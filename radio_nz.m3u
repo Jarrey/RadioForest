@@ -1,0 +1,881 @@
+﻿#EXTM3U
+
+#RADIOBROWSERUUID:748e6efd-9cb8-4f35-b224-77e4836431dd
+#EXTINF:-1 tvg-id="748e6efd-9cb8-4f35-b224-77e4836431dd" tvg-name=". Abdulbasit Abdulsamad" tvg-logo="null" group-title="New Zealand",. Abdulbasit Abdulsamad [3]
+https://radio.mp3islam.com/listen/abdulbasit/radio.mp3
+
+#RADIOBROWSERUUID:9e220835-ca65-4570-94f6-f31f70d6542f
+#EXTINF:-1 tvg-id="9e220835-ca65-4570-94f6-f31f70d6542f" tvg-name="100,3FM South Canterbury" tvg-logo="" group-title="New Zealand",100,3FM South Canterbury [151]
+http://uk4-vn.mixstream.net:8066/stream/1/
+
+#RADIOBROWSERUUID:af6c48a0-3051-401c-97da-f84b4171c7d6
+#EXTINF:-1 tvg-id="af6c48a0-3051-401c-97da-f84b4171c7d6" tvg-name="2XS FM Palmerston North" tvg-logo="" group-title="New Zealand",2XS FM Palmerston North [105]
+http://125.236.204.178:8001/listen.mp3
+
+#RADIOBROWSERUUID:4bcd4860-b8b6-4dc7-834c-d0dce43e9291
+#EXTINF:-1 tvg-id="4bcd4860-b8b6-4dc7-834c-d0dce43e9291" tvg-name="3ABN Christian Radio" tvg-logo="https://3abn.org/icons/3abn-apple-icon-120x120.png" group-title="New Zealand",3ABN Christian Radio [237]
+https://stream.3abnaustralia.org.au:8443/stream
+
+#RADIOBROWSERUUID:4de83f70-0ac9-4630-9786-cab9d4804540
+#EXTINF:-1 tvg-id="4de83f70-0ac9-4630-9786-cab9d4804540" tvg-name="531pi - AAC" tvg-logo="https://i.iheart.com/v3/re/new_assets/60fded128d281279cae3068e" group-title="New Zealand",531pi - AAC [25]
+https://playerservices.streamtheworld.com/api/livestream-redirect/531PIAAC_SC
+
+#RADIOBROWSERUUID:fd69151b-93ad-46cd-9169-796732061ffb
+#EXTINF:-1 tvg-id="fd69151b-93ad-46cd-9169-796732061ffb" tvg-name="531pi - MP3" tvg-logo="https://i.iheart.com/v3/re/new_assets/60fded128d281279cae3068e" group-title="New Zealand",531pi - MP3 [14]
+https://playerservices.streamtheworld.com/api/livestream-redirect/531PI_SC
+
+#RADIOBROWSERUUID:15025b54-958a-40d0-9cd0-40e755bac4e9
+#EXTINF:-1 tvg-id="15025b54-958a-40d0-9cd0-40e755bac4e9" tvg-name="8K.NZ" tvg-logo="" group-title="New Zealand",8K.NZ [59]
+http://radio8k.out.airtime.pro:8000/radio8k_a
+
+#RADIOBROWSERUUID:54663c94-5a9d-11e8-b0ce-52543be04c81
+#EXTINF:-1 tvg-id="54663c94-5a9d-11e8-b0ce-52543be04c81" tvg-name="8K.NZ" tvg-logo="" group-title="New Zealand",8K.NZ [71]
+http://radio8k.out.airtime.pro:8000/radio8k_a
+
+#RADIOBROWSERUUID:97f78b49-f24b-4a1b-b2b1-2ae29e9c141b
+#EXTINF:-1 tvg-id="97f78b49-f24b-4a1b-b2b1-2ae29e9c141b" tvg-name="8K.NZ || Christchurch, NZ" tvg-logo="" group-title="New Zealand",8K.NZ || Christchurch, NZ [24]
+http://radio8k.out.airtime.pro:8000/radio8k_a
+
+#RADIOBROWSERUUID:c93a5edc-9952-45af-bbd9-6540853bbf41
+#EXTINF:-1 tvg-id="c93a5edc-9952-45af-bbd9-6540853bbf41" tvg-name="91.2 Oamaru FM" tvg-logo="https://s3-ap-southeast-2.amazonaws.com/the-radio-bureau/assets/logos/OamaruFM_2021-03-22-203549.jpg" group-title="New Zealand",91.2 Oamaru FM [15]
+https://usa1-vn.mixstream.net/8096/listen.mp3
+
+#RADIOBROWSERUUID:0df7ff35-422f-4599-be5d-b9d84599e0cb
+#EXTINF:-1 tvg-id="0df7ff35-422f-4599-be5d-b9d84599e0cb" tvg-name="95bFM - 256Kbps MP3" tvg-logo="https://95bfm.com/sites/all/themes/bfm_ui/favicons/favicon-128.png" group-title="New Zealand",95bFM - 256Kbps MP3 [78]
+https://streams.95bfm.com/stream95
+
+#RADIOBROWSERUUID:45a71a03-bce2-49d8-9314-d8421223fe64
+#EXTINF:-1 tvg-id="45a71a03-bce2-49d8-9314-d8421223fe64" tvg-name="95bFM - 64kbps AAC+" tvg-logo="https://95bfm.com/sites/all/themes/bfm_ui/favicons/favicon-128.png" group-title="New Zealand",95bFM - 64kbps AAC+ [33]
+https://streams.95bfm.com/stream128
+
+#RADIOBROWSERUUID:59b2ab71-7653-4123-ae84-bdbf56fdab6e
+#EXTINF:-1 tvg-id="59b2ab71-7653-4123-ae84-bdbf56fdab6e" tvg-name="95bFM - FLAC" tvg-logo="https://95bfm.com/sites/all/themes/bfm_ui/favicons/favicon-128.png" group-title="New Zealand",95bFM - FLAC [96]
+https://streams.95bfm.com/stream112
+
+#RADIOBROWSERUUID:bfb9a5f6-0d68-4895-a8ff-eb397e42f493
+#EXTINF:-1 tvg-id="bfb9a5f6-0d68-4895-a8ff-eb397e42f493" tvg-name="Access Radio Taranaki 104.4FM" tvg-logo="https://cdn.prod.website-files.com/6600ba7b2bf4dc146691b611/679a92e0f7ea62c1e78e5d3a_favicon-32x32.png" group-title="New Zealand",Access Radio Taranaki 104.4FM [36]
+https://live.accessmedia.nz/Taranaki.stream_aac/playlist.m3u8
+
+#RADIOBROWSERUUID:30a4dac6-90e4-4fd5-a422-4fb818779c07
+#EXTINF:-1 tvg-id="30a4dac6-90e4-4fd5-a422-4fb818779c07" tvg-name="Akaroa World Radio" tvg-logo="https://cdn-profiles.tunein.com/s86464/images/logod.jpg?t=152329" group-title="New Zealand",Akaroa World Radio [22]
+https://n07.radiojar.com/k0t12bsns1duv?rj-ttl=5&rj-tok=AAABf7nGP10A7NK4A0_6v63i4w
+
+#RADIOBROWSERUUID:16356b10-6e2e-427e-9184-5e843cbe13a0
+#EXTINF:-1 tvg-id="16356b10-6e2e-427e-9184-5e843cbe13a0" tvg-name="Amped AI" tvg-logo="" group-title="New Zealand",Amped AI [2]
+https://amped-ai1.azuracast.tgnz.net/listen/amped_ai/radio.mp3
+
+#RADIOBROWSERUUID:f559ba5e-020c-4389-919f-3f2f79f8b0f4
+#EXTINF:-1 tvg-id="f559ba5e-020c-4389-919f-3f2f79f8b0f4" tvg-name="Anthemz" tvg-logo="https://images.ctfassets.net/r65x6q43xsmv/70j1jCRUfurYX5pXlaGoc1/fffb74f2f59a1a4b400e50f06d81d30d/anthemz-workdays-1x1.jpg?fm=webp&w=1536&q=75&f=center&h=1536&fit=fill" group-title="New Zealand",Anthemz [3]
+https://mediaworks.streamguys1.com/anthemz-chc-high_icy
+
+#RADIOBROWSERUUID:7dbe287d-b2d9-4fd1-b5e1-34f049b90ebe
+#EXTINF:-1 tvg-id="7dbe287d-b2d9-4fd1-b5e1-34f049b90ebe" tvg-name="Arrow FM" tvg-logo="http://www.arrowfm.co.nz/presentation/arrow-fm-logo.png" group-title="New Zealand",Arrow FM [3]
+https://live.accessmedia.nz/ArrowFM.stream/playlist.m3u8
+
+#RADIOBROWSERUUID:d1777228-19a9-4bb4-9e1e-5fa5b657a32c
+#EXTINF:-1 tvg-id="d1777228-19a9-4bb4-9e1e-5fa5b657a32c" tvg-name="Arrow FM 92.7" tvg-logo="http://www.arrowfm.co.nz/presentation/arrow-fm-logo.png" group-title="New Zealand",Arrow FM 92.7 [2]
+https://live.accessmedia.nz/ArrowFM.stream/playlist.m3u8
+
+#RADIOBROWSERUUID:05bf4e4e-8755-418a-83fd-ec7a786b1334
+#EXTINF:-1 tvg-id="05bf4e4e-8755-418a-83fd-ec7a786b1334" tvg-name="Arrow FM 92.7" tvg-logo="" group-title="New Zealand",Arrow FM 92.7 [61]
+https://live.accessmedia.nz/ArrowFM.stream_aac/playlist.m3u8
+
+#RADIOBROWSERUUID:996d7cd0-474c-4b02-9ec1-38d96f5e8a87
+#EXTINF:-1 tvg-id="996d7cd0-474c-4b02-9ec1-38d96f5e8a87" tvg-name="AWA FM" tvg-logo="https://awafm.co.nz/wp-content/uploads/2021/05/AWA-Logo-Plain.png" group-title="New Zealand",AWA FM [15]
+https://wowza.iwi.radio/icecast-to-hls/ngrp:AwaFM.stream/playlist.m3u8
+
+#RADIOBROWSERUUID:98d8ab1e-729a-42ea-b397-4505b159a69c
+#EXTINF:-1 tvg-id="98d8ab1e-729a-42ea-b397-4505b159a69c" tvg-name="Bandwagon Radio" tvg-logo="https://static2.mytuner.mobi/media/tvos_radios/602/bandwagon-radio.8250a334.jpg" group-title="New Zealand",Bandwagon Radio [1]
+https://streaming.radio.co/scfae3b30e/listen
+
+#RADIOBROWSERUUID:013e7197-c0b5-4b71-a10d-5e45e76c68d0
+#EXTINF:-1 tvg-id="013e7197-c0b5-4b71-a10d-5e45e76c68d0" tvg-name="Bay FM 100.7" tvg-logo="https://static-media.streema.com/media/cache/9f/95/9f9598196955d2228f613c8f0cda3da9.jpg" group-title="New Zealand",Bay FM 100.7 [16]
+https://s38.myradiostream.com:8876/;;?listening-from-radio-garden=1686796930
+
+#RADIOBROWSERUUID:00956d94-5d2b-461a-b007-52b0e73b5c01
+#EXTINF:-1 tvg-id="00956d94-5d2b-461a-b007-52b0e73b5c01" tvg-name="BeachFM 106.3" tvg-logo="https://www.beachfm.co.nz/favicon.ico" group-title="New Zealand",BeachFM 106.3 [226]
+http://s8.myradiostream.com:58408/
+
+#RADIOBROWSERUUID:d19d47a8-0ca0-438f-9273-25a117109dfe
+#EXTINF:-1 tvg-id="d19d47a8-0ca0-438f-9273-25a117109dfe" tvg-name="Beagle 88.1" tvg-logo="https://www.beagleradio.co.nz/wp-content/themes/beagle/gfx/logo-header.gif" group-title="New Zealand",Beagle 88.1 [1]
+https://stream.beagleradio.co.nz/stream
+
+#RADIOBROWSERUUID:b9d42ae3-7b57-4e5e-a037-e3ead4f4018b
+#EXTINF:-1 tvg-id="b9d42ae3-7b57-4e5e-a037-e3ead4f4018b" tvg-name="Beagle Radio" tvg-logo="https://www.beagleradio.co.nz/wp-content/uploads/2025/02/beagle-dog-logo-100.png" group-title="New Zealand",Beagle Radio [0]
+https://stream.beagleradio.co.nz/stream
+
+#RADIOBROWSERUUID:756a4cf1-9329-46d0-8739-3defcbf3c0e5
+#EXTINF:-1 tvg-id="756a4cf1-9329-46d0-8739-3defcbf3c0e5" tvg-name="Big River FM" tvg-logo="http://www.bigriverfm.co.nz/bigriverfm.png" group-title="New Zealand",Big River FM [3]
+http://bigriver.broadcast.co.nz/bigriverfm.mp3
+
+#RADIOBROWSERUUID:0a26a71c-798e-4159-994d-effb22b68697
+#EXTINF:-1 tvg-id="0a26a71c-798e-4159-994d-effb22b68697" tvg-name="Big River FM" tvg-logo="https://www.facebook.com/favicon.ico" group-title="New Zealand",Big River FM [15]
+http://bigriver.broadcast.co.nz/bigriverfm.mp3
+
+#RADIOBROWSERUUID:42ade87d-8430-4599-9384-c792b1c97b9a
+#EXTINF:-1 tvg-id="42ade87d-8430-4599-9384-c792b1c97b9a" tvg-name="Bollybop" tvg-logo="null" group-title="New Zealand",Bollybop [52]
+https://s3.radio.co/s2f19d44d0/listen
+
+#RADIOBROWSERUUID:94849e09-82db-4d33-b8ec-a041e8be516f
+#EXTINF:-1 tvg-id="94849e09-82db-4d33-b8ec-a041e8be516f" tvg-name="Brian FM 105.6 Nelson NZ" tvg-logo="" group-title="New Zealand",Brian FM 105.6 Nelson NZ [116]
+https://ais-sa1.streamon.fm/7358_128k.aac/playlist.m3u8?
+
+#RADIOBROWSERUUID:d714b8c3-9a52-4e17-aa62-a971f17f9462
+#EXTINF:-1 tvg-id="d714b8c3-9a52-4e17-aa62-a971f17f9462" tvg-name="Brian FM 105.6 Nelson NZ" tvg-logo="https://s3.amazonaws.com/streaming-player-assets/BrianFMNel/custom/images/brianfmnel-logo-20190225094751.png" group-title="New Zealand",Brian FM 105.6 Nelson NZ [171]
+https://ais-sa1.streamon.fm/7358_128k.aac/playlist.m3u8
+
+#RADIOBROWSERUUID:1adf99ff-0e13-4277-995c-4911e73eb50f
+#EXTINF:-1 tvg-id="1adf99ff-0e13-4277-995c-4911e73eb50f" tvg-name="Brian FM 91.2 Wanganui NZ" tvg-logo="" group-title="New Zealand",Brian FM 91.2 Wanganui NZ [31]
+https://ais-sa1.streamon.fm/7100_128k.aac
+
+#RADIOBROWSERUUID:e0c08e17-4b92-4625-b090-df6a57b67018
+#EXTINF:-1 tvg-id="e0c08e17-4b92-4625-b090-df6a57b67018" tvg-name="Brian FM 91.2 Whanganui NZ" tvg-logo="" group-title="New Zealand",Brian FM 91.2 Whanganui NZ [32]
+https://ais-sa1.streamon.fm/7100_128k.aac
+
+#RADIOBROWSERUUID:ccce596d-1af3-49de-900b-b4aa4e1eeb0d
+#EXTINF:-1 tvg-id="ccce596d-1af3-49de-900b-b4aa4e1eeb0d" tvg-name="CFM Coromandel" tvg-logo="https://i.postimg.cc/6qgdcWxL/CFM.jpg" group-title="New Zealand",CFM Coromandel [15]
+https://stream.cfm.co.nz/low
+
+#RADIOBROWSERUUID:be963cd8-af71-4fa6-b87e-0eedddc667a9
+#EXTINF:-1 tvg-id="be963cd8-af71-4fa6-b87e-0eedddc667a9" tvg-name="Channel X" tvg-logo="https://s3-ap-southeast-2.amazonaws.com/the-radio-bureau/assets/logos/Channel-X-600-x-600.jpg" group-title="New Zealand",Channel X [28]
+https://mediaworks.streamguys1.com/chx_net_icy
+
+#RADIOBROWSERUUID:ce9c7133-b671-4e03-89ad-106a9022dd13
+#EXTINF:-1 tvg-id="ce9c7133-b671-4e03-89ad-106a9022dd13" tvg-name="Chill-Radio" tvg-logo="https://www.smoothradio.com/assets_v4r/smooth/img/favicon-196x196.png" group-title="New Zealand",Chill-Radio [80]
+https://media-sov.musicradio.com/Chill
+
+#RADIOBROWSERUUID:627796d0-bf7f-11e9-8502-52543be04c81
+#EXTINF:-1 tvg-id="627796d0-bf7f-11e9-8502-52543be04c81" tvg-name="Classic1027" tvg-logo="" group-title="New Zealand",Classic1027 [328]
+http://edge.iono.fm/xice/49_high.aac
+
+#RADIOBROWSERUUID:96227653-0601-11e8-ae97-52543be04c81
+#EXTINF:-1 tvg-id="96227653-0601-11e8-ae97-52543be04c81" tvg-name="Coast" tvg-logo="" group-title="New Zealand",Coast [712]
+http://playerservices.streamtheworld.com/api/livestream-redirect/NZME_07AAC.m3u8
+
+#RADIOBROWSERUUID:de11ceb8-6ef9-11ea-b1cf-52543be04c81
+#EXTINF:-1 tvg-id="de11ceb8-6ef9-11ea-b1cf-52543be04c81" tvg-name="Coast Access Radio" tvg-logo="" group-title="New Zealand",Coast Access Radio [35]
+https://live.accessmedia.nz/Coast.stream_aac/playlist.m3u8
+
+#RADIOBROWSERUUID:0cb5cd0c-acdd-41c6-988e-8367d7176dca
+#EXTINF:-1 tvg-id="0cb5cd0c-acdd-41c6-988e-8367d7176dca" tvg-name="Coast Access Radio MP3" tvg-logo="https://cdn3.firecrestsystems.com/FC_Coast/Images/coastlogo.png" group-title="New Zealand",Coast Access Radio MP3 [31]
+https://live.accessmedia.nz/Coast.stream/playlist.m3u8
+
+#RADIOBROWSERUUID:64a74374-c09a-46e6-a4b5-2fbd29e23576
+#EXTINF:-1 tvg-id="64a74374-c09a-46e6-a4b5-2fbd29e23576" tvg-name="Coast FM" tvg-logo="https://i.postimg.cc/8k3S3mQP/coast-fm.png" group-title="New Zealand",Coast FM [81]
+https://playerservices.streamtheworld.com/api/livestream-redirect/NZME_07AAC.m3u8?aw_0_1st.playerid=iHeartRadioWebPlayer&aw_0_1st.skey=9774168307&clientType=web&companionAds=false&deviceName=web-desktop&dist=iheart&host=webapp.NZ&listenerId=&playedFrom=157&pname=live_profile&profileId=9774168307&stationid=6193&terminalId=162&territory=NZ
+
+#RADIOBROWSERUUID:6b4459eb-a696-45d9-a044-0655190d4adc
+#EXTINF:-1 tvg-id="6b4459eb-a696-45d9-a044-0655190d4adc" tvg-name="Compass FM" tvg-logo="http://compassfm.org.nz/favicon.ico" group-title="New Zealand",Compass FM [201]
+http://stream.compassfm.org.nz:8000/Compass_FM_104.9
+
+#RADIOBROWSERUUID:286bc0f6-8c74-4783-a343-6410c12fb752
+#EXTINF:-1 tvg-id="286bc0f6-8c74-4783-a343-6410c12fb752" tvg-name="Cool Blue Taupo" tvg-logo="" group-title="New Zealand",Cool Blue Taupo [61]
+http://falcon.shoutca.st:8166/stream
+
+#RADIOBROWSERUUID:9ef832af-3283-4d23-acbf-2b4c2c2c697b
+#EXTINF:-1 tvg-id="9ef832af-3283-4d23-acbf-2b4c2c2c697b" tvg-name="Country Radio Invercargill 105.2FM" tvg-logo="" group-title="New Zealand",Country Radio Invercargill 105.2FM [129]
+http://countryradio2.no-ip.org:8000/;
+
+#RADIOBROWSERUUID:440973ef-aa99-4946-9083-08bce4bd73b5
+#EXTINF:-1 tvg-id="440973ef-aa99-4946-9083-08bce4bd73b5" tvg-name="Country Radio Invercargilll" tvg-logo="https://www.facebook.com/favicon.ico" group-title="New Zealand",Country Radio Invercargilll [35]
+http://countryradio2.no-ip.org:8000/;
+
+#RADIOBROWSERUUID:6178568a-4b5c-4680-963f-870ca211e43a
+#EXTINF:-1 tvg-id="6178568a-4b5c-4680-963f-870ca211e43a" tvg-name="Dave FM" tvg-logo="https://www.facebook.com/favicon.ico" group-title="New Zealand",Dave FM [83]
+http://davefmradio.no-ip.org:8000/stream
+
+#RADIOBROWSERUUID:e5c509ad-aa7e-4910-8dc3-05f26d75081e
+#EXTINF:-1 tvg-id="e5c509ad-aa7e-4910-8dc3-05f26d75081e" tvg-name="Drop FM" tvg-logo="http://www.dropfm.com/uploads/1/2/4/0/124005161/new-logo-black.png" group-title="New Zealand",Drop FM [41]
+https://s2.radio.co/s7649837db/listen
+
+#RADIOBROWSERUUID:e6f28764-3433-439c-9eb8-8f9fd0e95a88
+#EXTINF:-1 tvg-id="e6f28764-3433-439c-9eb8-8f9fd0e95a88" tvg-name="East FM" tvg-logo="https://listen.eastfm.nz/logo.png" group-title="New Zealand",East FM [2]
+https://listen.eastfm.nz/stream-aac-64
+
+#RADIOBROWSERUUID:b5587c5a-f745-45f0-87df-cfcfb845a003
+#EXTINF:-1 tvg-id="b5587c5a-f745-45f0-87df-cfcfb845a003" tvg-name="East FM" tvg-logo="https://listen.eastfm.nz/logo.png" group-title="New Zealand",East FM [0]
+https://listen.eastfm.nz/stream.aac
+
+#RADIOBROWSERUUID:c3760f66-326b-4b6b-8280-bbdd83e68eaa
+#EXTINF:-1 tvg-id="c3760f66-326b-4b6b-8280-bbdd83e68eaa" tvg-name="East FM" tvg-logo="https://listen.eastfm.nz/logo.png" group-title="New Zealand",East FM [4]
+https://listen.eastfm.nz/stream.mp3
+
+#RADIOBROWSERUUID:4889d4ef-a405-11e8-abb8-52543be04c81
+#EXTINF:-1 tvg-id="4889d4ef-a405-11e8-abb8-52543be04c81" tvg-name="Easy 80s" tvg-logo="https://cdn-profiles.tunein.com/s302357/images/logoq.png" group-title="New Zealand",Easy 80s [2230]
+http://procyon.shoutca.st:8032/;
+
+#RADIOBROWSERUUID:5ce3ba73-b9c1-4642-8b6d-20f90fb83168
+#EXTINF:-1 tvg-id="5ce3ba73-b9c1-4642-8b6d-20f90fb83168" tvg-name="Free FM 89 Hamilton" tvg-logo="" group-title="New Zealand",Free FM 89 Hamilton [15]
+https://live.accessmedia.nz/FreeFM.stream_aac/chunklist_w1448621681.m3u8
+
+#RADIOBROWSERUUID:a5cafde1-44e4-438e-ba98-e224acd75fb7
+#EXTINF:-1 tvg-id="a5cafde1-44e4-438e-ba98-e224acd75fb7" tvg-name="FreshFM" tvg-logo="https://www.freshfm.net/favicon.ico" group-title="New Zealand",FreshFM [45]
+https://live.accessmedia.nz/Fresh.stream_aac/chunklist_w1462567576.m3u8
+
+#RADIOBROWSERUUID:8fb48975-d64f-4d36-b2b8-d27b877cb317
+#EXTINF:-1 tvg-id="8fb48975-d64f-4d36-b2b8-d27b877cb317" tvg-name="Gaia FM (New Zealand)" tvg-logo="https://gaiafm.stationplaylist.com/logo.gif" group-title="New Zealand",Gaia FM (New Zealand) [5]
+https://s2.stationplaylist.com:9000/gaiafm.aac
+
+#RADIOBROWSERUUID:964c54ec-0601-11e8-ae97-52543be04c81
+#EXTINF:-1 tvg-id="964c54ec-0601-11e8-ae97-52543be04c81" tvg-name="Gaia FM New Zealand" tvg-logo="" group-title="New Zealand",Gaia FM New Zealand [655]
+http://s2.stationplaylist.com:9000/gaiafm.aac
+
+#RADIOBROWSERUUID:963533f2-0601-11e8-ae97-52543be04c81
+#EXTINF:-1 tvg-id="963533f2-0601-11e8-ae97-52543be04c81" tvg-name="Galaxy 107 FM  Kawerau" tvg-logo="http://www.galaxyfm.co.nz/favicon.ico" group-title="New Zealand",Galaxy 107 FM  Kawerau [66]
+http://s39.myradiostream.com:14858/;listen.mp3
+
+#RADIOBROWSERUUID:0f9588db-66d9-411f-800d-de63753e741c
+#EXTINF:-1 tvg-id="0f9588db-66d9-411f-800d-de63753e741c" tvg-name="George FM" tvg-logo="https://s3-ap-southeast-2.amazonaws.com/the-radio-bureau/assets/22814443_10155347753227013_9008123902810078771_n.jpg" group-title="New Zealand",George FM [27]
+https://mediaworks.streamguys1.com/george_net_icy
+
+#RADIOBROWSERUUID:4d1ade94-77b2-40f3-8667-63b97af47aec
+#EXTINF:-1 tvg-id="4d1ade94-77b2-40f3-8667-63b97af47aec" tvg-name="George FM" tvg-logo="" group-title="New Zealand",George FM [87]
+https://digitalstreams.mediaworks.nz/george_net/playlist.m3u8
+
+#RADIOBROWSERUUID:b836f4e5-19c2-454f-ad63-67da218e8358
+#EXTINF:-1 tvg-id="b836f4e5-19c2-454f-ad63-67da218e8358" tvg-name="George FM - Chillsville" tvg-logo="https://images.ctfassets.net/r65x6q43xsmv/6fBl7Yr0fvCSKEDkPOFJT7/346791405202f33f8316c8d0001f9659/chillsville_boby_armor_sqaure.png?fm=png&w=200&q=95&f=center" group-title="New Zealand",George FM - Chillsville [1]
+https://playerservices.streamtheworld.com/api/livestream-redirect/CHILLSVILLE_S01.aac
+
+#RADIOBROWSERUUID:acd1ebf1-84e3-4983-bf6a-329af607cfeb
+#EXTINF:-1 tvg-id="acd1ebf1-84e3-4983-bf6a-329af607cfeb" tvg-name="George FM - Club Classics" tvg-logo="https://images.ctfassets.net/r65x6q43xsmv/1hs2ejFCmf8irHi0j8KmZn/1c10053daace384f82288a7b85c22095/Club_Classics_1080x1080.png?fm=png&w=200&q=95&f=center" group-title="New Zealand",George FM - Club Classics [1]
+https://playerservices.streamtheworld.com/api/livestream-redirect/GEORGEFM_CC_S01.aac
+
+#RADIOBROWSERUUID:d831d32a-365a-465e-aec2-82c83cd04abb
+#EXTINF:-1 tvg-id="d831d32a-365a-465e-aec2-82c83cd04abb" tvg-name="George FM - Cocktail Hour" tvg-logo="https://images.ctfassets.net/r65x6q43xsmv/308P6uWsXoijQkQbMBTsGV/8a6cca4fc65e97c504a99a8ec44536bb/GRG_RVA_CocktailHour_600x600_1_.png?fm=png&w=200&q=95&f=center" group-title="New Zealand",George FM - Cocktail Hour [2]
+https://playerservices.streamtheworld.com/api/livestream-redirect/COCKTAILHOUR_S01AAC.aac
+
+#RADIOBROWSERUUID:27d7c6f3-d1dd-4cab-b4c7-ca9ffdd21434
+#EXTINF:-1 tvg-id="27d7c6f3-d1dd-4cab-b4c7-ca9ffdd21434" tvg-name="George FM - DnB" tvg-logo="https://images.ctfassets.net/r65x6q43xsmv/2CBBxwPWsAwKU0bjzHM8y1/76fd3e4bab34449b2dff2d2adc719e1d/GRG_George_FM_DnB_Hundy_600x600px.png?fm=png&w=200&q=95&f=center" group-title="New Zealand",George FM - DnB [2]
+https://playerservices.streamtheworld.com/api/livestream-redirect/GEORGE_DNB_S01.aac
+
+#RADIOBROWSERUUID:0e9bb734-b0da-427e-900f-bdf87bce0650
+#EXTINF:-1 tvg-id="0e9bb734-b0da-427e-900f-bdf87bce0650" tvg-name="George FM - Latest Bangers" tvg-logo="https://images.ctfassets.net/r65x6q43xsmv/6kYCr49AIFrqBnXRbmHo5M/d8f64b4efeb114d188ce0599d44257c1/lates_bangers_new_new.png?fm=png&w=200&q=95&f=center" group-title="New Zealand",George FM - Latest Bangers [3]
+https://playerservices.streamtheworld.com/api/livestream-redirect/GEORGEFRESHHITS_S01.aac
+
+#RADIOBROWSERUUID:b3d31ee0-e6ee-43c7-8315-1258553e70f5
+#EXTINF:-1 tvg-id="b3d31ee0-e6ee-43c7-8315-1258553e70f5" tvg-name="Gold Sport AM" tvg-logo="https://i.postimg.cc/0j3pmL7Z/Untitled.jpg" group-title="New Zealand",Gold Sport AM [6]
+http://playerservices.streamtheworld.com/api/livestream-redirect/NZME_06AAC.m3u8
+
+#RADIOBROWSERUUID:0ff88412-d300-4660-9754-88199aa12e0f
+#EXTINF:-1 tvg-id="0ff88412-d300-4660-9754-88199aa12e0f" tvg-name="Gold Sport AM" tvg-logo="https://i.postimg.cc/0j3pmL7Z/Untitled.jpg" group-title="New Zealand",Gold Sport AM [6]
+http://playerservices.streamtheworld.com/api/livestream-redirect/NZME_06AAC.m3u8
+
+#RADIOBROWSERUUID:551f1c36-9ca7-45cb-98b3-c5fd0abba85c
+#EXTINF:-1 tvg-id="551f1c36-9ca7-45cb-98b3-c5fd0abba85c" tvg-name="Gone Country" tvg-logo="https://cdn-profiles.tunein.com/s206528/images/logod.png?t=638120163900000000" group-title="New Zealand",Gone Country [25]
+https://usa10.fastcast4u.com:6010/;?type=http&nocache=1676417570
+
+#RADIOBROWSERUUID:5c7eccdb-3b30-46a2-9810-e5d7a54e6378
+#EXTINF:-1 tvg-id="5c7eccdb-3b30-46a2-9810-e5d7a54e6378" tvg-name="Heads FM Mangawhai 106.4" tvg-logo="https://www.headsfm.co.nz/wp-content/uploads/2017/06/heads_logo_1064.png" group-title="New Zealand",Heads FM Mangawhai 106.4 [20]
+https://headsfm.radioca.st/stream
+
+#RADIOBROWSERUUID:97ecfd87-6e7f-4055-8282-f0121db9322f
+#EXTINF:-1 tvg-id="97ecfd87-6e7f-4055-8282-f0121db9322f" tvg-name="https://badradio.nz/ - 24/7 PHONK" tvg-logo="" group-title="New Zealand",https://badradio.nz/ - 24/7 PHONK [196]
+https://s2.radio.co/s2b2b68744/listen
+
+#RADIOBROWSERUUID:e72b2d2b-fde1-4c71-9548-6a76513cbc17
+#EXTINF:-1 tvg-id="e72b2d2b-fde1-4c71-9548-6a76513cbc17" tvg-name="https://www.newstalkzb.co.nz/" tvg-logo="" group-title="New Zealand",https://www.newstalkzb.co.nz/ [87]
+http://playerservices.streamtheworld.com/api/livestream-redirect/NZME_11AAC.m3u8
+
+#RADIOBROWSERUUID:143e3091-129f-44f7-9d9f-615bf19a7896
+#EXTINF:-1 tvg-id="143e3091-129f-44f7-9d9f-615bf19a7896" tvg-name="Humm Radio" tvg-logo="https://static.mytuner.mobi/media/tvos_radios/jB7Xr58rYS.jpg" group-title="New Zealand",Humm Radio [99]
+https://mediaworks.streamguys1.com/humm_net_icy
+
+#RADIOBROWSERUUID:f244451c-2d6c-4f02-aebb-3b985d362aac
+#EXTINF:-1 tvg-id="f244451c-2d6c-4f02-aebb-3b985d362aac" tvg-name="iHeartCountry New Zealand" tvg-logo="https://i.iheart.com/v3/re/assets.streams/6812fd4982aae621b8b5867c" group-title="New Zealand",iHeartCountry New Zealand [23]
+https://playerservices.streamtheworld.com/api/livestream-redirect/NZME_09AAC.m3u8
+
+#RADIOBROWSERUUID:f4886ec1-b9ee-4a75-af0b-02000ad1edd6
+#EXTINF:-1 tvg-id="f4886ec1-b9ee-4a75-af0b-02000ad1edd6" tvg-name="jakemusic" tvg-logo="" group-title="New Zealand",jakemusic [4]
+https://camera.jakebriggs.com/jakemusic
+
+#RADIOBROWSERUUID:e1bd4a00-7c0f-4c50-abc6-91fff1f53f21
+#EXTINF:-1 tvg-id="e1bd4a00-7c0f-4c50-abc6-91fff1f53f21" tvg-name="Jazz Cafe" tvg-logo="" group-title="New Zealand",Jazz Cafe [70]
+http://radio.wanderingsheep.tv:8000/jazzcafe
+
+#RADIOBROWSERUUID:6b0dee5f-2288-4b49-a1e2-497959078190
+#EXTINF:-1 tvg-id="6b0dee5f-2288-4b49-a1e2-497959078190" tvg-name="JAZZ CAFE" tvg-logo="https://wsradio.net/wp-content/uploads/2016/08/cropped-WanderingsheepRadioLogoSQ-big-192x192.png" group-title="New Zealand",JAZZ CAFE [69]
+https://radio.wanderingsheep.net:8000/jazzcafe
+
+#RADIOBROWSERUUID:4db39f80-ac48-4db2-b20f-343a0397bb9b
+#EXTINF:-1 tvg-id="4db39f80-ac48-4db2-b20f-343a0397bb9b" tvg-name="JAZZGROOVE.org - Smooth Jazz (64k)" tvg-logo="https://jazzgroove.org/favicon.ico" group-title="New Zealand",JAZZGROOVE.org - Smooth Jazz (64k) [197]
+http://streams.radiomast.io/4fdf004c-c2f3-49c1-bdb1-22e208d48780
+
+#RADIOBROWSERUUID:064b2425-e377-49b5-98bb-e6459596b020
+#EXTINF:-1 tvg-id="064b2425-e377-49b5-98bb-e6459596b020" tvg-name="Keep Laughing Forever Radio" tvg-logo="https://static.wixstatic.com/media/53e57b_acd90b3739fe4bde8acaadfd96d35520~mv2.jpg/v1/fill/w_415,h_415,al_c,q_80,usm_0.66_1.00_0.01,enc_avif,quality_auto/Radio%20Monkey-01%20(1).jpg" group-title="New Zealand",Keep Laughing Forever Radio [15]
+http://carol.epichosts.co.uk:8610/autodj.mp3
+
+#RADIOBROWSERUUID:5705e8c2-6208-41c9-8ad1-3fb780405548
+#EXTINF:-1 tvg-id="5705e8c2-6208-41c9-8ad1-3fb780405548" tvg-name="Kiwi Folk Radio" tvg-logo="https://i.postimg.cc/pLDxX33r/Kiwi-Folk.jpg" group-title="New Zealand",Kiwi Folk Radio [50]
+https://streamer.radio.co/sde527a41e/listen
+
+#RADIOBROWSERUUID:2467841a-260b-499a-b2e3-48f7c370ef46
+#EXTINF:-1 tvg-id="2467841a-260b-499a-b2e3-48f7c370ef46" tvg-name="KIX FM" tvg-logo="https://kixfm.co.nz/images/cover.png" group-title="New Zealand",KIX FM [2]
+https://stream.kixfm.co.nz/listen/kixfm/stream
+
+#RADIOBROWSERUUID:04d99a72-50cc-4f75-90c1-3403c0a7e005
+#EXTINF:-1 tvg-id="04d99a72-50cc-4f75-90c1-3403c0a7e005" tvg-name="LibertyNZ on The Wireless" tvg-logo="" group-title="New Zealand",LibertyNZ on The Wireless [22]
+https://stream.zeno.fm/lamr6x1fxrruv
+
+#RADIOBROWSERUUID:95c4307a-baf8-47e8-8a86-5d135644d7b8
+#EXTINF:-1 tvg-id="95c4307a-baf8-47e8-8a86-5d135644d7b8" tvg-name="Life FM - AAC" tvg-logo="https://player.streamguys.com/rhema-lifefm/sgplayer/include/assets/img/logo-lifefm.jpg" group-title="New Zealand",Life FM - AAC [39]
+https://rhema-radio.streamguys1.com/rhema-lifefm.aac
+
+#RADIOBROWSERUUID:70e66e79-c288-4690-a4f3-a1359cd72d63
+#EXTINF:-1 tvg-id="70e66e79-c288-4690-a4f3-a1359cd72d63" tvg-name="Life FM - MP3" tvg-logo="https://player.streamguys.com/rhema-lifefm/sgplayer/include/assets/img/logo-lifefm.jpg" group-title="New Zealand",Life FM - MP3 [41]
+https://rhema-radio.streamguys1.com/rhema-lifefm.mp3
+
+#RADIOBROWSERUUID:b92c342d-a349-4e4e-b49d-e89a88cadc5c
+#EXTINF:-1 tvg-id="b92c342d-a349-4e4e-b49d-e89a88cadc5c" tvg-name="MAD FM Auckland 106.7" tvg-logo="https://www.madfm.net/favicon.ico" group-title="New Zealand",MAD FM Auckland 106.7 [127]
+https://madfm-gecko.radioca.st/stream
+
+#RADIOBROWSERUUID:69b26bba-7b57-46c8-91f2-032febb52473
+#EXTINF:-1 tvg-id="69b26bba-7b57-46c8-91f2-032febb52473" tvg-name="Magic" tvg-logo="https://www.magic.co.nz/experience-fragments/mws-sites-nextgen/magic/en/site/header/master/_jcr_content/root/container/container_545837448/image.coreimg.svg/1662540657531/logo-01.svg" group-title="New Zealand",Magic [134]
+https://digitalstreams.mediaworks.nz/mmusic_net/playlist.m3u8
+
+#RADIOBROWSERUUID:1bd2a096-3167-43b3-a030-69b43780577d
+#EXTINF:-1 tvg-id="1bd2a096-3167-43b3-a030-69b43780577d" tvg-name="Magic FM" tvg-logo="https://static-media.streema.com/media/cache/c7/c1/c7c1117b7e50c5b753703c52b2dc1a16.jpg" group-title="New Zealand",Magic FM [115]
+https://mediaworks.streamguys1.com/magic_net_icy
+
+#RADIOBROWSERUUID:6f5ab635-8e49-43e7-b3f8-43cd44e4516e
+#EXTINF:-1 tvg-id="6f5ab635-8e49-43e7-b3f8-43cd44e4516e" tvg-name="Mai FM" tvg-logo="https://www.rova.nz/home/radio/mai-fm/_jcr_content/par/grid/par1/image.dynimg.1200.q75.jpg/v1592272923496/LOGO_MAI.jpg" group-title="New Zealand",Mai FM [52]
+https://ais-sa1.streamon.fm/7102_128k.aac
+
+#RADIOBROWSERUUID:89440784-a9c3-46b2-9474-1ed2c8baac72
+#EXTINF:-1 tvg-id="89440784-a9c3-46b2-9474-1ed2c8baac72" tvg-name="Mai FM" tvg-logo="https://upload.wikimedia.org/wikipedia/en/thumb/7/76/Mai_FM_logo.svg/1200px-Mai_FM_logo.svg.png" group-title="New Zealand",Mai FM [30]
+https://mediaworks.streamguys1.com/mai_net_icy
+
+#RADIOBROWSERUUID:a13f9a34-e6ca-459a-a6f1-26439858cc21
+#EXTINF:-1 tvg-id="a13f9a34-e6ca-459a-a6f1-26439858cc21" tvg-name="Maunganui FM" tvg-logo="" group-title="New Zealand",Maunganui FM [4]
+https://radio.mmc.school.nz/listen/mmc_radio/radio.mp3
+
+#RADIOBROWSERUUID:d596f379-e7a5-49c6-923c-117e26d9d365
+#EXTINF:-1 tvg-id="d596f379-e7a5-49c6-923c-117e26d9d365" tvg-name="metalradio.co.nz" tvg-logo="" group-title="New Zealand",metalradio.co.nz [45]
+http://curiosity.shoutca.st:9073/stream
+
+#RADIOBROWSERUUID:0189c6f6-3880-4381-8511-a4b694753ccf
+#EXTINF:-1 tvg-id="0189c6f6-3880-4381-8511-a4b694753ccf" tvg-name="metalradio.co.nz" tvg-logo="" group-title="New Zealand",metalradio.co.nz [28]
+http://curiosity.shoutca.st:9073/stream
+
+#RADIOBROWSERUUID:675a9c51-b31b-4524-ab0c-f978f4090fd0
+#EXTINF:-1 tvg-id="675a9c51-b31b-4524-ab0c-f978f4090fd0" tvg-name="metalradio.co.nz" tvg-logo="" group-title="New Zealand",metalradio.co.nz [23]
+http://curiosity.shoutca.st:9073/stream
+
+#RADIOBROWSERUUID:ef5519ea-980a-4eb3-8282-c9275b639147
+#EXTINF:-1 tvg-id="ef5519ea-980a-4eb3-8282-c9275b639147" tvg-name="metalradio.co.nz" tvg-logo="https://storage.ko-fi.com/cdn/useruploads/e34955c7-a202-4989-8dca-8eec69dabed6_8fe662b6-b480-43d9-8684-aefcd2d529c9.png" group-title="New Zealand",metalradio.co.nz [0]
+http://curiosity.shoutca.st:9073/stream
+
+#RADIOBROWSERUUID:3a8a8d3c-00ef-48fa-be6e-90b352c01fca
+#EXTINF:-1 tvg-id="3a8a8d3c-00ef-48fa-be6e-90b352c01fca" tvg-name="Mix FM 87.9, Wellington, New Zealand" tvg-logo="" group-title="New Zealand",Mix FM 87.9, Wellington, New Zealand [4]
+https://stream.mixfm.nz/
+
+#RADIOBROWSERUUID:903bad58-6ccb-4789-9b32-98a1b7b456f7
+#EXTINF:-1 tvg-id="903bad58-6ccb-4789-9b32-98a1b7b456f7" tvg-name="MIX FM Wellington" tvg-logo="" group-title="New Zealand",MIX FM Wellington [14]
+https://stream.mixfm.nz/
+
+#RADIOBROWSERUUID:0c144adf-06dd-481e-b425-be47c76cc0be
+#EXTINF:-1 tvg-id="0c144adf-06dd-481e-b425-be47c76cc0be" tvg-name="More FM - Nelson" tvg-logo="https://s3-ap-southeast-2.amazonaws.com/the-radio-bureau/assets/more-fm-icon.png" group-title="New Zealand",More FM - Nelson [27]
+https://mediaworks.streamguys1.com/more-nsn-high_icy
+
+#RADIOBROWSERUUID:4f6794f1-e1cf-4777-866c-2be23a41ad08
+#EXTINF:-1 tvg-id="4f6794f1-e1cf-4777-866c-2be23a41ad08" tvg-name="Mountainside FM" tvg-logo="" group-title="New Zealand",Mountainside FM [18]
+http://stream.nrgkits.co.nz:5000/mountainside
+
+#RADIOBROWSERUUID:4406eb02-8077-4035-999a-73ec35bf51d9
+#EXTINF:-1 tvg-id="4406eb02-8077-4035-999a-73ec35bf51d9" tvg-name="Mouthfull Radio" tvg-logo="https://i1.sndcdn.com/avatars-VaAJ9hfpsq0ADS8p-3I0Ubg-t200x200.jpg" group-title="New Zealand",Mouthfull Radio [25]
+https://mouthfull-radio.radiocult.fm/stream
+
+#RADIOBROWSERUUID:de0f20c2-a5b9-41fd-91e0-8b419acf52da
+#EXTINF:-1 tvg-id="de0f20c2-a5b9-41fd-91e0-8b419acf52da" tvg-name="Mouthfull Radio" tvg-logo="https://mouthfull.live/wp-content/themes/mouthfull/assets/img/newradio.png" group-title="New Zealand",Mouthfull Radio [1]
+https://mouthfull-radio.radiocult.fm/stream
+
+#RADIOBROWSERUUID:0d8da890-b6dd-4c28-acf6-a862b0902bba
+#EXTINF:-1 tvg-id="0d8da890-b6dd-4c28-acf6-a862b0902bba" tvg-name="MPR Manawatu People's Radio" tvg-logo="" group-title="New Zealand",MPR Manawatu People's Radio [27]
+https://live.accessmedia.nz/MPR.stream/playlist.m3u8
+
+#RADIOBROWSERUUID:e1011281-2179-42c2-b3bf-bbc5b4298d25
+#EXTINF:-1 tvg-id="e1011281-2179-42c2-b3bf-bbc5b4298d25" tvg-name="Mushroom Escape" tvg-logo="" group-title="New Zealand",Mushroom Escape [70]
+https://cast3.my-control-panel.com/proxy/jonatha1/escape?1664781783632
+
+#RADIOBROWSERUUID:8975f7b6-adfb-46e7-bdd5-2a9f36a332cc
+#EXTINF:-1 tvg-id="8975f7b6-adfb-46e7-bdd5-2a9f36a332cc" tvg-name="Mushroom Escape" tvg-logo="" group-title="New Zealand",Mushroom Escape [52]
+http://65.108.124.70:8676/escape
+
+#RADIOBROWSERUUID:4cdfc847-8d43-4a80-8e62-16f00148d072
+#EXTINF:-1 tvg-id="4cdfc847-8d43-4a80-8e62-16f00148d072" tvg-name="Mushroom FM" tvg-logo="" group-title="New Zealand",Mushroom FM [35]
+http://65.108.124.70:8676/live
+
+#RADIOBROWSERUUID:8fcf0980-e6e2-4ab6-a815-0a655274e63f
+#EXTINF:-1 tvg-id="8fcf0980-e6e2-4ab6-a815-0a655274e63f" tvg-name="New Zealand Net Radio" tvg-logo="https://i0.wp.com/www.nznetradio.net.nz/wp-content/uploads/2025/08/cropped-NZ-Net-Radio-logo-2025-2048-600.jpg?resize=768%2C401&ssl=1" group-title="New Zealand",New Zealand Net Radio [0]
+https://radio.nznetradio.net.nz/stream3
+
+#RADIOBROWSERUUID:dbc8afb2-b62d-4e2f-8620-b81fab471288
+#EXTINF:-1 tvg-id="dbc8afb2-b62d-4e2f-8620-b81fab471288" tvg-name="Newstalk ZB" tvg-logo="https://imgs.search.brave.com/QjtEBTpORhVUY18YIpMVH0rjS2nn2AgtIe7sK-Hak4U/rs:fit:500:0:0:0/g:ce/aHR0cHM6Ly9pLmlo/ZWFydC5jb20vdjMv/cmUvbmV3X2Fzc2V0/cy81ZmRiYTRlN2M1/MDYxN2Q0MDhiNjAx/YTI_b3BzPWZpdCg5/NjAsOTYwKSxyZXNp/emUoMCwzOTAp.jpeg" group-title="New Zealand",Newstalk ZB [192]
+https://playerservices.streamtheworld.com/api/livestream-redirect/NZME_01AAC.m3u8?aw_0_1st.playerid=iHeartRadioWebPlayer&aw_0_1st.skey=9631949606&clientType=web&companionAds=false&deviceName=web-desktop&dist=iheart&host=webapp.NZ&listenerId=&playedFrom=157&pname=live_profile&profileId=9631949606&stationid=6187&terminalId=162&territory=NZ
+
+#RADIOBROWSERUUID:97048e99-0fba-43f6-b3cd-99477d10bd1e
+#EXTINF:-1 tvg-id="97048e99-0fba-43f6-b3cd-99477d10bd1e" tvg-name="Newstalk ZB" tvg-logo="" group-title="New Zealand",Newstalk ZB [185]
+https://playerservices.streamtheworld.com/api/livestream-redirect/NZME_41AAC.aac
+
+#RADIOBROWSERUUID:9fbd3446-dc82-11e8-a9cc-52543be04c81
+#EXTINF:-1 tvg-id="9fbd3446-dc82-11e8-a9cc-52543be04c81" tvg-name="Newstalk ZB Christchurch" tvg-logo="https://www.newstalkzb.co.nz/content/news/images/interface/icons/newstalkzb/apple-touch-icon.png" group-title="New Zealand",Newstalk ZB Christchurch [432]
+http://playerservices.streamtheworld.com/api/livestream-redirect/NZME_41AAC.m3u8
+
+#RADIOBROWSERUUID:ceedb798-dc82-11e8-a9cc-52543be04c81
+#EXTINF:-1 tvg-id="ceedb798-dc82-11e8-a9cc-52543be04c81" tvg-name="Newstalk ZB Wellington" tvg-logo="https://www.newstalkzb.co.nz/content/news/images/interface/icons/newstalkzb/apple-touch-icon.png" group-title="New Zealand",Newstalk ZB Wellington [895]
+http://playerservices.streamtheworld.com/api/livestream-redirect/NZME_31AAC.m3u8
+
+#RADIOBROWSERUUID:b5be29e8-1d3c-4402-823a-cf1c941f8884
+#EXTINF:-1 tvg-id="b5be29e8-1d3c-4402-823a-cf1c941f8884" tvg-name="Niu FM - AAC" tvg-logo="https://i.iheart.com/v3/re/new_assets/60fdf21e8d281279cae30692" group-title="New Zealand",Niu FM - AAC [97]
+https://playerservices.streamtheworld.com/api/livestream-redirect/NIUFMAAC_SC
+
+#RADIOBROWSERUUID:53d584e7-c657-49a1-bd66-bc2b2069ac7f
+#EXTINF:-1 tvg-id="53d584e7-c657-49a1-bd66-bc2b2069ac7f" tvg-name="Niu FM - MP3" tvg-logo="https://i.iheart.com/v3/re/new_assets/60fdf21e8d281279cae30692" group-title="New Zealand",Niu FM - MP3 [1]
+https://playerservices.streamtheworld.com/api/livestream-redirect/NIUFM_SC
+
+#RADIOBROWSERUUID:47975fb9-40bf-4597-bbf5-019e21983171
+#EXTINF:-1 tvg-id="47975fb9-40bf-4597-bbf5-019e21983171" tvg-name="Oamaru Heritage Radio" tvg-logo="" group-title="New Zealand",Oamaru Heritage Radio [22]
+http://202.9.116.204:8000/ohrweb
+
+#RADIOBROWSERUUID:ff3a3778-cd32-46cc-8461-193d2d56b766
+#EXTINF:-1 tvg-id="ff3a3778-cd32-46cc-8461-193d2d56b766" tvg-name="OAR 105.4FM Dunedin" tvg-logo="https://liveonlineradio.net/wp-content/uploads/2017/05/Otago-Access-Radio-220x108.jpg" group-title="New Zealand",OAR 105.4FM Dunedin [22]
+https://live.accessmedia.nz/Otago.stream/playlist.m3u8
+
+#RADIOBROWSERUUID:c6253fc0-c45b-474b-926c-4f35727004fd
+#EXTINF:-1 tvg-id="c6253fc0-c45b-474b-926c-4f35727004fd" tvg-name="OAR FM - Otago Access Radio" tvg-logo="https://oar.org.nz/wp-content/uploads/2024/09/cropped-favicon-180x180.png" group-title="New Zealand",OAR FM - Otago Access Radio [0]
+https://live.accessmedia.nz/Otago.stream_aac/chunklist_w1332745084.m3u8
+
+#RADIOBROWSERUUID:2eeef74a-0fc6-412d-a8c1-4e0386d94070
+#EXTINF:-1 tvg-id="2eeef74a-0fc6-412d-a8c1-4e0386d94070" tvg-name="One Christian Radio" tvg-logo="" group-title="New Zealand",One Christian Radio [81]
+https://radio.wanderingsheep.net:33001/onechristianradio
+
+#RADIOBROWSERUUID:8ab96af5-c8e3-4254-9df0-e98dea76a7d7
+#EXTINF:-1 tvg-id="8ab96af5-c8e3-4254-9df0-e98dea76a7d7" tvg-name="One Double-X" tvg-logo="https://static.wixstatic.com/media/2997c4_037e291ea90b41719f166f41a3ea5005%7emv2.png/v1/fill/w_32%2ch_32%2clg_1%2cusm_0.66_1.00_0.01/2997c4_037e291ea90b41719f166f41a3ea5005%7emv2.png" group-title="New Zealand",One Double-X [9]
+https://radio.e-cast.co.nz/1xxone/stream.m3u8
+
+#RADIOBROWSERUUID:96169329-0601-11e8-ae97-52543be04c81
+#EXTINF:-1 tvg-id="96169329-0601-11e8-ae97-52543be04c81" tvg-name="Paekakariki" tvg-logo="http://groundtruth.co.nz/favicon.ico" group-title="New Zealand",Paekakariki [49]
+http://icecast.groundtruth.co.nz:8000/paekakfm.mp3
+
+#RADIOBROWSERUUID:aac62510-997b-4565-b22f-85d637564a68
+#EXTINF:-1 tvg-id="aac62510-997b-4565-b22f-85d637564a68" tvg-name="Paekakariki 88.2FM" tvg-logo="https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Fwww.radio.net%2Fimages%2Fbroadcasts%2Fe3%2F9b%2F126709%2F1%2Fc300.png&f=1&nofb=1" group-title="New Zealand",Paekakariki 88.2FM [35]
+https://icecast.groundtruth.co.nz/paekakfm.aac
+
+#RADIOBROWSERUUID:dffadd21-01f9-4c8a-b10d-69fe370a7874
+#EXTINF:-1 tvg-id="dffadd21-01f9-4c8a-b10d-69fe370a7874" tvg-name="Plains FM 96.9" tvg-logo="https://cdn3.firecrestsystems.com/FC_Plains/Images/ApplePodcastChannelCoverImage%20co%20(1).jpg" group-title="New Zealand",Plains FM 96.9 [4]
+https://live.accessmedia.nz/plains.stream/playlist.m3u8
+
+#RADIOBROWSERUUID:9513a5a0-481a-4250-b136-ef97b0fa01d4
+#EXTINF:-1 tvg-id="9513a5a0-481a-4250-b136-ef97b0fa01d4" tvg-name="Plains FM 96.9" tvg-logo="" group-title="New Zealand",Plains FM 96.9 [17]
+http://live.accessmedia.nz/plains.stream_aac/playlist.m3u8
+
+#RADIOBROWSERUUID:1395ac52-7f1b-4454-b9e5-e8215e4b2ba2
+#EXTINF:-1 tvg-id="1395ac52-7f1b-4454-b9e5-e8215e4b2ba2" tvg-name="Planet FM 104.6 - AAC" tvg-logo="https://images.accessmedia.nz/StationFolder/planetfm/Images/PlanetLogoSquare02.jpg" group-title="New Zealand",Planet FM 104.6 - AAC [15]
+https://live.accessmedia.nz/PlanetFM.stream_aac/playlist.m3u8
+
+#RADIOBROWSERUUID:344464db-120c-4605-9773-9782ddfe8842
+#EXTINF:-1 tvg-id="344464db-120c-4605-9773-9782ddfe8842" tvg-name="Planet FM 104.6 - MP3" tvg-logo="https://images.accessmedia.nz/StationFolder/planetfm/Images/PlanetLogoSquare02.jpg" group-title="New Zealand",Planet FM 104.6 - MP3 [10]
+https://live.accessmedia.nz/PlanetFM.stream/playlist.m3u8
+
+#RADIOBROWSERUUID:74cf3ba5-6899-43d2-b57d-f8cc5f73c512
+#EXTINF:-1 tvg-id="74cf3ba5-6899-43d2-b57d-f8cc5f73c512" tvg-name="Positively Morrinsville 87.7FM" tvg-logo="https://www.wix.com/favicon.ico" group-title="New Zealand",Positively Morrinsville 87.7FM [71]
+https://c16.radioboss.fm:8262/stream?1652324863134
+
+#RADIOBROWSERUUID:209eeeef-33b4-4080-b1b0-1a38f7d07fa7
+#EXTINF:-1 tvg-id="209eeeef-33b4-4080-b1b0-1a38f7d07fa7" tvg-name="Power Hit FM 87.8 - Christchurch, NZ" tvg-logo="" group-title="New Zealand",Power Hit FM 87.8 - Christchurch, NZ [76]
+http://listen.powerhitfm.co.nz:16100/stream
+
+#RADIOBROWSERUUID:2d5c53a1-7fd8-43ea-b296-032afe788adf
+#EXTINF:-1 tvg-id="2d5c53a1-7fd8-43ea-b296-032afe788adf" tvg-name="Q97" tvg-logo="https://static.wixstatic.com/media/2997c4_dd6042bd43aa449c9318d09ed79dd9eb%7emv2.png/v1/fill/w_32%2ch_32%2clg_1%2cusm_0.66_1.00_0.01/2997c4_dd6042bd43aa449c9318d09ed79dd9eb%7emv2.png" group-title="New Zealand",Q97 [31]
+https://radio.e-cast.co.nz/q97/stream.m3u8
+
+#RADIOBROWSERUUID:5bdb3e70-0b4f-45e3-b002-fb3e42ab837b
+#EXTINF:-1 tvg-id="5bdb3e70-0b4f-45e3-b002-fb3e42ab837b" tvg-name="RadiJohan" tvg-logo="https://i.postimg.cc/3JX2jxvZ/Radi-Johan.jpg" group-title="New Zealand",RadiJohan [9]
+http://69.30.214.54:13740/;?type=http&nocache=1708209708?0.5747864581171453
+
+#RADIOBROWSERUUID:ea6f468b-9416-4128-ac7d-1c8cddb91607
+#EXTINF:-1 tvg-id="ea6f468b-9416-4128-ac7d-1c8cddb91607" tvg-name="Radio - X" tvg-logo="" group-title="New Zealand",Radio - X [16]
+https://playerservices.streamtheworld.com/api/livestream-redirect/SAM02AAC65_SC?dist=onlineradiobox
+
+#RADIOBROWSERUUID:9c5ec747-98d0-4380-a1ed-33de2531b2d4
+#EXTINF:-1 tvg-id="9c5ec747-98d0-4380-a1ed-33de2531b2d4" tvg-name="Radio A" tvg-logo="https://static2.mytuner.mobi/media/tvos_radios/784/radio-a-new-zealand.13435436.jpg" group-title="New Zealand",Radio A [2]
+https://play.radioking.io/radio-a-music
+
+#RADIOBROWSERUUID:e3daf602-40fe-433a-810f-4807031f4af4
+#EXTINF:-1 tvg-id="e3daf602-40fe-433a-810f-4807031f4af4" tvg-name="Radio A - Nelson NZ" tvg-logo="" group-title="New Zealand",Radio A - Nelson NZ [24]
+https://listen.radioking.com/radio/106324/stream/145267
+
+#RADIOBROWSERUUID:9714a993-112d-444f-ae52-65307c0fa2c4
+#EXTINF:-1 tvg-id="9714a993-112d-444f-ae52-65307c0fa2c4" tvg-name="Radio Bay FM 100.7" tvg-logo="https://static-media.streema.com/media/cache/9f/95/9f9598196955d2228f613c8f0cda3da9.jpg" group-title="New Zealand",Radio Bay FM 100.7 [8]
+https://s38.myradiostream.com:8876/;;?listening-from-radio-garden=1686969300
+
+#RADIOBROWSERUUID:104485ee-7fd6-4bbc-9027-f968358f4065
+#EXTINF:-1 tvg-id="104485ee-7fd6-4bbc-9027-f968358f4065" tvg-name="Radio Bolly Bop" tvg-logo="" group-title="New Zealand",Radio Bolly Bop [67]
+http://s3.radio.co/s2f19d44d0/listen
+
+#RADIOBROWSERUUID:5799d3ff-4115-4da4-b8c0-17de590a6c92
+#EXTINF:-1 tvg-id="5799d3ff-4115-4da4-b8c0-17de590a6c92" tvg-name="Radio Bollybop" tvg-logo="null" group-title="New Zealand",Radio Bollybop [61]
+https://s3.radio.co/s2f19d44d0/listen
+
+#RADIOBROWSERUUID:a511378d-c216-424a-ab9a-732529b2c164
+#EXTINF:-1 tvg-id="a511378d-c216-424a-ab9a-732529b2c164" tvg-name="Radio BurgerFuel" tvg-logo="https://images.radio.co/station_logos/s9909bd65f.20200505033228.jpg" group-title="New Zealand",Radio BurgerFuel [2]
+https://s3.radio.co/s9909bd65f/listen
+
+#RADIOBROWSERUUID:7156f7c4-1b9d-4c2b-a446-5ac5d6607f49
+#EXTINF:-1 tvg-id="7156f7c4-1b9d-4c2b-a446-5ac5d6607f49" tvg-name="Radio Chinese FM90.6" tvg-logo="https://fm906.co.nz/images/logo-h.png" group-title="New Zealand",Radio Chinese FM90.6 [16]
+https://s26.myradiostream.com/:20274/listen.mp3?nocache=1628504081
+
+#RADIOBROWSERUUID:4ce90075-d450-44eb-8503-be054b2dc5c7
+#EXTINF:-1 tvg-id="4ce90075-d450-44eb-8503-be054b2dc5c7" tvg-name="Radio Control 99.4FM" tvg-logo="" group-title="New Zealand",Radio Control 99.4FM [63]
+https://michae14-gecko.radioca.st/stream
+
+#RADIOBROWSERUUID:91828462-6d40-4ca4-b71a-a0d3246e65a3
+#EXTINF:-1 tvg-id="91828462-6d40-4ca4-b71a-a0d3246e65a3" tvg-name="Radio Hauraki" tvg-logo="https://www.hauraki.co.nz/content/music/images/interface/icons/hauraki/apple-touch-icon.png" group-title="New Zealand",Radio Hauraki [4]
+https://playerservices.streamtheworld.com/api/livestream-redirect/NZME_04AAC_SC
+
+#RADIOBROWSERUUID:d00afbb3-a35a-4ed2-9261-5fad5301ea99
+#EXTINF:-1 tvg-id="d00afbb3-a35a-4ed2-9261-5fad5301ea99" tvg-name="Radio Hauraki" tvg-logo="https://www.hauraki.co.nz/content/music/images/interface/icons/hauraki/favicon.ico" group-title="New Zealand",Radio Hauraki [2]
+https://23163.live.streamtheworld.com/NZME_04AAC/HLS/playlist.m3u8?aw_0_1st.playerid=iHeartRadioWebPlayer&aw_0_1st.skey=12121006026&clientType=web&companionAds=false&deviceName=web-desktop&dist=iheart&host=webapp.NZ&listenerId=&playedFrom=157&pname=live_profile&profileId=12121006026&stationid=6191&terminalId=162&territory=NZ
+
+#RADIOBROWSERUUID:270fdac5-b50c-4775-ac3f-aa0638d1902e
+#EXTINF:-1 tvg-id="270fdac5-b50c-4775-ac3f-aa0638d1902e" tvg-name="Radio Hauraki" tvg-logo="https://www.hauraki.co.nz/content/music/images/interface/icons/hauraki/favicon.ico" group-title="New Zealand",Radio Hauraki [3]
+https://23163.live.streamtheworld.com/NZME_04AAC/HLS/playlist.m3u8
+
+#RADIOBROWSERUUID:b35e26d9-1962-4dd5-9c5c-e931eceff1c4
+#EXTINF:-1 tvg-id="b35e26d9-1962-4dd5-9c5c-e931eceff1c4" tvg-name="Radio Hawkes Bay" tvg-logo="https://cdn3.firecrestsystems.com/FC_Kidnappers/Images/RadioHawkesBay-Logo-NB.png" group-title="New Zealand",Radio Hawkes Bay [4]
+https://live.accessmedia.nz/Kidnappers.stream/playlist.m3u8
+
+#RADIOBROWSERUUID:88de303b-77c9-4492-8a87-04923001fe13
+#EXTINF:-1 tvg-id="88de303b-77c9-4492-8a87-04923001fe13" tvg-name="Radio Hydra" tvg-logo="" group-title="New Zealand",Radio Hydra [77]
+https://streaming.radio.co/sed9109681/listen
+
+#RADIOBROWSERUUID:3c5bb36b-dc71-4fc1-b1d7-77fd78281499
+#EXTINF:-1 tvg-id="3c5bb36b-dc71-4fc1-b1d7-77fd78281499" tvg-name="Radio Kidnappers" tvg-logo="" group-title="New Zealand",Radio Kidnappers [17]
+https://live.accessmedia.nz/Kidnappers.stream_aac/playlist.m3u8
+
+#RADIOBROWSERUUID:7350f5a9-b488-44ee-8a8d-3ba123ead9e9
+#EXTINF:-1 tvg-id="7350f5a9-b488-44ee-8a8d-3ba123ead9e9" tvg-name="Radio New Zealand National" tvg-logo="https://www.rnz.co.nz/x/favicons/production/apple-touch-icon-14e8cc0d5e9a21845ce6a582e39617baeebe39d41412666ecebcdba7f3c1770a.png" group-title="New Zealand",Radio New Zealand National [443]
+http://radionz-ice.streamguys.com/national.mp3
+
+#RADIOBROWSERUUID:d592657d-0359-42b7-99cc-fb1fd5388e49
+#EXTINF:-1 tvg-id="d592657d-0359-42b7-99cc-fb1fd5388e49" tvg-name="Radio Ngāti Porou" tvg-logo="https://radiongatiporou.com/wp-content/uploads/2019/08/logo_blue-200x133.png" group-title="New Zealand",Radio Ngāti Porou [1553]
+https://wowza.iwi.radio/icecast-to-hls/ngrp:NgatiPorou.stream/playlist.m3u8
+
+#RADIOBROWSERUUID:a75ab902-2c4e-49f7-8cf9-1a5d37397a7d
+#EXTINF:-1 tvg-id="a75ab902-2c4e-49f7-8cf9-1a5d37397a7d" tvg-name="Radio one 91 fm" tvg-logo="https://www.r1.co.nz/images/favicons/apple-touch-icon-120x120.png" group-title="New Zealand",Radio one 91 fm [9]
+https://play.r1.co.nz/live
+
+#RADIOBROWSERUUID:b562983d-1c3d-456c-acdd-bcef491f245e
+#EXTINF:-1 tvg-id="b562983d-1c3d-456c-acdd-bcef491f245e" tvg-name="Radio One 91FM" tvg-logo="https://www.r1.co.nz/images/logo.png" group-title="New Zealand",Radio One 91FM [28]
+https://play.r1.co.nz/live
+
+#RADIOBROWSERUUID:8d5a16cc-b77d-41e9-9257-21cb894beaba
+#EXTINF:-1 tvg-id="8d5a16cc-b77d-41e9-9257-21cb894beaba" tvg-name="Radio Robotic" tvg-logo="https://static.wixstatic.com/media/3e4049_7800f3b666694fbfab646b89828ce32d%7emv2.png/v1/fill/w_32%2ch_32%2clg_1%2cusm_0.66_1.00_0.01/3e4049_7800f3b666694fbfab646b89828ce32d%7emv2.png" group-title="New Zealand",Radio Robotic [116]
+https://stream.zeno.fm/rhscse2a41zuv
+
+#RADIOBROWSERUUID:b3b0caf4-43e2-4e47-a6d2-478e873c4cf3
+#EXTINF:-1 tvg-id="b3b0caf4-43e2-4e47-a6d2-478e873c4cf3" tvg-name="Radio Samoa 1593am" tvg-logo="" group-title="New Zealand",Radio Samoa 1593am [56]
+http://radiosamoa.stream.broadcast.co.nz:8000/rsamoa48k
+
+#RADIOBROWSERUUID:14928631-8213-42aa-bfc1-aad43f604154
+#EXTINF:-1 tvg-id="14928631-8213-42aa-bfc1-aad43f604154" tvg-name="Radio Sangeet Masti" tvg-logo="null" group-title="New Zealand",Radio Sangeet Masti [86]
+https://servidor19-4.brlogic.com:7304/live?source=website
+
+#RADIOBROWSERUUID:4a0c4611-69ad-11e8-b15b-52543be04c81
+#EXTINF:-1 tvg-id="4a0c4611-69ad-11e8-b15b-52543be04c81" tvg-name="Radio Spice (Auckland, New Zealand)" tvg-logo="https://cdn.webrad.io/images/brand/icon_192x192.png" group-title="New Zealand",Radio Spice (Auckland, New Zealand) [252]
+http://stream9.broadcast.co.nz:8000/radiospicewebsiteaudio.mp3
+
+#RADIOBROWSERUUID:dcc1f1e3-6168-4be4-b848-3026cfd4842f
+#EXTINF:-1 tvg-id="dcc1f1e3-6168-4be4-b848-3026cfd4842f" tvg-name="Radio Te Aroha 88FM" tvg-logo="" group-title="New Zealand",Radio Te Aroha 88FM [39]
+https://c2.radioboss.fm:18440/stream
+
+#RADIOBROWSERUUID:e7aa06ad-2f82-4ad5-b2b9-b04b280c4f1e
+#EXTINF:-1 tvg-id="e7aa06ad-2f82-4ad5-b2b9-b04b280c4f1e" tvg-name="Radio Universo FM" tvg-logo="https://static.wixstatic.com/media/997731_6db60f6e7a53483b81213fa9eac4da43~mv2.jpg/v1/fill/w_250,h_116,al_c,q_80,usm_0.66_1.00_0.01,enc_avif,quality_auto/a%20logo.jpg" group-title="New Zealand",Radio Universo FM [0]
+https://stationplaylist.com:7140/listen.aac
+
+#RADIOBROWSERUUID:35732d95-d390-4097-94c5-017385c081ca
+#EXTINF:-1 tvg-id="35732d95-d390-4097-94c5-017385c081ca" tvg-name="Radioactive.FM 88.6" tvg-logo="" group-title="New Zealand",Radioactive.FM 88.6 [83]
+https://radio123-gecko.radioca.st/radioactivefm
+
+#RADIOBROWSERUUID:26db92f7-6eb5-44f1-a5a6-8e90244e54a4
+#EXTINF:-1 tvg-id="26db92f7-6eb5-44f1-a5a6-8e90244e54a4" tvg-name="Radiowave NZ" tvg-logo="https://stream.radiowavenz.com/logo.jpeg" group-title="New Zealand",Radiowave NZ [0]
+https://stream.radiowavenz.com/stream
+
+#RADIOBROWSERUUID:e06e1aa5-2f61-4238-ab33-3cccdd1752b9
+#EXTINF:-1 tvg-id="e06e1aa5-2f61-4238-ab33-3cccdd1752b9" tvg-name="Radiowave NZ" tvg-logo="https://stream.radiowavenz.com/logo.jpeg" group-title="New Zealand",Radiowave NZ [1]
+https://stream.radiowavenz.com/stream-aac
+
+#RADIOBROWSERUUID:9f252686-bb17-42ab-a87e-2718d26ebadb
+#EXTINF:-1 tvg-id="9f252686-bb17-42ab-a87e-2718d26ebadb" tvg-name="Radiowave NZ" tvg-logo="https://stream.radiowavenz.com/logo.jpeg" group-title="New Zealand",Radiowave NZ [1]
+https://stream.radiowavenz.com/stream-aac-low
+
+#RADIOBROWSERUUID:fb02ee16-e123-40fa-88a0-355b3d38382a
+#EXTINF:-1 tvg-id="fb02ee16-e123-40fa-88a0-355b3d38382a" tvg-name="Radiowave NZ" tvg-logo="" group-title="New Zealand",Radiowave NZ [36]
+https://listen.radioking.com/radio/106324/stream/145267
+
+#RADIOBROWSERUUID:6bccda6d-4c9f-4501-a3bf-0f01699282d8
+#EXTINF:-1 tvg-id="6bccda6d-4c9f-4501-a3bf-0f01699282d8" tvg-name="RAG-FM 107.7FM" tvg-logo="https://i.postimg.cc/br29f0dX/RAG-FM.jpg" group-title="New Zealand",RAG-FM 107.7FM [6]
+https://cast6.asurahosting.com/proxy/ragfmcom/stream
+
+#RADIOBROWSERUUID:5d0d5fd3-6b10-48ee-b0fe-e0ee469965d9
+#EXTINF:-1 tvg-id="5d0d5fd3-6b10-48ee-b0fe-e0ee469965d9" tvg-name="Raglan Community Radio" tvg-logo="https://cdn3.firecrestsystems.com/FC_RaglanCR/Images/cropped-Raglan-Community-Radio.png" group-title="New Zealand",Raglan Community Radio [8]
+https://s36.myradiostream.com/20712/;?type=http&nocache=1738237589?0.8271986316497546
+
+#RADIOBROWSERUUID:80cf7a66-748f-4538-8de4-893e57827d8c
+#EXTINF:-1 tvg-id="80cf7a66-748f-4538-8de4-893e57827d8c" tvg-name="Raglan Communtiy Radio" tvg-logo="https://cdn3.firecrestsystems.com/FC_RaglanCR/Images/RaglanICO.png" group-title="New Zealand",Raglan Communtiy Radio [2]
+https://s36.myradiostream.com/20712/;?type=http&nocache=1738237956
+
+#RADIOBROWSERUUID:2ce0bd70-16d6-4378-85ae-52130d3a0f34
+#EXTINF:-1 tvg-id="2ce0bd70-16d6-4378-85ae-52130d3a0f34" tvg-name="RDU" tvg-logo="" group-title="New Zealand",RDU [20]
+https://rdu985fm-gecko.radioca.st/stream
+
+#RADIOBROWSERUUID:3082ddda-a057-40d9-86eb-f57fa2c76c1a
+#EXTINF:-1 tvg-id="3082ddda-a057-40d9-86eb-f57fa2c76c1a" tvg-name="RDU 98.5FM" tvg-logo="https://rdu.org.nz/favicon.ico" group-title="New Zealand",RDU 98.5FM [9]
+http://rdu985fm-gecko.radioca.st:8247/stream
+
+#RADIOBROWSERUUID:9c69a400-cc27-4d7f-9c37-389e446b10f0
+#EXTINF:-1 tvg-id="9c69a400-cc27-4d7f-9c37-389e446b10f0" tvg-name="Retro Hit Radio" tvg-logo="http://retrohitradio.co.nz/favicon.ico" group-title="New Zealand",Retro Hit Radio [81]
+https://riphel02.radioca.st/;
+
+#RADIOBROWSERUUID:946bf577-3d05-4c10-a790-3fc105922af4
+#EXTINF:-1 tvg-id="946bf577-3d05-4c10-a790-3fc105922af4" tvg-name="Retro Hit Radio" tvg-logo="http://retrohitradio.co.nz/rhr/images/logo/web.png" group-title="New Zealand",Retro Hit Radio [11]
+http://riphel02.radioca.st/stream
+
+#RADIOBROWSERUUID:a21473af-0d70-4fce-acba-a56c5e6ea249
+#EXTINF:-1 tvg-id="a21473af-0d70-4fce-acba-a56c5e6ea249" tvg-name="Retro Hit Radio" tvg-logo="" group-title="New Zealand",Retro Hit Radio [167]
+https://riphel02.radioca.st/stream
+
+#RADIOBROWSERUUID:96134f5a-0601-11e8-ae97-52543be04c81
+#EXTINF:-1 tvg-id="96134f5a-0601-11e8-ae97-52543be04c81" tvg-name="Rhema - MP3" tvg-logo="https://origin-player.streamguys.com/rhema/sgplayer/include/assets/img/logo-rhema.jpg" group-title="New Zealand",Rhema - MP3 [108]
+https://rhema-radio.streamguys1.com/rhema.mp3
+
+#RADIOBROWSERUUID:d0af46a6-6292-11e9-a622-52543be04c81
+#EXTINF:-1 tvg-id="d0af46a6-6292-11e9-a622-52543be04c81" tvg-name="RNZ Concert AAC (128kbps)" tvg-logo="https://www.rnz.co.nz/x/favicons/production/apple-touch-icon-14e8cc0d5e9a21845ce6a582e39617baeebe39d41412666ecebcdba7f3c1770a.png" group-title="New Zealand",RNZ Concert AAC (128kbps) [301]
+http://radionz-ice.streamguys.com/Concert_aac128
+
+#RADIOBROWSERUUID:73e4fccd-77cf-11e9-aa30-52543be04c81
+#EXTINF:-1 tvg-id="73e4fccd-77cf-11e9-aa30-52543be04c81" tvg-name="RNZ Concert MP3" tvg-logo="https://www.rnz.co.nz/x/favicons/production/apple-touch-icon-14e8cc0d5e9a21845ce6a582e39617baeebe39d41412666ecebcdba7f3c1770a.png" group-title="New Zealand",RNZ Concert MP3 [245]
+http://radionz-ice.streamguys.com/concert.mp3
+
+#RADIOBROWSERUUID:5e3b25d8-5e08-488c-adb7-a83b5139ffc6
+#EXTINF:-1 tvg-id="5e3b25d8-5e08-488c-adb7-a83b5139ffc6" tvg-name="RNZ National" tvg-logo="http://www.radionz.co.nz/x/favicons/apple-icon-120x120-2a68f62bcd63220044c71f3e7eb3ee0e0ea2d1079d3b50b3f90eab3c48a7a46b.png" group-title="New Zealand",RNZ National [13]
+http://radionz-ice.streamguys.com/national.mp3
+
+#RADIOBROWSERUUID:2ef52514-f78f-483e-94b6-7b7a11d8808a
+#EXTINF:-1 tvg-id="2ef52514-f78f-483e-94b6-7b7a11d8808a" tvg-name="RNZ National AAC (128kbps)" tvg-logo="https://www.rnz.co.nz/x/favicons/production/apple-touch-icon-14e8cc0d5e9a21845ce6a582e39617baeebe39d41412666ecebcdba7f3c1770a.png" group-title="New Zealand",RNZ National AAC (128kbps) [205]
+http://radionz-ice.streamguys.com/National_aac128
+
+#RADIOBROWSERUUID:960b1670-0601-11e8-ae97-52543be04c81
+#EXTINF:-1 tvg-id="960b1670-0601-11e8-ae97-52543be04c81" tvg-name="RNZ National MP3" tvg-logo="https://www.rnz.co.nz/x/favicons/production/apple-touch-icon-14e8cc0d5e9a21845ce6a582e39617baeebe39d41412666ecebcdba7f3c1770a.png" group-title="New Zealand",RNZ National MP3 [3374]
+http://radionz-ice.streamguys.com/national.mp3
+
+#RADIOBROWSERUUID:8a4a8c95-6a4f-11e9-af37-52543be04c81
+#EXTINF:-1 tvg-id="8a4a8c95-6a4f-11e9-af37-52543be04c81" tvg-name="RNZ Pacific AAC (64kbps)" tvg-logo="https://www.rnz.co.nz/x/favicons/production/apple-touch-icon-14e8cc0d5e9a21845ce6a582e39617baeebe39d41412666ecebcdba7f3c1770a.png" group-title="New Zealand",RNZ Pacific AAC (64kbps) [342]
+http://radionz-ice.streamguys.com/international_aac64
+
+#RADIOBROWSERUUID:b4ed66ec-77cf-11e9-aa30-52543be04c81
+#EXTINF:-1 tvg-id="b4ed66ec-77cf-11e9-aa30-52543be04c81" tvg-name="RNZ Pacific MP3" tvg-logo="https://www.rnz.co.nz/x/favicons/production/apple-touch-icon-14e8cc0d5e9a21845ce6a582e39617baeebe39d41412666ecebcdba7f3c1770a.png" group-title="New Zealand",RNZ Pacific MP3 [783]
+http://radionz-ice.streamguys.com/international.mp3
+
+#RADIOBROWSERUUID:5f98d68a-be85-4e00-aad8-5d8cb66d75fc
+#EXTINF:-1 tvg-id="5f98d68a-be85-4e00-aad8-5d8cb66d75fc" tvg-name="RNZ Parliament MP3 (Sanctuary outside Parliament hours)" tvg-logo="https://www.rnz.co.nz/x/favicons/production/apple-touch-icon-14e8cc0d5e9a21845ce6a582e39617baeebe39d41412666ecebcdba7f3c1770a.png" group-title="New Zealand",RNZ Parliament MP3 (Sanctuary outside Parliament hours) [24]
+http://radionz-ice.streamguys.com/parliament.mp3
+
+#RADIOBROWSERUUID:436c5b1e-5e64-4a7e-80c8-c9900a9aa65d
+#EXTINF:-1 tvg-id="436c5b1e-5e64-4a7e-80c8-c9900a9aa65d" tvg-name="ROVA CHILL HOP" tvg-logo="" group-title="New Zealand",ROVA CHILL HOP [22]
+https://playerservices.streamtheworld.com/api/livestream-redirect/ROVA_CHILLHOP_S01AAC.aac?dist=?n=de33099414fdd83859df
+
+#RADIOBROWSERUUID:c8345e4f-dff4-49a2-a391-e88950ad1a6a
+#EXTINF:-1 tvg-id="c8345e4f-dff4-49a2-a391-e88950ad1a6a" tvg-name="Rush FM" tvg-logo="" group-title="New Zealand",Rush FM [57]
+http://rushbroadcasting.serverroom.us:5204/;
+
+#RADIOBROWSERUUID:c6723382-d7b8-45e2-99ad-40a4b2b3a009
+#EXTINF:-1 tvg-id="c6723382-d7b8-45e2-99ad-40a4b2b3a009" tvg-name="Sanctuary - AAC" tvg-logo="https://yoursanctuary.nz/_ipx/_/images/cover.jpg" group-title="New Zealand",Sanctuary - AAC [12]
+https://rhema-radio.streamguys1.com/rhema-sanctuary.aac
+
+#RADIOBROWSERUUID:96222109-0601-11e8-ae97-52543be04c81
+#EXTINF:-1 tvg-id="96222109-0601-11e8-ae97-52543be04c81" tvg-name="Sanctuary - MP3" tvg-logo="https://yoursanctuary.nz/_ipx/_/images/cover.jpg" group-title="New Zealand",Sanctuary - MP3 [76]
+https://rhema-radio.streamguys1.com/rhema-sanctuary.mp3
+
+#RADIOBROWSERUUID:f93ed26a-d2f9-4fa6-8509-4413d885138c
+#EXTINF:-1 tvg-id="f93ed26a-d2f9-4fa6-8509-4413d885138c" tvg-name="SayHiFM" tvg-logo="https://sayhifm.com/images/favicon.ico" group-title="New Zealand",SayHiFM [2]
+https://play.radioking.io/sayhifm
+
+#RADIOBROWSERUUID:3da39960-20ce-4e64-88c0-3753aa8b6789
+#EXTINF:-1 tvg-id="3da39960-20ce-4e64-88c0-3753aa8b6789" tvg-name="SayHiFM" tvg-logo="https://sayhifm.com/favicon.ico" group-title="New Zealand",SayHiFM [2]
+https://play.radioking.io/sayhifm
+
+#RADIOBROWSERUUID:6ef99996-450b-487a-b900-cb9e7bdf8897
+#EXTINF:-1 tvg-id="6ef99996-450b-487a-b900-cb9e7bdf8897" tvg-name="Ski FM" tvg-logo="" group-title="New Zealand",Ski FM [413]
+https://s2.radio.co/s6436891bc/listen
+
+#RADIOBROWSERUUID:a8fa8771-648a-4b70-8ee6-5994b8b2a315
+#EXTINF:-1 tvg-id="a8fa8771-648a-4b70-8ee6-5994b8b2a315" tvg-name="Sleep Radio" tvg-logo="https://static.wixstatic.com/media/02acb2_6cce978449504683b9d9a5b6861b25e3.png/v1/fill/w_180%2ch_180%2clg_1%2cusm_0.66_1.00_0.01/02acb2_6cce978449504683b9d9a5b6861b25e3.png" group-title="New Zealand",Sleep Radio [46]
+https://cast4.my-control-panel.com/proxy/sleeprad/stream?1721309187745
+
+#RADIOBROWSERUUID:1808aee1-b1b0-4034-a110-7f28607cdf11
+#EXTINF:-1 tvg-id="1808aee1-b1b0-4034-a110-7f28607cdf11" tvg-name="sleep radio" tvg-logo="https://static.wixstatic.com/media/02acb2_6cce978449504683b9d9a5b6861b25e3.png/v1/fill/w_180%2ch_180%2clg_1%2cusm_0.66_1.00_0.01/02acb2_6cce978449504683b9d9a5b6861b25e3.png" group-title="New Zealand",sleep radio [141]
+http://65.109.81.84:9851/stream
+
+#RADIOBROWSERUUID:92ff577b-9ab5-49c6-b6c9-d7fe93495607
+#EXTINF:-1 tvg-id="92ff577b-9ab5-49c6-b6c9-d7fe93495607" tvg-name="Sleep Radio" tvg-logo="https://d3kle7qwymxpcy.cloudfront.net/images/broadcasts/97/65/31354/c175.png" group-title="New Zealand",Sleep Radio [776]
+http://65.109.81.84:9851/stream
+
+#RADIOBROWSERUUID:34b19004-b9c6-4204-a8b3-ef61a38077af
+#EXTINF:-1 tvg-id="34b19004-b9c6-4204-a8b3-ef61a38077af" tvg-name="Smooth 105.6FM" tvg-logo="https://i.postimg.cc/C1wKgw1w/Smooth.jpg" group-title="New Zealand",Smooth 105.6FM [26]
+https://servidor26.brlogic.com:7110/live
+
+#RADIOBROWSERUUID:4d182f6b-a7c8-4bcf-a519-08c6ea36b374
+#EXTINF:-1 tvg-id="4d182f6b-a7c8-4bcf-a519-08c6ea36b374" tvg-name="Southern Cross Country" tvg-logo="https://player.streamerr.co/uploads/logos/Untitled_design_-_2023-10-211.png" group-title="New Zealand",Southern Cross Country [5]
+https://sxcountry.radioca.st/stream
+
+#RADIOBROWSERUUID:b61e2d85-286e-4510-b6af-a7549cfeb13d
+#EXTINF:-1 tvg-id="b61e2d85-286e-4510-b6af-a7549cfeb13d" tvg-name="Sport Nation - AAC" tvg-logo="https://sportnation.nz/radio.png" group-title="New Zealand",Sport Nation - AAC [352]
+https://sen.streamguys1.com/SENZ-AAC/playlist.m3u8
+
+#RADIOBROWSERUUID:270a3bee-247e-4398-b31f-9ce35f71d247
+#EXTINF:-1 tvg-id="270a3bee-247e-4398-b31f-9ce35f71d247" tvg-name="Sub FM" tvg-logo="https://www.sub.fm/wp-content/uploads/2017/07/cropped-black-sub-180x180.png" group-title="New Zealand",Sub FM [98]
+https://fmsub.radioca.st/stream?type=http&nocache=140
+
+#RADIOBROWSERUUID:e7131e18-420c-4fb6-a56c-36afe763a263
+#EXTINF:-1 tvg-id="e7131e18-420c-4fb6-a56c-36afe763a263" tvg-name="Switch FM Gisborne" tvg-logo="https://cdn.onlineradiobox.com/img/l/6/74836.v5.png" group-title="New Zealand",Switch FM Gisborne [10]
+http://s8.myradiostream.com:56886/listen.m4a
+
+#RADIOBROWSERUUID:52f4370e-0d95-4db2-96b3-7e541d21bc2d
+#EXTINF:-1 tvg-id="52f4370e-0d95-4db2-96b3-7e541d21bc2d" tvg-name="Te Hiku Radio" tvg-logo="https://tehiku.radio/favicon.ico" group-title="New Zealand",Te Hiku Radio [7]
+http://libreice.tehiku.radio:8000/tehikufm_ogg
+
+#RADIOBROWSERUUID:7ab615c6-4c5f-4e12-b9e5-e34139b2eaaa
+#EXTINF:-1 tvg-id="7ab615c6-4c5f-4e12-b9e5-e34139b2eaaa" tvg-name="Te Reo Irirangi O Ngāti Kahungunu" tvg-logo="https://static.wixstatic.com/media/d14534_259a89e4fcec4fb1a130d955fd584e8e~mv2_d_4534_2593_s_4_2.png/v1/fill/w_203,h_116,al_c,q_85,usm_0.66_1.00_0.01,enc_auto/Radio%20K%20Logo%20small.png" group-title="New Zealand",Te Reo Irirangi O Ngāti Kahungunu [135]
+https://wowza.iwi.radio/icecast-to-hls/ngrp:Kahungunu.stream/playlist.m3u8
+
+#RADIOBROWSERUUID:74ee4b8c-1c55-4a2f-8fa6-2d6136e6fb8f
+#EXTINF:-1 tvg-id="74ee4b8c-1c55-4a2f-8fa6-2d6136e6fb8f" tvg-name="The Breeze 93.4" tvg-logo="https://cdn-profiles.tunein.com/s17930/images/logod.png?t=638017388010000000" group-title="New Zealand",The Breeze 93.4 [172]
+https://mediaworks.streamguys1.com/breeze-akl-high_icy
+
+#RADIOBROWSERUUID:9d17a168-6f90-41e4-a9fd-a55af86e868b
+#EXTINF:-1 tvg-id="9d17a168-6f90-41e4-a9fd-a55af86e868b" tvg-name="The Cheese" tvg-logo="https://station.thecheese.co.nz/static/uploads/the_cheese/album_art.1716808937.png" group-title="New Zealand",The Cheese [32]
+https://station.thecheese.co.nz/hls/the_cheese/live.m3u8
+
+#RADIOBROWSERUUID:6e96419f-0d2a-481c-a918-0b67644a71db
+#EXTINF:-1 tvg-id="6e96419f-0d2a-481c-a918-0b67644a71db" tvg-name="The Cheese" tvg-logo="https://nz.radio.net/300/884thecheese.png?version=d3bd97b7c4aadd62cf9c17dfe894f8f9" group-title="New Zealand",The Cheese [29]
+https://station.thecheese.co.nz/listen/the_cheese/128.mp3
+
+#RADIOBROWSERUUID:5dc4b7a8-128d-4b13-b555-27973025caca
+#EXTINF:-1 tvg-id="5dc4b7a8-128d-4b13-b555-27973025caca" tvg-name="The Cheese FLAC" tvg-logo="" group-title="New Zealand",The Cheese FLAC [10]
+https://station.thecheese.co.nz/listen/the_cheese/flac
+
+#RADIOBROWSERUUID:2e1c8d8a-605a-4b18-bfe2-751a3648713d
+#EXTINF:-1 tvg-id="2e1c8d8a-605a-4b18-bfe2-751a3648713d" tvg-name="The Edge" tvg-logo="" group-title="New Zealand",The Edge [143]
+https://digitalstreams.mediaworks.nz/edge_net/playlist.m3u8
+
+#RADIOBROWSERUUID:ad37b092-f582-4841-8022-bd70b7592067
+#EXTINF:-1 tvg-id="ad37b092-f582-4841-8022-bd70b7592067" tvg-name="The Generator" tvg-logo="" group-title="New Zealand",The Generator [123]
+https://s1.myradiostream.com/:14268/;?type=http&nocache=1608640718?0.7458407789862892
+
+#RADIOBROWSERUUID:5eb16e09-548b-46a1-9fba-4dc5fc998ab6
+#EXTINF:-1 tvg-id="5eb16e09-548b-46a1-9fba-4dc5fc998ab6" tvg-name="The Generator FM" tvg-logo="" group-title="New Zealand",The Generator FM [3]
+https://s1.myradiostream.com/14268/stream/1/
+
+#RADIOBROWSERUUID:2fa6da4e-e494-4a5f-a29a-bf94bd77c864
+#EXTINF:-1 tvg-id="2fa6da4e-e494-4a5f-a29a-bf94bd77c864" tvg-name="The Hits" tvg-logo="https://i.postimg.cc/gkQ2VPks/the-hits-c99846c6.png" group-title="New Zealand",The Hits [139]
+https://playerservices.streamtheworld.com/api/livestream-redirect/NZME_71AAC.m3u8?aw_0_1st.playerid=iHeartRadioWebPlayer&aw_0_1st.skey=9774168307&clientType=web&companionAds=false&deviceName=web-desktop&dist=iheart&host=webapp.NZ&listenerId=&playedFrom=157&pname=live_profile&profileId=9774168307&stationid=6204&terminalId=162&territory=NZ
+
+#RADIOBROWSERUUID:961280ef-0601-11e8-ae97-52543be04c81
+#EXTINF:-1 tvg-id="961280ef-0601-11e8-ae97-52543be04c81" tvg-name="The Most Fm" tvg-logo="" group-title="New Zealand",The Most Fm [51]
+http://gordon.mostfm.com:8000/high
+
+#RADIOBROWSERUUID:4c4d2d7b-cab3-4003-bd39-a6225252b055
+#EXTINF:-1 tvg-id="4c4d2d7b-cab3-4003-bd39-a6225252b055" tvg-name="The Most FM 104.4" tvg-logo="" group-title="New Zealand",The Most FM 104.4 [38]
+http://gordon.mostfm.com:8000/high
+
+#RADIOBROWSERUUID:4abeeca0-8730-4846-84bd-508b72b5ddfb
+#EXTINF:-1 tvg-id="4abeeca0-8730-4846-84bd-508b72b5ddfb" tvg-name="The Rhythm 89FM" tvg-logo="" group-title="New Zealand",The Rhythm 89FM [69]
+http://stream.zeno.fm/7v9aaqeqhs8uv
+
+#RADIOBROWSERUUID:f17c2043-dff0-4a74-8be1-099064ae2b81
+#EXTINF:-1 tvg-id="f17c2043-dff0-4a74-8be1-099064ae2b81" tvg-name="The Rock" tvg-logo="" group-title="New Zealand",The Rock [334]
+https://digitalstreams.mediaworks.nz/rock_net/playlist.m3u8
+
+#RADIOBROWSERUUID:bc9ac88d-9af6-4564-9cb4-57edf4d36865
+#EXTINF:-1 tvg-id="bc9ac88d-9af6-4564-9cb4-57edf4d36865" tvg-name="The Rock - NZ's #1 rock radio station" tvg-logo="" group-title="New Zealand",The Rock - NZ's #1 rock radio station [165]
+https://digitalstreams.mediaworks.nz/rock_net_icy
+
+#RADIOBROWSERUUID:55274882-6130-4c33-bb2b-72012215dca1
+#EXTINF:-1 tvg-id="55274882-6130-4c33-bb2b-72012215dca1" tvg-name="The Sound" tvg-logo="https://www.thesound.co.nz/etc.clientlibs/mws-sites-nextgen/clientlibs/clientlib-thesound/resources/favicons/apple-touch-icon-180x180.png" group-title="New Zealand",The Sound [351]
+https://digitalstreams.mediaworks.nz/sound_net/playlist.m3u8
+
+#RADIOBROWSERUUID:2670cbc0-8aaf-4ddc-b085-65faf884a6ac
+#EXTINF:-1 tvg-id="2670cbc0-8aaf-4ddc-b085-65faf884a6ac" tvg-name="The Wireless (Today's Best Country)" tvg-logo="" group-title="New Zealand",The Wireless (Today's Best Country) [18]
+https://stream.zeno.fm/lamr6x1fxrruv
+
+#RADIOBROWSERUUID:0bf0f31b-dff2-4e42-a18e-f1b44c7c029e
+#EXTINF:-1 tvg-id="0bf0f31b-dff2-4e42-a18e-f1b44c7c029e" tvg-name="Tiri 2" tvg-logo="https://i.postimg.cc/RVdL50ZZ/Tiri-2.jpg" group-title="New Zealand",Tiri 2 [16]
+https://servidor34-4.brlogic.com:7138/live?source=website
+
+#RADIOBROWSERUUID:8379b0ee-0a14-437d-adfa-e43d5f501113
+#EXTINF:-1 tvg-id="8379b0ee-0a14-437d-adfa-e43d5f501113" tvg-name="TLC Radio Northland" tvg-logo="" group-title="New Zealand",TLC Radio Northland [12]
+http://203.118.136.79:88/broadwave.mp3
+
+#RADIOBROWSERUUID:1ae05631-77ec-4df1-af50-b38e1d283b3d
+#EXTINF:-1 tvg-id="1ae05631-77ec-4df1-af50-b38e1d283b3d" tvg-name="TYFM" tvg-logo="https://static2.mytuner.mobi/media/tvos_radios/852/tyfm-auckland.7894fd3c.png" group-title="New Zealand",TYFM [1]
+https://radio.parkplacesounds.co.nz/listen/tyfm/apps/mtr
+
+#RADIOBROWSERUUID:48a88c41-f9cb-4a15-b504-97c48af247fc
+#EXTINF:-1 tvg-id="48a88c41-f9cb-4a15-b504-97c48af247fc" tvg-name="UP FM 107.5" tvg-logo="https://liveonlineradio.net/wp-content/uploads/2013/09/Up-FM.jpg" group-title="New Zealand",UP FM 107.5 [48]
+https://stream.upfm.live/radio/8000/radio.mp3
+
+#RADIOBROWSERUUID:89d7bca7-76a0-43ce-8546-7028022b21e9
+#EXTINF:-1 tvg-id="89d7bca7-76a0-43ce-8546-7028022b21e9" tvg-name="Vinyl Radio NZ" tvg-logo="https://cdn.onlineradiobox.com/img/favicon-194x194.png" group-title="New Zealand",Vinyl Radio NZ [77]
+https://s40.myradiostream.com:17794/listen.aac?
+
+#RADIOBROWSERUUID:963b06d6-0601-11e8-ae97-52543be04c81
+#EXTINF:-1 tvg-id="963b06d6-0601-11e8-ae97-52543be04c81" tvg-name="Wandering Sheep Radio - Christian Smooth Jazz" tvg-logo="" group-title="New Zealand",Wandering Sheep Radio - Christian Smooth Jazz [936]
+http://radio.wanderingsheep.tv:8021/christianjazz
+
+#RADIOBROWSERUUID:964193a0-0601-11e8-ae97-52543be04c81
+#EXTINF:-1 tvg-id="964193a0-0601-11e8-ae97-52543be04c81" tvg-name="Wandering Sheep Radio - Hope Alive" tvg-logo="" group-title="New Zealand",Wandering Sheep Radio - Hope Alive [144]
+http://radio.wanderingsheep.tv:8012/hopealive
+
+#RADIOBROWSERUUID:962b96e7-0601-11e8-ae97-52543be04c81
+#EXTINF:-1 tvg-id="962b96e7-0601-11e8-ae97-52543be04c81" tvg-name="Wandering Sheep Radio - Jazz Cafe" tvg-logo="http://wsradio.net/wp-content/uploads/2014/07/gordonsheep1.ico" group-title="New Zealand",Wandering Sheep Radio - Jazz Cafe [459]
+http://radio.wanderingsheep.tv:8000/jazzcafe
+
+#RADIOBROWSERUUID:4d561c49-3b86-4f38-914c-527bcdf9ee7a
+#EXTINF:-1 tvg-id="4d561c49-3b86-4f38-914c-527bcdf9ee7a" tvg-name="WCR 87.6 FM" tvg-logo="https://static-media.streema.com/media/cache/e5/70/e57010a75d567bdc3e4152a4a5cfa42b.jpg" group-title="New Zealand",WCR 87.6 FM [8]
+http://stream2.nrgkits.co.nz:5000/wcrfm
+
+#RADIOBROWSERUUID:b7ba83ed-44d3-4eaa-86b1-a326bec9b338
+#EXTINF:-1 tvg-id="b7ba83ed-44d3-4eaa-86b1-a326bec9b338" tvg-name="Wellington Access Radio" tvg-logo="" group-title="New Zealand",Wellington Access Radio [30]
+https://live.accessmedia.nz/Wellington.stream/playlist.m3u8
+
+#RADIOBROWSERUUID:d1af0dac-2021-42d1-9d5d-ca5dbc4301f5
+#EXTINF:-1 tvg-id="d1af0dac-2021-42d1-9d5d-ca5dbc4301f5" tvg-name="West Coast Radio" tvg-logo="https://www.wcrfm.co.nz/index_files/image3251.jpg" group-title="New Zealand",West Coast Radio [12]
+http://stream2.nrgkits.co.nz:5000/wcrfm
+
+#RADIOBROWSERUUID:0d61ab6a-5d38-4cbb-aa37-efaf7fae9823
+#EXTINF:-1 tvg-id="0d61ab6a-5d38-4cbb-aa37-efaf7fae9823" tvg-name="West FM Swing Radio" tvg-logo="https://i.postimg.cc/VNjvHX2V/West-FM.jpg" group-title="New Zealand",West FM Swing Radio [77]
+http://westfm.freeddns.org:8000/westfm
+
+#RADIOBROWSERUUID:adb2d678-5e99-4d24-b789-fb4836895887
+#EXTINF:-1 tvg-id="adb2d678-5e99-4d24-b789-fb4836895887" tvg-name="World FM Tawa 88.2" tvg-logo="" group-title="New Zealand",World FM Tawa 88.2 [40]
+http://www.worldfm.co.nz:8882/worldfm.aac
+
+#RADIOBROWSERUUID:441d7702-b003-4668-ab26-589f3a4c4934
+#EXTINF:-1 tvg-id="441d7702-b003-4668-ab26-589f3a4c4934" tvg-name="XS80s" tvg-logo="https://xs80s.com/img/XS80s-PP.png" group-title="New Zealand",XS80s [74]
+http://s1.myradiostream.com:12508/listen.mp3
+
+#RADIOBROWSERUUID:d8ea3ea6-fb6d-4e54-9f19-9a8b76b124e2
+#EXTINF:-1 tvg-id="d8ea3ea6-fb6d-4e54-9f19-9a8b76b124e2" tvg-name="XS80s" tvg-logo="http://xs80s.com/favicon.ico" group-title="New Zealand",XS80s [176]
+http://s1.myradiostream.com:12508/listen.mp3
+
+#RADIOBROWSERUUID:6beed16e-b2db-4c47-befd-03788443a8e8
+#EXTINF:-1 tvg-id="6beed16e-b2db-4c47-befd-03788443a8e8" tvg-name="ZFM Global" tvg-logo="" group-title="New Zealand",ZFM Global [22]
+http://nebula.shoutca.st:8545/stream/1/
+
+#RADIOBROWSERUUID:8f9c58ba-8526-4bdd-b145-02fabe40e635
+#EXTINF:-1 tvg-id="8f9c58ba-8526-4bdd-b145-02fabe40e635" tvg-name="ZM Wellington (new)" tvg-logo="https://i.iheart.com/v3/re/assets.streams/66cd032848755edc76e696f3" group-title="New Zealand",ZM Wellington (new) [57]
+https://playerservices.streamtheworld.com/api/livestream-redirect/NZME_33AAC.m3u8
+
+#RADIOBROWSERUUID:cc9c0708-d100-43cc-a76b-e1fef63d2e43
+#EXTINF:-1 tvg-id="cc9c0708-d100-43cc-a76b-e1fef63d2e43" tvg-name="新西兰中文广播电台 FM90.6 Radio Chinese" tvg-logo="https://fm906.co.nz/images/nzc-logo.jpg" group-title="New Zealand",新西兰中文广播电台 FM90.6 Radio Chinese [368]
+https://s26.myradiostream.com:20274/listen.mp3

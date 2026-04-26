@@ -1,0 +1,353 @@
+﻿#EXTM3U
+
+#RADIOBROWSERUUID:d68d59d8-3768-476b-b068-0e64c9ae7bd3
+#EXTINF:-1 tvg-id="d68d59d8-3768-476b-b068-0e64c9ae7bd3" tvg-name="Abdulbasit Abdulsamad" tvg-logo="null" group-title="Hong Kong",Abdulbasit Abdulsamad [20]
+https://radio.mp3islam.com/listen/abdulbasit/radio.mp3
+
+#RADIOBROWSERUUID:5b253a02-28ed-48a7-a972-2aef5b114036
+#EXTINF:-1 tvg-id="5b253a02-28ed-48a7-a972-2aef5b114036" tvg-name="Apple FM" tvg-logo="" group-title="Hong Kong",Apple FM [941]
+http://sc.apple-fm.net:9020/
+
+#RADIOBROWSERUUID:c5a87eaf-c961-11e9-8502-52543be04c81
+#EXTINF:-1 tvg-id="c5a87eaf-c961-11e9-8502-52543be04c81" tvg-name="Apple-FM.net" tvg-logo="" group-title="Hong Kong",Apple-FM.net [1305]
+http://sc7b.apple-fm.net:8188/
+
+#RADIOBROWSERUUID:70f7500f-e484-4783-8948-069dfc86f969
+#EXTINF:-1 tvg-id="70f7500f-e484-4783-8948-069dfc86f969" tvg-name="AXR" tvg-logo="" group-title="Hong Kong",AXR [77]
+https://hongkongstream.axr.online/
+
+#RADIOBROWSERUUID:d4a4ca27-d864-4f0c-ac3a-4dd9d273cbb9
+#EXTINF:-1 tvg-id="d4a4ca27-d864-4f0c-ac3a-4dd9d273cbb9" tvg-name="AXR Hong Kong" tvg-logo="" group-title="Hong Kong",AXR Hong Kong [1095]
+http://hongkongstream.axr.online/
+
+#RADIOBROWSERUUID:ce998ec3-59e1-49d7-8476-f32d4d3b5d41
+#EXTINF:-1 tvg-id="ce998ec3-59e1-49d7-8476-f32d4d3b5d41" tvg-name="CNR-14 香港之声" tvg-logo="https://cnvod.cnr.cn/audio2017/ondemand/img/1100/20230612/1686554792374.png" group-title="Hong Kong",CNR-14 香港之声 [241]
+http://ngcdn002.cnr.cn/live/xgzs/index.m3u8
+
+#RADIOBROWSERUUID:bda613a3-1bbe-47bc-ab24-d0e4d4ab9f20
+#EXTINF:-1 tvg-id="bda613a3-1bbe-47bc-ab24-d0e4d4ab9f20" tvg-name="CNR-14 香港之聲" tvg-logo="https://ytmedia.radio.cn/CCYT/202306/12/18/1E202306121836.jpg" group-title="Hong Kong",CNR-14 香港之聲 [52]
+https://satellitepull.cnr.cn/live/wxxgzs/playlist.m3u8?wsSession=5849bb6c90cf7fc1a7e3eae9-174908181231216&wsIPSercert=f7b6cfa8467acd0836b62cf14aa786d3
+
+#RADIOBROWSERUUID:5faadfe8-a738-4155-82a7-9663ce1c9c33
+#EXTINF:-1 tvg-id="5faadfe8-a738-4155-82a7-9663ce1c9c33" tvg-name="D-100" tvg-logo="https://www.d100.net/" group-title="Hong Kong",D-100 [11]
+http://59.152.232.107:8000/Channel1-128MP3
+
+#RADIOBROWSERUUID:9b982004-2ea5-49cc-a82d-bd65ae8ebd5e
+#EXTINF:-1 tvg-id="9b982004-2ea5-49cc-a82d-bd65ae8ebd5e" tvg-name="Digital Radio Hong Kong" tvg-logo="" group-title="Hong Kong",Digital Radio Hong Kong [1253]
+http://ice.digitalradiohk.net:8000/drhk
+
+#RADIOBROWSERUUID:67238017-50b9-444b-8f6c-ae17d008f5e4
+#EXTINF:-1 tvg-id="67238017-50b9-444b-8f6c-ae17d008f5e4" tvg-name="Fing Radio" tvg-logo="https://cdn.onlineradiobox.com/img/apple-touch-icon-120x120.png" group-title="Hong Kong",Fing Radio [951]
+https://bluesfan.stream.laut.fm/bluesfan?t302=2020-11-06_13-46-59&uuid=28a2f040-51e1-44fe-899f-3519cbd5d4e9
+
+#RADIOBROWSERUUID:5682c16a-581c-442b-a13e-849c9f926263
+#EXTINF:-1 tvg-id="5682c16a-581c-442b-a13e-849c9f926263" tvg-name="FM Belowground" tvg-logo="https://belowground.fm/wp-content/uploads/2026/01/YETIOUT_FMBELOWGROUND_NEW-03-i.png" group-title="Hong Kong",FM Belowground [8]
+https://listen.belowground.fm/radio/8000/radio.mp3
+
+#RADIOBROWSERUUID:ed6db46d-104e-4f43-b3ca-16e715091c94
+#EXTINF:-1 tvg-id="ed6db46d-104e-4f43-b3ca-16e715091c94" tvg-name="Highfun Radios ( shows)" tvg-logo="https://zeno.fm/_ipx/q_85&fit_cover&s_288x288/https://images.zeno.fm/SZeUK7-psWOBw1I245_SMIaEwn3jcW85NO8xLGu8hm8/rs:fill:288:288/g:ce:0:0/aHR0cHM6Ly9wcm94eS56ZW5vLmZtL2NvbnRlbnQvc3RhdGlvbnMvYWd4emZucGxibTh0YzNSaGRITnlNZ3NTQ2tGMWRHaERiR2xsYm5RWWdJRHdnSTJKaUFnTUN4SU9VM1JoZEdsdmJsQnliMlpwYkdVWWdJRHdrT3loMVFzTW9nRUVlbVZ1YncvaW1hZ2UvP3U9MTY0ODY5MzI1MjAwMA.webp" group-title="Hong Kong",Highfun Radios ( shows) [23]
+https://stream.zeno.fm/vzgtzzs0x68uv
+
+#RADIOBROWSERUUID:9b2430c5-afb8-4d83-8d95-ce695267c565
+#EXTINF:-1 tvg-id="9b2430c5-afb8-4d83-8d95-ce695267c565" tvg-name="Ifeng" tvg-logo="https://upload.wikimedia.org/wikipedia/en/3/34/Phoenix_Chinese.svg" group-title="Hong Kong",Ifeng [196]
+http://playtv-live.ifeng.com/live/06OLEEWQKN4_audio.m3u8
+
+#RADIOBROWSERUUID:21216932-11ca-47c6-8cef-a3f7192de15e
+#EXTINF:-1 tvg-id="21216932-11ca-47c6-8cef-a3f7192de15e" tvg-name="Ifeng (Phoenix TV)" tvg-logo="https://upload.wikimedia.org/wikipedia/en/thumb/3/34/Phoenix_Chinese.svg/1536px-Phoenix_Chinese.svg.png" group-title="Hong Kong",Ifeng (Phoenix TV) [299]
+http://playtv-live.ifeng.com/live/06OLEEWQKN4_audio.m3u8
+
+#RADIOBROWSERUUID:148bfb6d-e45e-4877-88eb-d8f3e3a7ad7d
+#EXTINF:-1 tvg-id="148bfb6d-e45e-4877-88eb-d8f3e3a7ad7d" tvg-name="Ifeng (Phoenix)" tvg-logo="https://en.m.wikipedia.org/wiki/Phoenix_Television#/media/File%3APhoenix_Chinese.svg" group-title="Hong Kong",Ifeng (Phoenix) [125]
+http://playtv-live.ifeng.com/live/06OLEEWQKN4_audio.m3u8
+
+#RADIOBROWSERUUID:fd88f043-118a-4b6f-8b1d-2a4cce984f06
+#EXTINF:-1 tvg-id="fd88f043-118a-4b6f-8b1d-2a4cce984f06" tvg-name="La French Radio Honk-Kong et Macao" tvg-logo="https://cdn.onlineradiobox.com/img/apple-touch-icon-120x120.png" group-title="Hong Kong",La French Radio Honk-Kong et Macao [250]
+https://listen.radioking.com/radio/333865/stream/382282
+
+#RADIOBROWSERUUID:3f82d490-0bf2-41bd-8c69-00f4fe8580e7
+#EXTINF:-1 tvg-id="3f82d490-0bf2-41bd-8c69-00f4fe8580e7" tvg-name="Metro Plus 1044 AM" tvg-logo="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQNMHNUQklLiwV95JbCYaxW22hy5mMqCqxm1w&usqp=CAU" group-title="Hong Kong",Metro Plus 1044 AM [204]
+http://162.220.162.10:8011/stream
+
+#RADIOBROWSERUUID:adcae25f-4823-4668-87ac-18aadbf02f38
+#EXTINF:-1 tvg-id="adcae25f-4823-4668-87ac-18aadbf02f38" tvg-name="Originalradio" tvg-logo="" group-title="Hong Kong",Originalradio [339]
+https://stream.zeno.fm/rzwzgu0dd8zuv
+
+#RADIOBROWSERUUID:186b2887-e1bb-4e1f-8ffe-c17b7b501c96
+#EXTINF:-1 tvg-id="186b2887-e1bb-4e1f-8ffe-c17b7b501c96" tvg-name="radio 1" tvg-logo="https://www.rthk.hk/img/apple-icon-114x114.png" group-title="Hong Kong",radio 1 [156]
+https://rthkaudio1-lh.akamaihd.net/i/radio1_1@355864/index_56_a-p.m3u8
+
+#RADIOBROWSERUUID:b5eea176-4a21-4287-990f-46c30ee306dc
+#EXTINF:-1 tvg-id="b5eea176-4a21-4287-990f-46c30ee306dc" tvg-name="Radio 1111" tvg-logo="https://www.rthk.hk/img/apple-icon-114x114.png" group-title="Hong Kong",Radio 1111 [84]
+https://rthkaudio1-lh.akamaihd.net/i/radio1_1@355864/index_56_a-p.m3u8
+
+#RADIOBROWSERUUID:897d3142-8c40-40f1-8b65-eff7d66ec7bd
+#EXTINF:-1 tvg-id="897d3142-8c40-40f1-8b65-eff7d66ec7bd" tvg-name="Radio 4444" tvg-logo="" group-title="Hong Kong",Radio 4444 [70]
+https://rthkaudio4-lh.akamaihd.net/i/radio4_1@355867/master.m3u8
+
+#RADIOBROWSERUUID:341fd2bc-f6b5-49e1-b85c-e70f212d9c71
+#EXTINF:-1 tvg-id="341fd2bc-f6b5-49e1-b85c-e70f212d9c71" tvg-name="Radio Disney Asia FM 100.7" tvg-logo="https://ar.radiodisney.com/_next/image?url=%2F_next%2Fstatic%2Fmedia%2FLogoPlayer.94eccc39.jpg&w=320&q=75" group-title="Hong Kong",Radio Disney Asia FM 100.7 [281]
+https://listen.radioking.com/radio/453221/stream/508076
+
+#RADIOBROWSERUUID:b52583a4-0da1-4c32-b917-a229f9d3a122
+#EXTINF:-1 tvg-id="b52583a4-0da1-4c32-b917-a229f9d3a122" tvg-name="RTHK Radio 1" tvg-logo="" group-title="Hong Kong",RTHK Radio 1 [246]
+https://rthkradio1-live.akamaized.net/hls/live/2035313/radio1/master.m3u8
+
+#RADIOBROWSERUUID:0e495b97-0a3d-49cf-9476-8814450b4cd0
+#EXTINF:-1 tvg-id="0e495b97-0a3d-49cf-9476-8814450b4cd0" tvg-name="RTHK Radio 1" tvg-logo="https://www.rthk.hk/img/apple-icon-114x114.png" group-title="Hong Kong",RTHK Radio 1 [6879]
+http://stm1.rthk.hk/radio1
+
+#RADIOBROWSERUUID:ba2c1f66-629c-49e0-b73c-c7bc67c4c6d8
+#EXTINF:-1 tvg-id="ba2c1f66-629c-49e0-b73c-c7bc67c4c6d8" tvg-name="RTHK Radio 1" tvg-logo="" group-title="Hong Kong",RTHK Radio 1 [110]
+https://rthkaudio1-lh.akamaihd.net/i/radio1_1@355864/index_56_a-p.m3u8
+
+#RADIOBROWSERUUID:1c999a35-cbc8-45e8-98d0-20b664b44c34
+#EXTINF:-1 tvg-id="1c999a35-cbc8-45e8-98d0-20b664b44c34" tvg-name="RTHK Radio 1" tvg-logo="https://cdn.webrad.io/images/logos/radios-hk/rthk-1.png" group-title="Hong Kong",RTHK Radio 1 [2738]
+https://rthkaudio1-lh.akamaihd.net/i/radio1_1@355864/index_56_a-p.m3u8
+
+#RADIOBROWSERUUID:6e54fe80-269e-4238-8ee2-c226c031d4bd
+#EXTINF:-1 tvg-id="6e54fe80-269e-4238-8ee2-c226c031d4bd" tvg-name="RTHK Radio 1" tvg-logo="" group-title="Hong Kong",RTHK Radio 1 [105]
+https://rthkaudio1-lh.akamaihd.net/i/radio1_1@355864/index_56_a-p.m3u8
+
+#RADIOBROWSERUUID:2be788be-a558-428b-93b1-6cc6e4a768ff
+#EXTINF:-1 tvg-id="2be788be-a558-428b-93b1-6cc6e4a768ff" tvg-name="RTHK Radio 2" tvg-logo="" group-title="Hong Kong",RTHK Radio 2 [5107]
+http://stm2.rthk.hk/radio2
+
+#RADIOBROWSERUUID:adb40af2-1bfe-4d43-8122-08b7e0b799a1
+#EXTINF:-1 tvg-id="adb40af2-1bfe-4d43-8122-08b7e0b799a1" tvg-name="RTHK Radio 2" tvg-logo="" group-title="Hong Kong",RTHK Radio 2 [726]
+https://rthkradio2-live.akamaized.net/hls/live/2040078/radio2/index_64_a.m3u8
+
+#RADIOBROWSERUUID:2da259ce-c76a-4996-8a89-23f200f6ac1c
+#EXTINF:-1 tvg-id="2da259ce-c76a-4996-8a89-23f200f6ac1c" tvg-name="RTHK radio 2" tvg-logo="" group-title="Hong Kong",RTHK radio 2 [633]
+https://rthkaudio2-lh.akamaihd.net/i/radio2_1@355865/index_56_a-p.m3u8
+
+#RADIOBROWSERUUID:3fb37778-628e-4799-bb76-cd2813a85464
+#EXTINF:-1 tvg-id="3fb37778-628e-4799-bb76-cd2813a85464" tvg-name="RTHK radio 3" tvg-logo="" group-title="Hong Kong",RTHK radio 3 [565]
+https://rthkaudio3-lh.akamaihd.net/i/radio3_1@355866/index_56_a-p.m3u8
+
+#RADIOBROWSERUUID:1875ea38-6f79-4277-b4d5-8db900077100
+#EXTINF:-1 tvg-id="1875ea38-6f79-4277-b4d5-8db900077100" tvg-name="RTHK Radio 3" tvg-logo="" group-title="Hong Kong",RTHK Radio 3 [238]
+https://rthkradio3-live.akamaized.net/hls/live/2040079/radio3/master.m3u8
+
+#RADIOBROWSERUUID:ff98b8d3-f26a-4801-8c02-6759c15f0003
+#EXTINF:-1 tvg-id="ff98b8d3-f26a-4801-8c02-6759c15f0003" tvg-name="RTHK Radio 4" tvg-logo="" group-title="Hong Kong",RTHK Radio 4 [360]
+https://rthkradio4-live.akamaized.net/hls/live/2040080/radio4/master.m3u8
+
+#RADIOBROWSERUUID:140cbc06-7365-40c8-b81e-564f55e7f290
+#EXTINF:-1 tvg-id="140cbc06-7365-40c8-b81e-564f55e7f290" tvg-name="RTHK Radio 5" tvg-logo="" group-title="Hong Kong",RTHK Radio 5 [556]
+https://rthkradio5-live.akamaized.net/hls/live/2040081/radio5/master.m3u8
+
+#RADIOBROWSERUUID:f27f962c-b42a-4674-9b50-30216165b108
+#EXTINF:-1 tvg-id="f27f962c-b42a-4674-9b50-30216165b108" tvg-name="RTHK Radio 5" tvg-logo="https://static.wikia.nocookie.net/hkradio/images/f/f8/RTHKRadio5_logo.gif/revision/latest?cb=20131022130417&path-prefix=zh" group-title="Hong Kong",RTHK Radio 5 [1338]
+https://rthkaudio5-lh.akamaihd.net/i/radio5_1@355868/index_56_a-p.m3u8
+
+#RADIOBROWSERUUID:3e7ad9d1-17e6-4b74-a5b7-9d5654c20d3c
+#EXTINF:-1 tvg-id="3e7ad9d1-17e6-4b74-a5b7-9d5654c20d3c" tvg-name="RTHK Radio 6 央廣香港之聲" tvg-logo="" group-title="Hong Kong",RTHK Radio 6 央廣香港之聲 [269]
+https://rthkradiocnrhk-live.akamaized.net/hls/live/2046111/radiocnrhk/master.m3u8
+
+#RADIOBROWSERUUID:3a5b3c97-1204-4a47-bf97-6bc08eba38b9
+#EXTINF:-1 tvg-id="3a5b3c97-1204-4a47-bf97-6bc08eba38b9" tvg-name="RTHK Radio 8 央廣粵港澳大灣區之聲" tvg-logo="http://ytdem.radio.cn/oldres/cnvod/audio2017/ondemand/media/1100/20201230/1609294853242.jpg" group-title="Hong Kong",RTHK Radio 8 央廣粵港澳大灣區之聲 [329]
+https://rthkradiocmgrgb-live.akamaized.net/hls/live/2046112/radiocmgrgb/master.m3u8
+
+#RADIOBROWSERUUID:df485b29-376b-446e-9427-e88c4aefe364
+#EXTINF:-1 tvg-id="df485b29-376b-446e-9427-e88c4aefe364" tvg-name="RTHK Radio-3" tvg-logo="https://webstatic.rthk.hk/img/apple-icon-114x114.png" group-title="Hong Kong",RTHK Radio-3 [171]
+https://rthkaudio3-lh.akamaihd.net/i/radio3_1@355866/master.m3u8
+
+#RADIOBROWSERUUID:7c426f02-1c08-409c-8068-3a0d82bb1ea3
+#EXTINF:-1 tvg-id="7c426f02-1c08-409c-8068-3a0d82bb1ea3" tvg-name="ZENO FM 良友同行频道" tvg-logo="https://zeno.fm/_ipx/f_webp&q_85&fit_cover&s_288x288/https://images.zeno.fm/LGQOOUaEo3MLF9_bx1RaFEBCpjbxXevZx_ELbWE9Zyw/rs:fill:288:288/g:ce:0:0/aHR0cHM6Ly9wcm94eS56ZW5vLmZtL2NvbnRlbnQvc3RhdGlvbnMvZDk3NGI4MDMtYTdmMi00N2FhLTkwOTUtYTQwNjNlNDMxYzEyL2ltYWdlLz91PTE3Mjk1NjE0MjYwMDA.webp" group-title="Hong Kong",ZENO FM 良友同行频道 [204]
+https://stream.zeno.fm/2uvcyzjw38ivv
+
+#RADIOBROWSERUUID:40424e67-42c4-4fa7-a8e9-4127153eae69
+#EXTINF:-1 tvg-id="40424e67-42c4-4fa7-a8e9-4127153eae69" tvg-name="三时系念" tvg-logo="" group-title="Hong Kong",三时系念 [11]
+https://v.hwadzan.info/liveedge/_definst_/smil:sanshi_720p.smil/playlist.m3u8
+
+#RADIOBROWSERUUID:a41c628e-3961-43d2-9aec-91521d00788b
+#EXTINF:-1 tvg-id="a41c628e-3961-43d2-9aec-91521d00788b" tvg-name="中央人民廣播電台 中國之聲" tvg-logo="" group-title="Hong Kong",中央人民廣播電台 中國之聲 [224]
+http://zbbf2.ahbztv.com/live/4f3.m3u8
+
+#RADIOBROWSERUUID:bc6d7454-bc64-42e4-83e7-9ad79de1bd22
+#EXTINF:-1 tvg-id="bc6d7454-bc64-42e4-83e7-9ad79de1bd22" tvg-name="中央人民廣播電台 經濟之聲" tvg-logo="http://5b0988e595225.cdn.sohucs.com/images/20191022/9c14ea3edb2a4b8798cfd33865397800.jpeg" group-title="Hong Kong",中央人民廣播電台 經濟之聲 [164]
+http://ngcdn002.cnr.cn/live/jjzs/index.m3u8
+
+#RADIOBROWSERUUID:aa91470c-89dc-48ba-b155-f6455fc2fa74
+#EXTINF:-1 tvg-id="aa91470c-89dc-48ba-b155-f6455fc2fa74" tvg-name="中山環保旅遊之聲" tvg-logo="http://pic.qingting.fm/2017/0811/20170811095134.jpeg" group-title="Hong Kong",中山環保旅遊之聲 [58]
+https://lhttp.qingting.fm/live/1278/64k.mp3
+
+#RADIOBROWSERUUID:21682878-a527-4deb-8b64-c94c744a473c
+#EXTINF:-1 tvg-id="21682878-a527-4deb-8b64-c94c744a473c" tvg-name="中山綜合廣播" tvg-logo="http://pic.qingting.fm/2020/0417/20200417071307.png" group-title="Hong Kong",中山綜合廣播 [54]
+https://lhttp.qingting.fm/live/1277/64k.mp3
+
+#RADIOBROWSERUUID:38ee7cba-f235-4e89-ba9a-60e588af2b82
+#EXTINF:-1 tvg-id="38ee7cba-f235-4e89-ba9a-60e588af2b82" tvg-name="凤凰卫视中文台" tvg-logo="https://y1.ifengimg.com/index/72x72_2520ifeng.png" group-title="Hong Kong",凤凰卫视中文台 [1525]
+http://playtv-live.ifeng.com/live/06OLEGEGM4G_audio.m3u8
+
+#RADIOBROWSERUUID:14e12a23-52d7-42fb-901b-da15d0526711
+#EXTINF:-1 tvg-id="14e12a23-52d7-42fb-901b-da15d0526711" tvg-name="华藏多元文化台" tvg-logo="" group-title="Hong Kong",华藏多元文化台 [7]
+https://v.hwadzan.info/liveedge/_definst_/education/playlist.m3u8
+
+#RADIOBROWSERUUID:f9f38dfb-7ed2-4f41-a440-d22baa2d5ebf
+#EXTINF:-1 tvg-id="f9f38dfb-7ed2-4f41-a440-d22baa2d5ebf" tvg-name="双溪法会" tvg-logo="" group-title="Hong Kong",双溪法会 [9]
+https://v.hwadzan.info/liveedge/_definst_/smil:sx.smil/playlist.m3u8
+
+#RADIOBROWSERUUID:bcab3194-d497-453f-b3ac-644724a18345
+#EXTINF:-1 tvg-id="bcab3194-d497-453f-b3ac-644724a18345" tvg-name="台山電台" tvg-logo="http://pic.qingting.fm/2019/0313/20190313010126.jpeg" group-title="Hong Kong",台山電台 [104]
+https://lhttp-hw.qtfm.cn/live/5022062/64k.mp3
+
+#RADIOBROWSERUUID:357fbb15-05ba-4219-968a-0c0408ec8dbf
+#EXTINF:-1 tvg-id="357fbb15-05ba-4219-968a-0c0408ec8dbf" tvg-name="夜空傳情" tvg-logo="https://liveonlineradio.net/wp-content/uploads/2021/04/sunnys-music-show-220x108.jpg" group-title="Hong Kong",夜空傳情 [1245]
+http://procyon.shoutca.st:8492/listen.mp3
+
+#RADIOBROWSERUUID:93b7ad6f-abdc-4a24-a947-f87dec018269
+#EXTINF:-1 tvg-id="93b7ad6f-abdc-4a24-a947-f87dec018269" tvg-name="大嶼山廣播電台 RADIO LANTAU" tvg-logo="https://liveonlineradio.net/wp-content/uploads/2017/08/Radio-Lantau.jpg" group-title="Hong Kong",大嶼山廣播電台 RADIO LANTAU [4]
+https://radio.dripfeed.net/listen/radiolantau/radio.mp3
+
+#RADIOBROWSERUUID:9036a21b-8c15-42fb-93d2-f177c9e2ac7e
+#EXTINF:-1 tvg-id="9036a21b-8c15-42fb-93d2-f177c9e2ac7e" tvg-name="大連交通廣播" tvg-logo="https://pic.baike.soso.com/ugc/baikepic2/17726/20160809183723-1630520041.jpg/0" group-title="Hong Kong",大連交通廣播 [20]
+http://live.ximalaya.com/radio-first-page-app/live/2817/64.m3u8
+
+#RADIOBROWSERUUID:5fea3ae3-eb18-4760-b622-1ca36e646887
+#EXTINF:-1 tvg-id="5fea3ae3-eb18-4760-b622-1ca36e646887" tvg-name="大連少兒廣播" tvg-logo="https://pic.baike.soso.com/ugc/baikepic2/17726/20160809183723-1630520041.jpg/0" group-title="Hong Kong",大連少兒廣播 [18]
+https://lhttp.qtfm.cn/live/1084/64k.mp3
+
+#RADIOBROWSERUUID:cdfcd71c-f3d7-4ae6-baae-a4831e8e06db
+#EXTINF:-1 tvg-id="cdfcd71c-f3d7-4ae6-baae-a4831e8e06db" tvg-name="大連新聞綜合廣播" tvg-logo="https://pic.baike.soso.com/ugc/baikepic2/17726/20160809183723-1630520041.jpg/0" group-title="Hong Kong",大連新聞綜合廣播 [33]
+https://live.xmcdn.com/live/2732/64.m3u8
+
+#RADIOBROWSERUUID:9b15c524-f261-497d-8ea8-3a35bc2f8709
+#EXTINF:-1 tvg-id="9b15c524-f261-497d-8ea8-3a35bc2f8709" tvg-name="大連都市之聲廣播" tvg-logo="https://pic.baike.soso.com/ugc/baikepic2/17726/20160809183723-1630520041.jpg/0" group-title="Hong Kong",大連都市之聲廣播 [32]
+https://lhttp-hw.qtfm.cn/live/1086/64k.mp3
+
+#RADIOBROWSERUUID:bea0fae3-8ed2-4e56-bbc4-6ad68d2c6aea
+#EXTINF:-1 tvg-id="bea0fae3-8ed2-4e56-bbc4-6ad68d2c6aea" tvg-name="大連體育廣播" tvg-logo="https://pic.baike.soso.com/ugc/baikepic2/17726/20160809183723-1630520041.jpg/0" group-title="Hong Kong",大連體育廣播 [17]
+http://ls.qingting.fm/live/1085.m3u8
+
+#RADIOBROWSERUUID:1658a818-4ad2-46e0-b090-cdb01015d76e
+#EXTINF:-1 tvg-id="1658a818-4ad2-46e0-b090-cdb01015d76e" tvg-name="悟道法师讲经台" tvg-logo="" group-title="Hong Kong",悟道法师讲经台 [13]
+https://v.hwadzan.info/liveedge/_definst_/smil:wdmaster.smil/playlist.m3u8
+
+#RADIOBROWSERUUID:7b939313-e0fd-4570-bba6-bd0f832edb96
+#EXTINF:-1 tvg-id="7b939313-e0fd-4570-bba6-bd0f832edb96" tvg-name="深圳交通廣播" tvg-logo="https://so1.360tres.com/t016784d7db69638713.jpg" group-title="Hong Kong",深圳交通廣播 [56]
+https://lhttp-hw.qtfm.cn/live/1272/64k.mp3
+
+#RADIOBROWSERUUID:f34d33ab-a932-4e24-b6c5-938c2599cb25
+#EXTINF:-1 tvg-id="f34d33ab-a932-4e24-b6c5-938c2599cb25" tvg-name="深圳新聞廣播" tvg-logo="https://so1.360tres.com/t016784d7db69638713.jpg" group-title="Hong Kong",深圳新聞廣播 [128]
+http://lhttp.qingting.fm/live/1270/64k.mp3
+
+#RADIOBROWSERUUID:35fc7e68-2b4a-4d2e-a2b5-1dc73a711170
+#EXTINF:-1 tvg-id="35fc7e68-2b4a-4d2e-a2b5-1dc73a711170" tvg-name="深圳生活廣播" tvg-logo="https://so1.360tres.com/t016784d7db69638713.jpg" group-title="Hong Kong",深圳生活廣播 [91]
+http://ls.qingting.fm/live/1273.m3u8
+
+#RADIOBROWSERUUID:da5d55db-a24f-4914-90dc-89ab26120df7
+#EXTINF:-1 tvg-id="da5d55db-a24f-4914-90dc-89ab26120df7" tvg-name="深圳音樂廣播" tvg-logo="https://so1.360tres.com/t016784d7db69638713.jpg" group-title="Hong Kong",深圳音樂廣播 [143]
+http://ls.qingting.fm/live/1271.m3u8
+
+#RADIOBROWSERUUID:8c56edc7-6e44-4143-aeb5-51fe9a00dfe4
+#EXTINF:-1 tvg-id="8c56edc7-6e44-4143-aeb5-51fe9a00dfe4" tvg-name="源声态汽车音乐电台" tvg-logo="https://pic.qtfm.cn/2024/0410/20240410025046.jpeg" group-title="Hong Kong",源声态汽车音乐电台 [98]
+https://lhttp-hw.qtfm.cn/live/20500021/64k.mp3
+
+#RADIOBROWSERUUID:392ab5e8-c91a-4b27-9792-cae5fb712ebe
+#EXTINF:-1 tvg-id="392ab5e8-c91a-4b27-9792-cae5fb712ebe" tvg-name="澳门绿邦" tvg-logo="null" group-title="Hong Kong",澳门绿邦 [83]
+https://fm995.ddns.net/hls1/fm995.m3u8
+
+#RADIOBROWSERUUID:4dcf7151-3427-43bc-9ef1-24e3704ac0f2
+#EXTINF:-1 tvg-id="4dcf7151-3427-43bc-9ef1-24e3704ac0f2" tvg-name="澳门绿邨电台" tvg-logo="null" group-title="Hong Kong",澳门绿邨电台 [116]
+https://fm995.ddns.net/hls1/fm995.m3u8
+
+#RADIOBROWSERUUID:9de7cf57-00f2-4995-b3b2-c380245ac710
+#EXTINF:-1 tvg-id="9de7cf57-00f2-4995-b3b2-c380245ac710" tvg-name="熱血時報" tvg-logo="" group-title="Hong Kong",熱血時報 [235]
+https://ptmirror3.passiontimes.hk/hls3/stream.m3u8
+
+#RADIOBROWSERUUID:7e98e1e9-f29c-4444-b3cc-f981b2778a13
+#EXTINF:-1 tvg-id="7e98e1e9-f29c-4444-b3cc-f981b2778a13" tvg-name="珠海環保經濟廣播" tvg-logo="http://pic.qtfm.cn/2022/1229/20221229110525.jpeg!200" group-title="Hong Kong",珠海環保經濟廣播 [35]
+https://lhttp-hw.qtfm.cn/live/1275/64k.mp3
+
+#RADIOBROWSERUUID:a34df3ef-f1ed-4250-bddb-d306627fa1da
+#EXTINF:-1 tvg-id="a34df3ef-f1ed-4250-bddb-d306627fa1da" tvg-name="珠海綜合廣播" tvg-logo="http://pic.qingting.fm/2022/0815/20220815031908.png" group-title="Hong Kong",珠海綜合廣播 [42]
+https://lhttp-hw.qtfm.cn/live/1274/64k.mp3
+
+#RADIOBROWSERUUID:9073a5eb-5a43-45a3-9c18-33bb5b4dab9c
+#EXTINF:-1 tvg-id="9073a5eb-5a43-45a3-9c18-33bb5b4dab9c" tvg-name="珠海資訊廣播" tvg-logo="http://pic.qingting.fm/2022/1231/20221231114640.png" group-title="Hong Kong",珠海資訊廣播 [51]
+https://lhttp-hw.qtfm.cn/live/5021725/64k.mp3
+
+#RADIOBROWSERUUID:5f9d4def-f46f-4f69-86f4-93e8168e6ab2
+#EXTINF:-1 tvg-id="5f9d4def-f46f-4f69-86f4-93e8168e6ab2" tvg-name="第四台" tvg-logo="https://www.rthk.hk/img/apple-icon-114x114.png" group-title="Hong Kong",第四台 [663]
+https://rthkaudio4-lh.akamaihd.net/i/radio4_1@355867/master.m3u8
+
+#RADIOBROWSERUUID:cb5b8578-166b-4b78-98a3-804adf69b99b
+#EXTINF:-1 tvg-id="cb5b8578-166b-4b78-98a3-804adf69b99b" tvg-name="第四台" tvg-logo="https://www.rthk.hk/img/apple-icon-114x114.png" group-title="Hong Kong",第四台 [286]
+https://rthkaudio4-lh.akamaihd.net/i/radio4_1@355867/master.m3u8
+
+#RADIOBROWSERUUID:9196ed7d-f3c0-4b9f-8103-462edf819c9f
+#EXTINF:-1 tvg-id="9196ed7d-f3c0-4b9f-8103-462edf819c9f" tvg-name="网络念佛堂" tvg-logo="" group-title="Hong Kong",网络念佛堂 [19]
+https://js1.hwadzan.info/liveedge/_definst_/smil:amtb.smil/playlist.m3u8
+
+#RADIOBROWSERUUID:8c0614be-7b3d-4bc8-93e1-6824ecfbfaa5
+#EXTINF:-1 tvg-id="8c0614be-7b3d-4bc8-93e1-6824ecfbfaa5" tvg-name="良友电台友音乐频道" tvg-logo="https://zeno.fm/_ipx/_/https://images.zeno.fm/Rfga_aqdyJTHhOUeOVe5z-j4fmTXNe9avbyWEoQX32I/rs:fill:288:288/g:ce:0:0/aHR0cHM6Ly9wcm94eS56ZW5vLmZtL2NvbnRlbnQvc3RhdGlvbnMvMTNlYmQ5M2UtMGIzOS00ODk0LTlmNmQtYjIwNGMzMzEwZDk5L2ltYWdlLz91PTE3Mjk1NjEzNDMwMDA.webp" group-title="Hong Kong",良友电台友音乐频道 [19]
+https://c25.radioboss.fm:8334/stream
+
+#RADIOBROWSERUUID:a34645cb-3c73-449b-9d3d-44db5570e8a2
+#EXTINF:-1 tvg-id="a34645cb-3c73-449b-9d3d-44db5570e8a2" tvg-name="良友电台同行频道" tvg-logo="https://zeno.fm/_ipx/_/https://images.zeno.fm/LGQOOUaEo3MLF9_bx1RaFEBCpjbxXevZx_ELbWE9Zyw/rs:fill:288:288/g:ce:0:0/aHR0cHM6Ly9wcm94eS56ZW5vLmZtL2NvbnRlbnQvc3RhdGlvbnMvZDk3NGI4MDMtYTdmMi00N2FhLTkwOTUtYTQwNjNlNDMxYzEyL2ltYWdlLz91PTE3Mjk1NjE0MjYwMDA.webp" group-title="Hong Kong",良友电台同行频道 [12]
+https://c23.radioboss.fm/stream/194
+
+#RADIOBROWSERUUID:8b41cd58-4393-4761-a6c5-25758f630144
+#EXTINF:-1 tvg-id="8b41cd58-4393-4761-a6c5-25758f630144" tvg-name="陽光衛視" tvg-logo="http://www.nettvpro.xyz/uploads/18/1-1PR5212U3439.jpg" group-title="Hong Kong",陽光衛視 [107]
+https://stream.chinasuntv.com/680k/mid_video_index.m3u8
+
+#RADIOBROWSERUUID:c11e8296-758d-4ece-a891-cad8236f8c09
+#EXTINF:-1 tvg-id="c11e8296-758d-4ece-a891-cad8236f8c09" tvg-name="香港新城电台知讯台" tvg-logo="https://sao.fm/wp-content/uploads/20220401142443934-150x150.jpeg" group-title="Hong Kong",香港新城电台知讯台 [49]
+https://1603884249.rsc.cdn77.org/1603884249/index.m3u8
+
+#RADIOBROWSERUUID:c174f4fc-6bca-4389-a8f0-a97badd2374a
+#EXTINF:-1 tvg-id="c174f4fc-6bca-4389-a8f0-a97badd2374a" tvg-name="香港新城电台财经台" tvg-logo="https://sao.fm/wp-content/uploads/20220401142443934-150x150.jpeg" group-title="Hong Kong",香港新城电台财经台 [36]
+https://1716664847.rsc.cdn77.org/1716664847/tracks-a1/mono.ts.m3u8
+
+#RADIOBROWSERUUID:7c6d8cee-8c48-4895-b960-8103f6373508
+#EXTINF:-1 tvg-id="7c6d8cee-8c48-4895-b960-8103f6373508" tvg-name="香港普通话台" tvg-logo="https://www.rthk.hk/img/apple-icon-114x114.png" group-title="Hong Kong",香港普通话台 [877]
+https://rthkradiopth-live.akamaized.net/hls/live/2040082/radiopth/master.m3u8
+
+#RADIOBROWSERUUID:2930da9c-7279-4c16-8574-080074ddf763
+#EXTINF:-1 tvg-id="2930da9c-7279-4c16-8574-080074ddf763" tvg-name="香港普通话台" tvg-logo="" group-title="Hong Kong",香港普通话台 [822]
+https://rthkaudio6-lh.akamaihd.net/i/radiopth_1@355869/index_56_a-p.m3u8
+
+#RADIOBROWSERUUID:5d6f4010-91b7-11e9-a6c6-52543be04c81
+#EXTINF:-1 tvg-id="5d6f4010-91b7-11e9-a6c6-52543be04c81" tvg-name="香港普通话台" tvg-logo="" group-title="Hong Kong",香港普通话台 [1146]
+https://rthkaudio6-lh.akamaihd.net/i/radiopth_1@355869/master.m3u8
+
+#RADIOBROWSERUUID:6f1d1d19-40a5-4cd4-ad30-b3fd930c52de
+#EXTINF:-1 tvg-id="6f1d1d19-40a5-4cd4-ad30-b3fd930c52de" tvg-name="香港电台第三台" tvg-logo="https://webstatic.rthk.hk/img/radio_icon/Player_Logo/R3_cNam_01.svg" group-title="Hong Kong",香港电台第三台 [8]
+https://rthkradio3-live.akamaized.net/hls/live/2040079/radio3/master.m3u8
+
+#RADIOBROWSERUUID:75958664-ebc5-42fc-b4b4-487bfdc39ea0
+#EXTINF:-1 tvg-id="75958664-ebc5-42fc-b4b4-487bfdc39ea0" tvg-name="香港电台第二台" tvg-logo="https://webstatic.rthk.hk/img/radio_icon/Player_Logo/R2_cNam_01.svg" group-title="Hong Kong",香港电台第二台 [23]
+http://stm2.rthk.hk/radio2
+
+#RADIOBROWSERUUID:98f1beba-b3eb-43d9-81f9-8bb09098f184
+#EXTINF:-1 tvg-id="98f1beba-b3eb-43d9-81f9-8bb09098f184" tvg-name="香港電台第一台" tvg-logo="https://webstatic.rthk.hk/img/radio_icon/Player_Logo/R1_cNam_01.svg" group-title="Hong Kong",香港電台第一台 [62]
+https://rthkradio1-live.akamaized.net/hls/live/2035313/radio1/index_64_a.m3u8
+
+#RADIOBROWSERUUID:0e5b6b8c-8e85-4a3b-8664-64cd6d6ae4ca
+#EXTINF:-1 tvg-id="0e5b6b8c-8e85-4a3b-8664-64cd6d6ae4ca" tvg-name="香港電台第七台 普通话台" tvg-logo="https://sao.fm/wp-content/uploads/20220923022632737.jpg" group-title="Hong Kong",香港電台第七台 普通话台 [11]
+https://rthkradiopth-live.akamaized.net/hls/live/2040082/radiopth/index_64_a.m3u8
+
+#RADIOBROWSERUUID:9e9c4d7f-bb68-4d13-8bce-711d0cb219be
+#EXTINF:-1 tvg-id="9e9c4d7f-bb68-4d13-8bce-711d0cb219be" tvg-name="香港電台第三台" tvg-logo="https://webstatic.rthk.hk/img/radio_icon/Player_Logo/R3_cNam_01.svg" group-title="Hong Kong",香港電台第三台 [15]
+https://rthkradio2-live.akamaized.net/hls/live/2040078/radio2/index_64_a.m3u8
+
+#RADIOBROWSERUUID:37530049-1ce7-4096-8728-470f1becaa0b
+#EXTINF:-1 tvg-id="37530049-1ce7-4096-8728-470f1becaa0b" tvg-name="香港電台第二台" tvg-logo="https://webstatic.rthk.hk/img/radio_icon/Player_Logo/R2_cNam_01.svg" group-title="Hong Kong",香港電台第二台 [15]
+https://rthkradio2-live.akamaized.net/hls/live/2040078/radio2/index_64_a.m3u8
+
+#RADIOBROWSERUUID:5c270835-4ed3-43cb-9e93-05f574f12b19
+#EXTINF:-1 tvg-id="5c270835-4ed3-43cb-9e93-05f574f12b19" tvg-name="香港電台第五台" tvg-logo="https://webstatic.rthk.hk/img/radio_icon/Player_Logo/R5_cNam_01.svg" group-title="Hong Kong",香港電台第五台 [13]
+https://rthkradio5-live.akamaized.net/hls/live/2040081/radio5/index_64_a.m3u8
+
+#RADIOBROWSERUUID:d1ef34d7-4d8c-471a-868a-2a563393a3b0
+#EXTINF:-1 tvg-id="d1ef34d7-4d8c-471a-868a-2a563393a3b0" tvg-name="香港電台第八台" tvg-logo="https://ytmedia.radio.cn/CCYT/202306/12/18/zmco8RqfK6wcZu7BZCv2023061218737.jpg" group-title="Hong Kong",香港電台第八台 [2]
+https://rthkradiocmgrgb-live.akamaized.net/hls/live/2046112/radiocmgrgb/index_64_a.m3u8
+
+#RADIOBROWSERUUID:53e9eab3-eee4-472f-af2a-c5fa5282b4ac
+#EXTINF:-1 tvg-id="53e9eab3-eee4-472f-af2a-c5fa5282b4ac" tvg-name="香港電台第六台" tvg-logo="https://ytmedia.radio.cn/CCYT/202306/12/18/1E202306121836.jpg" group-title="Hong Kong",香港電台第六台 [2]
+https://rthkradiocnrhk-live.akamaized.net/hls/live/2046111/radiocnrhk/index_64_a.m3u8
+
+#RADIOBROWSERUUID:4e9a60c7-3c7d-437d-81b0-c1bd148097ce
+#EXTINF:-1 tvg-id="4e9a60c7-3c7d-437d-81b0-c1bd148097ce" tvg-name="香港電台第四台" tvg-logo="https://webstatic.rthk.hk/img/radio_icon/Player_Logo/R4_cNam_01.svg" group-title="Hong Kong",香港電台第四台 [15]
+https://rthkradio4-live.akamaized.net/hls/live/2040080/radio4/index_64_a.m3u8

@@ -1,0 +1,741 @@
+﻿#EXTM3U
+
+#RADIOBROWSERUUID:3116c0ab-e005-4d47-96c6-9f746006f03c
+#EXTINF:-1 tvg-id="3116c0ab-e005-4d47-96c6-9f746006f03c" tvg-name="011 Radio" tvg-logo="https://eu2.contabostorage.com/b94f201d35554c5283f96247e0e97a2c:famcast-storage/011Radio/011-radio.webp" group-title="South Africa",011 Radio [5]
+https://sv2.famcast.co.za/stream/011_radio?1769529224555
+
+#RADIOBROWSERUUID:96192d12-0601-11e8-ae97-52543be04c81
+#EXTINF:-1 tvg-id="96192d12-0601-11e8-ae97-52543be04c81" tvg-name="702 Johannesburg" tvg-logo="" group-title="South Africa",702 Johannesburg [4054]
+http://23543.live.streamtheworld.com:3690/FM702_SC
+
+#RADIOBROWSERUUID:7d9c37ec-0129-499c-9cf3-6c5fd30c0cc7
+#EXTINF:-1 tvg-id="7d9c37ec-0129-499c-9cf3-6c5fd30c0cc7" tvg-name="919" tvg-logo="" group-title="South Africa",919 [18]
+https://edge.iono.fm/xice/112_medium.aac
+
+#RADIOBROWSERUUID:dcead878-3e26-4a2c-a441-f99fe560cd76
+#EXTINF:-1 tvg-id="dcead878-3e26-4a2c-a441-f99fe560cd76" tvg-name="919" tvg-logo="" group-title="South Africa",919 [20]
+https://edge.iono.fm/xice/112_low.aac
+
+#RADIOBROWSERUUID:ab05e667-14e1-11e8-ae97-52543be04c81
+#EXTINF:-1 tvg-id="ab05e667-14e1-11e8-ae97-52543be04c81" tvg-name="94.7" tvg-logo="" group-title="South Africa",94.7 [4109]
+http://27953.live.streamtheworld.com/FM947AAC_SC
+
+#RADIOBROWSERUUID:e0ed999c-584b-4441-b501-e9895f3b0914
+#EXTINF:-1 tvg-id="e0ed999c-584b-4441-b501-e9895f3b0914" tvg-name="94.7 Highveld Stereo" tvg-logo="" group-title="South Africa",94.7 Highveld Stereo [166]
+https://playerservices.streamtheworld.com/api/livestream-redirect/FM947_SC
+
+#RADIOBROWSERUUID:9610b7f6-0601-11e8-ae97-52543be04c81
+#EXTINF:-1 tvg-id="9610b7f6-0601-11e8-ae97-52543be04c81" tvg-name="947" tvg-logo="" group-title="South Africa",947 [1566]
+http://25553.live.streamtheworld.com:3690/FM947_SC
+
+#RADIOBROWSERUUID:4ede8acc-538b-4b97-b6db-352bd6dfd4f3
+#EXTINF:-1 tvg-id="4ede8acc-538b-4b97-b6db-352bd6dfd4f3" tvg-name="Abdulbasit Abdulsamad" tvg-logo="null" group-title="South Africa",Abdulbasit Abdulsamad [18]
+https://radio.mp3islam.com/listen/abdulbasit/radio.mp3
+
+#RADIOBROWSERUUID:e4617145-dce9-460a-8afc-fcc446711cfe
+#EXTINF:-1 tvg-id="e4617145-dce9-460a-8afc-fcc446711cfe" tvg-name="African Praise Radio" tvg-logo="https://africanpraiseradio.com/images/Cool-Text-250229628295821-1.png" group-title="South Africa",African Praise Radio [203]
+https://usa3.fastcast4u.com/proxy/africanpraiserad?mp=/1
+
+#RADIOBROWSERUUID:4c41fb58-fe5c-419e-bad7-ea81e4932092
+#EXTINF:-1 tvg-id="4c41fb58-fe5c-419e-bad7-ea81e4932092" tvg-name="Afrobeat N1 FM" tvg-logo="" group-title="South Africa",Afrobeat N1 FM [82]
+https://streamer.radio.co/s919e54210/listen
+
+#RADIOBROWSERUUID:2128490c-0414-4555-8146-596bb234e7da
+#EXTINF:-1 tvg-id="2128490c-0414-4555-8146-596bb234e7da" tvg-name="AGANANG FM" tvg-logo="http://www.aganangfm.org.za/assets/images/aganang-fm-logo-website-216x194.png" group-title="South Africa",AGANANG FM [69]
+https://streaming.fabrik.fm/aganangfm/echocast/audio/low/index.m3u8?session_id=1pbxzwxy1RWaVFv&device_id=Q7fauplH
+
+#RADIOBROWSERUUID:b7c46425-7fd3-4176-8e57-e3916ace3fd2
+#EXTINF:-1 tvg-id="b7c46425-7fd3-4176-8e57-e3916ace3fd2" tvg-name="Al Husnaa Quran Radio" tvg-logo="" group-title="South Africa",Al Husnaa Quran Radio [15]
+https://stream.zeno.fm/pyc8kax6f2zuv
+
+#RADIOBROWSERUUID:e7b9541b-de25-4be8-a4ed-bd9c7ba5326d
+#EXTINF:-1 tvg-id="e7b9541b-de25-4be8-a4ed-bd9c7ba5326d" tvg-name="AL-Ansaar Radio" tvg-logo="https://linktr.ee/favicon.ico" group-title="South Africa",AL-Ansaar Radio [175]
+https://al-ansaar.simplestreaming.co.za/radio/8000/radio.mp3
+
+#RADIOBROWSERUUID:fd183918-a6fe-4af2-8c18-9f4f91049a26
+#EXTINF:-1 tvg-id="fd183918-a6fe-4af2-8c18-9f4f91049a26" tvg-name="AL-Ansaar Radio" tvg-logo="https://alansaar.org.za/favicon.ico" group-title="South Africa",AL-Ansaar Radio [46]
+https://al-ansaar.simplestreaming.co.za/radio/8000/radio.mp3?refresh=1653300780766
+
+#RADIOBROWSERUUID:738555cc-4515-4350-8b98-d628f5017963
+#EXTINF:-1 tvg-id="738555cc-4515-4350-8b98-d628f5017963" tvg-name="Al-Ansaar Radio" tvg-logo="" group-title="South Africa",Al-Ansaar Radio [188]
+https://al-ansaar.simplestreaming.co.za/listen/al-ansaar_radio/radio.mp3
+
+#RADIOBROWSERUUID:e361fbe4-ca90-42f3-9abe-deda661fc149
+#EXTINF:-1 tvg-id="e361fbe4-ca90-42f3-9abe-deda661fc149" tvg-name="Algoa FM" tvg-logo="" group-title="South Africa",Algoa FM [1035]
+http://edge.iono.fm/xice/54_high.mp3
+
+#RADIOBROWSERUUID:bed37ad7-1542-4455-96ea-6b7608c7bc8f
+#EXTINF:-1 tvg-id="bed37ad7-1542-4455-96ea-6b7608c7bc8f" tvg-name="Amapiano FM" tvg-logo="https://cdn.webrad.io/images/logos/radiosa-org/amapiano.png" group-title="South Africa",Amapiano FM [2736]
+https://stream.zeno.fm/xs6zeac1ts8uv
+
+#RADIOBROWSERUUID:cf477514-6fc0-446b-adf2-d252dba5ee75
+#EXTINF:-1 tvg-id="cf477514-6fc0-446b-adf2-d252dba5ee75" tvg-name="Amapiano FM" tvg-logo="https://cdn.webrad.io/images/logos/radiosa-org/amapiano.png" group-title="South Africa",Amapiano FM [726]
+https://stream.zeno.fm/xs6zeac1ts8uv
+
+#RADIOBROWSERUUID:bc6cebdf-e061-49db-a5d9-ce1131eb58a9
+#EXTINF:-1 tvg-id="bc6cebdf-e061-49db-a5d9-ce1131eb58a9" tvg-name="Amapiano FM" tvg-logo="https://cdn.webrad.io/images/logos/radiosa-org/amapiano.png" group-title="South Africa",Amapiano FM [662]
+https://stream-37.zeno.fm/xs6zeac1ts8uv?zs=Tf36JxfyQTKE-KteyZLrww
+
+#RADIOBROWSERUUID:ff4f6728-5280-4e06-8bba-80d31e93f191
+#EXTINF:-1 tvg-id="ff4f6728-5280-4e06-8bba-80d31e93f191" tvg-name="Atiawa Toa FM" tvg-logo="https://atiawa.com/wp-content/uploads/2020/11/Te-Atiawa-Logow-768x442.jpg" group-title="South Africa",Atiawa Toa FM [0]
+https://icast1.streamcom.net/Atiawa
+
+#RADIOBROWSERUUID:888ea4f5-4525-4ac0-b3b4-9427137d5053
+#EXTINF:-1 tvg-id="888ea4f5-4525-4ac0-b3b4-9427137d5053" tvg-name="Ballito 88 FM - Radio Life & Style" tvg-logo="https://static.iono.fm/files/p2465/logo_165_20210824_111513_600.jpg" group-title="South Africa",Ballito 88 FM - Radio Life & Style [93]
+https://edge.iono.fm/xhls/165_high.m3u8
+
+#RADIOBROWSERUUID:a45361ad-fe7f-47d2-89a6-db858c9d0e1d
+#EXTINF:-1 tvg-id="a45361ad-fe7f-47d2-89a6-db858c9d0e1d" tvg-name="Bok Radio" tvg-logo="https://www.bokradio.co.za/wp-content/uploads/2020/06/logo-4-1-370x370.png" group-title="South Africa",Bok Radio [5]
+http://bokradio.highquality.radiostream.co.za/
+
+#RADIOBROWSERUUID:e348e898-96ac-443e-aa03-d6c76d36301c
+#EXTINF:-1 tvg-id="e348e898-96ac-443e-aa03-d6c76d36301c" tvg-name="Bok Radio" tvg-logo="https://www.bokradio.co.za/wp-content/uploads/2020/06/logo-4-1-100x100.png" group-title="South Africa",Bok Radio [118]
+https://bokradio.highquality.radiostream.co.za/
+
+#RADIOBROWSERUUID:fd4982b0-41c2-11e8-b74d-52543be04c81
+#EXTINF:-1 tvg-id="fd4982b0-41c2-11e8-b74d-52543be04c81" tvg-name="Bokradio" tvg-logo="http://fmradiobuffer.co.za/wp-content/uploads/2015/03/bok-radio-top-40.jpg" group-title="South Africa",Bokradio [2707]
+http://bokradio.highquality.radiostream.co.za/
+
+#RADIOBROWSERUUID:9621d2a4-0601-11e8-ae97-52543be04c81
+#EXTINF:-1 tvg-id="9621d2a4-0601-11e8-ae97-52543be04c81" tvg-name="Bosveld Stereo" tvg-logo="https://mytuner.global.ssl.fastly.net/media/tvos_radios/RRjd3up6aH.png" group-title="South Africa",Bosveld Stereo [4625]
+http://capeant.antfarm.co.za:8000/Bosveld
+
+#RADIOBROWSERUUID:9571c114-bcc1-4dca-9358-22cb831e0606
+#EXTINF:-1 tvg-id="9571c114-bcc1-4dca-9358-22cb831e0606" tvg-name="BOX : Chillwave" tvg-logo="" group-title="South Africa",BOX : Chillwave [25]
+https://play.streamafrica.net/chillwave
+
+#RADIOBROWSERUUID:52e6aa2b-9d35-4b8c-938a-a91bac4140ed
+#EXTINF:-1 tvg-id="52e6aa2b-9d35-4b8c-938a-a91bac4140ed" tvg-name="BOX Chillwave" tvg-logo="" group-title="South Africa",BOX Chillwave [15]
+https://boxradio-edge-00.streamafrica.net/chillwave
+
+#RADIOBROWSERUUID:9415f050-3ff8-45a4-939d-7fe12ccf82b2
+#EXTINF:-1 tvg-id="9415f050-3ff8-45a4-939d-7fe12ccf82b2" tvg-name="BOX Dreamscapes" tvg-logo="" group-title="South Africa",BOX Dreamscapes [20]
+https://boxradio-edge-00.streamafrica.net/dreamscapes
+
+#RADIOBROWSERUUID:8aaf34ac-10d3-4a0b-9822-3c5a7c4b75bb
+#EXTINF:-1 tvg-id="8aaf34ac-10d3-4a0b-9822-3c5a7c4b75bb" tvg-name="Bush Radio" tvg-logo="https://bushradio.wordpress.com/wp-content/uploads/2025/06/bush-logo-round.png" group-title="South Africa",Bush Radio [4]
+https://zas4.ndx.co.za:9100/stream
+
+#RADIOBROWSERUUID:961b24b2-0601-11e8-ae97-52543be04c81
+#EXTINF:-1 tvg-id="961b24b2-0601-11e8-ae97-52543be04c81" tvg-name="Cape Talk" tvg-logo="" group-title="South Africa",Cape Talk [1774]
+http://22733.live.streamtheworld.com/CAPE_TALK_SC
+
+#RADIOBROWSERUUID:b291f81b-288c-4f78-9953-06aed3277af4
+#EXTINF:-1 tvg-id="b291f81b-288c-4f78-9953-06aed3277af4" tvg-name="Cape Talk 567" tvg-logo="" group-title="South Africa",Cape Talk 567 [68]
+https://27863.live.streamtheworld.com/CAPE_TALKAAC_SC?dist=CapeTalkWeb&pname=TDSdk
+
+#RADIOBROWSERUUID:d7371c0b-e4f1-445c-b66a-9fb11d0b41c7
+#EXTINF:-1 tvg-id="d7371c0b-e4f1-445c-b66a-9fb11d0b41c7" tvg-name="Cape Town Classic" tvg-logo="https://www.fmr.co.za/favicon.ico" group-title="South Africa",Cape Town Classic [142]
+https://edge.iono.fm/xhls/fmr_live_high.m3u8
+
+#RADIOBROWSERUUID:19328ca9-507a-4973-9e8a-8617a42f98c2
+#EXTINF:-1 tvg-id="19328ca9-507a-4973-9e8a-8617a42f98c2" tvg-name="Capital Radio 604" tvg-logo="" group-title="South Africa",Capital Radio 604 [97]
+https://stream.galaxywebsolutions.com/proxy/capitalradio604?mp=%2Fstream
+
+#RADIOBROWSERUUID:cc43705f-e328-463b-ae81-b9aef27a9358
+#EXTINF:-1 tvg-id="cc43705f-e328-463b-ae81-b9aef27a9358" tvg-name="Capricorn FM" tvg-logo="https://upload.wikimedia.org/wikipedia/en/thumb/8/86/Capricomfm300.png/200px-Capricomfm300.png" group-title="South Africa",Capricorn FM [1391]
+http://edge.iono.fm/xice/67_medium.aac
+
+#RADIOBROWSERUUID:81e6e014-151d-4a43-a5c5-09af4adfb9ea
+#EXTINF:-1 tvg-id="81e6e014-151d-4a43-a5c5-09af4adfb9ea" tvg-name="Cassette Radio" tvg-logo="" group-title="South Africa",Cassette Radio [5]
+https://vm65162.streamerr.co/listen/cassette_radio/radio.mp3
+
+#RADIOBROWSERUUID:61fa9e9d-afeb-422c-bc0a-b22138ac674d
+#EXTINF:-1 tvg-id="61fa9e9d-afeb-422c-bc0a-b22138ac674d" tvg-name="Cassette Radio" tvg-logo="" group-title="South Africa",Cassette Radio [12]
+https://vm65162.streamerr.co/listen/cassette_radio/radio.mp3
+
+#RADIOBROWSERUUID:db841ae9-452c-4479-a4cc-cc789fe9b69b
+#EXTINF:-1 tvg-id="db841ae9-452c-4479-a4cc-cc789fe9b69b" tvg-name="CCFM 107.5" tvg-logo="" group-title="South Africa",CCFM 107.5 [191]
+https://edge.iono.fm/xice/69_medium.aac
+
+#RADIOBROWSERUUID:b65fccc0-1e7c-4337-acff-b64d19e84e95
+#EXTINF:-1 tvg-id="b65fccc0-1e7c-4337-acff-b64d19e84e95" tvg-name="Chai FM" tvg-logo="" group-title="South Africa",Chai FM [95]
+https://zas1.ndx.co.za:8008/stream?1702143258610
+
+#RADIOBROWSERUUID:a224255e-160e-4ade-8ef0-586e436f78b0
+#EXTINF:-1 tvg-id="a224255e-160e-4ade-8ef0-586e436f78b0" tvg-name="Channel Islam International" tvg-logo="https://ciiradio.com/favicon.ico" group-title="South Africa",Channel Islam International [401]
+http://edge.iono.fm/xice/109_medium.aac
+
+#RADIOBROWSERUUID:5de8baec-2c0a-11e9-a35e-52543be04c81
+#EXTINF:-1 tvg-id="5de8baec-2c0a-11e9-a35e-52543be04c81" tvg-name="Classic FM 1027" tvg-logo="https://www.classic1027.co.za/assets/images/apple-touch-icon.png" group-title="South Africa",Classic FM 1027 [1749]
+http://edge.iono.fm/xice/49_medium.aac?p=embed
+
+#RADIOBROWSERUUID:e9332006-0fb7-4d45-a03f-3e0aa1be1442
+#EXTINF:-1 tvg-id="e9332006-0fb7-4d45-a03f-3e0aa1be1442" tvg-name="Cliff Central" tvg-logo="" group-title="South Africa",Cliff Central [58]
+https://edge.iono.fm/xice/cliffcentral_live_medium.aac
+
+#RADIOBROWSERUUID:6d608cbb-bb82-4e18-b5da-2982e66e6752
+#EXTINF:-1 tvg-id="6d608cbb-bb82-4e18-b5da-2982e66e6752" tvg-name="Diamond Radio" tvg-logo="" group-title="South Africa",Diamond Radio [5]
+https://vm65162.streamerr.co/listen/diamond_fm/radio.mp3
+
+#RADIOBROWSERUUID:dd493e42-1c7c-4256-8277-53cf61452d88
+#EXTINF:-1 tvg-id="dd493e42-1c7c-4256-8277-53cf61452d88" tvg-name="East Coast Gold" tvg-logo="" group-title="South Africa",East Coast Gold [589]
+https://live.ecr.co.za/ecrgoldhigh.mp3
+
+#RADIOBROWSERUUID:7881d719-bae9-407d-912c-f75174c43403
+#EXTINF:-1 tvg-id="7881d719-bae9-407d-912c-f75174c43403" tvg-name="East Coast Radio" tvg-logo="https://turntable.kagiso.io/core/images/ecr/apple-touch-icon.png" group-title="South Africa",East Coast Radio [508]
+https://live.ecr.co.za/ecrhigh.mp3?aw_0_pinpoll=1,2,9&listenerid=94d1ac3bf877b65e4e17cd7e9bfec132&awparams=companionAds%3Atrue&aw_0_1st.ri=iono
+
+#RADIOBROWSERUUID:9618310a-0601-11e8-ae97-52543be04c81
+#EXTINF:-1 tvg-id="9618310a-0601-11e8-ae97-52543be04c81" tvg-name="ECR - East Coast Radio -KwaZulu Natal" tvg-logo="https://turntable.kagiso.io/core/images/ecr/apple-touch-icon.png" group-title="South Africa",ECR - East Coast Radio -KwaZulu Natal [2306]
+https://edge.iono.fm/xice/ecr_live_medium.aac
+
+#RADIOBROWSERUUID:873528b4-4f42-49c8-9cff-8095d29625e7
+#EXTINF:-1 tvg-id="873528b4-4f42-49c8-9cff-8095d29625e7" tvg-name="Eden FM" tvg-logo="https://app.cue24.co.za/images/24/logo.png" group-title="South Africa",Eden FM [23]
+https://iceant.antfarm.co.za/EdenFM
+
+#RADIOBROWSERUUID:cde89677-cb75-4e86-a7e3-8a53d008c3a9
+#EXTINF:-1 tvg-id="cde89677-cb75-4e86-a7e3-8a53d008c3a9" tvg-name="EVR" tvg-logo="https://radio.eclipse-streaming.co.za/static/uploads/album_art.1708559460.jpg" group-title="South Africa",EVR [6]
+https://radio.eclipse-streaming.co.za/listen/evr/radio.mp3
+
+#RADIOBROWSERUUID:6e3c6a56-f0e1-4ac8-a640-af2c3103f430
+#EXTINF:-1 tvg-id="6e3c6a56-f0e1-4ac8-a640-af2c3103f430" tvg-name="Express 106.6FM" tvg-logo="https://www.express-fm.co.za/image/catalog/express_fm_logo_in_colour.png" group-title="South Africa",Express 106.6FM [8]
+http://198.7.59.28:34235/stream
+
+#RADIOBROWSERUUID:c29a8ef0-f80c-4263-a371-061e503d34b7
+#EXTINF:-1 tvg-id="c29a8ef0-f80c-4263-a371-061e503d34b7" tvg-name="Express-FM Digital" tvg-logo="https://www.express-fm.co.za/image/catalog/express_fm_logo_in_colour.png" group-title="South Africa",Express-FM Digital [111]
+http://198.7.59.28:34235/stream
+
+#RADIOBROWSERUUID:3a05a166-c046-4db8-9cc2-fc64aac53564
+#EXTINF:-1 tvg-id="3a05a166-c046-4db8-9cc2-fc64aac53564" tvg-name="Faithofgodseedchurch" tvg-logo="" group-title="South Africa",Faithofgodseedchurch [121]
+http://faithofgodseedchurch.stream.laut.fm/faithofgodseedchurch?pl=pls&t302=2026-01-15_04-50-23&uuid=5d8bc606-4ca2-4bf6-9041-04d0b3795527
+
+#RADIOBROWSERUUID:961d5b7f-0601-11e8-ae97-52543be04c81
+#EXTINF:-1 tvg-id="961d5b7f-0601-11e8-ae97-52543be04c81" tvg-name="Fine Music Radio" tvg-logo="http://www.fmr.co.za/favicon.ico" group-title="South Africa",Fine Music Radio [345]
+http://edge.iono.fm/xhls/fmr_live_medium.m3u8
+
+#RADIOBROWSERUUID:8bd6e684-e3f3-4ab8-8089-71e27f6ceb74
+#EXTINF:-1 tvg-id="8bd6e684-e3f3-4ab8-8089-71e27f6ceb74" tvg-name="Fine Music Radio" tvg-logo="https://www.fmr.co.za/wp-content/uploads/2020/11/fmr.png" group-title="South Africa",Fine Music Radio [26]
+https://edge.iono.fm/xhls/fmr_live_high.m3u8
+
+#RADIOBROWSERUUID:489e2233-2d46-4998-97ed-5708a0b06a7c
+#EXTINF:-1 tvg-id="489e2233-2d46-4998-97ed-5708a0b06a7c" tvg-name="Gagasi FM" tvg-logo="https://cdn.instant.audio/images/logos/radiosa-org/gagasi.png" group-title="South Africa",Gagasi FM [258]
+https://streaming.fabrik.fm/gagasi/echocast/audio/low/index.m3u8
+
+#RADIOBROWSERUUID:854d7137-a38b-4b82-8dec-82e6014520f9
+#EXTINF:-1 tvg-id="854d7137-a38b-4b82-8dec-82e6014520f9" tvg-name="GaySA Radio" tvg-logo="https://www.gaysaradio.co.za/" group-title="South Africa",GaySA Radio [107]
+https://zas1.ndx.co.za:8018/stream
+
+#RADIOBROWSERUUID:f257e332-aca1-4859-af61-f4d2347403b3
+#EXTINF:-1 tvg-id="f257e332-aca1-4859-af61-f4d2347403b3" tvg-name="Good Hope FM" tvg-logo="https://www.goodhopefm.co.za/goodhopefm/favicon.ico" group-title="South Africa",Good Hope FM [7]
+https://25453.live.streamtheworld.com/GOODHOPEFMAAC
+
+#RADIOBROWSERUUID:7ab42a01-97d4-4892-86e1-eb6f814b2687
+#EXTINF:-1 tvg-id="7ab42a01-97d4-4892-86e1-eb6f814b2687" tvg-name="GospelBluesRadio" tvg-logo="" group-title="South Africa",GospelBluesRadio [35]
+https://gospelblues365.com/listen/gospelbluesradio/radio
+
+#RADIOBROWSERUUID:146d7bfd-1488-47bf-bd1e-112b73671fa3
+#EXTINF:-1 tvg-id="146d7bfd-1488-47bf-bd1e-112b73671fa3" tvg-name="GrootFM" tvg-logo="https://www.grootfm.co.za/wordpress/wp-content/uploads/2019/04/GrootFM-logo-small-300x130.jpg 300w" group-title="South Africa",GrootFM [7]
+https://edge.iono.fm/xice/330_medium.aac
+
+#RADIOBROWSERUUID:e706282d-6ae5-46c4-8af1-a94caf5a102b
+#EXTINF:-1 tvg-id="e706282d-6ae5-46c4-8af1-a94caf5a102b" tvg-name="Harties FM" tvg-logo="" group-title="South Africa",Harties FM [106]
+https://s5.radio.co/s68c6f4028/listen
+
+#RADIOBROWSERUUID:a61d65fb-63ed-43d6-a3ae-982a6aed4ecd
+#EXTINF:-1 tvg-id="a61d65fb-63ed-43d6-a3ae-982a6aed4ecd" tvg-name="Harties FM" tvg-logo="" group-title="South Africa",Harties FM [118]
+https://s5.radio.co/s68c6f4028/listen
+
+#RADIOBROWSERUUID:0c9260f9-0b4b-4f9a-8c1f-d76905e16542
+#EXTINF:-1 tvg-id="0c9260f9-0b4b-4f9a-8c1f-d76905e16542" tvg-name="Heaven FM" tvg-logo="https://zeno.fm/_next/image/?url=https%3A%2F%2Fimages.zeno.fm%2Fs8BCMBe8SFoxoGmF4Gk5pqG5fudBTZsqHIsquERr3W0%2Frs%3Afit%3A240%3A240%2Fg%3Ace%3A0%3A0%2FaHR0cHM6Ly9zdHJlYW0tdG9vbHMuemVub21lZGlhLmNvbS9jb250ZW50L3N0YXRpb25zL2FneHpmbnBsYm04dGMzUmhkSE55TWdzU0NrRjFkR2hEYkdsbGJuUVlnSUNJbHRpQ21Bb01DeElPVTNSaGRHbHZibEJ5YjJacGJHVVlnSUNJbHFpS29BZ01vZ0VFZW1WdWJ3L2ltYWdlLz91cGRhdGVkPTE3MDc0ODg2MTUwMDA.webp&w=3840&q=100" group-title="South Africa",Heaven FM [51]
+https://stream.zeno.fm/eequgfw72hhvv
+
+#RADIOBROWSERUUID:da81140d-96ed-49fe-a17d-761de31f6d19
+#EXTINF:-1 tvg-id="da81140d-96ed-49fe-a17d-761de31f6d19" tvg-name="Helderberg FM" tvg-logo="https://helderbergfm.co.za/wp-content/uploads/2022/07/cropped-Fav-192x192.png" group-title="South Africa",Helderberg FM [168]
+https://helderberg.highquality.radiostream.co.za/
+
+#RADIOBROWSERUUID:6c3db0fd-3700-4d07-ae61-3f562bfe8202
+#EXTINF:-1 tvg-id="6c3db0fd-3700-4d07-ae61-3f562bfe8202" tvg-name="Hellenic Radio" tvg-logo="" group-title="South Africa",Hellenic Radio [20]
+http://iceant.eclipse-streaming.co.za/Hellenic
+
+#RADIOBROWSERUUID:dbb1e550-d0d4-4dbd-b956-57e65c4fb545
+#EXTINF:-1 tvg-id="dbb1e550-d0d4-4dbd-b956-57e65c4fb545" tvg-name="Hellenic Radio" tvg-logo="https://www.hellenicradio.org.za/wp-content/uploads/2023/07/LOGO.png" group-title="South Africa",Hellenic Radio [7]
+http://iceant.eclipse-streaming.co.za/Hellenic
+
+#RADIOBROWSERUUID:d6647132-efaf-4de4-a76b-7e71383117b8
+#EXTINF:-1 tvg-id="d6647132-efaf-4de4-a76b-7e71383117b8" tvg-name="Hot 102.7 FM" tvg-logo="" group-title="South Africa",Hot 102.7 FM [1211]
+https://edge.iono.fm/xice/57_high.aac
+
+#RADIOBROWSERUUID:9a9dfce3-57e3-4442-9d05-59b699eda303
+#EXTINF:-1 tvg-id="9a9dfce3-57e3-4442-9d05-59b699eda303" tvg-name="Hot 102.7 FM Club" tvg-logo="" group-title="South Africa",Hot 102.7 FM Club [66]
+https://edge.iono.fm/xice/306_high.aac
+
+#RADIOBROWSERUUID:c0ba91ff-e31a-4fac-bc5c-0fda77fb12cc
+#EXTINF:-1 tvg-id="c0ba91ff-e31a-4fac-bc5c-0fda77fb12cc" tvg-name="Hot 102.7FM" tvg-logo="" group-title="South Africa",Hot 102.7FM [167]
+https://edge.iono.fm/xice/57_medium.aac?ref=https%3A%2F%2Fhot1027.co.za%2F&adToken=
+
+#RADIOBROWSERUUID:e703d33b-d498-11e8-a54a-52543be04c81
+#EXTINF:-1 tvg-id="e703d33b-d498-11e8-a54a-52543be04c81" tvg-name="HOT 91.9" tvg-logo="" group-title="South Africa",HOT 91.9 [1235]
+http://edge.iono.fm/xice/57_medium.mp3
+
+#RADIOBROWSERUUID:a096b4e7-0c07-4dea-988e-2c5a09b03fd7
+#EXTINF:-1 tvg-id="a096b4e7-0c07-4dea-988e-2c5a09b03fd7" tvg-name="IFM 102.2" tvg-logo="https://static.wixstatic.com/media/0a14cb_6c3c98cf37f64f04b5a60717d63f179f~mv2.png/v1/fill/w_207,h_149,al_c,q_85,usm_0.66_1.00_0.01,enc_auto/Logo_edited_edited.png" group-title="South Africa",IFM 102.2 [44]
+http://cdn.voscast.com/resources/?key=d8adb6a62c17441aa66982bad82a52d3&c=winamp
+
+#RADIOBROWSERUUID:ff2c9f53-d5b6-40b5-ba2a-64b381ff997f
+#EXTINF:-1 tvg-id="ff2c9f53-d5b6-40b5-ba2a-64b381ff997f" tvg-name="IFM 102.2" tvg-logo="https://static.wixstatic.com/media/0a14cb_6c3c98cf37f64f04b5a60717d63f179f~mv2.png/v1/fill/w_207,h_149,al_c,q_85,usm_0.66_1.00_0.01,enc_auto/Logo_edited_edited.png" group-title="South Africa",IFM 102.2 [112]
+http://s7.voscast.com:9538/;stream1700094931336/1
+
+#RADIOBROWSERUUID:8215d10f-6f5e-4e07-a4bc-fe83548ebc3e
+#EXTINF:-1 tvg-id="8215d10f-6f5e-4e07-a4bc-fe83548ebc3e" tvg-name="Impala Radio" tvg-logo="" group-title="South Africa",Impala Radio [88]
+https://maggie.torontocast.com:8014/stream
+
+#RADIOBROWSERUUID:91dbdf0b-57d0-452e-aaad-a1e0dabc7e17
+#EXTINF:-1 tvg-id="91dbdf0b-57d0-452e-aaad-a1e0dabc7e17" tvg-name="Inanda FM" tvg-logo="https://www.inandafm.co.za/wp-content/uploads/2025/02/1-e1740565998973.png" group-title="South Africa",Inanda FM [43]
+https://streaming.fabrik.fm/inandafm/echocast/audio/low/index.m3u8?session_id=F7QhCzr5lwhLx6D&device_id=gCWDK0co
+
+#RADIOBROWSERUUID:84a1258a-a45a-4ede-8008-e27f89107d65
+#EXTINF:-1 tvg-id="84a1258a-a45a-4ede-8008-e27f89107d65" tvg-name="Izwi LoMzansi" tvg-logo="https://izwi98fm.co.za/wp-content/uploads/2025/01/cropped-izwi-lomzansi-logo-2-180x180.png" group-title="South Africa",Izwi LoMzansi [540]
+https://streaming.fabrik.fm/izwi/echocast/audio/index.m3u8
+
+#RADIOBROWSERUUID:85d2f4f2-08c8-4c4f-b41d-60e9c06c52e7
+#EXTINF:-1 tvg-id="85d2f4f2-08c8-4c4f-b41d-60e9c06c52e7" tvg-name="Jacaranda" tvg-logo="https://static.iono.fm/files/p155/logo_155_20210311_154401_600.jpg" group-title="South Africa",Jacaranda [238]
+https://live.jacarandafm.com/jacarandahigh.mp3
+
+#RADIOBROWSERUUID:9614225b-0601-11e8-ae97-52543be04c81
+#EXTINF:-1 tvg-id="9614225b-0601-11e8-ae97-52543be04c81" tvg-name="Jacaranda FM" tvg-logo="https://turntable.kagiso.io/core/images/jacaranda/apple-touch-icon.png" group-title="South Africa",Jacaranda FM [6018]
+https://edge.iono.fm/xice/jacarandafm_live_medium.aac
+
+#RADIOBROWSERUUID:baecc41d-5879-4294-aa09-0adefefb141f
+#EXTINF:-1 tvg-id="baecc41d-5879-4294-aa09-0adefefb141f" tvg-name="Jacaranda FM" tvg-logo="" group-title="South Africa",Jacaranda FM [289]
+https://live.jacarandafm.com/jacarandahigh.mp3
+
+#RADIOBROWSERUUID:4521215b-50ff-4d08-89a6-a023619001c2
+#EXTINF:-1 tvg-id="4521215b-50ff-4d08-89a6-a023619001c2" tvg-name="Jacaranda FM" tvg-logo="" group-title="South Africa",Jacaranda FM [652]
+https://edge.iono.fm/xice/jacarandafm_live_medium.mp3
+
+#RADIOBROWSERUUID:cf1404fa-6fee-48a0-a85f-bab63f803dd5
+#EXTINF:-1 tvg-id="cf1404fa-6fee-48a0-a85f-bab63f803dd5" tvg-name="Jacaranda FM" tvg-logo="https://turntable.kagiso.io/images/532x350-FlipCardImage-JacarandaFMNewsBulleti.max-140x140.png" group-title="South Africa",Jacaranda FM [33]
+https://live.jacarandafm.com/jacarandahigh.mp3
+
+#RADIOBROWSERUUID:5fcebb16-26a8-4b9f-872d-94d686da58f5
+#EXTINF:-1 tvg-id="5fcebb16-26a8-4b9f-872d-94d686da58f5" tvg-name="jacaranda_high" tvg-logo="" group-title="South Africa",jacaranda_high [67]
+https://edge.iono.fm/xice/jacarandafm_live_high.aac
+
+#RADIOBROWSERUUID:050ced6a-151c-11ea-a87e-52543be04c81
+#EXTINF:-1 tvg-id="050ced6a-151c-11ea-a87e-52543be04c81" tvg-name="Jakaranda FM" tvg-logo="" group-title="South Africa",Jakaranda FM [1834]
+https://edge.iono.fm/xice/jacarandafm_live_high.mp3
+
+#RADIOBROWSERUUID:a12c36da-728a-4551-b4f3-318b6aaf015d
+#EXTINF:-1 tvg-id="a12c36da-728a-4551-b4f3-318b6aaf015d" tvg-name="JOY GOSPEL RADIO" tvg-logo="https://www.google.com/search?q=joy+gospel+radio+group&client=ms-android-mobicell&prmd=nmiv&sxsrf=APq-WBvKOVGQbCq5i6NX0F8KleM7OsyOlg:1647248530624&source=lnms&tbm=isch&sa=X&ved=2ahUKEwig6pj8nsX2AhWCYsAKHbWfBZQQ_AUoA3oECAIQAw&biw=377&bih=627&dpr=1.27#imgrc=seUxB2JYeu2ZVM" group-title="South Africa",JOY GOSPEL RADIO [657]
+https://servidor17.brlogic.com:7012/live
+
+#RADIOBROWSERUUID:22a21e54-0c74-4c29-868c-8e8dd6ab8f22
+#EXTINF:-1 tvg-id="22a21e54-0c74-4c29-868c-8e8dd6ab8f22" tvg-name="JOY GOSPEL RADIO" tvg-logo="https://www.google.com/search?q=joy+gospel+radio+group&client=ms-android-mobicell&prmd=nmiv&sxsrf=APq-WBvKOVGQbCq5i6NX0F8KleM7OsyOlg:1647248530624&source=lnms&tbm=isch&sa=X&ved=2ahUKEwig6pj8nsX2AhWCYsAKHbWfBZQQ_AUoA3oECAIQAw&biw=377&bih=627&dpr=1.27#imgrc=seUxB2JYeu2ZVM" group-title="South Africa",JOY GOSPEL RADIO [1633]
+https://servidor17.brlogic.com:7012/live
+
+#RADIOBROWSERUUID:e13e8d57-0608-11ea-afd6-52543be04c81
+#EXTINF:-1 tvg-id="e13e8d57-0608-11ea-afd6-52543be04c81" tvg-name="Jozi FM" tvg-logo="" group-title="South Africa",Jozi FM [1478]
+https://edge.iono.fm/xice/51_medium.aac
+
+#RADIOBROWSERUUID:98c9274f-903a-4779-a682-f2ba37ae7b09
+#EXTINF:-1 tvg-id="98c9274f-903a-4779-a682-f2ba37ae7b09" tvg-name="Jozi FM (HiFi aac)" tvg-logo="" group-title="South Africa",Jozi FM (HiFi aac) [461]
+https://edge.iono.fm/xice/51_high.aac
+
+#RADIOBROWSERUUID:ca97191f-aa31-49e9-b699-413aef9ffa1c
+#EXTINF:-1 tvg-id="ca97191f-aa31-49e9-b699-413aef9ffa1c" tvg-name="Kakarela FM" tvg-logo="" group-title="South Africa",Kakarela FM [19]
+https://stream.zeno.fm/845opvifkhytv
+
+#RADIOBROWSERUUID:c99495bd-d31c-4e31-9d39-479ac3fc65ca
+#EXTINF:-1 tvg-id="c99495bd-d31c-4e31-9d39-479ac3fc65ca" tvg-name="KASIE FM" tvg-logo="https://kasiefm971.co.za/wp-content/uploads/2023/12/cropped-IMG-20210512-WA0010-1_auto_x2-1.jpg" group-title="South Africa",KASIE FM [37]
+https://s44.myradiostream.com/9128/listen.mp3
+
+#RADIOBROWSERUUID:4520e100-0609-11ea-afd6-52543be04c81
+#EXTINF:-1 tvg-id="4520e100-0609-11ea-afd6-52543be04c81" tvg-name="Kaya FM" tvg-logo="" group-title="South Africa",Kaya FM [2837]
+https://edge.iono.fm/xice/82_medium.aac
+
+#RADIOBROWSERUUID:119f07c3-81f0-4309-91e8-f46525f0d35d
+#EXTINF:-1 tvg-id="119f07c3-81f0-4309-91e8-f46525f0d35d" tvg-name="KAYA FM 95.9" tvg-logo="https://cdn-profiles.tunein.com/s6401/images/logog.png" group-title="South Africa",KAYA FM 95.9 [2055]
+http://edge.iono.fm/xhls/82_high.m3u8
+
+#RADIOBROWSERUUID:cd6d66e4-adc0-4284-9392-f1a1f87091d9
+#EXTINF:-1 tvg-id="cd6d66e4-adc0-4284-9392-f1a1f87091d9" tvg-name="KFM 94.5" tvg-logo="" group-title="South Africa",KFM 94.5 [372]
+https://playerservices.streamtheworld.com/api/livestream-redirect/KFM.mp3
+
+#RADIOBROWSERUUID:9d60e5e6-db7c-4521-9de6-c2690f06e371
+#EXTINF:-1 tvg-id="9d60e5e6-db7c-4521-9de6-c2690f06e371" tvg-name="KM RADIO" tvg-logo="https://kmradio.net/wp-content/uploads/2021/08/KMLOGOMOVIL-1.png.webp" group-title="South Africa",KM RADIO [20]
+https://centova.hostingelectrica.net/proxy/kmradio?mp=/stream&1704296313782
+
+#RADIOBROWSERUUID:28b85cc9-696f-4175-966e-7459653c4811
+#EXTINF:-1 tvg-id="28b85cc9-696f-4175-966e-7459653c4811" tvg-name="Lekker FM" tvg-logo="https://www.lekkerfm.com/favicon.ico" group-title="South Africa",Lekker FM [2330]
+https://zas3.ndx.co.za:8002/stream
+
+#RADIOBROWSERUUID:a3e9e91b-ab33-4524-a683-cf5ba8463e2e
+#EXTINF:-1 tvg-id="a3e9e91b-ab33-4524-a683-cf5ba8463e2e" tvg-name="Lekoa fm" tvg-logo="https://lekoafm.co.za/wp-content/uploads/2020/10/TRANSPERENT-LOGO-1-400x300.png" group-title="South Africa",Lekoa fm [13]
+https://zas1-2-3-6.ndx.co.za/stream/lekoafm?1743647827740
+
+#RADIOBROWSERUUID:49970d3a-0a50-4655-8dfb-9065b279d662
+#EXTINF:-1 tvg-id="49970d3a-0a50-4655-8dfb-9065b279d662" tvg-name="Lesedi" tvg-logo="http://www.lesedifm.co.za/sabc/wcm/connect/1c966b4c-f8cb-4b55-a426-9b607a8fa32e/index.jpg?MOD=AJPERES&CACHEID=1c966b4c-f8cb-4b55-a426-9b607a8fa32e&cache=none" group-title="South Africa",Lesedi [737]
+https://playerservices.streamtheworld.com/api/livestream-redirect/LESEDIAAC_SC
+
+#RADIOBROWSERUUID:003efaa4-e791-4095-84aa-81bedd09a986
+#EXTINF:-1 tvg-id="003efaa4-e791-4095-84aa-81bedd09a986" tvg-name="Link FM (RSA-EC)" tvg-logo="" group-title="South Africa",Link FM (RSA-EC) [79]
+https://de2.streamingpulse.com/ssl/LinkFM
+
+#RADIOBROWSERUUID:1ff050a9-24ac-40dc-862a-7616080be46e
+#EXTINF:-1 tvg-id="1ff050a9-24ac-40dc-862a-7616080be46e" tvg-name="Link FM EC" tvg-logo="" group-title="South Africa",Link FM EC [56]
+https://de2.streamingpulse.com/ssl/LinkFM
+
+#RADIOBROWSERUUID:f25e0a43-b6e9-4d63-849b-93b0522da04d
+#EXTINF:-1 tvg-id="f25e0a43-b6e9-4d63-849b-93b0522da04d" tvg-name="LM Radio 87.8FM Komatipoort South Africa#" tvg-logo="" group-title="South Africa",LM Radio 87.8FM Komatipoort South Africa# [294]
+http://cast.fabrik.fm:8008/
+
+#RADIOBROWSERUUID:1e18b9ec-9f32-4c8a-90b4-43764a66a093
+#EXTINF:-1 tvg-id="1e18b9ec-9f32-4c8a-90b4-43764a66a093" tvg-name="LM Radio South Africa" tvg-logo="" group-title="South Africa",LM Radio South Africa [1881]
+http://cast.fabrik.fm:8008/
+
+#RADIOBROWSERUUID:e5a34365-80b9-41fc-bdd4-da7075cc5c19
+#EXTINF:-1 tvg-id="e5a34365-80b9-41fc-bdd4-da7075cc5c19" tvg-name="Loca FM" tvg-logo="http://www.locafm.com/assets/img/favicon/android-icon-192x192.png" group-title="South Africa",Loca FM [36]
+https://s3.we4stream.com:2020/stream/locafm
+
+#RADIOBROWSERUUID:8e40a7ca-c66b-4875-b55f-dd4a20144aa6
+#EXTINF:-1 tvg-id="8e40a7ca-c66b-4875-b55f-dd4a20144aa6" tvg-name="Luister FM" tvg-logo="http://www.luisterfm.co.za/logo.jpg" group-title="South Africa",Luister FM [39]
+http://stream2.luisterfm.co.za:8000/LuisterFM
+
+#RADIOBROWSERUUID:6adfd307-cb44-4e0e-8fd0-85b272f02a78
+#EXTINF:-1 tvg-id="6adfd307-cb44-4e0e-8fd0-85b272f02a78" tvg-name="Magic 828" tvg-logo="" group-title="South Africa",Magic 828 [87]
+https://streaming.fabrik.fm/magic828/echocast/audio/low/index.m3u8
+
+#RADIOBROWSERUUID:8286f8cd-c17d-4322-b58b-a4aafbba2b87
+#EXTINF:-1 tvg-id="8286f8cd-c17d-4322-b58b-a4aafbba2b87" tvg-name="Magic 828" tvg-logo="https://magic828.co.za/favicon.ico" group-title="South Africa",Magic 828 [23]
+https://streaming.fabrik.fm/magic828/echocast/audio/high/index.m3u8?
+
+#RADIOBROWSERUUID:f1248129-1d36-4075-8da8-d405e7ee2745
+#EXTINF:-1 tvg-id="f1248129-1d36-4075-8da8-d405e7ee2745" tvg-name="Magic 828" tvg-logo="" group-title="South Africa",Magic 828 [14]
+https://streaming.fabrik.fm/magic828/echocast/audio/high/index.m3u8
+
+#RADIOBROWSERUUID:bffdc007-3f6b-445e-aa53-edd1ae20d040
+#EXTINF:-1 tvg-id="bffdc007-3f6b-445e-aa53-edd1ae20d040" tvg-name="Magic 828" tvg-logo="" group-title="South Africa",Magic 828 [319]
+http://cast.fabrik.fm:8106/
+
+#RADIOBROWSERUUID:f56e79d2-7b59-42b3-8a0a-f375c6f2d71a
+#EXTINF:-1 tvg-id="f56e79d2-7b59-42b3-8a0a-f375c6f2d71a" tvg-name="Maluti FM" tvg-logo="https://streammedia.org.za/Streams/malutifm/listenlive/Artwork.jpg" group-title="South Africa",Maluti FM [16]
+https://cast3.my-control-panel.com/proxy/malutifm/stream
+
+#RADIOBROWSERUUID:c31350b3-a41d-4e56-83fb-c02eb3be0679
+#EXTINF:-1 tvg-id="c31350b3-a41d-4e56-83fb-c02eb3be0679" tvg-name="Marley Music Radio" tvg-logo="" group-title="South Africa",Marley Music Radio [1]
+https://marleymusic.online/listen/marleymusic/radio.mp3
+
+#RADIOBROWSERUUID:d844cb73-f62e-485d-8447-f120bf64616c
+#EXTINF:-1 tvg-id="d844cb73-f62e-485d-8447-f120bf64616c" tvg-name="MC 90.3 FM" tvg-logo="" group-title="South Africa",MC 90.3 FM [9]
+http://zas4.ndx.co.za:9066/stream
+
+#RADIOBROWSERUUID:bee57d58-d02e-47c9-9670-a40d4514edf6
+#EXTINF:-1 tvg-id="bee57d58-d02e-47c9-9670-a40d4514edf6" tvg-name="mc90.3fm" tvg-logo="https://www.knysnafm.co.za/assets/site-images/wavelogo.jpg" group-title="South Africa",mc90.3fm [5]
+https://zas4.ndx.co.za:9066/stream
+
+#RADIOBROWSERUUID:19bdb520-e481-4cf0-87dd-47a853da5be1
+#EXTINF:-1 tvg-id="19bdb520-e481-4cf0-87dd-47a853da5be1" tvg-name="Mdantsane FM 89.5  S'guqul'ubom" tvg-logo="https://mdantsanefm895.co.za/images/soundcloud-image-1.jpg?crc=4123017129" group-title="South Africa",Mdantsane FM 89.5  S'guqul'ubom [14]
+http://148.251.43.149:8134/stream
+
+#RADIOBROWSERUUID:058d5c5b-8d3b-4e21-b0a7-aebabdd0d817
+#EXTINF:-1 tvg-id="058d5c5b-8d3b-4e21-b0a7-aebabdd0d817" tvg-name="Megazone Bollywood" tvg-logo="" group-title="South Africa",Megazone Bollywood [99]
+https://vm65162.streamerr.co/listen/megazone_bollywood_/radio.mp3
+
+#RADIOBROWSERUUID:a168cef4-140b-44b0-bc6e-6582ef3cdac6
+#EXTINF:-1 tvg-id="a168cef4-140b-44b0-bc6e-6582ef3cdac6" tvg-name="Megazone South" tvg-logo="" group-title="South Africa",Megazone South [26]
+https://vm65162.streamerr.co/listen/megazone_south/radio.mp3
+
+#RADIOBROWSERUUID:a31ea18b-9ba9-4368-ad2e-5da164cb53b8
+#EXTINF:-1 tvg-id="a31ea18b-9ba9-4368-ad2e-5da164cb53b8" tvg-name="Megazone South" tvg-logo="" group-title="South Africa",Megazone South [20]
+https://vm65162.streamerr.co/listen/megazone_south/radio.mp3
+
+#RADIOBROWSERUUID:c8de966e-df6f-445e-930d-d779227f5578
+#EXTINF:-1 tvg-id="c8de966e-df6f-445e-930d-d779227f5578" tvg-name="Megazone South" tvg-logo="" group-title="South Africa",Megazone South [34]
+https://vm65162.streamerr.co/listen/megazone_south/radio.mp3
+
+#RADIOBROWSERUUID:6fc4059c-e74b-4e83-89a1-b7ff4cae8d58
+#EXTINF:-1 tvg-id="6fc4059c-e74b-4e83-89a1-b7ff4cae8d58" tvg-name="Melkies Radio" tvg-logo="https://radio2.eclipse-streaming.co.za/api/station/melkies/art/743dfd89be4058a65b368cdd" group-title="South Africa",Melkies Radio [9]
+https://radio2.eclipse-streaming.co.za/listen/melkies/radio.mp3
+
+#RADIOBROWSERUUID:13942d11-f0e4-43e4-9e9b-3d3902944a2a
+#EXTINF:-1 tvg-id="13942d11-f0e4-43e4-9e9b-3d3902944a2a" tvg-name="MERAFONG 360 ONLINE RADIO" tvg-logo="https://eu2.contabostorage.com/b94f201d35554c5283f96247e0e97a2c:famcast-storage/ThaboM/merafong-360-online-radio.webp" group-title="South Africa",MERAFONG 360 ONLINE RADIO [9]
+https://sv2.famcast.co.za/stream/merafong?t=1769529345666
+
+#RADIOBROWSERUUID:9e8ccaf9-99b1-4b80-ac33-66b3b5057745
+#EXTINF:-1 tvg-id="9e8ccaf9-99b1-4b80-ac33-66b3b5057745" tvg-name="metro fm south Africa" tvg-logo="null" group-title="South Africa",metro fm south Africa [688]
+https://25283.live.streamtheworld.com/METROFMAAC.aac?dist=triton-widget&tdsdk=js-2.9&swm=false&pname=tdwidgets&pversion=2.9&banners=none&burst-time=15&sbmid=541b37d8-153e-41d8-85b9-35e10d314d8c
+
+#RADIOBROWSERUUID:bf31e986-2314-4fd8-b054-6254503dd704
+#EXTINF:-1 tvg-id="bf31e986-2314-4fd8-b054-6254503dd704" tvg-name="MFM" tvg-logo="" group-title="South Africa",MFM [317]
+https://edge.iono.fm/xice/46_medium.aac
+
+#RADIOBROWSERUUID:cbad45e6-1de5-439a-8f5f-828100e79026
+#EXTINF:-1 tvg-id="cbad45e6-1de5-439a-8f5f-828100e79026" tvg-name="Mirchi FM" tvg-logo="" group-title="South Africa",Mirchi FM [87]
+https://vm65162.streamerr.co/listen/mirchi/radio.mp3
+
+#RADIOBROWSERUUID:3cc9067f-ecff-47d9-a748-15cf4d917480
+#EXTINF:-1 tvg-id="3cc9067f-ecff-47d9-a748-15cf4d917480" tvg-name="Mix 93.8 FM" tvg-logo="" group-title="South Africa",Mix 93.8 FM [1392]
+https://edge.iono.fm/xice/113_medium.aac
+
+#RADIOBROWSERUUID:3e3633dd-52f1-4a1f-8906-d542096a9b9a
+#EXTINF:-1 tvg-id="3e3633dd-52f1-4a1f-8906-d542096a9b9a" tvg-name="More Bounce to the Ounce" tvg-logo="https://www.morebouncetotheounce.com/images/Ubuntu.FM.MoBounce.logo.webp" group-title="South Africa",More Bounce to the Ounce [6]
+https://streaming.coollective.nl:8443/MoBounce
+
+#RADIOBROWSERUUID:894dbee7-22de-4e58-822f-5b36d46da85c
+#EXTINF:-1 tvg-id="894dbee7-22de-4e58-822f-5b36d46da85c" tvg-name="Mzansi FM" tvg-logo="" group-title="South Africa",Mzansi FM [2]
+https://a7.asurahosting.com:6850/radio.mp3
+
+#RADIOBROWSERUUID:c0e0cede-b1bd-4a16-a51f-72e287829ae4
+#EXTINF:-1 tvg-id="c0e0cede-b1bd-4a16-a51f-72e287829ae4" tvg-name="NCDOH Radio The Healthy Sound from Northern Cape Department of Health" tvg-logo="https://zeno.fm/_next/image/?url=https%3A%2F%2Fimages.zeno.fm%2F1MxoTXLPS4WyYKNdvKzDnchNj4leGge4Jr8Uh7_TkKs%2Frs%3Afit%3A240%3A240%2Fg%3Ace%3A0%3A0%2FaHR0cHM6Ly9zdHJlYW0tdG9vbHMuemVub21lZGlhLmNvbS9jb250ZW50L3N0YXRpb25zLzVkYjYxZjEyLTUxYjktNDJkNC1iMzY2LWQ5NzY0YmZhODVkZS9pbWFnZS8_dXBkYXRlZD0xNjY2NzAxMTQzMDAw.webp&w=1920&q=100" group-title="South Africa",NCDOH Radio The Healthy Sound from Northern Cape Department of Health [26]
+https://stream-154.zeno.fm/grjnbwcxbneuv
+
+#RADIOBROWSERUUID:961e3141-0601-11e8-ae97-52543be04c81
+#EXTINF:-1 tvg-id="961e3141-0601-11e8-ae97-52543be04c81" tvg-name="OFM 94 & 97 FM Bloemfontein" tvg-logo="" group-title="South Africa",OFM 94 & 97 FM Bloemfontein [1028]
+http://edge.iono.fm/xice/ofm_live_medium.aac
+
+#RADIOBROWSERUUID:045f3748-7488-4249-bf43-6feb7bb8db3d
+#EXTINF:-1 tvg-id="045f3748-7488-4249-bf43-6feb7bb8db3d" tvg-name="Pan African Space Station" tvg-logo="" group-title="South Africa",Pan African Space Station [72]
+https://pass.out.airtime.pro/pass_a
+
+#RADIOBROWSERUUID:1dfa15fc-9e88-4ddb-8a64-e74f046f233c
+#EXTINF:-1 tvg-id="1dfa15fc-9e88-4ddb-8a64-e74f046f233c" tvg-name="Pep Feel good fm" tvg-logo="" group-title="South Africa",Pep Feel good fm [203]
+https://edge.iono.fm/xice/feelgood_live_high.aac
+
+#RADIOBROWSERUUID:d4ad996c-fdbf-4f35-8de4-9a638e7f7509
+#EXTINF:-1 tvg-id="d4ad996c-fdbf-4f35-8de4-9a638e7f7509" tvg-name="Perron FM" tvg-logo="" group-title="South Africa",Perron FM [53]
+https://zas7.ndx.co.za:8044/stream?1694973588521
+
+#RADIOBROWSERUUID:682f0221-4dc9-45ea-b807-d0becd414a0f
+#EXTINF:-1 tvg-id="682f0221-4dc9-45ea-b807-d0becd414a0f" tvg-name="Pitch Radio" tvg-logo="http://www.pitchradio.co.za/wp-content/plugins/radio-player/assets/images/placeholder.png" group-title="South Africa",Pitch Radio [26]
+http://stream.zeno.fm/etw8vx9knm0uv
+
+#RADIOBROWSERUUID:cf181801-2b36-42ca-b19b-216821da3871
+#EXTINF:-1 tvg-id="cf181801-2b36-42ca-b19b-216821da3871" tvg-name="Plaas Radio - Rad's Vibes" tvg-logo="https://eclipse-radio.eclipse-streaming.co.za/static/uploads/browser_icon/180.1708559464.png" group-title="South Africa",Plaas Radio - Rad's Vibes [11]
+https://radio.eclipse-streaming.co.za/hls/plaas_radio/live.m3u8
+
+#RADIOBROWSERUUID:21b074e0-dd20-41cc-9d3d-ad4b9b5b4afe
+#EXTINF:-1 tvg-id="21b074e0-dd20-41cc-9d3d-ad4b9b5b4afe" tvg-name="Power 98.7" tvg-logo="" group-title="South Africa",Power 98.7 [1480]
+https://edge.iono.fm/xice/65_medium.aac
+
+#RADIOBROWSERUUID:c1cb378c-014e-4835-a0e8-a6fc0cb40cb6
+#EXTINF:-1 tvg-id="c1cb378c-014e-4835-a0e8-a6fc0cb40cb6" tvg-name="Pretoria FM" tvg-logo="https://www.pretoriafm.co.za/wp-content/uploads/2024/09/favicon-150x150.png" group-title="South Africa",Pretoria FM [18]
+https://edge.iono.fm/xice/362_medium.aac?ref=https%3A%2F%2Fwww.pretoriafm.co.za%2F
+
+#RADIOBROWSERUUID:68dee448-5980-4c10-ab8e-0674c7dd1fcd
+#EXTINF:-1 tvg-id="68dee448-5980-4c10-ab8e-0674c7dd1fcd" tvg-name="Radio 786" tvg-logo="https://www.radio786.co.za/wp-content/uploads/2020/10/cropped-786icon-logo-180x180.png" group-title="South Africa",Radio 786 [1965]
+http://stream.krypton.co.za:8040/stream/
+
+#RADIOBROWSERUUID:0606fff2-73ce-4113-a283-2bbf4348b0cf
+#EXTINF:-1 tvg-id="0606fff2-73ce-4113-a283-2bbf4348b0cf" tvg-name="Radio 786" tvg-logo="https://www.radio786.co.za/wp-content/uploads/elementor/thumbs/cropped-Generic-Testimonial-Logo-1-p7nb9imeuwv5um6i4f7lxsmk46glopvtscb6k2g7k4.png" group-title="South Africa",Radio 786 [121]
+https://stream.krypton.co.za/proxy/radio786?mp=/stream
+
+#RADIOBROWSERUUID:7d1cd6bb-be5d-4064-9639-4adc513a7ea5
+#EXTINF:-1 tvg-id="7d1cd6bb-be5d-4064-9639-4adc513a7ea5" tvg-name="Radio Atlantis 107.9FM" tvg-logo="https://www.radioatlantis.org.za/wp-content/uploads/2023/12/RAFM-Logo.png" group-title="South Africa",Radio Atlantis 107.9FM [17]
+https://edge.iono.fm/xice/127_medium.aac?ref=https%3A%2F%2Fwww.radioatlantis.org.za%2F&adToken=
+
+#RADIOBROWSERUUID:ad084a49-3398-42c7-a82a-a127fe1c281e
+#EXTINF:-1 tvg-id="ad084a49-3398-42c7-a82a-a127fe1c281e" tvg-name="Radio Free Tankwa" tvg-logo="https://www.radiofreetankwa.com/uploads/8/5/8/1/8581569/published/screenshot-2019-12-27-at-13-00-14.png?1577451635" group-title="South Africa",Radio Free Tankwa [26]
+https://samcloud.spacial.com/api/listen?sid=69819&m=sc&rid=155682
+
+#RADIOBROWSERUUID:cd157ca8-dbae-40f2-8cf9-e6da02ccea4e
+#EXTINF:-1 tvg-id="cd157ca8-dbae-40f2-8cf9-e6da02ccea4e" tvg-name="Radio Fynbos - Stilbaai" tvg-logo="" group-title="South Africa",Radio Fynbos - Stilbaai [27]
+https://stream-152.zeno.fm/w0cyqt4cyy8uv?zs=KrkViuxOTr6gZl4perU1jA
+
+#RADIOBROWSERUUID:bb59897c-65b7-4a5d-88fd-045b1d0a6938
+#EXTINF:-1 tvg-id="bb59897c-65b7-4a5d-88fd-045b1d0a6938" tvg-name="Radio Hallelujah" tvg-logo="" group-title="South Africa",Radio Hallelujah [17]
+https://vm65162.streamerr.co/listen/radio_hallelujah_/radio.mp3
+
+#RADIOBROWSERUUID:b905e9d6-368f-4321-b90f-4a36ef02a296
+#EXTINF:-1 tvg-id="b905e9d6-368f-4321-b90f-4a36ef02a296" tvg-name="Radio Laeveld" tvg-logo="http://www.radiolaeveld.co.za/wp-content/uploads/2018/01/100.5-Fm-Logo-Final.-png-179-KB-1.png" group-title="South Africa",Radio Laeveld [10]
+https://zas2.ndx.co.za:8046/stream
+
+#RADIOBROWSERUUID:aecc5c24-57bc-4ed4-aed1-34d1d5d3688b
+#EXTINF:-1 tvg-id="aecc5c24-57bc-4ed4-aed1-34d1d5d3688b" tvg-name="RADIO NAMAKWALAND" tvg-logo="" group-title="South Africa",RADIO NAMAKWALAND [78]
+https://zas3.ndx.co.za:8034/stream
+
+#RADIOBROWSERUUID:b5652db9-a4bc-4ec8-8dc4-2188e04eb044
+#EXTINF:-1 tvg-id="b5652db9-a4bc-4ec8-8dc4-2188e04eb044" tvg-name="Radio Namaste" tvg-logo="" group-title="South Africa",Radio Namaste [38]
+https://vm65162.streamerr.co/listen/radio_namaste/radio.mp3
+
+#RADIOBROWSERUUID:dbf646d1-2a66-440f-b5f7-1d16740e5042
+#EXTINF:-1 tvg-id="dbf646d1-2a66-440f-b5f7-1d16740e5042" tvg-name="Radio Pulpit" tvg-logo="https://www.radiopulpit.co.za/wp-content/uploads/2020/10/cropped-10-180x180.png" group-title="South Africa",Radio Pulpit [241]
+https://edge.iono.fm/xice/189_medium.aac?ref=https%3A%2F%2Fwww.radiopulpit.co.za%2F&adToken=
+
+#RADIOBROWSERUUID:294ab834-a5d0-4beb-8d92-1c213e1d560c
+#EXTINF:-1 tvg-id="294ab834-a5d0-4beb-8d92-1c213e1d560c" tvg-name="Radio Rosestad 100.6 FM" tvg-logo="https://firebasestorage.googleapis.com/v0/b/radiogalaxy-580f4.appspot.com/o/images%2FIMG_20241025_101050271.jpg?alt=media&token=0b01b450-1b02-4cb1-b3e3-096377ca4a01" group-title="South Africa",Radio Rosestad 100.6 FM [46]
+https://edge.iono.fm/xice/122_medium.aac
+
+#RADIOBROWSERUUID:8e5625fd-b4ec-4e11-a68a-5fa6fd8dd19b
+#EXTINF:-1 tvg-id="8e5625fd-b4ec-4e11-a68a-5fa6fd8dd19b" tvg-name="Radio Saranghae" tvg-logo="" group-title="South Africa",Radio Saranghae [5]
+https://vm65162.streamerr.co/listen/radiosaranghae/radio.mp3
+
+#RADIOBROWSERUUID:a8b4567f-909c-485a-bce0-754d63b53f4f
+#EXTINF:-1 tvg-id="a8b4567f-909c-485a-bce0-754d63b53f4f" tvg-name="Radio Saranghae" tvg-logo="" group-title="South Africa",Radio Saranghae [5]
+https://vm65162.streamerr.co/listen/radiosaranghae/radio.mp3
+
+#RADIOBROWSERUUID:1680e92f-c3b2-451c-9d76-f1a9708daecb
+#EXTINF:-1 tvg-id="1680e92f-c3b2-451c-9d76-f1a9708daecb" tvg-name="Radio Sonder Grense" tvg-logo="https://static.wikia.nocookie.net/logopedia/images/8/8d/Radio_Sonder_Grense_logo.png/revision/latest?cb=20171102212609" group-title="South Africa",Radio Sonder Grense [585]
+http://25583.live.streamtheworld.com/RSGAAC.aac?dist=triton-widget&tdsdk=js-2.9&swm=false&pname=tdwidgets&pversion=2.9&banners=none&burst-time=15&sbmid=9395327b-94a6-4c64-fe05-7f9179443574
+
+#RADIOBROWSERUUID:8ee4d023-658b-46bd-97f9-0bb7d38db4d2
+#EXTINF:-1 tvg-id="8ee4d023-658b-46bd-97f9-0bb7d38db4d2" tvg-name="Radio Teemaneng" tvg-logo="https://rtsfm.co.za/images/LISTENLIVE.png" group-title="South Africa",Radio Teemaneng [16]
+http://zas2.ndx.co.za:8006/stream?1743646346531
+
+#RADIOBROWSERUUID:8c0a5e3f-1c20-41be-9f81-efc3270b7b2c
+#EXTINF:-1 tvg-id="8c0a5e3f-1c20-41be-9f81-efc3270b7b2c" tvg-name="Radio Today" tvg-logo="https://rt1485.com/wp-content/uploads/2020/06/RTH-Logo01-W.png" group-title="South Africa",Radio Today [29]
+https://rt1485.out.airtime.pro/rt1485_b
+
+#RADIOBROWSERUUID:bf83f318-ddb6-4d57-b0f1-4c9813855b9f
+#EXTINF:-1 tvg-id="bf83f318-ddb6-4d57-b0f1-4c9813855b9f" tvg-name="Radio Today" tvg-logo="https://rt1485.com/wp-content/uploads/2020/06/RTH-Logo01-W.png" group-title="South Africa",Radio Today [43]
+https://rt1485.out.airtime.pro/rt1485_b
+
+#RADIOBROWSERUUID:9964eed0-d786-4bbb-9b95-dcdff4c6aa32
+#EXTINF:-1 tvg-id="9964eed0-d786-4bbb-9b95-dcdff4c6aa32" tvg-name="Radio Turf" tvg-logo="https://radio-player.eclipse-streaming.co.za/radioturf/img/radioturf_logo.jpeg" group-title="South Africa",Radio Turf [16]
+https://iceant.eclipse-streaming.co.za/radio-turf.mp3
+
+#RADIOBROWSERUUID:47b19cf6-3bb6-43fb-b3bb-de30e04d6a1a
+#EXTINF:-1 tvg-id="47b19cf6-3bb6-43fb-b3bb-de30e04d6a1a" tvg-name="Radio Veritas" tvg-logo="https://radioveritas.co.za/wp-content/uploads/2021/10/Logo2024.webp" group-title="South Africa",Radio Veritas [42]
+https://zas5.ndx.co.za:9618/stream?1722433923032
+
+#RADIOBROWSERUUID:4a687830-f905-408e-a291-782bbb24071f
+#EXTINF:-1 tvg-id="4a687830-f905-408e-a291-782bbb24071f" tvg-name="Radio Veritas" tvg-logo="" group-title="South Africa",Radio Veritas [42]
+https://zas5.ndx.co.za:9618/stream?1702476652972
+
+#RADIOBROWSERUUID:9b15a70a-8fa3-4797-a73a-575fa120e176
+#EXTINF:-1 tvg-id="9b15a70a-8fa3-4797-a73a-575fa120e176" tvg-name="Radio Vilakku" tvg-logo="" group-title="South Africa",Radio Vilakku [20]
+https://vm65162.streamerr.co/listen/radio_vilakku/radio.mp3
+
+#RADIOBROWSERUUID:2ae7474d-ee79-49c3-8281-9622cf404995
+#EXTINF:-1 tvg-id="2ae7474d-ee79-49c3-8281-9622cf404995" tvg-name="Radio Yaadien" tvg-logo="" group-title="South Africa",Radio Yaadien [33]
+https://vm65162.streamerr.co/listen/radioyaadein/radio.mp3
+
+#RADIOBROWSERUUID:721c3cda-5c8d-451f-afc1-f59da137d725
+#EXTINF:-1 tvg-id="721c3cda-5c8d-451f-afc1-f59da137d725" tvg-name="RadioCross" tvg-logo="" group-title="South Africa",RadioCross [5]
+https://gospelblues365.com/listen/radiocross/radiocross.mp3
+
+#RADIOBROWSERUUID:23606a1e-a4a2-472f-90dc-775d4b2dbbe3
+#EXTINF:-1 tvg-id="23606a1e-a4a2-472f-90dc-775d4b2dbbe3" tvg-name="Rainbow FM" tvg-logo="https://rainbowfm.co.za/wp-content/uploads/2024/08/cropped-rainbowfmicon-180x180.png" group-title="South Africa",Rainbow FM [147]
+https://edge.iono.fm/xice/237_low.aac
+
+#RADIOBROWSERUUID:6b5a1935-6a40-4aed-82cd-84ce166873e9
+#EXTINF:-1 tvg-id="6b5a1935-6a40-4aed-82cd-84ce166873e9" tvg-name="Rainbow Gospel Radio" tvg-logo="https://rainbowgr.com/wp-content/uploads/2023/04/cropped-Rainbow-Gospel-Radio-A-elongated.png" group-title="South Africa",Rainbow Gospel Radio [62]
+http://102.130.114.184:8000/Stream/1
+
+#RADIOBROWSERUUID:b981e0c8-37f4-475d-9e09-9045731cbd7c
+#EXTINF:-1 tvg-id="b981e0c8-37f4-475d-9e09-9045731cbd7c" tvg-name="RISE FM" tvg-logo="https://risefm.co.za/wp-content/uploads/2023/10/Rise-FM-752x1024.png" group-title="South Africa",RISE FM [78]
+https://edge.iono.fm/xice/73_medium.aac?ref=https%3A%2F%2Frisefm.co.za%2F&adToken=
+
+#RADIOBROWSERUUID:082884a5-99e4-4d21-9da4-bd4446f529b1
+#EXTINF:-1 tvg-id="082884a5-99e4-4d21-9da4-bd4446f529b1" tvg-name="Rocka FM" tvg-logo="https://www.rockafm.co.za/wp-content/uploads/2025/02/2022-Rocka-FM-Logo.png" group-title="South Africa",Rocka FM [2]
+https://live.urbanza.co.za/listen/roccafm/rockafm
+
+#RADIOBROWSERUUID:7d803118-4e2e-4d62-bb61-b65315f12a2b
+#EXTINF:-1 tvg-id="7d803118-4e2e-4d62-bb61-b65315f12a2b" tvg-name="SAFFA OnAir World Radio" tvg-logo="https://drive.google.com/file/d/1jcqay-UPk4x7UCU0tYSetTVZ7N8Hq0ec/view?usp=sharing" group-title="South Africa",SAFFA OnAir World Radio [99]
+http://stream.zeno.fm/k8cqvwu2za0uv
+
+#RADIOBROWSERUUID:9635d27f-0601-11e8-ae97-52543be04c81
+#EXTINF:-1 tvg-id="9635d27f-0601-11e8-ae97-52543be04c81" tvg-name="Salaam Media" tvg-logo="" group-title="South Africa",Salaam Media [186]
+http://capeant.antfarm.co.za:1935/salaam/salaam.stream/chunklist_w1196116988.m3u8
+
+#RADIOBROWSERUUID:fbf0bb38-272f-438a-b8f3-d325b2232df8
+#EXTINF:-1 tvg-id="fbf0bb38-272f-438a-b8f3-d325b2232df8" tvg-name="salaammedia" tvg-logo="" group-title="South Africa",salaammedia [117]
+https://iceant.antfarm.co.za/Salaam
+
+#RADIOBROWSERUUID:20f70b9f-e036-4427-b179-0249dc7a9b69
+#EXTINF:-1 tvg-id="20f70b9f-e036-4427-b179-0249dc7a9b69" tvg-name="SFM Streek Radio" tvg-logo="https://static.wixstatic.com/media/05ae2c_5858aa3f8e6c4d719e147b042f03b0ca%7emv2.png/v1/fill/w_180%2ch_180%2clg_1%2cusm_0.66_1.00_0.01/05ae2c_5858aa3f8e6c4d719e147b042f03b0ca%7emv2.png" group-title="South Africa",SFM Streek Radio [98]
+http://capeant.antfarm.co.za:8000/SFM
+
+#RADIOBROWSERUUID:c8bf230b-7edb-4d4e-984c-855a49d13ee1
+#EXTINF:-1 tvg-id="c8bf230b-7edb-4d4e-984c-855a49d13ee1" tvg-name="Simply Making Success Radio" tvg-logo="" group-title="South Africa",Simply Making Success Radio [41]
+https://stream.zeno.fm/ylvoyhv6tbntv
+
+#RADIOBROWSERUUID:e1a8db15-123a-4ff9-a5d9-8f1de59944be
+#EXTINF:-1 tvg-id="e1a8db15-123a-4ff9-a5d9-8f1de59944be" tvg-name="Simply Making Success Radio" tvg-logo="https://www.smsradio.co.za/wp-content/uploads/2024/04/cropped-SMS-Centered-Logo.png" group-title="South Africa",Simply Making Success Radio [25]
+https://stream.zeno.fm/ylvoyhv6tbntv
+
+#RADIOBROWSERUUID:bf94b075-7a8b-4849-8f9e-d7e94add043b
+#EXTINF:-1 tvg-id="bf94b075-7a8b-4849-8f9e-d7e94add043b" tvg-name="Smile 90.4 FM" tvg-logo="" group-title="South Africa",Smile 90.4 FM [537]
+https://edge.iono.fm/xice/212_medium.aac
+
+#RADIOBROWSERUUID:8fe6c009-2206-4b86-a9b9-305a21daadfa
+#EXTINF:-1 tvg-id="8fe6c009-2206-4b86-a9b9-305a21daadfa" tvg-name="Springbok Radio" tvg-logo="https://springbokradio.org.za/image/catalog/logo3.jpg" group-title="South Africa",Springbok Radio [36]
+https://springbokradio.xyz:8443/main
+
+#RADIOBROWSERUUID:a6e8bb41-9417-46b8-8627-46d5e26b86c5
+#EXTINF:-1 tvg-id="a6e8bb41-9417-46b8-8627-46d5e26b86c5" tvg-name="StarFM" tvg-logo="https://star919fm.co.za/storage/2022/08/cropped-StarFm_Logo-2048x1453-1-192x192.png" group-title="South Africa",StarFM [168]
+https://edge.iono.fm/xice/112_medium.aac
+
+#RADIOBROWSERUUID:0c5a3d4f-ecd6-430e-bcf4-f51ff1b13d1c
+#EXTINF:-1 tvg-id="0c5a3d4f-ecd6-430e-bcf4-f51ff1b13d1c" tvg-name="Talk Radio 702" tvg-logo="https://www.primediaplus.com/images/logos/logo-702.png" group-title="South Africa",Talk Radio 702 [694]
+https://playerservices.streamtheworld.com/api/livestream-redirect/FM702_192AAC.aac
+
+#RADIOBROWSERUUID:fc25ddf3-a4a8-4d2f-8525-b3ae3299e622
+#EXTINF:-1 tvg-id="fc25ddf3-a4a8-4d2f-8525-b3ae3299e622" tvg-name="TAMBO FM" tvg-logo="https://tambofm.co.za/wp-content/uploads/2023/07/Untitled-3545rrrrr3.jpg" group-title="South Africa",TAMBO FM [36]
+https://listen.radioking.com/radio/326599/stream/374668?fbclid=IwAR3lWR7ZdVVmZBSBedW_Cv1xF_Q7KzGmUQ0stgVCc_A7kx8Cf3Ncek1ntxk
+
+#RADIOBROWSERUUID:a0a245af-451a-4e5e-b873-7e629e62c691
+#EXTINF:-1 tvg-id="a0a245af-451a-4e5e-b873-7e629e62c691" tvg-name="The Grind Radio" tvg-logo="https://www.thegrindradio.co.za/wp-content/uploads/2022/10/G-1.png" group-title="South Africa",The Grind Radio [8]
+https://radio.eclipse-streaming.co.za/listen/thegrindradio/radio.mp3
+
+#RADIOBROWSERUUID:3bdf2126-b792-46f6-b0bd-9c991411e373
+#EXTINF:-1 tvg-id="3bdf2126-b792-46f6-b0bd-9c991411e373" tvg-name="ThobelaFM" tvg-logo="http://www.thobelafm.co.za/sabc/contenthandler/!ut/p/digest!os-IGfRHDAke8Lr8sjz6Wg/war/CustomTheme8Static/themes/Portal8.0/pivot/thobelafm/images/website-header-main-logo.png" group-title="South Africa",ThobelaFM [940]
+https://playerservices.streamtheworld.com/api/livestream-redirect/THOBELAAAC.aac
+
+#RADIOBROWSERUUID:09a1997a-c0a9-4fa0-87cd-a74785954d76
+#EXTINF:-1 tvg-id="09a1997a-c0a9-4fa0-87cd-a74785954d76" tvg-name="TransWorldRadio Music" tvg-logo="https://radio.eclipse-streaming.co.za/static/uploads/the_better_dot_fm/album_art.1708590513.jpg" group-title="South Africa",TransWorldRadio Music [28]
+https://radio.eclipse-streaming.co.za/listen/the_better_dot_fm/radio.mp3
+
+#RADIOBROWSERUUID:9619fd8c-0601-11e8-ae97-52543be04c81
+#EXTINF:-1 tvg-id="9619fd8c-0601-11e8-ae97-52543be04c81" tvg-name="Tuks FM" tvg-logo="" group-title="South Africa",Tuks FM [611]
+http://edge.iono.fm/xice/tuksfm_live_medium.aac
+
+#RADIOBROWSERUUID:35533bda-4bc1-4f2a-9dd6-3f271d41ad3b
+#EXTINF:-1 tvg-id="35533bda-4bc1-4f2a-9dd6-3f271d41ad3b" tvg-name="TUKS FM 107.2" tvg-logo="https://www.tuksfm.co.za/wp-content/uploads/2025/04/702.png" group-title="South Africa",TUKS FM 107.2 [0]
+https://edge.iono.fm/xice/tuksfm_live_medium.aac?ref=https%3A%2F%2Fwww.tuksfm.co.za%2Fon-air%2Flisten-live%2F&adToken=&pofToken=
+
+#RADIOBROWSERUUID:2ad985ec-f235-4e36-b362-b3b993174b40
+#EXTINF:-1 tvg-id="2ad985ec-f235-4e36-b362-b3b993174b40" tvg-name="UbuntuFM" tvg-logo="https://www.ubuntu.fm/sites/default/files//favicons/apple-touch-icon.png" group-title="South Africa",UbuntuFM [1105]
+https://streaming.coollective.nl:8443/UbuntuFM
+
+#RADIOBROWSERUUID:e35c02fe-5a63-4d6a-903f-04b00380c16a
+#EXTINF:-1 tvg-id="e35c02fe-5a63-4d6a-903f-04b00380c16a" tvg-name="UbuntuFM Africa" tvg-logo="" group-title="South Africa",UbuntuFM Africa [225]
+https://streaming.coollective.nl:8443/UbuntuFMafrica
+
+#RADIOBROWSERUUID:475bce46-41a5-4e8f-981a-a7f81a5eaf9e
+#EXTINF:-1 tvg-id="475bce46-41a5-4e8f-981a-a7f81a5eaf9e" tvg-name="UbuntuFM Radio Africa" tvg-logo="https://www.ubuntufmafrica.com/sites/default/files//favicons/apple-touch-icon.png" group-title="South Africa",UbuntuFM Radio Africa [28]
+https://streaming.coollective.nl:8443/UbuntuFMafrica
+
+#RADIOBROWSERUUID:efb11d41-857b-4bec-b79c-6e8a520152dc
+#EXTINF:-1 tvg-id="efb11d41-857b-4bec-b79c-6e8a520152dc" tvg-name="UbuntuFM Radio International" tvg-logo="https://www.ubuntufm.international/images/logo.webp" group-title="South Africa",UbuntuFM Radio International [22]
+https://streaming.coollective.nl:8443/RadioXYZ
+
+#RADIOBROWSERUUID:ac81df15-039c-43df-b944-7462426b9db5
+#EXTINF:-1 tvg-id="ac81df15-039c-43df-b944-7462426b9db5" tvg-name="Ukhozi FM S.A" tvg-logo="https://www.ukhozifm.co.za/wp-content/uploads/2023/07/cropped-ukhozi-tranparent-logo.png" group-title="South Africa",Ukhozi FM S.A [1810]
+https://playerservices.streamtheworld.com/api/livestream-redirect/UKHOZIFMAAC_SC?dist=triton-widget&pname=tdwidgets
+
+#RADIOBROWSERUUID:4a0ada25-20e1-4754-ae2f-e805e69549e8
+#EXTINF:-1 tvg-id="4a0ada25-20e1-4754-ae2f-e805e69549e8" tvg-name="ultracol FM" tvg-logo="" group-title="South Africa",ultracol FM [6]
+https://vm65162.streamerr.co/listen/ultracol_/radio.mp3
+
+#RADIOBROWSERUUID:d33574a2-b4ac-4553-a309-539c3e15e414
+#EXTINF:-1 tvg-id="d33574a2-b4ac-4553-a309-539c3e15e414" tvg-name="uMgungundlovu FM 107.6" tvg-logo="https://fabrikstore.blob.core.windows.net/9ba0ebb4-7bdd-4cf8-be4d-6cc629cb9500/e573dc31-a7b5-4631-b1a1-2b8a7489e151/directory/livestream/0d398af1-91ae-45e3-b75f-c4e3ef8c1944" group-title="South Africa",uMgungundlovu FM 107.6 [59]
+https://streaming.fabrik.fm/umgungundlovufm/echocast/audio/low/index.m3u8
+
+#RADIOBROWSERUUID:a9e6359d-1ef4-4cd1-8fde-3717d4eed01f
+#EXTINF:-1 tvg-id="a9e6359d-1ef4-4cd1-8fde-3717d4eed01f" tvg-name="Urban Fusion Radio" tvg-logo="https://urbanfusionmedia.co.za/wp-content/uploads/2022/06/Urban-Fusion-new-LogoMEDIA-1-1.png" group-title="South Africa",Urban Fusion Radio [25]
+http://stream.zeno.fm/wcy3kh4pqv8uv?ver=896973
+
+#RADIOBROWSERUUID:cec89f5b-ba88-4fbe-9e32-4de87b606c71
+#EXTINF:-1 tvg-id="cec89f5b-ba88-4fbe-9e32-4de87b606c71" tvg-name="Vault Radio 404" tvg-logo="https://baronvonvault.com/wp-content/uploads/2026/03/Vault_Radio_404_Still_Background_Favicon.jpg" group-title="South Africa",Vault Radio 404 [0]
+https://radio.baronvonvault.com/listen/vault_radio_404/radio.mp3
+
+#RADIOBROWSERUUID:69654639-1e10-4a6c-8cbd-61dffab238c8
+#EXTINF:-1 tvg-id="69654639-1e10-4a6c-8cbd-61dffab238c8" tvg-name="VCR - 90.6 FM Stereo" tvg-logo="https://static.wixstatic.com/media/39bd45_3c0fa981a9a14e2e9003646db594564a~mv2.png/v1/fill/w_481,h_240,al_c,q_85,usm_0.66_1.00_0.01,enc_avif,quality_auto/39bd45_3c0fa981a9a14e2e9003646db594564a~mv2.png" group-title="South Africa",VCR - 90.6 FM Stereo [20]
+https://radio2.eclipse-streaming.co.za/listen/vaal_community_radio/radio.mp3
+
+#RADIOBROWSERUUID:5f44735a-20e7-4ec5-989e-3613c4d99b4f
+#EXTINF:-1 tvg-id="5f44735a-20e7-4ec5-989e-3613c4d99b4f" tvg-name="Viva Nation Radio" tvg-logo="https://public-rf-upload.minhawebradio.net/244271/broadcaster/ca6fce1ca58b93163c0557fd7b65e99e.png" group-title="South Africa",Viva Nation Radio [9]
+https://servidor34-3.brlogic.com:7056/live?source=website
+
+#RADIOBROWSERUUID:a21017f9-f175-4af3-ac81-690492e18c3d
+#EXTINF:-1 tvg-id="a21017f9-f175-4af3-ac81-690492e18c3d" tvg-name="YFM" tvg-logo="https://mytuner.global.ssl.fastly.net/media/tvos_radios/JfwtLBVEWn.png" group-title="South Africa",YFM [1368]
+http://streaming.fabrik.fm/yfm/echocast/audio/index.m3u8
+
+#RADIOBROWSERUUID:43f4f4d6-a481-406e-a43a-0d7df0430c8a
+#EXTINF:-1 tvg-id="43f4f4d6-a481-406e-a43a-0d7df0430c8a" tvg-name="zoibi FM" tvg-logo="https://radio.eclipse-streaming.co.za/static/uploads/album_art.1708559460.jpg" group-title="South Africa",zoibi FM [7]
+https://radio.eclipse-streaming.co.za/listen/zoibi_fm/mainout
+
+#RADIOBROWSERUUID:f81a8e55-80ec-4eea-9e61-04e4a81eb299
+#EXTINF:-1 tvg-id="f81a8e55-80ec-4eea-9e61-04e4a81eb299" tvg-name="zoibicube" tvg-logo="https://radio3.eclipse-streaming.co.za/api/station/zoibi/art/6473db46b767a1693b441a2e" group-title="South Africa",zoibicube [0]
+https://radio3.eclipse-streaming.co.za/listen/zoibi/zoibi.mp3
