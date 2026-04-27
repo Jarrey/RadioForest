@@ -1,0 +1,6 @@
+# Node.js build dependencies (not project code)
+node_modules/
+package-lock.json
+
+# Playlist files (local data, not project code)
+radio_*.m3u

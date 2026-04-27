@@ -1,0 +1,2602 @@
+<?php
+/**
+ * 解析 M3U 播放列表文件，返回电台数组
+ * 每个电台包含 name、logo、url、group 字段
+ */
+function parseM3U($file) {
+    $stations = [];
+    $content = file_get_contents($file);
+    if ($content === false) return $stations;
+    $lines = explode("\n", $content);
+    $lineCount = count($lines); // 缓存行数，避免循环内重复计算
+    
+    $i = 0;
+    while ($i < $lineCount) {
+        $line = trim($lines[$i]);
+        
+        if (strpos($line, '#EXTINF:') === 0) {
+            $name = '';
+            $logo = '';
+            $group = '';
+            
+            if (preg_match('/tvg-name="([^"]*)"/', $line, $matches)) {
+                $name = $matches[1];
+            }
+            if (preg_match('/tvg-logo="([^"]*)"/', $line, $matches)) {
+                $logo = $matches[1];
+            }
+            if (preg_match('/group-title="([^"]*)"/', $line, $matches)) {
+                $group = $matches[1];
+            }
+            
+            $i++;
+            while ($i < $lineCount && trim($lines[$i]) === '') {
+                $i++;
+            }
+            
+            if ($i < $lineCount) {
+                $url = trim($lines[$i]);
+                if (!empty($url) && strpos($url, '#') !== 0 && strpos($url, 'http') === 0) {
+                    $stations[] = [
+                        'name' => $name ?: '未知电台',
+                        'logo' => $logo,
+                        'url' => $url,
+                        'group' => $group
+                    ];
+                }
+            }
+        }
+        $i++;
+    }
+    
+    return $stations;
+}
+
+/**
+ * 将 M3U group-title 字段转换为中文国家名
+ * 使用 static 变量缓存小写键映射，避免每次调用重复构建
+ */
+function getCountryName($group) {
+    static $lowerMap = null;
+    if ($lowerMap === null) {
+        $raw = [
+            'China' => '中国', 'Japan' => '日本', 'South Korea' => '韩国', 'The Republic Of Korea' => '韩国', 'Korea' => '韩国', 'Taiwan' => '台湾', 'Taiwan, Republic Of China' => '台湾', 'Republic Of China' => '台湾',
+            'Hong Kong' => '香港', 'Singapore' => '新加坡',
+            'United Kingdom' => '英国', 'The United Kingdom of Great Britain and Northern Ireland' => '英国', 'The United Kingdom' => '英国', 'Great Britain' => '英国', 'Britain' => '英国', 'England' => '英国', 'Scotland' => '英国', 'Wales' => '英国', 'Northern Ireland' => '英国',
+            'Germany' => '德国', 'France' => '法国', 'Italy' => '意大利', 'Spain' => '西班牙',
+            'Russia' => '俄罗斯',
+            'United States Of America' => '美国', 'The United States Of America' => '美国',
+            'United States' => '美国', 'America' => '美国', 'USA' => '美国', 'US' => '美国', 'U.S.A.' => '美国', 'U.S.' => '美国',
+            'Canada' => '加拿大',
+            'Australia' => '澳大利亚', 'New Zealand' => '新西兰', 'Brazil' => '巴西',
+            'Mexico' => '墨西哥', 'Argentina' => '阿根廷', 'India' => '印度', 'Thailand' => '泰国',
+            'Vietnam' => '越南', 'Malaysia' => '马来西亚', 'Indonesia' => '印尼',
+            'Philippines' => '菲律宾', 'Saudi Arabia' => '沙特', 'Turkey' => '土耳其',
+            'Netherlands' => '荷兰', 'Belgium' => '比利时', 'Switzerland' => '瑞士',
+            'Austria' => '奥地利', 'Poland' => '波兰', 'Sweden' => '瑞典', 'Norway' => '挪威',
+            'Denmark' => '丹麦', 'Finland' => '芬兰', 'Ireland' => '爱尔兰', 'Portugal' => '葡萄牙',
+            'Greece' => '希腊', 'Czech' => '捷克', 'Hungary' => '匈牙利', 'Romania' => '罗马尼亚',
+            'South Africa' => '南非', 'Egypt' => '埃及', 'Israel' => '以色列', 'UAE' => '阿联酋',
+            'UK' => '英国', 'GB' => '英国', 'CH' => '瑞士', 'NL' => '荷兰', 'SE' => '瑞典',
+            'NO' => '挪威', 'DK' => '丹麦', 'FI' => '芬兰', 'PL' => '波兰',
+            'AT' => '奥地利', 'BE' => '比利时', 'PT' => '葡萄牙', 'GR' => '希腊',
+            'CZ' => '捷克', 'HU' => '匈牙利', 'RO' => '罗马尼亚', 'UA' => '乌克兰',
+            'BY' => '白俄罗斯', 'KZ' => '哈萨克斯坦', 'CL' => '智利',
+            'CO' => '哥伦比亚', 'PE' => '秘鲁', 'VE' => '委内瑞拉', 'EC' => '厄瓜多尔',
+            'KR' => '韩国', 'JP' => '日本', 'IN' => '印度', 'PK' => '巴基斯坦',
+            'BD' => '孟加拉', 'LK' => '斯里兰卡', 'NP' => '尼泊尔', 'MM' => '缅甸',
+            'KH' => '柬埔寨', 'LA' => '老挝', 'BN' => '文莱', 'MY' => '马来西亚',
+            'TW' => '台湾', 'HK' => '香港', 'MO' => '澳门', 'PH' => '菲律宾',
+            'TH' => '泰国', 'ID' => '印尼', 'SG' => '新加坡', 'VN' => '越南',
+            'SA' => '沙特', 'AE' => '阿联酋', 'QA' => '卡塔尔', 'KW' => '科威特',
+            'BH' => '巴林', 'OM' => '阿曼', 'JO' => '约旦', 'LB' => '黎巴嫩',
+            'SY' => '叙利亚', 'IQ' => '伊拉克', 'IR' => '伊朗', 'AF' => '阿富汗',
+            'NG' => '尼日利亚', 'MA' => '摩洛哥', 'KE' => '肯尼亚',
+            'GH' => '加纳', 'TZ' => '坦桑尼亚', 'ET' => '埃塞俄比亚', 'DZ' => '阿尔及利亚',
+            'TN' => '突尼斯', 'SD' => '苏丹', 'UG' => '乌干达', 'ZW' => '津巴布韦',
+            'NA' => '纳米比亚', 'BW' => '博茨瓦纳', 'ZM' => '赞比亚', 'MG' => '马达加斯加',
+        ];
+        // 预构建全小写键的映射，后续查找为 O(1)
+        $lowerMap = [];
+        foreach ($raw as $k => $v) $lowerMap[strtolower($k)] = $v;
+    }
+    $key = strtolower(trim($group));
+    return $lowerMap[$key] ?? ($group ?: '其他');
+}
+
+$dir = __DIR__;
+$files = glob($dir . '/radio*.m3u');
+$allStations = [];
+$countries = [];
+
+$regionNames = [
+    'cn' => '中国', 'jp' => '日本', 'kr' => '韩国', 'tw' => '台湾', 'hk' => '香港',
+    'sg' => '新加坡', 'gb' => '英国', 'de' => '德国', 'fr' => '法国', 'it' => '意大利',
+    'es' => '西班牙', 'ru' => '俄罗斯', 'us' => '美国', 'ca' => '加拿大', 'au' => '澳大利亚',
+    'nz' => '新西兰', 'br' => '巴西', 'mx' => '墨西哥', 'ar' => '阿根廷', 'ch' => '瑞士',
+    'za' => '南非', 'in' => '印度', 'th' => '泰国', 'vn' => '越南', 'my' => '马来西亚',
+    'id' => '印尼', 'ph' => '菲律宾', 'tr' => '土耳其', 'nl' => '荷兰', 'be' => '比利时',
+    'at' => '奥地利', 'pl' => '波兰', 'se' => '瑞典', 'no' => '挪威', 'dk' => '丹麦',
+    'fi' => '芬兰', 'ie' => '爱尔兰', 'pt' => '葡萄牙', 'gr' => '希腊', 'cz' => '捷克',
+    'hu' => '匈牙利', 'ro' => '罗马尼亚', 'eg' => '埃及', 'il' => '以色列', 'ae' => '阿联酋',
+    'sa' => '沙特', '' => '全球'
+];
+
+foreach ($files as $file) {
+    $stations = parseM3U($file);
+    $basename = basename($file, '.m3u');
+    $region = str_replace('radio_', '', $basename);
+    $regionName = $regionNames[$region] ?? $region;
+    
+    foreach ($stations as $s) {
+        // 输出字段：去除 group，减少 JSON 体积
+        $allStations[] = [
+            'name'    => $s['name'],
+            'logo'    => $s['logo'],
+            'url'     => $s['url'],
+            'region'  => $regionName,
+            'country' => getCountryName($s['group']),
+        ];
+        if (!isset($countries[$regionName])) $countries[$regionName] = 0;
+        $countries[$regionName]++;
+    }
+}
+
+$totalCount = count($allStations);
+?>
+<!DOCTYPE html>
+<html lang="zh-CN" data-theme="green">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>电台森林</title>
+    <!-- 尽早设置主题，避免闪烁 -->
+    <script>
+        (function() {
+            const savedTheme = localStorage.getItem('theme') || 'green';
+            document.documentElement.setAttribute('data-theme', savedTheme);
+        })();
+    </script>
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js" integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
+    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 60 52'%3E%3Cline x1='46' y1='3' x2='39' y2='13' stroke='%2322c55e' stroke-width='2.5' stroke-linecap='round'/%3E%3Crect x='3' y='12' width='54' height='36' rx='7' fill='%2322c55e'/%3E%3Crect x='7' y='17' width='25' height='26' rx='4' fill='%23121212' opacity='0.1'/%3E%3Cline x1='9' y1='22' x2='30' y2='22' stroke='%23121212' stroke-width='1.3' stroke-linecap='round' opacity='0.55'/%3E%3Cline x1='9' y1='26' x2='30' y2='26' stroke='%23121212' stroke-width='1.3' stroke-linecap='round' opacity='0.55'/%3E%3Cline x1='9' y1='30' x2='30' y2='30' stroke='%23121212' stroke-width='1.3' stroke-linecap='round' opacity='0.55'/%3E%3Cline x1='9' y1='34' x2='30' y2='34' stroke='%23121212' stroke-width='1.3' stroke-linecap='round' opacity='0.55'/%3E%3Cline x1='9' y1='38' x2='30' y2='38' stroke='%23121212' stroke-width='1.3' stroke-linecap='round' opacity='0.55'/%3E%3Crect x='36' y='16' width='17' height='8' rx='2' fill='%23121212' opacity='0.22'/%3E%3Cline x1='45' y1='17.5' x2='45' y2='23.5' stroke='%23121212' stroke-width='1.5' stroke-linecap='round' opacity='0.6'/%3E%3Ccircle cx='41' cy='33' r='5' fill='%23121212' opacity='0.2'/%3E%3Ccircle cx='41' cy='33' r='2.5' fill='%23121212' opacity='0.5'/%3E%3Ccircle cx='53' cy='33' r='5' fill='%23121212' opacity='0.2'/%3E%3Ccircle cx='53' cy='33' r='2.5' fill='%23121212' opacity='0.5'/%3E%3Ccircle cx='41' cy='43' r='1.8' fill='%23121212' opacity='0.45'/%3E%3Ccircle cx='47' cy='43' r='1.8' fill='%23121212' opacity='0.28'/%3E%3Ccircle cx='53' cy='43' r='1.8' fill='%23121212' opacity='0.28'/%3E%3C/svg%3E">
+    <style>
+        :root {
+            --primary: #22c55e;
+            --primary-dim: #166534;
+            --bg: #121212;
+            --bg-card: #1a1a1a;
+            --bg-input: #1a1a1a;
+            --border: #333;
+            --border-light: #444;
+            --text: #e8e8e8;
+            --text-dim: #777;
+            --text-dimmer: #555;
+            --tag-bg: #252525;
+            --type-bg: #1e3a5f;
+            --type-text: #60a5fa;
+            --player-bg: linear-gradient(135deg, #0f1a0f 0%, #0a150a 100%);
+            --player-border: #22c55e;
+            --player-shadow: rgba(34, 197, 94, 0.15);
+        }
+        
+        [data-theme="orange"] {
+            --primary: #f97316;
+            --primary-dim: #9a3412;
+            --bg: #121212;
+            --bg-card: #1a1815;
+            --bg-input: #1a1815;
+            --border: #333;
+            --border-light: #443830;
+            --text: #e8e8e8;
+            --text-dim: #777;
+            --text-dimmer: #555;
+            --tag-bg: #2a231a;
+            --type-bg: #4a300a;
+            --type-text: #fbbf24;
+            --player-bg: linear-gradient(135deg, #1a1408 0%, #0f0a04 100%);
+            --player-border: #f97316;
+            --player-shadow: rgba(249, 115, 22, 0.15);
+        }
+        
+        [data-theme="red"] {
+            --primary: #dc2626;
+            --primary-dim: #991b1b;
+            --bg: #121212;
+            --bg-card: #1a1515;
+            --bg-input: #1a1515;
+            --border: #333;
+            --border-light: #442828;
+            --text: #e8e8e8;
+            --text-dim: #777;
+            --text-dimmer: #555;
+            --tag-bg: #2a1a1a;
+            --type-bg: #4a0a0a;
+            --type-text: #f87171;
+            --player-bg: linear-gradient(135deg, #1a0808 0%, #0f0404 100%);
+            --player-border: #dc2626;
+            --player-shadow: rgba(220, 38, 38, 0.15);
+        }
+        
+        [data-theme="blue"] {
+            --primary: #3b82f6;
+            --primary-dim: #1d4ed8;
+            --bg: #121212;
+            --bg-card: #151a1f;
+            --bg-input: #151a1f;
+            --border: #333;
+            --border-light: #2a3544;
+            --text: #e8e8e8;
+            --text-dim: #777;
+            --text-dimmer: #555;
+            --tag-bg: #1a2530;
+            --type-bg: #0a1a3a;
+            --type-text: #60a5fa;
+            --player-bg: linear-gradient(135deg, #0a1525 0%, #050a10 100%);
+            --player-border: #3b82f6;
+            --player-shadow: rgba(59, 130, 246, 0.15);
+        }
+        
+        [data-theme="purple"] {
+            --primary: #a855f7;
+            --primary-dim: #7e22ce;
+            --bg: #121212;
+            --bg-card: #1a1520;
+            --bg-input: #1a1520;
+            --border: #333;
+            --border-light: #3a2a44;
+            --text: #e8e8e8;
+            --text-dim: #777;
+            --text-dimmer: #555;
+            --tag-bg: #251a2a;
+            --type-bg: #2a0a3a;
+            --type-text: #c084fc;
+            --player-bg: linear-gradient(135deg, #150a1a 0%, #0a0510 100%);
+            --player-border: #a855f7;
+            --player-shadow: rgba(168, 85, 247, 0.15);
+        }
+        
+        [data-theme="teal"] {
+            --primary: #14b8a6;
+            --primary-dim: #0f766e;
+            --bg: #121212;
+            --bg-card: #152020;
+            --bg-input: #152020;
+            --border: #333;
+            --border-light: #1a3030;
+            --text: #e8e8e8;
+            --text-dim: #777;
+            --text-dimmer: #555;
+            --tag-bg: #1a2828;
+            --type-bg: #0a2020;
+            --type-text: #2dd4bf;
+            --player-bg: linear-gradient(135deg, #0a1515 0%, #050a0a 100%);
+            --player-border: #14b8a6;
+            --player-shadow: rgba(20, 184, 166, 0.15);
+        }
+        
+        [data-theme="cyan"] {
+            --primary: #06b6d4;
+            --primary-dim: #0891b2;
+            --bg: #121212;
+            --bg-card: #151d21;
+            --bg-input: #151d21;
+            --border: #333;
+            --border-light: #1a2a30;
+            --text: #e8e8e8;
+            --text-dim: #777;
+            --text-dimmer: #555;
+            --tag-bg: #1a252a;
+            --type-bg: #0a1a20;
+            --type-text: #22d3ee;
+            --player-bg: linear-gradient(135deg, #081515 0%, #040a0a 100%);
+            --player-border: #06b6d4;
+            --player-shadow: rgba(6, 182, 212, 0.15);
+        }
+        
+        [data-theme="amber"] {
+            --primary: #f59e0b;
+            --primary-dim: #d97706;
+            --bg: #121212;
+            --bg-card: #1f1a12;
+            --bg-input: #1f1a12;
+            --border: #333;
+            --border-light: #3a3020;
+            --text: #e8e8e8;
+            --text-dim: #777;
+            --text-dimmer: #555;
+            --tag-bg: #2a2015;
+            --type-bg: #201a08;
+            --type-text: #fbbf24;
+            --player-bg: linear-gradient(135deg, #150f08 0%, #0a0804 100%);
+            --player-border: #f59e0b;
+            --player-shadow: rgba(245, 158, 11, 0.15);
+        }
+        
+        [data-theme="rose"] {
+            --primary: #f43f5e;
+            --primary-dim: #e11d48;
+            --bg: #121212;
+            --bg-card: #1f1518;
+            --bg-input: #1f1518;
+            --border: #333;
+            --border-light: #3a2025;
+            --text: #e8e8e8;
+            --text-dim: #777;
+            --text-dimmer: #555;
+            --tag-bg: #2a181d;
+            --type-bg: #200a10;
+            --type-text: #fb7185;
+            --player-bg: linear-gradient(135deg, #15080c 0%, #0a0406 100%);
+            --player-border: #f43f5e;
+            --player-shadow: rgba(244, 63, 94, 0.15);
+        }
+        
+        [data-theme="pink"] {
+            --primary: #ec4899;
+            --primary-dim: #db2777;
+            --bg: #121212;
+            --bg-card: #1f151d;
+            --bg-input: #1f151d;
+            --border: #333;
+            --border-light: #3a2030;
+            --text: #e8e8e8;
+            --text-dim: #777;
+            --text-dimmer: #555;
+            --tag-bg: #2a1822;
+            --type-bg: #200a15;
+            --type-text: #f472b6;
+            --player-bg: linear-gradient(135deg, #150a10 0%, #0a0508 100%);
+            --player-border: #ec4899;
+            --player-shadow: rgba(236, 72, 153, 0.15);
+        }
+        
+        [data-theme="indigo"] {
+            --primary: #6366f1;
+            --primary-dim: #4f46e5;
+            --bg: #121212;
+            --bg-card: #161822;
+            --bg-input: #161822;
+            --border: #333;
+            --border-light: #202030;
+            --text: #e8e8e8;
+            --text-dim: #777;
+            --text-dimmer: #555;
+            --tag-bg: #1a1828;
+            --type-bg: #0a0a20;
+            --type-text: #818cf8;
+            --player-bg: linear-gradient(135deg, #0a0a15 0%, #050508 100%);
+            --player-border: #6366f1;
+            --player-shadow: rgba(99, 102, 241, 0.15);
+        }
+        
+        [data-theme="black"] {
+            --primary: #ffffff;
+            --primary-dim: #888888;
+            --bg: #000000;
+            --bg-card: #0a0a0a;
+            --bg-input: #0a0a0a;
+            --border: #222;
+            --border-light: #333;
+            --text: #ffffff;
+            --text-dim: #888;
+            --text-dimmer: #555;
+            --tag-bg: #111;
+            --type-bg: #222;
+            --type-text: #ccc;
+            --player-bg: linear-gradient(135deg, #111 0%, #000 100%);
+            --player-border: #333;
+            --player-shadow: rgba(255, 255, 255, 0.05);
+        }
+
+        [data-theme="bw"] {
+            --primary: #ffffff;
+            --primary-dim: #cccccc;
+            --bg: #000000;
+            --bg-card: #000000;
+            --bg-input: #000000;
+            --border: #ffffff;
+            --border-light: #ffffff;
+            --text: #ffffff;
+            --text-dim: #cccccc;
+            --text-dimmer: #999999;
+            --tag-bg: #000000;
+            --type-bg: #000000;
+            --type-text: #ffffff;
+            --player-bg: #000000;
+            --player-border: #ffffff;
+            --player-shadow: rgba(255, 255, 255, 0.2);
+        }
+
+        [data-theme="grayscale"] {
+            --primary: #888888;
+            --primary-dim: #666666;
+            --bg: #1a1a1a;
+            --bg-card: #222222;
+            --bg-input: #222222;
+            --border: #444;
+            --border-light: #555;
+            --text: #e0e0e0;
+            --text-dim: #999;
+            --text-dimmer: #666;
+            --tag-bg: #2a2a2a;
+            --type-bg: #333;
+            --type-text: #aaa;
+            --player-bg: linear-gradient(135deg, #2a2a2a 0%, #1a1a1a 100%);
+            --player-border: #666;
+            --player-shadow: rgba(136, 136, 136, 0.15);
+        }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        html, body {
+            min-height: 100%;
+            overflow-x: hidden;
+            max-width: 100vw;
+        }
+        
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background: var(--bg);
+            color: var(--text);
+            transition: background 0.3s, color 0.3s;
+        }
+        
+        .container {
+            max-width: 1400px;
+            width: 100%;
+            margin: 0 auto;
+            padding: 24px 16px;
+            overflow-x: hidden;
+        }
+        
+        header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-bottom: 20px;
+            padding: 0 8px;
+        }
+        
+        .header-left {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+        
+        .logo {
+            filter: drop-shadow(0 0 8px var(--player-shadow));
+        }
+        
+        .theme-select {
+            padding: 6px 12px;
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            color: var(--text);
+            font-size: 13px;
+            cursor: pointer;
+            outline: none;
+            transition: all 0.2s;
+        }
+        
+        .theme-select:hover {
+            border-color: var(--primary);
+        }
+        
+        .theme-select:focus {
+            border-color: var(--primary);
+            box-shadow: 0 0 0 2px color-mix(in srgb, var(--primary) 20%, transparent);
+        }
+        
+        .theme-select option {
+            background: var(--bg-card);
+            color: var(--text);
+        }
+        
+        h1 {
+            font-size: 22px;
+            font-weight: 200;
+            color: #fff;
+            letter-spacing: 3px;
+            margin-bottom: 4px;
+        }
+        
+        .subtitle { color: var(--text-dim); font-size: 12px; }
+        
+        .search-box {
+            max-width: 400px;
+            margin: 0 auto 16px;
+        }
+        
+        .search-box input {
+            width: 100%;
+            padding: 12px 16px;
+            border-radius: 24px;
+            border: 1px solid var(--border);
+            background: var(--bg-input);
+            color: var(--text);
+            font-size: 14px;
+            outline: none;
+            transition: all 0.2s;
+        }
+        
+        .search-box input:focus {
+            border-color: var(--primary);
+            background: var(--bg-card);
+        }
+        
+        .search-box input::placeholder { color: var(--text-dimmer); }
+        
+        .filter-section {
+            margin-bottom: 16px;
+        }
+        
+        .filter-header {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            margin-bottom: 8px;
+            padding: 6px 8px;
+            cursor: pointer;
+            user-select: none;
+            border-radius: 8px;
+            transition: background 0.2s;
+        }
+        
+        .filter-header:hover {
+            background: var(--bg-card);
+        }
+        
+        .filter-header h3 {
+            font-size: 14px;
+            font-weight: 500;
+            color: var(--text);
+            margin: 0;
+        }
+        
+        .toggle-icon {
+            font-size: 10px;
+            color: var(--primary);
+            transition: transform 0.3s ease;
+            display: inline-block;
+            width: 12px;
+            text-align: center;
+        }
+        
+        .toggle-icon.collapsed {
+            transform: rotate(-90deg);
+        }
+        
+        .filter-content {
+            overflow: hidden;
+            transition: max-height 0.4s ease, opacity 0.3s ease;
+            max-height: 2000px;
+            opacity: 1;
+        }
+        
+        .filter-content.collapsed {
+            max-height: 0;
+            opacity: 0;
+        }
+        
+        .regions {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 6px;
+        }
+        
+        .region-btn {
+            padding: 5px 10px;
+            border-radius: 16px;
+            border: 1px solid var(--border);
+            background: var(--bg-card);
+            color: var(--text);
+            font-size: 13px;
+            cursor: pointer;
+            transition: all 0.15s;
+            font-weight: 400;
+            display: inline-flex;
+            align-items: center;
+            gap: 4px;
+        }
+
+        .region-flag {
+            width: 18px;
+            height: 12px;
+            object-fit: cover;
+            border-radius: 2px;
+            flex-shrink: 0;
+        }
+        
+        .region-btn:hover { background: var(--border-light); color: var(--text); }
+        
+        .region-btn.active {
+            background: var(--primary);
+            color: #000;
+            border-color: var(--primary);
+            font-weight: 500;
+        }
+        
+        .types {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 5px;
+            padding: 10px 12px 6px;
+            border: none;
+            border-radius: 12px;
+            background: color-mix(in srgb, var(--primary) 15%, transparent);
+        }
+        
+        .type-btn {
+            padding: 4px 10px;
+            border-radius: 12px;
+            border: 1px solid var(--border);
+            background: var(--bg-card);
+            color: var(--text);
+            font-size: 11px;
+            cursor: pointer;
+            transition: all 0.15s;
+            font-weight: 400;
+        }
+        
+        .type-btn:hover { background: var(--border-light); color: var(--text); }
+        
+        .type-btn.active {
+            background: var(--primary);
+            color: #000;
+            border-color: var(--primary);
+            font-weight: 500;
+        }
+        
+        .player-bar {
+            background: var(--player-bg);
+            border-radius: 20px;
+            padding: 24px 32px;
+            margin-bottom: 20px;
+            display: flex;
+            align-items: center;
+            gap: 24px;
+            border: 1px solid var(--player-border);
+            box-shadow: 0 0 30px var(--player-shadow), 0 4px 20px rgba(0,0,0,0.4);
+            position: relative;
+            overflow: hidden;
+            transition: all 0.3s;
+            flex-wrap: wrap;
+            cursor: pointer;
+        }
+        
+        .player-bar::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, var(--player-shadow), transparent);
+            animation: shimmer 3s infinite;
+        }
+        
+        @keyframes shimmer {
+            0% { left: -100%; }
+            100% { left: 100%; }
+        }
+        
+        .player-logo {
+            width: 56px;
+            height: 56px;
+            border-radius: 12px;
+            object-fit: cover;
+            background: var(--bg-card);
+            flex-shrink: 0;
+            border: 2px solid var(--primary);
+            box-shadow: 0 0 12px var(--player-shadow);
+        }
+        
+        .player-logo.placeholder {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: var(--bg-card);
+            border: 2px solid var(--primary);
+        }
+        
+        .player-info { flex: 1; min-width: 0; }
+        
+.player-title {
+            font-size: 17px;
+            font-weight: 500;
+            color: var(--text);
+            margin-bottom: 4px;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+        
+        .player-status {
+            font-size: 11px;
+            color: var(--text-dim);
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+        
+        .status-dot {
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+            background: var(--text-dimmer);
+        }
+        
+        .status-dot.playing {
+            background: var(--primary);
+            animation: pulse 1.5s infinite;
+        }
+
+        .status-dot.paused {
+            background: var(--text-dim);
+            animation: pulse-dim 1.5s infinite;
+        }
+        
+        @keyframes pulse {
+            0%, 100% { opacity: 1; box-shadow: 0 0 4px var(--primary); }
+            50% { opacity: 0.6; box-shadow: 0 0 8px var(--primary); }
+        }
+
+        @keyframes pulse-dim {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.3; }
+        }
+        
+        audio {
+            height: 32px;
+            flex-shrink: 0;
+            filter: invert(0.8);
+            /* 阻止点击 audio 冒泡到 player-bar 时不要触发 togglePlay */
+            position: relative;
+            z-index: 2;
+        }
+        
+        .fullscreen-btn {
+            width: 40px;
+            height: 40px;
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--primary);
+            transition: all 0.2s;
+            flex-shrink: 0;
+            z-index: 2;
+        }
+        
+        .fullscreen-btn:hover {
+            background: var(--primary);
+            color: var(--bg);
+            transform: scale(1.05);
+        }
+        
+        .fullscreen-btn svg {
+            width: 20px;
+            height: 20px;
+            fill: currentColor;
+        }
+
+        .result-count {
+            text-align: center;
+            color: var(--text-dim);
+            font-size: 12px;
+            margin: 8px 0;
+            padding: 6px 0;
+        }
+        
+        .stations-list {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 8px;
+        }
+        
+        .station-card {
+            background: var(--bg-card);
+            border-radius: 8px;
+            padding: 12px;
+            cursor: pointer;
+            transition: all 0.15s ease;
+            border: 1px solid var(--border);
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            text-decoration: none;
+            color: inherit;
+            max-width: 100%;
+            overflow: hidden;
+        }
+        
+        .station-card:hover {
+            background: var(--border-light);
+            border-color: var(--border-light);
+        }
+        
+        .station-card.active {
+            background: var(--bg-card);
+            border-color: var(--primary);
+        }
+        
+        .station-logo {
+            width: 40px;
+            height: 40px;
+            border-radius: 8px;
+            object-fit: cover;
+            background: var(--bg);
+            flex-shrink: 0;
+        }
+        
+        .station-logo.placeholder {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .station-content {
+            flex: 1;
+            min-width: 0;
+        }
+        
+        .station-name {
+            font-size: 13px;
+            font-weight: 400;
+            color: var(--text);
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+        
+        .station-meta {
+            font-size: 11px;
+            color: var(--text-dim);
+            margin-top: 2px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            flex-wrap: wrap;
+            overflow: hidden;
+        }
+        
+        .region-tag {
+            display: inline-flex;
+            align-items: center;
+            gap: 4px;
+            padding: 1px 6px;
+            border-radius: 4px;
+            background: var(--tag-bg);
+            font-size: 10px;
+            flex-shrink: 0;
+            white-space: nowrap;
+        }
+        
+        .region-tag-flag {
+            width: 14px;
+            height: 10px;
+            object-fit: cover;
+            border-radius: 1px;
+            flex-shrink: 0;
+        }
+        
+        .region-tag-name {
+            color: var(--primary-dim);
+        }
+        
+        .type-tag {
+            padding: 1px 6px;
+            border-radius: 4px;
+            background: var(--type-bg);
+            font-size: 10px;
+            color: var(--type-text);
+            flex-shrink: 0;
+            white-space: nowrap;
+        }
+        
+        .loading-more {
+            text-align: center;
+            padding: 20px;
+            color: #666;
+            font-size: 12px;
+            display: none;
+        }
+        
+        .loading-more.show { display: block; }
+        
+        .no-results {
+            text-align: center;
+            padding: 40px;
+            color: #666;
+        }
+
+        @media (max-width: 600px) {
+            .container {
+                padding: 16px 8px;
+                width: 100%;
+            }
+            
+            h1 {
+                font-size: 18px;
+                letter-spacing: 2px;
+            }
+            
+            .subtitle {
+                font-size: 11px;
+            }
+            
+            .logo {
+                width: 36px;
+                height: 31px;
+            }
+            
+            .stations-list { 
+                grid-template-columns: 1fr;
+                gap: 6px;
+                width: 100%;
+            }
+            
+            .station-card {
+                padding: 8px;
+                gap: 8px;
+                width: 100%;
+                box-sizing: border-box;
+            }
+            
+            .station-logo {
+                width: 36px;
+                height: 36px;
+                border-radius: 6px;
+            }
+            
+            .station-logo.placeholder {
+                font-size: 16px;
+            }
+            
+            .station-content {
+                min-width: 0;
+                flex: 1;
+                overflow: hidden;
+            }
+            
+            .station-name {
+                font-size: 12px;
+                overflow: hidden;
+                text-overflow: ellipsis;
+                white-space: nowrap;
+            }
+            
+            .station-meta {
+                font-size: 10px;
+                gap: 4px;
+                flex-wrap: wrap;
+            }
+            
+            .region-tag {
+                padding: 1px 4px;
+                font-size: 9px;
+                gap: 3px;
+            }
+            
+            .region-tag-flag {
+                width: 12px;
+                height: 8px;
+            }
+            
+            .type-tag {
+                padding: 1px 4px;
+                font-size: 9px;
+            }
+            
+            .player-bar { 
+                flex-wrap: wrap;
+                padding: 10px;
+            }
+            
+            .player-logo {
+                width: 44px;
+                height: 44px;
+            }
+            
+            .player-title {
+                font-size: 15px;
+            }
+            
+            audio { 
+                width: 100%; 
+                order: 3; 
+                margin-top: 8px; 
+            }
+            
+            .fullscreen-btn {
+                order: 2;
+                width: 36px;
+                height: 36px;
+            }
+            
+            .fullscreen-btn svg {
+                width: 18px;
+                height: 18px;
+            }
+            
+            .region-btn, .type-btn {
+                font-size: 12px;
+                padding: 4px 8px;
+            }
+            
+            .filter-header h3 {
+                font-size: 13px;
+            }
+        }
+        
+        @media (max-width: 400px) {
+            .container {
+                padding: 12px 6px;
+                width: 100%;
+            }
+            
+            .station-card {
+                padding: 6px;
+                gap: 6px;
+                width: 100%;
+            }
+            
+            .station-logo {
+                width: 32px;
+                height: 32px;
+            }
+            
+            .station-name {
+                font-size: 11px;
+            }
+            
+            .station-meta {
+                font-size: 9px;
+                gap: 3px;
+            }
+            
+            .region-tag, .type-tag {
+                font-size: 8px;
+                padding: 0 3px;
+            }
+            
+            .region-tag {
+                gap: 2px;
+            }
+            
+            .region-tag-flag {
+                width: 10px;
+                height: 7px;
+            }
+        }
+        
+        /* 全屏播放器 */
+        .fullscreen-player {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            background: var(--bg);
+            z-index: 9999;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            padding: 40px;
+            box-sizing: border-box;
+            opacity: 0;
+            visibility: hidden;
+            transition: opacity 0.3s ease, visibility 0.3s ease;
+            overflow: hidden;
+        }
+        
+        .fullscreen-player.show {
+            opacity: 1;
+            visibility: visible;
+        }
+        
+        /* 音波正弦波背景 */
+        .wave-background {
+            position: absolute;
+            top: 10%;
+            left: 0;
+            width: 100%;
+            height: 80%;
+            overflow: hidden;
+            opacity: 0.28;
+            pointer-events: none;
+        }
+        
+        .wave-line {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+        }
+        
+        .wave-line svg {
+            position: absolute;
+            width: 200%;
+            height: 100%;
+        }
+        
+        .fullscreen-player.show .wave-line:nth-child(1) svg {
+            animation: wave-move 12s linear infinite;
+        }
+        
+        .fullscreen-player.show .wave-line:nth-child(2) svg {
+            animation: wave-move 10s linear infinite;
+            animation-delay: -3s;
+        }
+        
+        .fullscreen-player.show .wave-line:nth-child(3) svg {
+            animation: wave-move 13s linear infinite;
+            animation-delay: -2s;
+        }
+        
+        .fullscreen-player.show .wave-line:nth-child(4) svg {
+            animation: wave-move 16s linear infinite;
+            animation-delay: -9s;
+        }
+        
+        .fullscreen-player.show .wave-line:nth-child(5) svg {
+            animation: wave-move 11s linear infinite;
+            animation-delay: -4s;
+        }
+        
+        @keyframes wave-move {
+            from { transform: translateX(-50%); }
+            to { transform: translateX(0%); }
+        }
+        
+        .fullscreen-top-bar {
+            position: absolute;
+            top: 20px;
+            left: 20px;
+            right: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            z-index: 10;
+        }
+        
+        .fullscreen-clock {
+            font-size: 15px;
+            font-weight: 500;
+            color: var(--primary);
+            opacity: 0.7;
+            letter-spacing: 1px;
+            font-variant-numeric: tabular-nums;
+        }
+        
+        .fullscreen-close {
+            width: 44px;
+            height: 44px;
+            background: color-mix(in srgb, var(--primary) 15%, transparent);
+            border: 1px solid color-mix(in srgb, var(--primary) 40%, transparent);
+            border-radius: 50%;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--primary);
+            transition: all 0.2s;
+        }
+        
+        .fullscreen-close svg {
+            width: 20px;
+            height: 20px;
+            fill: none;
+            stroke: currentColor;
+            stroke-width: 2;
+            stroke-linecap: round;
+            stroke-linejoin: round;
+        }
+        
+        .fullscreen-close:hover {
+            background: var(--primary);
+            color: var(--bg);
+            transform: scale(1.1);
+        }
+        
+        /* 回到顶部按钮 */
+        .back-to-top {
+            position: fixed;
+            bottom: 28px;
+            right: 20px;
+            width: 44px;
+            height: 44px;
+            background: var(--primary);
+            border: none;
+            border-radius: 50%;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #000;
+            box-shadow: 0 4px 16px rgba(0,0,0,0.3), 0 0 12px var(--player-shadow);
+            opacity: 0;
+            visibility: hidden;
+            transform: translateY(10px);
+            transition: opacity 0.3s, visibility 0.3s, transform 0.3s;
+            z-index: 999;
+        }
+        
+        .back-to-top.show {
+            opacity: 0.6;
+            visibility: visible;
+            transform: translateY(0);
+        }
+        
+        .back-to-top:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(0,0,0,0.4);
+            opacity: 0.9 !important;
+        }
+        
+        .back-to-top svg {
+            width: 20px;
+            height: 20px;
+            fill: currentColor;
+        }
+        
+        /* 正在播放的卡片标记 */
+        .station-card.playing {
+            border-color: var(--primary);
+            background: color-mix(in srgb, var(--primary) 8%, var(--bg-card));
+        }
+        
+        .station-card.playing .station-name {
+            color: var(--primary);
+            font-weight: 500;
+        }
+        
+        .station-actions {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            flex-shrink: 0;
+        }
+
+        .playing-badge {
+            display: none;
+            align-items: center;
+            gap: 4px;
+            font-size: 11px;
+            color: var(--primary);
+            white-space: nowrap;
+        }
+        
+        .station-card.playing .playing-badge {
+            display: inline-flex;
+        }
+        
+        .playing-badge-dot {
+            width: 6px;
+            height: 6px;
+            border-radius: 50%;
+            background: var(--primary);
+            animation: pulse 1.5s infinite;
+        }
+
+        .station-play-btn,
+        .station-stop-btn {
+            width: 28px;
+            height: 28px;
+            background: color-mix(in srgb, var(--primary) 20%, transparent);
+            border: 1px solid var(--primary);
+            border-radius: 6px;
+            cursor: pointer;
+            align-items: center;
+            justify-content: center;
+            color: var(--primary);
+            flex-shrink: 0;
+            transition: all 0.15s;
+        }
+
+        .station-play-btn {
+            display: flex;
+        }
+
+        .station-stop-btn {
+            display: none;
+        }
+        
+        .station-card.playing .station-play-btn {
+            display: none;
+        }
+
+        .station-card.playing .station-stop-btn {
+            display: flex;
+        }
+        
+        .station-play-btn:hover,
+        .station-stop-btn:hover {
+            background: var(--primary);
+            color: #000;
+        }
+        
+        .station-play-btn svg,
+        .station-stop-btn svg {
+            width: 14px;
+            height: 14px;
+            fill: currentColor;
+        }
+        
+        .fullscreen-cover {
+            width: 280px;
+            height: 280px;
+            border-radius: 20px;
+            object-fit: cover;
+            background: var(--bg-card);
+            border: 4px solid var(--primary);
+            box-shadow: 0 20px 60px rgba(0,0,0,0.4), 0 0 40px var(--player-shadow);
+            margin-bottom: 40px;
+            position: relative;
+        }
+        
+        .fullscreen-cover.placeholder {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 120px;
+            color: var(--primary);
+        }
+        
+        .fullscreen-title {
+            font-size: 32px;
+            font-weight: 600;
+            color: var(--text);
+            margin-bottom: 12px;
+            text-align: center;
+            max-width: 80%;
+        }
+        
+        .fullscreen-status {
+            font-size: 16px;
+            color: var(--text-dim);
+            margin-bottom: 40px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        
+        .fullscreen-controls {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+        }
+        
+        .fullscreen-control-btn {
+            width: 64px;
+            height: 64px;
+            background: var(--bg-card);
+            border: 2px solid var(--primary);
+            border-radius: 50%;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--primary);
+            transition: all 0.2s;
+        }
+        
+        .fullscreen-control-btn:hover {
+            background: var(--primary);
+            color: var(--bg);
+            transform: scale(1.1);
+        }
+        
+        .fullscreen-control-btn.play-pause {
+            width: 80px;
+            height: 80px;
+        }
+        
+        .fullscreen-control-btn svg {
+            width: 32px;
+            height: 32px;
+            fill: currentColor;
+        }
+        
+        .fullscreen-control-btn.play-pause svg {
+            width: 40px;
+            height: 40px;
+        }
+        
+        /* 音波动画 */
+        .sound-wave {
+            display: flex;
+            align-items: center;
+            gap: 4px;
+            height: 40px;
+            position: absolute;
+            bottom: -60px;
+            left: 50%;
+            transform: translateX(-50%);
+        }
+        
+        .sound-wave-bar {
+            width: 4px;
+            background: var(--primary);
+            border-radius: 2px;
+            opacity: 0.6;
+        }
+        
+        .sound-wave.playing .sound-wave-bar {
+            animation: wave 1.2s ease-in-out infinite;
+        }
+        
+        .sound-wave-bar:nth-child(1) { animation-delay: 0s; }
+        .sound-wave-bar:nth-child(2) { animation-delay: 0.1s; }
+        .sound-wave-bar:nth-child(3) { animation-delay: 0.2s; }
+        .sound-wave-bar:nth-child(4) { animation-delay: 0.3s; }
+        .sound-wave-bar:nth-child(5) { animation-delay: 0.4s; }
+        
+        @keyframes wave {
+            0%, 100% { height: 10px; }
+            50% { height: 35px; }
+        }
+        
+        .fullscreen-content {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            position: relative;
+            z-index: 1;
+        }
+        
+        .fullscreen-info {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        
+        /* 横屏模式优化 - 水平布局 */
+        @media (max-width: 900px) and (orientation: landscape) {
+            .fullscreen-player {
+                padding: 15px 30px;
+            }
+            
+            .fullscreen-content {
+                flex-direction: row;
+                gap: 30px;
+                align-items: center;
+                justify-content: center;
+                width: 100%;
+            }
+            
+            .fullscreen-cover {
+                width: 140px;
+                height: 140px;
+                margin-bottom: 0;
+                flex-shrink: 0;
+            }
+            
+            .fullscreen-cover.placeholder {
+                font-size: 50px;
+            }
+            
+            .fullscreen-info {
+                align-items: flex-start;
+                flex: 1;
+                max-width: 400px;
+            }
+            
+            .fullscreen-title {
+                font-size: 18px;
+                margin-bottom: 6px;
+                text-align: left;
+                max-width: 100%;
+            }
+            
+            .fullscreen-status {
+                font-size: 12px;
+                margin-bottom: 12px;
+            }
+            
+            .fullscreen-controls {
+                margin-top: 0;
+            }
+            
+            .fullscreen-control-btn {
+                width: 48px;
+                height: 48px;
+            }
+            
+            .fullscreen-control-btn.play-pause {
+                width: 56px;
+                height: 56px;
+            }
+            
+            .fullscreen-control-btn svg {
+                width: 20px;
+                height: 20px;
+            }
+            
+            .fullscreen-control-btn.play-pause svg {
+                width: 24px;
+                height: 24px;
+            }
+            
+            .sound-wave {
+                bottom: -30px;
+                height: 25px;
+            }
+            
+            .fullscreen-close {
+                width: 36px;
+                height: 36px;
+                top: 15px;
+                right: 15px;
+            }
+            
+            .fullscreen-close svg {
+                width: 16px;
+                height: 16px;
+            }
+        }
+        
+        @media (max-width: 600px) {
+            .fullscreen-player {
+                padding: 20px;
+            }
+            
+            .fullscreen-cover {
+                width: 220px;
+                height: 220px;
+                margin-bottom: 30px;
+            }
+            
+            .fullscreen-cover.placeholder {
+                font-size: 80px;
+            }
+            
+            .fullscreen-title {
+                font-size: 24px;
+                max-width: 90%;
+            }
+            
+            .fullscreen-status {
+                font-size: 14px;
+                margin-bottom: 30px;
+            }
+            
+            .fullscreen-control-btn {
+                width: 52px;
+                height: 52px;
+            }
+            
+            .fullscreen-control-btn.play-pause {
+                width: 68px;
+                height: 68px;
+            }
+            
+            .fullscreen-control-btn svg {
+                width: 24px;
+                height: 24px;
+            }
+            
+            .fullscreen-control-btn.play-pause svg {
+                width: 32px;
+                height: 32px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="fixed-header">
+        <header>
+            <div class="header-left">
+                <svg class="logo" viewBox="0 0 60 52" width="46" height="40">
+                    <!-- 天线 -->
+                    <line x1="46" y1="3" x2="39" y2="13" stroke="var(--primary)" stroke-width="2.5" stroke-linecap="round"/>
+                    <!-- 机身 -->
+                    <rect x="3" y="12" width="54" height="36" rx="7" fill="var(--primary)"/>
+                    <!-- 扬声器网格区域 -->
+                    <rect x="7" y="17" width="25" height="26" rx="4" fill="var(--bg)" opacity="0.1"/>
+                    <line x1="9" y1="22" x2="30" y2="22" stroke="var(--bg)" stroke-width="1.3" stroke-linecap="round" opacity="0.55"/>
+                    <line x1="9" y1="26" x2="30" y2="26" stroke="var(--bg)" stroke-width="1.3" stroke-linecap="round" opacity="0.55"/>
+                    <line x1="9" y1="30" x2="30" y2="30" stroke="var(--bg)" stroke-width="1.3" stroke-linecap="round" opacity="0.55"/>
+                    <line x1="9" y1="34" x2="30" y2="34" stroke="var(--bg)" stroke-width="1.3" stroke-linecap="round" opacity="0.55"/>
+                    <line x1="9" y1="38" x2="30" y2="38" stroke="var(--bg)" stroke-width="1.3" stroke-linecap="round" opacity="0.55"/>
+                    <!-- 调频显示条 -->
+                    <rect x="36" y="16" width="17" height="8" rx="2" fill="var(--bg)" opacity="0.22"/>
+                    <line x1="45" y1="17.5" x2="45" y2="23.5" stroke="var(--bg)" stroke-width="1.5" stroke-linecap="round" opacity="0.6"/>
+                    <!-- 音量旋钮 -->
+                    <circle cx="41" cy="33" r="5" fill="var(--bg)" opacity="0.2"/>
+                    <circle cx="41" cy="33" r="2.5" fill="var(--bg)" opacity="0.5"/>
+                    <!-- 调谐旋钮 -->
+                    <circle cx="53" cy="33" r="5" fill="var(--bg)" opacity="0.2"/>
+                    <circle cx="53" cy="33" r="2.5" fill="var(--bg)" opacity="0.5"/>
+                    <!-- 状态指示灯 -->
+                    <circle cx="41" cy="43" r="1.8" fill="var(--bg)" opacity="0.45"/>
+                    <circle cx="47" cy="43" r="1.8" fill="var(--bg)" opacity="0.28"/>
+                    <circle cx="53" cy="43" r="1.8" fill="var(--bg)" opacity="0.28"/>
+                </svg>
+                <h1>电台森林</h1>
+                <p class="subtitle">共 <?php echo $totalCount; ?> 个电台</p>
+            </div>
+            <select class="theme-select" id="themeSelect">
+                <option value="green">🌿 翠绿</option>
+                <option value="teal">💎 青绿</option>
+                <option value="cyan">💠 天蓝</option>
+                <option value="orange">🍊 橙色</option>
+                <option value="amber">🔶 琥珀</option>
+                <option value="rose">🌹 玫瑰</option>
+                <option value="red">❤️ 深红</option>
+                <option value="pink">💗 粉红</option>
+                <option value="purple">💜 紫色</option>
+                <option value="indigo">🔵 靛蓝</option>
+                <option value="grayscale">⚫ 灰度</option>
+                <option value="bw">⚪ 黑白</option>
+            </select>
+        </header>
+        
+        <div class="search-box">
+            <input type="text" id="searchInput" placeholder="搜索电台...">
+        </div>
+        
+        <div class="filter-section">
+            <div class="filter-header" id="regionsToggle">
+                <span class="toggle-icon">▼</span>
+                <h3>国家筛选<span id="regionFilterLabel" style="font-weight:normal;opacity:0.65;margin-left:6px;font-size:0.85em;"></span></h3>
+            </div>
+            <div class="filter-content" id="regionsContent">
+                <div class="regions" id="regionBtns">
+            <button class="region-btn active" data-region="all"><img src="https://flagcdn.com/w20/un.png" alt="" class="region-flag"> 全部(<?php echo $totalCount; ?>)</button>
+            <?php
+            $regionCodes = [
+                '中国' => 'cn', '日本' => 'jp', '韩国' => 'kr', '台湾' => 'tw', '香港' => 'hk',
+                '新加坡' => 'sg', '英国' => 'gb', '德国' => 'de', '法国' => 'fr', '意大利' => 'it',
+                '西班牙' => 'es', '俄罗斯' => 'ru', '美国' => 'us', '加拿大' => 'ca', '澳大利亚' => 'au',
+                '澳洲' => 'au', '新西兰' => 'nz', '巴西' => 'br', '墨西哥' => 'mx', '阿根廷' => 'ar',
+                '瑞士' => 'ch', '南非' => 'za', '印度' => 'in', '泰国' => 'th', '越南' => 'vn',
+                '马来西亚' => 'my', '印尼' => 'id', '菲律宾' => 'ph', '土耳其' => 'tr',
+                '荷兰' => 'nl', '比利时' => 'be', '奥地利' => 'at', '波兰' => 'pl',
+                '瑞典' => 'se', '挪威' => 'no', '丹麦' => 'dk', '芬兰' => 'fi',
+                '爱尔兰' => 'ie', '葡萄牙' => 'pt', '希腊' => 'gr', '捷克' => 'cz',
+                '匈牙利' => 'hu', '罗马尼亚' => 'ro', '埃及' => 'eg', '以色列' => 'il',
+                '阿联酋' => 'ae', '沙特' => 'sa', '其他' => 'un',
+            ];
+            $regionOrder = ['中国', '日本', '韩国', '台湾', '香港', '新加坡', '美国', '加拿大', '墨西哥', '巴西', '阿根廷', '英国', '德国', '法国', '意大利', '西班牙', '瑞士', '俄罗斯', '澳洲', '新西兰', '南非', '其他'];
+            foreach ($regionOrder as $r):
+                if (isset($countries[$r])):
+                    $code = $regionCodes[$r] ?? 'un';
+                    $flagImg = '<img src="https://flagcdn.com/w20/' . $code . '.png" alt="" class="region-flag">';
+            ?>
+                <button class="region-btn" data-region="<?php echo $r; ?>"><?php echo $flagImg . ' ' . $r; ?>(<?php echo $countries[$r]; ?>)</button>
+            <?php endif; endforeach; ?>
+                </div>
+            </div>
+        </div>
+
+        <!-- 分类筛选（中国地区含省份/央广/央视） -->
+        <div class="filter-section">
+            <div class="filter-header" id="typesToggle">
+                <span class="toggle-icon">▼</span>
+                <h3>分类筛选<span id="typeFilterLabel" style="font-weight:normal;opacity:0.65;margin-left:6px;font-size:0.85em;"></span></h3>
+            </div>
+            <div class="filter-content" id="typesContent">
+                <div class="types" id="typeBtns"></div>
+            </div>
+        </div>
+        
+        <div class="player-bar" id="playerBar">
+            <div class="player-logo placeholder" id="playerLogo"><svg viewBox="0 0 60 52" width="36" height="31"><line x1="46" y1="3" x2="39" y2="13" stroke="var(--primary)" stroke-width="2.5" stroke-linecap="round"/><rect x="3" y="12" width="54" height="36" rx="7" fill="var(--primary)"/><rect x="7" y="17" width="25" height="26" rx="4" fill="var(--bg)" opacity="0.1"/><line x1="9" y1="22" x2="30" y2="22" stroke="var(--bg)" stroke-width="1.3" stroke-linecap="round" opacity="0.55"/><line x1="9" y1="26" x2="30" y2="26" stroke="var(--bg)" stroke-width="1.3" stroke-linecap="round" opacity="0.55"/><line x1="9" y1="30" x2="30" y2="30" stroke="var(--bg)" stroke-width="1.3" stroke-linecap="round" opacity="0.55"/><line x1="9" y1="34" x2="30" y2="34" stroke="var(--bg)" stroke-width="1.3" stroke-linecap="round" opacity="0.55"/><line x1="9" y1="38" x2="30" y2="38" stroke="var(--bg)" stroke-width="1.3" stroke-linecap="round" opacity="0.55"/><rect x="36" y="16" width="17" height="8" rx="2" fill="var(--bg)" opacity="0.22"/><line x1="45" y1="17.5" x2="45" y2="23.5" stroke="var(--bg)" stroke-width="1.5" stroke-linecap="round" opacity="0.6"/><circle cx="41" cy="33" r="5" fill="var(--bg)" opacity="0.2"/><circle cx="41" cy="33" r="2.5" fill="var(--bg)" opacity="0.5"/><circle cx="53" cy="33" r="5" fill="var(--bg)" opacity="0.2"/><circle cx="53" cy="33" r="2.5" fill="var(--bg)" opacity="0.5"/></svg></div>
+            <div class="player-info">
+                <div class="player-title" id="playerTitle">选择一个电台开始播放</div>
+                <div class="player-status">
+                    <span class="status-dot" id="statusDot"></span>
+                    <span id="playerStatus">等待中</span>
+                </div>
+            </div>
+            <audio controls id="audioPlayer"></audio>
+            <button class="fullscreen-btn" id="fullscreenBtn" title="全屏播放">
+                <svg viewBox="0 0 24 24">
+                    <path d="M7 14H5v5h5v-2H7v-3zm-2-4h2V7h3V5H5v5zm12 7h-3v2h5v-5h-2v3zM14 5v2h3v3h2V5h-5z"/>
+                </svg>
+            </button>
+        </div>
+        
+        <p class="result-count" id="resultCount">加载中...</p>
+
+        <div class="stations-list" id="stationsGrid"></div>
+        
+        <div class="loading-more" id="loadingMore">加载更多...</div>
+    </div>
+    
+    <!-- 回到顶部按钮 -->
+    <button class="back-to-top" id="backToTop">
+        <svg viewBox="0 0 24 24"><path d="M12 4l-8 8h5v8h6v-8h5z"/></svg>
+    </button>
+    
+    <!-- 全屏播放器 -->
+    <div class="fullscreen-player" id="fullscreenPlayer">
+        <div class="wave-background">
+            <div class="wave-line">
+                <svg viewBox="0 0 2000 1000" preserveAspectRatio="none">
+                    <path d="M0,500 Q250,420 500,500 T1000,500 T1500,500 T2000,500" 
+                          stroke="var(--primary)" 
+                          stroke-width="3" 
+                          fill="none" 
+                          stroke-linecap="round"
+                          opacity="0.9"/>
+                </svg>
+            </div>
+            <div class="wave-line">
+                <svg viewBox="0 0 2000 1000" preserveAspectRatio="none">
+                    <path d="M0,520 Q250,440 500,520 T1000,520 T1500,520 T2000,520" 
+                          stroke="var(--primary)" 
+                          stroke-width="2.5" 
+                          fill="none" 
+                          stroke-linecap="round"
+                          opacity="0.7"/>
+                </svg>
+            </div>
+            <div class="wave-line">
+                <svg viewBox="0 0 2000 1000" preserveAspectRatio="none">
+                    <path d="M0,540 Q250,460 500,540 T1000,540 T1500,540 T2000,540" 
+                          stroke="var(--primary)" 
+                          stroke-width="2" 
+                          fill="none" 
+                          stroke-linecap="round"
+                          opacity="0.5"/>
+                </svg>
+            </div>
+            <div class="wave-line">
+                <svg viewBox="0 0 2000 1000" preserveAspectRatio="none">
+                    <path d="M0,490 Q250,570 500,490 T1000,490 T1500,490 T2000,490" 
+                          stroke="var(--primary)" 
+                          stroke-width="3" 
+                          fill="none" 
+                          stroke-linecap="round"
+                          opacity="0.8"/>
+                </svg>
+            </div>
+            <div class="wave-line">
+                <svg viewBox="0 0 2000 1000" preserveAspectRatio="none">
+                    <path d="M0,510 Q250,430 500,510 T1000,510 T1500,510 T2000,510" 
+                          stroke="var(--primary)" 
+                          stroke-width="2.5" 
+                          fill="none" 
+                          stroke-linecap="round"
+                          opacity="0.6"/>
+                </svg>
+            </div>
+        </div>
+        <div class="fullscreen-top-bar">
+            <span class="fullscreen-clock" id="fullscreenClock"></span>
+            <button class="fullscreen-close" id="fullscreenClose">
+                <svg viewBox="0 0 24 24">
+                    <polyline points="4 14 10 14 10 20"/>
+                    <polyline points="20 10 14 10 14 4"/>
+                    <line x1="14" y1="10" x2="21" y2="3"/>
+                    <line x1="3" y1="21" x2="10" y2="14"/>
+                </svg>
+            </button>
+        </div>
+        
+        <div class="fullscreen-content">
+            <div class="fullscreen-cover placeholder" id="fullscreenCover">
+                <svg viewBox="0 0 60 52" width="100" height="87"><line x1="46" y1="3" x2="39" y2="13" stroke="var(--primary)" stroke-width="2.5" stroke-linecap="round"/><rect x="3" y="12" width="54" height="36" rx="7" fill="var(--primary)"/><rect x="7" y="17" width="25" height="26" rx="4" fill="var(--bg)" opacity="0.1"/><line x1="9" y1="22" x2="30" y2="22" stroke="var(--bg)" stroke-width="1.3" stroke-linecap="round" opacity="0.55"/><line x1="9" y1="26" x2="30" y2="26" stroke="var(--bg)" stroke-width="1.3" stroke-linecap="round" opacity="0.55"/><line x1="9" y1="30" x2="30" y2="30" stroke="var(--bg)" stroke-width="1.3" stroke-linecap="round" opacity="0.55"/><line x1="9" y1="34" x2="30" y2="34" stroke="var(--bg)" stroke-width="1.3" stroke-linecap="round" opacity="0.55"/><line x1="9" y1="38" x2="30" y2="38" stroke="var(--bg)" stroke-width="1.3" stroke-linecap="round" opacity="0.55"/><rect x="36" y="16" width="17" height="8" rx="2" fill="var(--bg)" opacity="0.22"/><line x1="45" y1="17.5" x2="45" y2="23.5" stroke="var(--bg)" stroke-width="1.5" stroke-linecap="round" opacity="0.6"/><circle cx="41" cy="33" r="5" fill="var(--bg)" opacity="0.2"/><circle cx="41" cy="33" r="2.5" fill="var(--bg)" opacity="0.5"/><circle cx="53" cy="33" r="5" fill="var(--bg)" opacity="0.2"/><circle cx="53" cy="33" r="2.5" fill="var(--bg)" opacity="0.5"/></svg>
+            </div>
+            
+            <div class="fullscreen-info">
+                <h2 class="fullscreen-title" id="fullscreenTitle">选择一个电台开始播放</h2>
+                
+                <div class="fullscreen-status">
+                    <span class="status-dot" id="fullscreenDot"></span>
+                    <span id="fullscreenStatus">等待中</span>
+                </div>
+                
+                <div class="fullscreen-controls">
+                    <button class="fullscreen-control-btn play-pause" id="fullscreenPlayBtn">
+                        <svg viewBox="0 0 24 24">
+                            <polygon points="8,5 19,12 8,19"/>
+                        </svg>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <script>
+        // ─── 国家代码映射（用于国旗显示）───────────────────────────────────────
+        const regionCodes = {
+            '中国': 'cn', '日本': 'jp', '韩国': 'kr', '台湾': 'tw', '香港': 'hk',
+            '新加坡': 'sg', '英国': 'gb', '德国': 'de', '法国': 'fr', '意大利': 'it',
+            '西班牙': 'es', '俄罗斯': 'ru', '美国': 'us', '加拿大': 'ca', '澳大利亚': 'au',
+            '澳洲': 'au', '新西兰': 'nz', '巴西': 'br', '墨西哥': 'mx', '阿根廷': 'ar',
+            '瑞士': 'ch', '南非': 'za', '印度': 'in', '泰国': 'th', '越南': 'vn',
+            '马来西亚': 'my', '印尼': 'id', '菲律宾': 'ph', '土耳其': 'tr',
+            '荷兰': 'nl', '比利时': 'be', '奥地利': 'at', '波兰': 'pl',
+            '瑞典': 'se', '挪威': 'no', '丹麦': 'dk', '芬兰': 'fi',
+            '爱尔兰': 'ie', '葡萄牙': 'pt', '希腊': 'gr', '捷克': 'cz',
+            '匈牙利': 'hu', '罗马尼亚': 'ro', '埃及': 'eg', '以色列': 'il',
+            '阿联酋': 'ae', '沙特': 'sa', '其他': 'un'
+        };
+
+        // ─── 电台默认图标 SVG（适配主题色）──────────────────────────────────────
+        const SVG_RADIO_SM = '<svg viewBox="0 0 60 52" width="26" height="22"><line x1="46" y1="3" x2="39" y2="13" stroke="var(--primary)" stroke-width="2.5" stroke-linecap="round"/><rect x="3" y="12" width="54" height="36" rx="7" fill="var(--primary)"/><rect x="7" y="17" width="25" height="26" rx="4" fill="var(--bg)" opacity="0.1"/><line x1="9" y1="22" x2="30" y2="22" stroke="var(--bg)" stroke-width="1.3" stroke-linecap="round" opacity="0.55"/><line x1="9" y1="26" x2="30" y2="26" stroke="var(--bg)" stroke-width="1.3" stroke-linecap="round" opacity="0.55"/><line x1="9" y1="30" x2="30" y2="30" stroke="var(--bg)" stroke-width="1.3" stroke-linecap="round" opacity="0.55"/><line x1="9" y1="34" x2="30" y2="34" stroke="var(--bg)" stroke-width="1.3" stroke-linecap="round" opacity="0.55"/><line x1="9" y1="38" x2="30" y2="38" stroke="var(--bg)" stroke-width="1.3" stroke-linecap="round" opacity="0.55"/><rect x="36" y="16" width="17" height="8" rx="2" fill="var(--bg)" opacity="0.22"/><line x1="45" y1="17.5" x2="45" y2="23.5" stroke="var(--bg)" stroke-width="1.5" stroke-linecap="round" opacity="0.6"/><circle cx="41" cy="33" r="5" fill="var(--bg)" opacity="0.2"/><circle cx="41" cy="33" r="2.5" fill="var(--bg)" opacity="0.5"/><circle cx="53" cy="33" r="5" fill="var(--bg)" opacity="0.2"/><circle cx="53" cy="33" r="2.5" fill="var(--bg)" opacity="0.5"/></svg>';
+        const SVG_RADIO_MD = '<svg viewBox="0 0 60 52" width="36" height="31"><line x1="46" y1="3" x2="39" y2="13" stroke="var(--primary)" stroke-width="2.5" stroke-linecap="round"/><rect x="3" y="12" width="54" height="36" rx="7" fill="var(--primary)"/><rect x="7" y="17" width="25" height="26" rx="4" fill="var(--bg)" opacity="0.1"/><line x1="9" y1="22" x2="30" y2="22" stroke="var(--bg)" stroke-width="1.3" stroke-linecap="round" opacity="0.55"/><line x1="9" y1="26" x2="30" y2="26" stroke="var(--bg)" stroke-width="1.3" stroke-linecap="round" opacity="0.55"/><line x1="9" y1="30" x2="30" y2="30" stroke="var(--bg)" stroke-width="1.3" stroke-linecap="round" opacity="0.55"/><line x1="9" y1="34" x2="30" y2="34" stroke="var(--bg)" stroke-width="1.3" stroke-linecap="round" opacity="0.55"/><line x1="9" y1="38" x2="30" y2="38" stroke="var(--bg)" stroke-width="1.3" stroke-linecap="round" opacity="0.55"/><rect x="36" y="16" width="17" height="8" rx="2" fill="var(--bg)" opacity="0.22"/><line x1="45" y1="17.5" x2="45" y2="23.5" stroke="var(--bg)" stroke-width="1.5" stroke-linecap="round" opacity="0.6"/><circle cx="41" cy="33" r="5" fill="var(--bg)" opacity="0.2"/><circle cx="41" cy="33" r="2.5" fill="var(--bg)" opacity="0.5"/><circle cx="53" cy="33" r="5" fill="var(--bg)" opacity="0.2"/><circle cx="53" cy="33" r="2.5" fill="var(--bg)" opacity="0.5"/></svg>';
+        const SVG_RADIO_LG = '<svg viewBox="0 0 60 52" width="100" height="87"><line x1="46" y1="3" x2="39" y2="13" stroke="var(--primary)" stroke-width="2.5" stroke-linecap="round"/><rect x="3" y="12" width="54" height="36" rx="7" fill="var(--primary)"/><rect x="7" y="17" width="25" height="26" rx="4" fill="var(--bg)" opacity="0.1"/><line x1="9" y1="22" x2="30" y2="22" stroke="var(--bg)" stroke-width="1.3" stroke-linecap="round" opacity="0.55"/><line x1="9" y1="26" x2="30" y2="26" stroke="var(--bg)" stroke-width="1.3" stroke-linecap="round" opacity="0.55"/><line x1="9" y1="30" x2="30" y2="30" stroke="var(--bg)" stroke-width="1.3" stroke-linecap="round" opacity="0.55"/><line x1="9" y1="34" x2="30" y2="34" stroke="var(--bg)" stroke-width="1.3" stroke-linecap="round" opacity="0.55"/><line x1="9" y1="38" x2="30" y2="38" stroke="var(--bg)" stroke-width="1.3" stroke-linecap="round" opacity="0.55"/><rect x="36" y="16" width="17" height="8" rx="2" fill="var(--bg)" opacity="0.22"/><line x1="45" y1="17.5" x2="45" y2="23.5" stroke="var(--bg)" stroke-width="1.5" stroke-linecap="round" opacity="0.6"/><circle cx="41" cy="33" r="5" fill="var(--bg)" opacity="0.2"/><circle cx="41" cy="33" r="2.5" fill="var(--bg)" opacity="0.5"/><circle cx="53" cy="33" r="5" fill="var(--bg)" opacity="0.2"/><circle cx="53" cy="33" r="2.5" fill="var(--bg)" opacity="0.5"/></svg>';
+
+        // ─── 数据加载 ───────────────────────────────────────────────────────────
+        var allStations = [];
+        try {
+            var _data = <?php echo json_encode($allStations, JSON_UNESCAPED_UNICODE); ?>;
+            if (Array.isArray(_data)) allStations = _data;
+        } catch(e) {
+            console.error('数据加载失败:', e);
+        }
+
+        // ─── 分类正则（定义一次，全局复用）─────────────────────────────────────
+        const typePatterns = {
+            '音乐': /音乐|Music|pop|rock|hit|jazz|classical/i,
+            '新闻': /新闻|News|资讯|information/i,
+            '综合': /广播|Radio|综合|general/i,
+            '交通': /交通|Traffic|汽车|Auto/i,
+            '体育': /体育|Sports/i,
+            '文艺': /文艺|Culture/i,
+            '经典': /经典|Classic|怀旧|Old/i,
+            '儿童': /儿童|少儿|Kids|children/i,
+            '宗教': /宗教|上帝|Islam|Christian|Quran|佛教/i,
+            '古典': /古典|Symphony|交响/i,
+            '方言': /方言|闽南|粤语|Cantonese|吴语|沪语/i,
+            // 仅中国：央级媒体
+            '央广': /央广|中央人民广播|中国之声|CNR\s*\d/i,
+            '央视': /央视|CCTV|中央电视台/i,
+        };
+        const typeKeys = Object.keys(typePatterns);
+
+        // ─── 省份正则（按匹配优先级排列；覆盖全国所有地级行政区 + 拼音）─────────
+        // 规则：全国/央级最先匹配；直辖市次之；各省含所有地级市/自治州/盟名称及拼音
+        // 注意：detectProvince 取第一个命中省份，排列顺序即优先级
+        // 冲突处理：Taizhou(苏/浙)、Yichun(赣/黑)、Yulin(桂/陕)、Fuzhou(闽/赣) 均由排序靠前的省份优先命中
+        const provincePatterns = {
+            // ── 全国/央级（优先级最高）──────────────────────────────────────
+            '全国':   /央广|中央人民广播|中国之声|CNR\s*\d|CRI\b|中国国际广播|全国联播|中央广播电台/i,
+            // ── 四大直辖市 ──────────────────────────────────────────────────
+            '北京':   /北京|Beijing/i,
+            '天津':   /天津|Tianjin/i,
+            '上海':   /上海|Shanghai/i,
+            '重庆':   /重庆|Chongqing/i,
+            // ── 华南 ────────────────────────────────────────────────────────
+            '广东':   /广东|珠江|Guangdong|广州|深圳|珠海|汕头|佛山|韶关|湛江|肇庆|江门|茂名|惠州|梅州|汕尾|河源|阳江|清远|东莞|中山|潮州|揭阳|云浮|Guangzhou|Shenzhen|Zhuhai|Shantou|Foshan|Shaoguan|Zhanjiang|Zhaoqing|Jiangmen|Maoming|Huizhou|Meizhou|Shanwei|Heyuan|Yangjiang|Qingyuan|Dongguan|Zhongshan|Chaozhou|Jieyang|Yunfu/i,
+            '广西':   /广西|Guangxi|南宁|柳州|桂林|梧州|北海|防城港|钦州|贵港|玉林|百色|贺州|河池|来宾|崇左|Nanning|Liuzhou|Guilin|Wuzhou|Beihai|Fangchenggang|Qinzhou|Guigang|Yulin|Baise|Hezhou|Hechi|Laibin|Chongzuo/i,
+            // 海南：(?!州) 防止匹配青海的"海南州"；不含"东方"（过于通用）
+            '海南':   /海南(?!州)|Hainan|海口|三亚|三沙|儋州|琼海|文昌|万宁|Haikou|Sanya|Danzhou|Qionghai|Wenchang|Wanning/i,
+            // ── 华东 ────────────────────────────────────────────────────────
+            '福建':   /福建|闽南|闽北|闽东|闽西|Fujian|福州|厦门|莆田|三明|泉州|漳州|南平|龙岩|宁德|Fuzhou|Xiamen|Putian|Sanming|Quanzhou|Zhangzhou|Nanping|Longyan|Ningde/i,
+            '江苏':   /江苏|Jiangsu|南京|无锡|徐州|常州|苏州|南通|连云港|淮安|盐城|扬州|镇江|泰州|宿迁|Nanjing|Wuxi|Xuzhou|Changzhou|Suzhou|Nantong|Lianyungang|Huaian|Yancheng|Yangzhou|Zhenjiang|Taizhou|Suqian/i,
+            '浙江':   /浙江|Zhejiang|杭州|宁波|温州|嘉兴|湖州|绍兴|金华|衢州|舟山|台州|丽水|Hangzhou|Ningbo|Wenzhou|Jiaxing|Huzhou|Shaoxing|Jinhua|Quzhou|Zhoushan|Lishui/i,
+            '山东':   /山东|Shandong|济南|青岛|淄博|枣庄|东营|烟台|潍坊|济宁|泰安|威海|日照|临沂|德州|聊城|滨州|菏泽|Jinan|Qingdao|Zibo|Zaozhuang|Dongying|Yantai|Weifang|Jining|Taian|Weihai|Rizhao|Linyi|Dezhou|Liaocheng|Binzhou|Heze/i,
+            '安徽':   /安徽|Anhui|合肥|芜湖|蚌埠|淮南|马鞍山|淮北|铜陵|安庆|黄山|滁州|阜阳|宿州|六安|宣城|池州|亳州|Hefei|Wuhu|Bengbu|Huainan|Maanshan|Huaibei|Tongling|Anqing|Huangshan|Chuzhou|Fuyang|Luan|Xuancheng|Chizhou|Bozhou/i,
+            // 宜春(Yichun)与黑龙江伊春拼音相同，江西排前故优先命中
+            '江西':   /江西|Jiangxi|南昌|景德镇|萍乡|九江|新余|鹰潭|赣州|吉安|宜春|抚州|上饶|Nanchang|Jingdezhen|Pingxiang|Jiujiang|Xinyu|Yingtan|Ganzhou|Jian|Yichun|Fuzhou|Shangrao/i,
+            // ── 华中 ────────────────────────────────────────────────────────
+            '湖南':   /湖南|Hunan|长沙|株洲|湘潭|衡阳|邵阳|岳阳|常德|张家界|益阳|郴州|永州|怀化|娄底|湘西|Changsha|Zhuzhou|Xiangtan|Hengyang|Shaoyang|Yueyang|Changde|Zhangjiajie|Yiyang|Chenzhou|Yongzhou|Huaihua|Loudi|Xiangxi/i,
+            '湖北':   /湖北|Hubei|武汉|黄石|十堰|宜昌|襄阳|鄂州|荆门|孝感|荆州|黄冈|咸宁|随州|恩施|仙桃|潜江|天门|Wuhan|Huangshi|Shiyan|Yichang|Xiangyang|Ezhou|Jingmen|Xiaogan|Jingzhou|Huanggang|Xianning|Suizhou|Enshi|Xiantao|Qianjiang|Tianmen/i,
+            '河南':   /河南|Henan|郑州|开封|洛阳|平顶山|安阳|鹤壁|新乡|焦作|濮阳|许昌|漯河|三门峡|南阳|商丘|信阳|周口|驻马店|Zhengzhou|Kaifeng|Luoyang|Pingdingshan|Anyang|Hebi|Xinxiang|Jiaozuo|Puyang|Xuchang|Luohe|Sanmenxia|Nanyang|Shangqiu|Xinyang|Zhoukou|Zhumadian/i,
+            // ── 华北 ────────────────────────────────────────────────────────
+            '河北':   /河北|Hebei|石家庄|唐山|秦皇岛|邯郸|邢台|保定|张家口|承德|沧州|廊坊|衡水|Shijiazhuang|Tangshan|Qinhuangdao|Handan|Xingtai|Baoding|Zhangjiakou|Chengde|Cangzhou|Langfang|Hengshui/i,
+            // 山西(Shanxi) vs 陕西(Shaanxi)：拼音有别，城市名无交叉
+            '山西':   /山西|Shanxi|太原|大同|阳泉|长治|晋城|朔州|晋中|运城|忻州|临汾|吕梁|Taiyuan|Datong|Yangquan|Changzhi|Jincheng|Shuozhou|Jinzhong|Yuncheng|Xinzhou|Linfen|Luliang/i,
+            // ── 东北 ────────────────────────────────────────────────────────
+            '辽宁':   /辽宁|Liaoning|沈阳|大连|鞍山|抚顺|本溪|丹东|锦州|营口|阜新|辽阳|盘锦|铁岭|朝阳|葫芦岛|Shenyang|Dalian|Anshan|Fushun|Benxi|Dandong|Jinzhou|Yingkou|Fuxin|Liaoyang|Panjin|Tieling|Chaoyang|Huludao/i,
+            '吉林':   /吉林|Jilin|长春|四平|辽源|通化|白山|松原|白城|延边|Changchun|Siping|Liaoyuan|Tonghua|Baishan|Songyuan|Baicheng|Yanbian/i,
+            // 伊春(Yichun)与江西宜春拼音相同，黑龙江排后，中文字符`伊春`可精确匹配
+            '黑龙江': /黑龙江|Heilongjiang|哈尔滨|齐齐哈尔|鸡西|鹤岗|双鸭山|大庆|伊春|佳木斯|七台河|牡丹江|黑河|绥化|大兴安岭|Harbin|Qiqihar|Jixi|Hegang|Shuangyashan|Daqing|Yichun|Jiamusi|Qitaihe|Mudanjiang|Heihe|Suihua|Daxinganling/i,
+            // ── 西南 ────────────────────────────────────────────────────────
+            '四川':   /四川|Sichuan|成都|自贡|攀枝花|泸州|德阳|绵阳|广元|遂宁|内江|乐山|南充|眉山|宜宾|广安|达州|雅安|巴中|资阳|阿坝|甘孜|凉山|Chengdu|Zigong|Panzhihua|Luzhou|Deyang|Mianyang|Guangyuan|Suining|Neijiang|Leshan|Nanchong|Meishan|Yibin|Guangan|Dazhou|Yaan|Bazhong|Ziyang|Aba|Ganzi|Liangshan/i,
+            '贵州':   /贵州|Guizhou|贵阳|六盘水|遵义|安顺|毕节|铜仁|黔西南|黔东南|黔南|Guiyang|Liupanshui|Zunyi|Anshun|Bijie|Tongren|Qianxinan|Qiandongnan|Qiannan/i,
+            '云南':   /云南|Yunnan|昆明|曲靖|玉溪|保山|昭通|丽江|普洱|临沧|楚雄|红河|文山|西双版纳|大理|德宏|怒江|迪庆|Kunming|Qujing|Yuxi|Baoshan|Zhaotong|Lijiang|Puer|Lincang|Chuxiong|Honghe|Wenshan|Xishuangbanna|Dali|Dehong|Nujiang|Diqing/i,
+            // 西藏：含拼音及常用英文名（Lhasa/Shigatse 等）
+            '西藏':   /西藏|Tibet|藏语|拉萨|日喀则|昌都|林芝|山南|那曲|阿里|Lhasa|Lasa|Shigatse|Xigazê|Chamdo|Changdu|Nyingchi|Linzhi|Shannan|Nagqu|Naqu/i,
+            // ── 西北 ────────────────────────────────────────────────────────
+            // 榆林(Yulin)与广西玉林拼音相同，陕西排后，中文字符`榆林`可精确匹配
+            '陕西':   /陕西|Shaanxi|西安|铜川|宝鸡|咸阳|渭南|延安|汉中|榆林|安康|商洛|Xian|Xi.an|Tongchuan|Baoji|Xianyang|Weinan|Yanan|Hanzhong|Yulin|Ankang|Shangluo/i,
+            '甘肃':   /甘肃|Gansu|兰州|嘉峪关|金昌|白银|天水|武威|张掖|平凉|酒泉|庆阳|定西|陇南|临夏|甘南|Lanzhou|Jiayuguan|Jinchang|Baiyin|Tianshui|Wuwei|Zhangye|Pingliang|Jiuquan|Qingyang|Dingxi|Longnan|Linxia|Gannan/i,
+            // 海南州加"州"以区分海南省；Hainanzhou 也精确无歧义
+            '青海':   /青海|Qinghai|西宁|海东|海北|黄南|海南州|果洛|玉树|Xining|Haidong|Haibei|Huangnan|Hainanzhou|Guoluo|Yushu/i,
+            // 新疆：含地级市/自治州/地区的拼音及国际通用英文名
+            '新疆':   /新疆|Xinjiang|维吾尔|乌鲁木齐|克拉玛依|吐鲁番|哈密|昌吉|博尔塔拉|巴音郭楞|阿克苏|克孜勒苏|喀什|和田|伊犁|塔城|阿勒泰|Urumqi|Wulumuqi|Karamay|Turpan|Tulufan|Hami|Changji|Bortala|Boertala|Bayingolin|Bayinguoleng|Aksu|Akesu|Kizilsu|Kashgar|Kashi|Hotan|Hetian|Ili|Yili|Tacheng|Altay|Aletai/i,
+            '宁夏':   /宁夏|Ningxia|银川|石嘴山|吴忠|固原|中卫|Yinchuan|Shizuishan|Wuzhong|Guyuan|Zhongwei/i,
+            // 内蒙古：9地级市+3盟，含蒙古语及国际英文名
+            '内蒙古': /内蒙古|内蒙|呼和浩特|包头|乌海|赤峰|通辽|鄂尔多斯|呼伦贝尔|巴彦淖尔|乌兰察布|兴安盟|锡林郭勒|阿拉善|蒙古语|Hohhot|Huhehaote|Baotou|Wuhai|Chifeng|Tongliao|Ordos|Eerduosi|Hulunbuir|Hulunbeier|Bayannur|Ulanqab|Wulanchabu|Hinggan|Xingan|Xilingol|Xilinguole|Alxa|Alasha/i,
+        };
+
+        /**
+         * 根据电台名推断所属省份，按 provincePatterns 顺序匹配，未命中返回 '其他'
+         */
+        function detectProvince(name) {
+            for (const [province, regex] of Object.entries(provincePatterns)) {
+                if (regex.test(name)) return province;
+            }
+            return '其他';
+        }
+
+        // ─── 繁简字符映射（支持繁体搜索命中简体，以及繁体台名正确分类）────────
+        // 每两个字符为一对：奇数位=繁体，偶数位=简体
+        const T2S_PAIRS = '電电廣广臺台灣湾國国語语樂乐聽听聞闻節节體体聯联頻频粵粤鳳凤閩闽衛卫娛娱兒儿時时藝艺經经綜综總总發发傳传興兴會会來来為为當当進进長长開开關关東东風风愛爱聲声話话見见號号陽阳業业際际與与個个們们無无網网訊讯線线頭头動动車车萬万問问題题員员點点書书學学習习導导親亲實实歡欢雲云務务優优麗丽農农濟济環环夢梦島岛億亿說说讀读寫写還还兩两橋桥飛飞遠远遊游運运龍龙馬马魚鱼鳥鸟畫画歷历參参義义專专權权產产術术設设備备試试驗验應应響响壓压質质標标達达請请項项紅红綠绿藍蓝純纯維维積积編编繼继給给結结絕绝視视報报後后廳厅銀银鐘钟論论錄录類类齊齐鬥斗頂顶';
+        const T2S_MAP = {};
+        for (let i = 0; i < T2S_PAIRS.length; i += 2) T2S_MAP[T2S_PAIRS[i]] = T2S_PAIRS[i + 1];
+        /** 将字符串中的繁体字统一替换为对应简体字 */
+        function normalizeZh(s) { return s.replace(/[\u4e00-\u9fff]/g, c => T2S_MAP[c] || c); }
+
+        // ─── 预计算每个电台的衍生字段（只在数据加载时执行一次）──────────────
+        // _nameLower:   规范化（繁→简）+ 小写，用于搜索匹配
+        // _types:       匹配到的分类数组（中国电台额外含省份），避免过滤/渲染时重跑正则
+        // _typeTagHtml: 预渲染好的分类标签 HTML 片段
+        allStations.forEach(s => {
+            const nameNorm = normalizeZh(s.name);  // 繁体名称统一为简体
+            s._nameLower = nameNorm.toLowerCase();
+            s._types = typeKeys.filter(t => typePatterns[t].test(nameNorm));
+            // 中国电台：将省份作为一种分类加入 _types（仅命中省份时，排在最前）
+            if (s.region === '中国') {
+                const prov = detectProvince(nameNorm);
+                if (prov !== '其他') s._types.unshift(prov);
+            }
+            if (s._types.length === 0) s._types = ['其他'];
+            s._typeTagHtml = s._types.map(t => `<span class="type-tag">${t}</span>`).join('');
+        });
+
+        // ─── 状态变量 ────────────────────────────────────────────────────────────
+        const BATCH_SIZE = 100;
+        let currentRegion = 'all';
+        let currentType   = '';
+        let currentSearch = '';
+        let visibleCount    = BATCH_SIZE;
+        let isLoading       = false;
+        let currentUrl      = '';
+        let currentStation  = null;
+
+        // HTML 属性安全转义（防止电台名内的引号等破坏HTML属性）
+        function esc(s) {
+            return String(s).replace(/&/g, '&amp;').replace(/"/g, '&quot;');
+        }
+        // 复合唯一键判断当前播放
+        function isSameStation(a, b) {
+            return a && b && a.url === b.url && a.name === b.name;
+        }
+        /** 过滤结果缓存，reset 时置 null 强制重新计算 */
+        let filteredCache = null;
+
+        // ─── jQuery 主逻辑（DOM 操作、事件绑定、渲染）──────────────────────────
+        $(function () {
+
+            // ── 计算过滤结果（有缓存则复用）──────────────────────────────────────
+            function getFiltered() {
+                if (filteredCache) return filteredCache;
+                const result = [];
+                const seenNames = new Set();
+                for (let i = 0; i < allStations.length; i++) {
+                    const s = allStations[i];
+                    if (seenNames.has(s.name)) continue;
+                    if (currentRegion !== 'all' && s.region !== currentRegion) continue;
+                    if (currentSearch && !s._nameLower.includes(currentSearch)) continue;
+                    if (currentType !== '' && !s._types.includes(currentType)) continue;
+                    seenNames.add(s.name);
+                    result.push(s);
+                }
+                filteredCache = result;
+                return result;
+            }
+
+            // ── 渲染电台卡片（拼接 HTML 字符串，$.html() 一次写入 DOM）────────────
+            function renderStations(stations) {
+                let html = '';
+                stations.forEach(station => {
+                    const logoHtml = station.logo && station.logo !== 'null'
+                        ? `<img src="${station.logo}" class="station-logo" alt="" loading="lazy">`
+                        : `<div class="station-logo placeholder">${SVG_RADIO_SM}</div>`;
+                    const isPlaying = isSameStation(station, currentStation) &&
+                        (() => { const a = document.getElementById('audioPlayer'); return !!a.src && a.src !== location.href && !a.paused; })();
+                    const activeClass = isPlaying ? ' playing' : '';
+                    
+                    // 生成带国旗的国家标签
+                    const countryCode = regionCodes[station.country] || 'un';
+                    const flagUrl = `https://flagcdn.com/w20/${countryCode}.png`;
+                    const regionTagHtml = `<span class="region-tag"><img src="${flagUrl}" alt="" class="region-tag-flag"><span class="region-tag-name">${station.country}</span></span>`;
+                    
+                    html += `<div class="station-card${activeClass}" data-url="${esc(station.url)}" data-name="${esc(station.name)}">
+                        ${logoHtml}
+                        <div class="station-content">
+                            <div class="station-name">${station.name}</div>
+                            <div class="station-meta">
+                                ${regionTagHtml}${station._typeTagHtml}
+                            </div>
+                        </div>
+                        <div class="station-actions">
+                            <span class="playing-badge"><span class="playing-badge-dot"></span>正在播放</span>
+                            <button class="station-play-btn" data-url="${esc(station.url)}" data-name="${esc(station.name)}" title="播放">
+                                <svg viewBox="0 0 24 24"><polygon points="6,4 20,12 6,20"/></svg>
+                            </button>
+                            <button class="station-stop-btn" data-url="${esc(station.url)}" data-name="${esc(station.name)}" title="暂停">
+                                <svg viewBox="0 0 24 24"><rect x="6" y="5" width="4" height="14" rx="1"/><rect x="14" y="5" width="4" height="14" rx="1"/></svg>
+                            </button>
+                        </div>
+                    </div>`;
+                });
+                $('#stationsGrid').html(html);
+            }
+
+            // ── 过滤 + 渲染主入口 ─────────────────────────────────────────────────
+            function filterAndRender(reset = false) {
+                if (!allStations.length) { $('#resultCount').text('无电台数据'); return; }
+                if (reset) { filteredCache = null; visibleCount = BATCH_SIZE; }
+                const filtered = getFiltered();
+                const toShow   = filtered.slice(0, visibleCount);
+                renderStations(toShow);
+                $('#resultCount').text(`显示 ${toShow.length} / ${filtered.length} 个电台`);
+                $('#loadingMore').toggleClass('show', visibleCount < filtered.length);
+            }
+
+            // 去重后的电台范围（用于分类按钮计数），不应用 currentType 过滤
+            function getDeduplicatedScope() {
+                const result = [];
+                const seenNames = new Set();
+                for (let i = 0; i < allStations.length; i++) {
+                    const s = allStations[i];
+                    if (seenNames.has(s.name)) continue;
+                    if (currentRegion !== 'all' && s.region !== currentRegion) continue;
+                    if (currentSearch && !s._nameLower.includes(currentSearch)) continue;
+                    seenNames.add(s.name);
+                    result.push(s);
+                }
+                return result;
+            }
+
+            // ── 渲染分类按钮（含中国省份，基于预计算 _types）─────────────────────
+            // 中国：全国 → 央广 → 央视 → 省份(按数量) → 风格(按数量) → 其他
+            // 其他地区：按数量降序，其他 固定最后
+            function renderTypeButtons() {
+                const scope = getDeduplicatedScope();
+                const typeCounts = {};
+                scope.forEach(s => s._types.forEach(t => { typeCounts[t] = (typeCounts[t] || 0) + 1; }));
+
+                const provinceSet = new Set(Object.keys(provincePatterns)); // 全国 + 32省份
+                const styleSet    = new Set(Object.keys(typePatterns));     // 音乐/新闻/央广/央视…
+                const FIXED_CN    = ['全国', '央广', '央视'];               // 中国固定前三位
+
+                let sorted;
+                if (currentRegion === '中国') {
+                    // 固定头部（仅出现在 typeCounts 中的才显示）
+                    const fixed  = FIXED_CN.filter(t => typeCounts[t]);
+                    // 省份：在 provincePatterns 中、非固定头部、非 其他
+                    const provs  = Object.keys(typeCounts)
+                        .filter(t => provinceSet.has(t) && !FIXED_CN.includes(t) && t !== '其他')
+                        .sort((a, b) => typeCounts[b] - typeCounts[a]);
+                    // 风格：在 typePatterns 中、非固定头部
+                    const styles = Object.keys(typeCounts)
+                        .filter(t => styleSet.has(t) && !FIXED_CN.includes(t) && t !== '其他')
+                        .sort((a, b) => typeCounts[b] - typeCounts[a]);
+                    // 其他 始终垫底
+                    const tail   = typeCounts['其他'] ? ['其他'] : [];
+                    sorted = [...fixed, ...provs, ...styles, ...tail];
+                } else {
+                    // 非中国：按数量降序，省份标签不显示，其他 垫底
+                    sorted = Object.keys(typeCounts)
+                        .filter(t => t !== '其他' && !provinceSet.has(t))
+                        .sort((a, b) => typeCounts[b] - typeCounts[a]);
+                    if (typeCounts['其他']) sorted.push('其他');
+                }
+
+                let html = `<button class="type-btn ${currentType === '' ? 'active' : ''}" data-type="">所有</button>`;
+                sorted.forEach(type => {
+                    html += `<button class="type-btn ${currentType === type ? 'active' : ''}" data-type="${type}">${type}(${typeCounts[type]})</button>`;
+                });
+                $('#typeBtns').html(html);
+            }
+
+            // ── 播放 ──────────────────────────────────────────────────────────────
+            // autoPlay=false 用于页面刷新恢复显示状态，不触发音频播放（避免自动播放拦截）
+            function playStation(station, autoPlay = true) {
+                currentUrl     = station.url;
+                currentStation = station;
+                const audio = document.getElementById('audioPlayer');
+                
+                // 更新标题
+                $('#playerTitle, #fullscreenTitle').text(station.name);
+                
+                // 更新 Logo
+                const imgSrc = station.logo && station.logo !== 'null' ? station.logo : null;
+                $('#playerLogo').replaceWith(imgSrc
+                    ? `<img src="${imgSrc}" class="player-logo" id="playerLogo" alt="">`
+                    : `<div class="player-logo placeholder" id="playerLogo">${SVG_RADIO_MD}</div>`);
+                
+                // 更新全屏封面
+                if (imgSrc) {
+                    $('#fullscreenCover').replaceWith(`<img src="${imgSrc}" class="fullscreen-cover" id="fullscreenCover" alt="">`);
+                } else {
+                    $('#fullscreenCover').replaceWith(`<div class="fullscreen-cover placeholder" id="fullscreenCover">${SVG_RADIO_LG}</div>`);
+                }
+                
+                // 更新卡片播放状态（名称+URL 双重匹配）
+                // autoPlay=false 时不标记为 playing，卡片与实际音频状态保持一致
+                $('.station-card').removeClass('playing');
+                if (autoPlay) {
+                    $('.station-card').filter(function () {
+                        return $(this).attr('data-url') === station.url &&
+                               $(this).attr('data-name') === station.name;
+                    }).addClass('playing');
+                }
+                
+                if (autoPlay) {
+                    // 设置加载状态并播放
+                    $('#playerStatus, #fullscreenStatus').text('加载中...');
+                    $('#statusDot, #fullscreenDot').removeClass('playing paused');
+                    audio.src = station.url;
+                    audio.play().catch(e => {
+                        console.warn('自动播放被阻止，请点击播放条开始播放:', e);
+                        $('#playerStatus, #fullscreenStatus').text('点击播放');
+                        $('#statusDot, #fullscreenDot').addClass('paused');
+                        updatePlayIcon(true);
+                        updateFullscreenPlayIcon(true);
+                    });
+                } else {
+                    // 仅恢复显示，等待用户点击播放
+                    $('#playerStatus, #fullscreenStatus').text('点击播放');
+                    $('#statusDot, #fullscreenDot').removeClass('playing').addClass('paused');
+                    updatePlayIcon(true);
+                    updateFullscreenPlayIcon(true);
+                }
+
+                updateURL();
+            }
+
+            /** 根据暂停状态切换播放图标（三角=播放 / 方块=停止）*/
+            function updatePlayIcon(isPaused) {
+                const icon = isPaused
+                    ? '<polygon points="6,4 20,12 6,20"/>'
+                    : '<rect x="5" y="4" width="4" height="16"/><rect x="15" y="4" width="4" height="16"/>';
+                $('#playIcon').html(icon);
+            }
+
+            /** 切换当前电台的播放 / 暂停；若尚未加载则无操作 */
+            function togglePlay() {
+                if (!currentStation) return;
+                const audio = document.getElementById('audioPlayer');
+                // 刷新后 src 为空（仅恢复了显示），需要先赋 src 再播放
+                if (!audio.src || audio.src === window.location.href) {
+                    audio.src = currentStation.url;
+                }
+                if (audio.paused) {
+                    audio.play().catch(e => console.warn('播放失败:', e));
+                } else {
+                    audio.pause();
+                }
+            }
+
+            // ── 地区 / 分类切换 ───────────────────────────────────────────────────
+            function setRegion(region) {
+                currentRegion = region;
+                currentType   = '';
+                $('.region-btn').removeClass('active');
+                $(`.region-btn[data-region="${region}"]`).addClass('active');
+                renderTypeButtons();
+                filterAndRender(true);
+                updateURL();
+                updateFilterLabels();
+            }
+
+            function setType(type) {
+                currentType = type;
+                renderTypeButtons();
+                filterAndRender(true);
+                updateURL();
+                updateFilterLabels();
+            }
+
+            // 更新筛选标题提示
+            function updateFilterLabels() {
+                $('#regionFilterLabel').text('· ' + (currentRegion !== 'all' ? currentRegion : '全部'));
+                $('#typeFilterLabel').text('· ' + (currentType !== '' ? currentType : '全部'));
+            }
+
+            // ── URL 状态同步 ──────────────────────────────────────────────────────
+            function updateURL() {
+                const params = new URLSearchParams();
+                if (currentRegion !== 'all') params.set('region', currentRegion);
+                if (currentType !== '')       params.set('type',   currentType);
+                if (currentStation) {
+                    params.set('play',      currentStation.url);
+                    params.set('play_name', currentStation.name);
+                }
+                history.replaceState(null, '', params.toString() ? '?' + params : location.pathname);
+            }
+
+            // ── 无限滚动 ──────────────────────────────────────────────────────────
+            function loadMore() {
+                if (isLoading) return;
+                isLoading = true;
+                visibleCount += BATCH_SIZE;
+                filterAndRender();
+                isLoading = false;
+            }
+
+            // ── 主题切换 ──────────────────────────────────────────────────────────
+            function setTheme(theme) {
+                $('html').attr('data-theme', theme);
+                localStorage.setItem('theme', theme);
+                $('#themeSelect').val(theme);
+            }
+
+            // ── 初始化：从 URL 参数恢复状态 ───────────────────────────────────────
+            function init() {
+                const params      = new URLSearchParams(location.search);
+                const regionParam = params.get('region');
+                const typeParam   = params.get('type');
+                const playUrl     = params.get('play');
+
+                if (regionParam) {
+                    currentRegion = regionParam;
+                    $('.region-btn').removeClass('active');
+                    $(`.region-btn[data-region="${regionParam}"]`).addClass('active');
+                }
+                if (typeParam) currentType = typeParam;
+
+                renderTypeButtons();
+                filterAndRender();
+
+                // 窄屏（手机）默认收起分类筛选，宽屏保持展开
+                if (window.innerWidth < 600) {
+                    $('#typesContent').addClass('collapsed');
+                    $('#typesToggle').find('.toggle-icon').addClass('collapsed');
+                }
+
+                updateFilterLabels();
+
+                if (playUrl) {
+                    // 优先用 name+url 精确匹配，若失败则降级为 url 单独匹配（兼容旧书签或名称编码偏差）
+                    const playName = params.get('play_name');
+                    let station = playName
+                        ? allStations.find(s => s.url === playUrl && s.name === playName)
+                        : null;
+                    if (!station) station = allStations.find(s => s.url === playUrl);
+                    // 刷新恢复时不自动播放，仅还原显示状态，用户点击播放条即可开始
+                    if (station) playStation(station, false);
+                }
+            }
+
+            // ── 事件绑定 ──────────────────────────────────────────────────────────
+            // 电台卡片（事件委托，无需为每张卡单独绑定监听器）
+            $('#stationsGrid').on('click', '.station-card', function () {
+                const url  = $(this).attr('data-url');
+                const name = $(this).attr('data-name');
+                const station = name
+                    ? allStations.find(s => s.url === url && s.name === name)
+                    : allStations.find(s => s.url === url);
+                if (station) playStation(station);
+            });
+
+            // 地区按钮
+            $('#regionBtns').on('click', '.region-btn', function () {
+                setRegion($(this).attr('data-region'));
+            });
+
+            // 分类按钮（委托，按钮由 renderTypeButtons 动态生成）
+            $('#typeBtns').on('click', '.type-btn', function () {
+                setType($(this).attr('data-type'));
+            });
+
+            // 主题选择下拉框
+            $('#themeSelect').on('change', function () {
+                setTheme($(this).val());
+            });
+            
+            // 折叠/展开功能
+            $('#regionsToggle').on('click', function () {
+                $('#regionsContent').toggleClass('collapsed');
+                $(this).find('.toggle-icon').toggleClass('collapsed');
+            });
+            
+            $('#typesToggle').on('click', function () {
+                $('#typesContent').toggleClass('collapsed');
+                $(this).find('.toggle-icon').toggleClass('collapsed');
+            });
+
+            // 搜索防抖 300ms
+            let searchTimeout;
+            $('#searchInput').on('input', function () {
+                clearTimeout(searchTimeout);
+                searchTimeout = setTimeout(() => {
+                    currentSearch = normalizeZh($(this).val().toLowerCase());
+                    filterAndRender(true);
+                }, 300);
+            });
+
+            // 无限滚动（监听 window 滚动）
+            $(window).on('scroll', function () {
+                if ($(window).scrollTop() + $(window).height() >= $(document).height() - 200) {
+                    loadMore();
+                }
+            });
+
+            // 播放器状态事件
+            $('#audioPlayer')
+                .on('play',  function () {
+                    $('#statusDot, #fullscreenDot').removeClass('paused').addClass('playing');
+                    $('#playerStatus, #fullscreenStatus').text('正在播放');
+                    $('#soundWave').addClass('playing');
+                    $('#fullscreenCover').addClass('playing');
+                    updatePlayIcon(false);
+                    updateFullscreenPlayIcon(false);
+                    // 同步卡片播放状态
+                    if (currentStation) {
+                        $('.station-card').removeClass('playing')
+                            .filter(function () {
+                                return $(this).attr('data-url') === currentStation.url &&
+                                       $(this).attr('data-name') === currentStation.name;
+                            }).addClass('playing');
+                        document.title = currentStation.name + ' — 电台森林';
+                    }
+                })
+                .on('pause', function () {
+                    $('#statusDot, #fullscreenDot').removeClass('playing').addClass('paused');
+                    $('#playerStatus, #fullscreenStatus').text('点击播放');
+                    $('#soundWave').removeClass('playing');
+                    $('#fullscreenCover').removeClass('playing');
+                    updatePlayIcon(true);
+                    updateFullscreenPlayIcon(true);
+                    // 移除所有卡片播放高亮
+                    $('.station-card').removeClass('playing');
+                    document.title = '电台森林';
+                })
+                .on('error', function () {
+                    $('#statusDot, #fullscreenDot').removeClass('playing').addClass('paused');
+                    $('#playerStatus, #fullscreenStatus').text('播放错误');
+                    $('#soundWave').removeClass('playing');
+                    $('#fullscreenCover').removeClass('playing');
+                    updatePlayIcon(true);
+                    updateFullscreenPlayIcon(true);
+                    $('.station-card').removeClass('playing');
+                    console.error('音频加载错误');
+                });
+
+            // 播放条整体点击切换（忽略 audio 原生控件和全屏按钮）
+            $('#playerBar').on('click', function (e) {
+                if ($(e.target).closest('audio, .fullscreen-btn').length) return;
+                togglePlay();
+            });
+            
+            // 全屏播放器功能
+            function updateFullscreenUI() {
+                if (!currentStation) return;
+                
+                $('#fullscreenTitle').text(currentStation.name);
+                
+                const imgSrc = currentStation.logo && currentStation.logo !== 'null' ? currentStation.logo : null;
+                if (imgSrc) {
+                    $('#fullscreenCover').replaceWith(`<img src="${imgSrc}" class="fullscreen-cover" id="fullscreenCover" alt="">`);
+                } else {
+                    $('#fullscreenCover').replaceWith(`<div class="fullscreen-cover placeholder" id="fullscreenCover">${SVG_RADIO_LG}</div>`);
+                }
+                
+                const audio = document.getElementById('audioPlayer');
+                if (!audio.paused) {
+                    $('#fullscreenCover').addClass('playing');
+                    $('#soundWave').addClass('playing');
+                }
+            }
+            
+            function updateFullscreenPlayIcon(isPaused) {
+                const icon = isPaused
+                    ? '<polygon points="8,5 19,12 8,19"/>'
+                    : '<rect x="7" y="5" width="3" height="14"/><rect x="14" y="5" width="3" height="14"/>';
+                $('#fullscreenPlayBtn svg').html(icon);
+            }
+            
+            // 是否是自动触发的全屏（用于区分手动点击和横屏自动）
+            let isAutoFullscreen = false;
+            // 记录上一次是否为横屏，用于检测“进入横屏”这个瞬间
+            let lastIsLandscape  = false;
+            let userManuallyHid  = false;
+            let pendingBrowserFS = false;
+
+            let wakeLock = null;
+            async function requestWakeLock() {
+                if ('wakeLock' in navigator) {
+                    try {
+                        wakeLock = await navigator.wakeLock.request('screen');
+                        wakeLock.addEventListener('release', () => { wakeLock = null; });
+                    } catch(e) {}
+                }
+            }
+            function releaseWakeLock() {
+                if (wakeLock) { wakeLock.release(); wakeLock = null; }
+            }
+            document.addEventListener('visibilitychange', function() {
+                if (document.visibilityState === 'visible' && $('#fullscreenPlayer').hasClass('show')) {
+                    requestWakeLock();
+                }
+            });
+
+            function showFullscreen() {
+                $('#fullscreenPlayer').addClass('show');
+                updateFullscreenUI();
+                const scrollY = window.scrollY;
+                $('body').css({ 'overflow': 'hidden', 'position': 'fixed', 'top': -scrollY + 'px', 'width': '100%' });
+                $('body').data('scroll-y', scrollY);
+                requestWakeLock();
+            }
+            
+            function hideFullscreen() {
+                $('#fullscreenPlayer').removeClass('show');
+                const scrollY = $('body').data('scroll-y') || 0;
+                $('body').css({ 'overflow': '', 'position': '', 'top': '', 'width': '' });
+                window.scrollTo(0, scrollY);
+                isAutoFullscreen = false;
+                pendingBrowserFS = false;
+                releaseWakeLock();
+                const fsEl = document.fullscreenElement || document.webkitFullscreenElement || document.mozFullScreenElement;
+                if (fsEl) {
+                    (document.exitFullscreen || document.webkitExitFullscreen || document.mozCancelFullScreen || function(){}).call(document);
+                }
+            }
+            
+            function requestBrowserFullscreen() {
+                const el  = document.documentElement;
+                const req = el.requestFullscreen || el.webkitRequestFullscreen
+                          || el.mozRequestFullScreen || el.msRequestFullscreen;
+                if (req) req.call(el).catch(() => {});
+            }
+
+            $('#fullscreenPlayer').on('touchstart.fspend pointerdown.fspend', function() {
+                if (pendingBrowserFS && $('#fullscreenPlayer').hasClass('show') &&
+                    !document.fullscreenElement && !document.webkitFullscreenElement) {
+                    pendingBrowserFS = false;
+                    requestBrowserFullscreen();
+                }
+            });
+            
+            // 全屏按钮点击
+            $('#fullscreenBtn').on('click', function(e) {
+                e.stopPropagation();
+                isAutoFullscreen = false;
+                userManuallyHid  = false;
+                showFullscreen();
+                setTimeout(() => requestBrowserFullscreen(), 100);
+            });
+
+            $('#fullscreenClose').on('click', function() {
+                userManuallyHid = true;
+                hideFullscreen();
+            });
+            
+            // 全屏播放/暂停按钮
+            $('#fullscreenPlayBtn').on('click', togglePlay);
+            
+            // ESC键关闭全屏
+            $(document).on('keydown', function(e) {
+                if (e.key === 'Escape' && $('#fullscreenPlayer').hasClass('show')) {
+                    userManuallyHid = true;
+                    hideFullscreen();
+                }
+            });
+            
+            // 横竖屏检测（手机横屏自动进入全屏播放器和浏览器全屏，竖屏退出）
+            function checkOrientation() { // orientation-check
+                const isLandscape = window.matchMedia('(max-width: 900px) and (orientation: landscape)').matches;
+                const enteredLandscape = isLandscape && !lastIsLandscape;
+
+                // 每次“进入横屏”都强制进入播放器视图并请求浏览器全屏
+                if (enteredLandscape) {
+                    userManuallyHid = false;
+                    if (!$('#fullscreenPlayer').hasClass('show')) {
+                        isAutoFullscreen = true;
+                        showFullscreen();
+                    }
+                    pendingBrowserFS = true;
+                    setTimeout(function() {
+                        if ($('#fullscreenPlayer').hasClass('show') &&
+                            !document.fullscreenElement && !document.webkitFullscreenElement) {
+                            requestBrowserFullscreen();
+                        }
+                    }, 300);
+                } else if (!isLandscape) {
+                    userManuallyHid  = false;
+                    pendingBrowserFS = false;
+                    if ($('#fullscreenPlayer').hasClass('show') && isAutoFullscreen) {
+                        isAutoFullscreen = false;
+                        $('#fullscreenPlayer').removeClass('show');
+                        const scrollY = $('body').data('scroll-y') || 0;
+                        $('body').css({ 'overflow': '', 'position': '', 'top': '', 'width': '' });
+                        window.scrollTo(0, scrollY);
+                        releaseWakeLock();
+                        const fsEl = document.fullscreenElement || document.webkitFullscreenElement || document.mozFullScreenElement;
+                        if (fsEl) {
+                            (document.exitFullscreen || document.webkitExitFullscreen || document.mozCancelFullScreen || function(){}).call(document);
+                        }
+                    }
+                }
+
+                lastIsLandscape = isLandscape;
+            }
+            
+            $(window).on('orientationchange resize', checkOrientation);
+            
+            // 监听浏览器全屏状态变化
+            $(document).on('fullscreenchange webkitfullscreenchange mozfullscreenchange', function() {
+                if (!document.fullscreenElement && !document.webkitFullscreenElement && !document.mozFullScreenElement) {
+                    if ($('#fullscreenPlayer').hasClass('show')) {
+                        userManuallyHid  = true;
+                        isAutoFullscreen = false;
+                        $('#fullscreenPlayer').removeClass('show');
+                        const scrollY = $('body').data('scroll-y') || 0;
+                        $('body').css({ 'overflow': '', 'position': '', 'top': '', 'width': '' });
+                        window.scrollTo(0, scrollY);
+                        releaseWakeLock();
+                    }
+                }
+            });
+            
+            checkOrientation();
+            
+            // 全屏时钟
+            function updateClock() {
+                const now = new Date();
+                const h = String(now.getHours()).padStart(2, '0');
+                const m = String(now.getMinutes()).padStart(2, '0');
+                const s = String(now.getSeconds()).padStart(2, '0');
+                $('#fullscreenClock').text(h + ':' + m + ':' + s);
+            }
+            updateClock();
+            setInterval(updateClock, 1000);
+            
+            // 回到顶部按钮
+            $(window).on('scroll.backtotop', function() {
+                if ($(this).scrollTop() > 300) {
+                    $('#backToTop').addClass('show');
+                } else {
+                    $('#backToTop').removeClass('show');
+                }
+            });
+            
+            $('#backToTop').on('click', function() {
+                $('html, body').animate({ scrollTop: 0 }, 300);
+            });
+            
+            // 播放按钮
+            $(document).on('click', '.station-play-btn', function(e) {
+                e.stopPropagation();
+                const url  = $(this).attr('data-url');
+                const name = $(this).attr('data-name');
+                const station = name
+                    ? allStations.find(s => s.url === url && s.name === name)
+                    : allStations.find(s => s.url === url);
+                if (station) playStation(station);
+            });
+
+            // 停止播放按钮
+            $(document).on('click', '.station-stop-btn', function(e) {
+                e.stopPropagation();
+                const audio = document.getElementById('audioPlayer');
+                audio.pause();
+                audio.src = '';
+                currentUrl = '';
+                currentStation = null;
+                filterAndRender();
+                $('#playerTitle').text('选择一个电台开始播放');
+                $('#playerStatus').text('等待中');
+                $('#statusDot').removeClass('playing paused');
+                $('#fullscreenTitle').text('选择一个电台开始播放');
+                $('#fullscreenStatus').text('等待中');
+                $('#fullscreenDot').removeClass('playing paused');
+                $('#soundWave').removeClass('playing');
+                document.title = '电台森林';
+            });
+
+            // 主题初始化 + 页面初始化
+            setTheme(localStorage.getItem('theme') || 'green');
+            init();
+        });
+    </script>
+</body>
+</html>
