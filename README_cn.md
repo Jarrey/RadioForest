@@ -1,0 +1,91 @@
+# 电台森林 📻
+
+基于 PHP 的在线网络电台播放器。它会自动扫描项目根目录下的 M3U 播放列表文件，解析电台信息并在浏览器中提供搜索、区域筛选、主题切换和实时播放功能。
+
+## 目录结构
+
+```text
+radioweb/
+├── index.dev.php    # 开发源文件，包含可编辑的 PHP/HTML/CSS/JS
+├── index.php        # 构建产物，部署到服务器的文件
+├── build.js         # 构建脚本，压缩 CSS/JS 并生成 index.php
+└── package.json     # 构建依赖声明
+```
+
+## 说明
+
+- 项目会读取根目录下所有符合 `radio*.m3u` 的文件，推荐使用 `radio_<地区代码>.m3u` 命名方式。
+- 如果没有找到任何播放列表文件，页面会显示空列表。
+- 支持多个播放列表同时存在，所有电台会自动合并展示。
+
+## 播放列表格式
+
+示例 M3U 文件内容：
+
+```m3u
+#EXTM3U
+#EXTINF:-1 tvg-name="中央人民广播电台" tvg-logo="https://example.com/logo.png" group-title="China",中央人民广播电台
+http://lhttp.cnr.cn/live/zgzs/64k.mp3
+```
+
+推荐文件名示例：
+
+| 文件名         | 含义       |
+| -------------- | ---------- |
+| `radio_cn.m3u` | 中国电台   |
+| `radio_us.m3u` | 美国电台   |
+| `radio_jp.m3u` | 日本电台   |
+| `radio.m3u`   | 全球电台   |
+
+支持的标签字段：
+
+- `tvg-name` — 电台名称
+- `tvg-logo` — 台标图片 URL
+- `group-title` — 国家/分组（用于筛选面板）
+
+## 部署方式
+
+### 方式一：直接部署 `index.php`
+
+将 `index.php` 和 `radio_*.m3u` 文件上传到支持 PHP 的 Web 服务器即可。无需上传 `node_modules/` 和 `package-lock.json`。
+
+### 方式二：从源代码构建
+
+在 `index.dev.php` 修改后，通过构建脚本生成压缩部署文件：
+
+```bash
+npm install
+node build.js
+```
+
+构建后，`build.js` 会将页面内的 CSS 和 JavaScript 压缩后写入 `index.php`，并保留原始 PHP 逻辑。
+
+## 功能亮点
+
+- 多列表合并：自动读取并合并所有 `radio*.m3u` 文件
+- 国家/地区筛选：支持多地区筛选，并显示国旗图标
+- 关键词搜索：快速过滤电台名称
+- 主题切换：提供 12 种配色主题
+- 全屏播放器：带音波动画、播放状态和时钟显示
+- 响应式设计：支持手机、平板和桌面浏览器
+
+## 运行环境
+
+| 组件       | 要求                                  |
+| ---------- | ------------------------------------- |
+| PHP        | 5.6+                                  |
+| Web 服务器 | Apache / Nginx / 其他支持 PHP 的服务器 |
+| 浏览器     | 支持 HTML5 `<audio>` 的现代浏览器      |
+| Node.js    | 仅构建时需要（建议 ≥ 14）             |
+
+## 开发说明
+
+- `index.dev.php` 是可编辑源文件，包含 HTML、CSS、JavaScript 和 PHP 解析逻辑。
+- `build.js` 会压缩内联 CSS 以及 `<script>` 中的 JavaScript，并输出到 `index.php`。
+- 当前构建依赖为 `terser`，已在 `package.json` 中声明。
+
+## 额外提示
+
+- 建议将播放列表文件和 `index.php` 放在同一目录下。
+- `group-title` 字段会被映射为中文国家名，提升筛选体验。
+- 如果需要新增主题或界面样式，可直接编辑 `index.dev.php` 并重新运行 `node build.js`。

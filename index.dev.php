@@ -1074,6 +1074,11 @@ $totalCount = count($allStations);
                 height: 7px;
             }
         }
+
+        /* mini 播放条显示时，给 container 增加底部间距，防止最后一张卡片被遮挡 */
+        body.mini-player-visible .container {
+            padding-bottom: 80px;
+        }
         
         /* 全屏播放器 */
         .fullscreen-player {
@@ -1207,14 +1212,14 @@ $totalCount = count($allStations);
         /* 悬浮小播放条 */
         .mini-player {
             position: fixed;
-            bottom: 0;
-            left: 0;
-            right: 0;
-            transform: translateY(100%);
-            background: var(--player-bg);
-            border-top: 1px solid var(--player-border);
-            border-radius: 0;
-            box-shadow: 0 -4px 20px rgba(0,0,0,0.25), 0 0 14px var(--player-shadow);
+            bottom: 12px;
+            left: 12px;
+            right: 12px;
+            transform: translateY(calc(100% + 12px));
+            background: color-mix(in srgb, var(--bg) 55%, transparent);
+            border: 1px solid var(--player-border);
+            border-radius: 16px;
+            box-shadow: 0 4px 24px rgba(0,0,0,0.35), 0 0 14px var(--player-shadow);
             display: flex;
             align-items: center;
             gap: 10px;
@@ -1223,8 +1228,8 @@ $totalCount = count($allStations);
             visibility: hidden;
             transition: opacity 0.3s, visibility 0.3s, transform 0.3s;
             z-index: 998;
-            backdrop-filter: blur(8px);
-            -webkit-backdrop-filter: blur(8px);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
         }
         .mini-player.show {
             opacity: 1;
@@ -1929,67 +1934,111 @@ $totalCount = count($allStations);
             '宗教': /宗教|上帝|Islam|Christian|Quran|佛教/i,
             '古典': /古典|Symphony|交响/i,
             '方言': /方言|闽南|粤语|Cantonese|吴语|沪语/i,
+            // ── 音乐细分风格（优先级低于通用分类，但早于央级）───────────────────
+            // 注意：与上方「音乐」分类并存，具体风格会双重打标，方便按风格筛选
+            '爵士':  /jazz|爵士/i,
+            '流行':  /\bpop\b|流行|top\s*40|\bhits\b|k.?pop|j.?pop/i,
+            '摇滚':  /\brock\b|摇滚|\bindie\b|alternative|punk|grunge/i,
+            '嘻哈':  /hip.?hop|\brap\b|嘻哈|说唱/i,
+            '电子':  /\bedm\b|\belectronic\b|\belectro\b|techno|trance|dance\s*(?:music|fm|radio|hits)|舞曲|电子音乐/i,
+            'R&B':   /\br\s*&\s*b\b|rhythm.?blues|soul\s*(?:music|fm|radio)|灵魂乐|节奏蓝调/i,
+            '乡村':  /\bcountry\b|乡村音乐/i,
+            '民谣':  /\bfolk\b|民谣|\bacoustic\b/i,
+            '蓝调':  /\bblues\b|蓝调/i,
+            '雷鬼':  /reggae|雷鬼/i,
+            '金属':  /\bmetal\b|金属乐|heavy\s*metal/i,
+            '拉丁':  /\blatin\b|salsa|cumbia|merengue|bachata|拉丁/i,
             // 仅中国：央级媒体
-            '央广': /央广|中央人民广播|中国之声|CNR\s*\d/i,
+            '央广': /央广|中央人民广播|中国之声|CNR\s*\d|CRI\b|中国国际广播|全国联播|中央广播电台/i,
             '央视': /央视|CCTV|中央电视台/i,
         };
         const typeKeys = Object.keys(typePatterns);
 
-        // ─── 省份正则（按匹配优先级排列；覆盖全国所有地级行政区 + 拼音）─────────
+        // ─── 省份正则（按匹配优先级排列；覆盖全国所有地级行政区 + 拼音 + 邮政式拼音）────
         // 规则：全国/央级最先匹配；直辖市次之；各省含所有地级市/自治州/盟名称及拼音
         // 注意：detectProvince 取第一个命中省份，排列顺序即优先级
         // 冲突处理：Taizhou(苏/浙)、Yichun(赣/黑)、Yulin(桂/陕)、Fuzhou(闽/赣) 均由排序靠前的省份优先命中
+        // 邮政式拼音（Wade-Giles 衍生）：Peking 北京、Tsingtao 青岛、Soochow 苏州、Foochow 福州 等历史英文名
         const provincePatterns = {
             // ── 全国/央级（优先级最高）──────────────────────────────────────
             '全国':   /央广|中央人民广播|中国之声|CNR\s*\d|CRI\b|中国国际广播|全国联播|中央广播电台/i,
             // ── 四大直辖市 ──────────────────────────────────────────────────
-            '北京':   /北京|Beijing/i,
-            '天津':   /天津|Tianjin/i,
+            // 邮政：Peking(北京) Peiping(1928-49年旧称) Tientsin(天津) Chungking(重庆)
+            '北京':   /北京|Beijing|Peking|Peiping|Peiking/i,
+            '天津':   /天津|Tianjin|Tientsin|Tientsien/i,
             '上海':   /上海|Shanghai/i,
-            '重庆':   /重庆|Chongqing/i,
+            '重庆':   /重庆|Chongqing|Chungking|Chunking/i,
             // ── 华南 ────────────────────────────────────────────────────────
-            '广东':   /广东|珠江|Guangdong|广州|深圳|珠海|汕头|佛山|韶关|湛江|肇庆|江门|茂名|惠州|梅州|汕尾|河源|阳江|清远|东莞|中山|潮州|揭阳|云浮|Guangzhou|Shenzhen|Zhuhai|Shantou|Foshan|Shaoguan|Zhanjiang|Zhaoqing|Jiangmen|Maoming|Huizhou|Meizhou|Shanwei|Heyuan|Yangjiang|Qingyuan|Dongguan|Zhongshan|Chaozhou|Jieyang|Yunfu/i,
-            '广西':   /广西|Guangxi|南宁|柳州|桂林|梧州|北海|防城港|钦州|贵港|玉林|百色|贺州|河池|来宾|崇左|Nanning|Liuzhou|Guilin|Wuzhou|Beihai|Fangchenggang|Qinzhou|Guigang|Yulin|Baise|Hezhou|Hechi|Laibin|Chongzuo/i,
+            // 邮政：Kwangtung(广东) Canton/Kwangchow(广州) Swatow(汕头) Fatshan(佛山)
+            //       Shaokwan(韶关) Tsamkong/Chanchiang(湛江) Shiuhing(肇庆) Kongmoon(江门)
+            //       Kaying(梅州/梅县) Chaochow(潮州)
+            '广东':   /广东|珠江|Guangdong|Kwangtung|广州|深圳|珠海|汕头|佛山|韶关|湛江|肇庆|江门|茂名|惠州|梅州|汕尾|河源|阳江|清远|东莞|中山|潮州|揭阳|云浮|Guangzhou|Canton|Kwangchow|Shenzhen|Shumchun|Zhuhai|Shantou|Swatow|Foshan|Fatshan|Shaoguan|Shaokwan|Zhanjiang|Tsamkong|Chanchiang|Zhaoqing|Shiuhing|Jiangmen|Kongmoon|Maoming|Huizhou|Meizhou|Kaying|Shanwei|Heyuan|Yangjiang|Qingyuan|Dongguan|Zhongshan|Chaozhou|Chaochow|Jieyang|Yunfu/i,
+            // 邮政：Kwangsi(广西) Liuchow(柳州) Kweilin(桂林)
+            '广西':   /广西|Guangxi|Kwangsi|南宁|柳州|桂林|梧州|北海|防城港|钦州|贵港|玉林|百色|贺州|河池|来宾|崇左|Nanning|Liuzhou|Liuchow|Guilin|Kweilin|Wuzhou|Beihai|Fangchenggang|Qinzhou|Guigang|Yulin|Baise|Hezhou|Hechi|Laibin|Chongzuo/i,
             // 海南：(?!州) 防止匹配青海的"海南州"；不含"东方"（过于通用）
-            '海南':   /海南(?!州)|Hainan|海口|三亚|三沙|儋州|琼海|文昌|万宁|Haikou|Sanya|Danzhou|Qionghai|Wenchang|Wanning/i,
+            // 邮政：Hoihow/Haikkow(海口)
+            '海南':   /海南(?!州)|Hainan|海口|三亚|三沙|儋州|琼海|文昌|万宁|Haikou|Hoihow|Haikkow|Sanya|Danzhou|Qionghai|Wenchang|Wanning/i,
             // ── 华东 ────────────────────────────────────────────────────────
-            '福建':   /福建|闽南|闽北|闽东|闽西|Fujian|福州|厦门|莆田|三明|泉州|漳州|南平|龙岩|宁德|Fuzhou|Xiamen|Putian|Sanming|Quanzhou|Zhangzhou|Nanping|Longyan|Ningde/i,
-            '江苏':   /江苏|Jiangsu|南京|无锡|徐州|常州|苏州|南通|连云港|淮安|盐城|扬州|镇江|泰州|宿迁|Nanjing|Wuxi|Xuzhou|Changzhou|Suzhou|Nantong|Lianyungang|Huaian|Yancheng|Yangzhou|Zhenjiang|Taizhou|Suqian/i,
-            '浙江':   /浙江|Zhejiang|杭州|宁波|温州|嘉兴|湖州|绍兴|金华|衢州|舟山|台州|丽水|Hangzhou|Ningbo|Wenzhou|Jiaxing|Huzhou|Shaoxing|Jinhua|Quzhou|Zhoushan|Lishui/i,
-            '山东':   /山东|Shandong|济南|青岛|淄博|枣庄|东营|烟台|潍坊|济宁|泰安|威海|日照|临沂|德州|聊城|滨州|菏泽|Jinan|Qingdao|Zibo|Zaozhuang|Dongying|Yantai|Weifang|Jining|Taian|Weihai|Rizhao|Linyi|Dezhou|Liaocheng|Binzhou|Heze/i,
-            '安徽':   /安徽|Anhui|合肥|芜湖|蚌埠|淮南|马鞍山|淮北|铜陵|安庆|黄山|滁州|阜阳|宿州|六安|宣城|池州|亳州|Hefei|Wuhu|Bengbu|Huainan|Maanshan|Huaibei|Tongling|Anqing|Huangshan|Chuzhou|Fuyang|Luan|Xuancheng|Chizhou|Bozhou/i,
+            // 邮政：Fukien(福建) Foochow(福州) Amoy(厦门) Hinghwa(莆田/兴化) Chinchew/Tsinkiang(泉州) Changchow/Cheangchew(漳州)
+            '福建':   /福建|闽南|闽北|闽东|闽西|Fujian|Fukien|福州|厦门|莆田|三明|泉州|漳州|南平|龙岩|宁德|Fuzhou|Foochow|Xiamen|Amoy|Putian|Hinghwa|Sanming|Quanzhou|Chinchew|Tsinkiang|Zhangzhou|Changchow|Cheangchew|Nanping|Longyan|Ningde/i,
+            // 邮政：Kiangsu(江苏) Nanking(南京) Wusih(无锡) Hsuchow/Suchow(徐州) Soochow(苏州) Nantung(南通) Lienyunkang(连云港) Yangchow(扬州) Chinkiang(镇江)
+            '江苏':   /江苏|Jiangsu|Kiangsu|南京|无锡|徐州|常州|苏州|南通|连云港|淮安|盐城|扬州|镇江|泰州|宿迁|Nanjing|Nanking|Wuxi|Wusih|Xuzhou|Hsuchow|Suchow|Changzhou|Suzhou|Soochow|Nantong|Nantung|Lianyungang|Lienyunkang|Huaian|Yancheng|Yangzhou|Yangchow|Zhenjiang|Chinkiang|Taizhou|Suqian/i,
+            // 邮政：Chekiang(浙江) Hangchow(杭州) Ningpo(宁波) Wenchow(温州) Kashing(嘉兴) Huchow(湖州) Shaohsing(绍兴)
+            '浙江':   /浙江|Zhejiang|Chekiang|杭州|宁波|温州|嘉兴|湖州|绍兴|金华|衢州|舟山|台州|丽水|Hangzhou|Hangchow|Ningbo|Ningpo|Wenzhou|Wenchow|Jiaxing|Kashing|Huzhou|Huchow|Shaoxing|Shaohsing|Jinhua|Quzhou|Zhoushan|Lishui/i,
+            // 邮政：Shantung(山东) Tsinan/Chinan(济南) Tsingtao/Chingtao(青岛) Chefoo/Yentai(烟台) Weihaiwei(威海)
+            '山东':   /山东|Shandong|Shantung|济南|青岛|淄博|枣庄|东营|烟台|潍坊|济宁|泰安|威海|日照|临沂|德州|聊城|滨州|菏泽|Jinan|Tsinan|Chinan|Qingdao|Tsingtao|Chingtao|Zibo|Zaozhuang|Dongying|Yantai|Chefoo|Yentai|Weifang|Jining|Taian|Weihai|Weihaiwei|Rizhao|Linyi|Dezhou|Liaocheng|Binzhou|Heze/i,
+            // 邮政：Anhwei(安徽) Hofei(合肥) Pengpu(蚌埠) Anking(安庆)
+            '安徽':   /安徽|Anhui|Anhwei|Nganhwei|合肥|芜湖|蚌埠|淮南|马鞍山|淮北|铜陵|安庆|黄山|滁州|阜阳|宿州|六安|宣城|池州|亳州|Hefei|Hofei|Wuhu|Bengbu|Pengpu|Huainan|Maanshan|Huaibei|Tongling|Anqing|Anking|Huangshan|Chuzhou|Fuyang|Luan|Xuancheng|Chizhou|Bozhou/i,
             // 宜春(Yichun)与黑龙江伊春拼音相同，江西排前故优先命中
-            '江西':   /江西|Jiangxi|南昌|景德镇|萍乡|九江|新余|鹰潭|赣州|吉安|宜春|抚州|上饶|Nanchang|Jingdezhen|Pingxiang|Jiujiang|Xinyu|Yingtan|Ganzhou|Jian|Yichun|Fuzhou|Shangrao/i,
+            // 邮政：Kiangsi(江西) Kiukiang(九江) Kingtehchen(景德镇)
+            '江西':   /江西|Jiangxi|Kiangsi|南昌|景德镇|萍乡|九江|新余|鹰潭|赣州|吉安|宜春|抚州|上饶|Nanchang|Jingdezhen|Kingtehchen|Pingxiang|Jiujiang|Kiukiang|Xinyu|Yingtan|Ganzhou|Jian|Yichun|Fuzhou|Shangrao/i,
             // ── 华中 ────────────────────────────────────────────────────────
-            '湖南':   /湖南|Hunan|长沙|株洲|湘潭|衡阳|邵阳|岳阳|常德|张家界|益阳|郴州|永州|怀化|娄底|湘西|Changsha|Zhuzhou|Xiangtan|Hengyang|Shaoyang|Yueyang|Changde|Zhangjiajie|Yiyang|Chenzhou|Yongzhou|Huaihua|Loudi|Xiangxi/i,
-            '湖北':   /湖北|Hubei|武汉|黄石|十堰|宜昌|襄阳|鄂州|荆门|孝感|荆州|黄冈|咸宁|随州|恩施|仙桃|潜江|天门|Wuhan|Huangshi|Shiyan|Yichang|Xiangyang|Ezhou|Jingmen|Xiaogan|Jingzhou|Huanggang|Xianning|Suizhou|Enshi|Xiantao|Qianjiang|Tianmen/i,
-            '河南':   /河南|Henan|郑州|开封|洛阳|平顶山|安阳|鹤壁|新乡|焦作|濮阳|许昌|漯河|三门峡|南阳|商丘|信阳|周口|驻马店|Zhengzhou|Kaifeng|Luoyang|Pingdingshan|Anyang|Hebi|Xinxiang|Jiaozuo|Puyang|Xuchang|Luohe|Sanmenxia|Nanyang|Shangqiu|Xinyang|Zhoukou|Zhumadian/i,
+            // 邮政：Siangtan(湘潭) Yochow(岳阳)
+            '湖南':   /湖南|Hunan|长沙|株洲|湘潭|衡阳|邵阳|岳阳|常德|张家界|益阳|郴州|永州|怀化|娄底|湘西|Changsha|Zhuzhou|Xiangtan|Siangtan|Hengyang|Shaoyang|Yueyang|Yochow|Changde|Zhangjiajie|Yiyang|Chenzhou|Yongzhou|Huaihua|Loudi|Xiangxi/i,
+            // 邮政：Hupeh/Hupei(湖北) Wuchang/Hankow/Hanyang(武汉三镇旧名) Ichang(宜昌) Siangyang(襄阳) Shashi(荆州/沙市)
+            '湖北':   /湖北|Hubei|Hupeh|Hupei|武汉|黄石|十堰|宜昌|襄阳|鄂州|荆门|孝感|荆州|黄冈|咸宁|随州|恩施|仙桃|潜江|天门|Wuhan|Wuchang|Hankow|Hankou|Hanyang|Huangshi|Shiyan|Yichang|Ichang|Xiangyang|Siangyang|Ezhou|Jingmen|Xiaogan|Jingzhou|Shashi|Huanggang|Xianning|Suizhou|Enshi|Xiantao|Qianjiang|Tianmen/i,
+            // 邮政：Honan(河南) Chengchow(郑州) Loyang(洛阳)
+            '河南':   /河南|Henan|Honan|郑州|开封|洛阳|平顶山|安阳|鹤壁|新乡|焦作|濮阳|许昌|漯河|三门峡|南阳|商丘|信阳|周口|驻马店|Zhengzhou|Chengchow|Kaifeng|Luoyang|Loyang|Pingdingshan|Anyang|Hebi|Xinxiang|Jiaozuo|Puyang|Xuchang|Luohe|Sanmenxia|Nanyang|Shangqiu|Xinyang|Zhoukou|Zhumadian/i,
             // ── 华北 ────────────────────────────────────────────────────────
-            '河北':   /河北|Hebei|石家庄|唐山|秦皇岛|邯郸|邢台|保定|张家口|承德|沧州|廊坊|衡水|Shijiazhuang|Tangshan|Qinhuangdao|Handan|Xingtai|Baoding|Zhangjiakou|Chengde|Cangzhou|Langfang|Hengshui/i,
+            // 邮政：Hopeh/Hopei(河北) Shihkiachwang/Shichiachiang(石家庄) Paoting(保定) Kalgan/Changchiakow(张家口)
+            '河北':   /河北|Hebei|Hopeh|Hopei|石家庄|唐山|秦皇岛|邯郸|邢台|保定|张家口|承德|沧州|廊坊|衡水|Shijiazhuang|Shihkiachwang|Shichiachiang|Tangshan|Qinhuangdao|Handan|Xingtai|Baoding|Paoting|Zhangjiakou|Kalgan|Changchiakow|Chengde|Cangzhou|Langfang|Hengshui/i,
             // 山西(Shanxi) vs 陕西(Shaanxi)：拼音有别，城市名无交叉
-            '山西':   /山西|Shanxi|太原|大同|阳泉|长治|晋城|朔州|晋中|运城|忻州|临汾|吕梁|Taiyuan|Datong|Yangquan|Changzhi|Jincheng|Shuozhou|Jinzhong|Yuncheng|Xinzhou|Linfen|Luliang/i,
+            // 邮政：Shansi(山西) Tatung(大同)
+            '山西':   /山西|Shanxi|Shansi|太原|大同|阳泉|长治|晋城|朔州|晋中|运城|忻州|临汾|吕梁|Taiyuan|Datong|Tatung|Yangquan|Changzhi|Jincheng|Shuozhou|Jinzhong|Yuncheng|Xinzhou|Linfen|Luliang/i,
             // ── 东北 ────────────────────────────────────────────────────────
-            '辽宁':   /辽宁|Liaoning|沈阳|大连|鞍山|抚顺|本溪|丹东|锦州|营口|阜新|辽阳|盘锦|铁岭|朝阳|葫芦岛|Shenyang|Dalian|Anshan|Fushun|Benxi|Dandong|Jinzhou|Yingkou|Fuxin|Liaoyang|Panjin|Tieling|Chaoyang|Huludao/i,
-            '吉林':   /吉林|Jilin|长春|四平|辽源|通化|白山|松原|白城|延边|Changchun|Siping|Liaoyuan|Tonghua|Baishan|Songyuan|Baicheng|Yanbian/i,
+            // 邮政：Mukden/Fengtien(沈阳) Dairen/Talien(大连) Antung(丹东) Chinchow(锦州)
+            '辽宁':   /辽宁|Liaoning|沈阳|大连|鞍山|抚顺|本溪|丹东|锦州|营口|阜新|辽阳|盘锦|铁岭|朝阳|葫芦岛|Shenyang|Mukden|Fengtien|Dalian|Dairen|Talien|Anshan|Fushun|Benxi|Dandong|Antung|Jinzhou|Chinchow|Yingkou|Fuxin|Liaoyang|Panjin|Tieling|Chaoyang|Huludao/i,
+            // 邮政：Kirin/Chilin(吉林) Hsinking(长春，满洲国旧称新京)
+            '吉林':   /吉林|Jilin|Kirin|Chilin|长春|四平|辽源|通化|白山|松原|白城|延边|Changchun|Hsinking|Siping|Liaoyuan|Tonghua|Baishan|Songyuan|Baicheng|Yanbian/i,
             // 伊春(Yichun)与江西宜春拼音相同，黑龙江排后，中文字符`伊春`可精确匹配
-            '黑龙江': /黑龙江|Heilongjiang|哈尔滨|齐齐哈尔|鸡西|鹤岗|双鸭山|大庆|伊春|佳木斯|七台河|牡丹江|黑河|绥化|大兴安岭|Harbin|Qiqihar|Jixi|Hegang|Shuangyashan|Daqing|Yichun|Jiamusi|Qitaihe|Mudanjiang|Heihe|Suihua|Daxinganling/i,
+            // 邮政：Heilungkiang(黑龙江) Tsitsihar/Chichihaerh(齐齐哈尔) Chiamussu(佳木斯) Mutankiang(牡丹江)
+            '黑龙江': /黑龙江|Heilongjiang|Heilungkiang|哈尔滨|齐齐哈尔|鸡西|鹤岗|双鸭山|大庆|伊春|佳木斯|七台河|牡丹江|黑河|绥化|大兴安岭|Harbin|Qiqihar|Tsitsihar|Chichihaerh|Jixi|Hegang|Shuangyashan|Daqing|Yichun|Jiamusi|Chiamussu|Qitaihe|Mudanjiang|Mutankiang|Heihe|Suihua|Daxinganling/i,
             // ── 西南 ────────────────────────────────────────────────────────
-            '四川':   /四川|Sichuan|成都|自贡|攀枝花|泸州|德阳|绵阳|广元|遂宁|内江|乐山|南充|眉山|宜宾|广安|达州|雅安|巴中|资阳|阿坝|甘孜|凉山|Chengdu|Zigong|Panzhihua|Luzhou|Deyang|Mianyang|Guangyuan|Suining|Neijiang|Leshan|Nanchong|Meishan|Yibin|Guangan|Dazhou|Yaan|Bazhong|Ziyang|Aba|Ganzi|Liangshan/i,
-            '贵州':   /贵州|Guizhou|贵阳|六盘水|遵义|安顺|毕节|铜仁|黔西南|黔东南|黔南|Guiyang|Liupanshui|Zunyi|Anshun|Bijie|Tongren|Qianxinan|Qiandongnan|Qiannan/i,
-            '云南':   /云南|Yunnan|昆明|曲靖|玉溪|保山|昭通|丽江|普洱|临沧|楚雄|红河|文山|西双版纳|大理|德宏|怒江|迪庆|Kunming|Qujing|Yuxi|Baoshan|Zhaotong|Lijiang|Puer|Lincang|Chuxiong|Honghe|Wenshan|Xishuangbanna|Dali|Dehong|Nujiang|Diqing/i,
+            // 邮政：Szechwan/Szechuan(四川) Chengtu(成都) Luchow(泸州) Mienchiang(绵阳) Kiating(乐山/嘉定府旧名) Nanchung(南充) Ipin(宜宾)
+            '四川':   /四川|Sichuan|Szechwan|Szechuan|成都|自贡|攀枝花|泸州|德阳|绵阳|广元|遂宁|内江|乐山|南充|眉山|宜宾|广安|达州|雅安|巴中|资阳|阿坝|甘孜|凉山|Chengdu|Chengtu|Zigong|Panzhihua|Luzhou|Luchow|Deyang|Mianyang|Mienchiang|Guangyuan|Suining|Neijiang|Leshan|Kiating|Nanchong|Nanchung|Meishan|Yibin|Ipin|Guangan|Dazhou|Yaan|Bazhong|Ziyang|Aba|Ganzi|Liangshan/i,
+            // 邮政：Kweichow(贵州) Kweiyang(贵阳) Tsunyi(遵义)
+            '贵州':   /贵州|Guizhou|Kweichow|贵阳|六盘水|遵义|安顺|毕节|铜仁|黔西南|黔东南|黔南|Guiyang|Kweiyang|Liupanshui|Zunyi|Tsunyi|Anshun|Bijie|Tongren|Qianxinan|Qiandongnan|Qiannan/i,
+            // 邮政：Yunnanfu(昆明历史名) Likiang(丽江) Tali(大理)
+            '云南':   /云南|Yunnan|昆明|曲靖|玉溪|保山|昭通|丽江|普洱|临沧|楚雄|红河|文山|西双版纳|大理|德宏|怒江|迪庆|Kunming|Yunnanfu|Qujing|Yuxi|Baoshan|Zhaotong|Lijiang|Likiang|Puer|Lincang|Chuxiong|Honghe|Wenshan|Xishuangbanna|Dali|Tali|Dehong|Nujiang|Diqing/i,
             // 西藏：含拼音及常用英文名（Lhasa/Shigatse 等）
             '西藏':   /西藏|Tibet|藏语|拉萨|日喀则|昌都|林芝|山南|那曲|阿里|Lhasa|Lasa|Shigatse|Xigazê|Chamdo|Changdu|Nyingchi|Linzhi|Shannan|Nagqu|Naqu/i,
             // ── 西北 ────────────────────────────────────────────────────────
             // 榆林(Yulin)与广西玉林拼音相同，陕西排后，中文字符`榆林`可精确匹配
-            '陕西':   /陕西|Shaanxi|西安|铜川|宝鸡|咸阳|渭南|延安|汉中|榆林|安康|商洛|Xian|Xi.an|Tongchuan|Baoji|Xianyang|Weinan|Yanan|Hanzhong|Yulin|Ankang|Shangluo/i,
-            '甘肃':   /甘肃|Gansu|兰州|嘉峪关|金昌|白银|天水|武威|张掖|平凉|酒泉|庆阳|定西|陇南|临夏|甘南|Lanzhou|Jiayuguan|Jinchang|Baiyin|Tianshui|Wuwei|Zhangye|Pingliang|Jiuquan|Qingyang|Dingxi|Longnan|Linxia|Gannan/i,
+            // 邮政：Shensi(陕西) Sian/Hsian/Sianfu(西安) Paochi(宝鸡) Hsienyang(咸阳) Yenan(延安) Hanchung(汉中)
+            '陕西':   /陕西|Shaanxi|Shensi|西安|铜川|宝鸡|咸阳|渭南|延安|汉中|榆林|安康|商洛|Xian|Xi.an|Sian|Hsian|Sianfu|Tongchuan|Baoji|Paochi|Xianyang|Hsienyang|Weinan|Yanan|Yenan|Hanzhong|Hanchung|Yulin|Ankang|Shangluo/i,
+            // 邮政：Kansu(甘肃) Lanchow(兰州) Tienshui(天水) Liangchow(武威/凉州旧名) Changyeh(张掖) Chiuchuan(酒泉)
+            '甘肃':   /甘肃|Gansu|Kansu|兰州|嘉峪关|金昌|白银|天水|武威|张掖|平凉|酒泉|庆阳|定西|陇南|临夏|甘南|Lanzhou|Lanchow|Jiayuguan|Jinchang|Baiyin|Tianshui|Tienshui|Wuwei|Liangchow|Zhangye|Changyeh|Pingliang|Jiuquan|Chiuchuan|Qingyang|Dingxi|Longnan|Linxia|Gannan/i,
             // 海南州加"州"以区分海南省；Hainanzhou 也精确无歧义
-            '青海':   /青海|Qinghai|西宁|海东|海北|黄南|海南州|果洛|玉树|Xining|Haidong|Haibei|Huangnan|Hainanzhou|Guoluo|Yushu/i,
+            // 邮政：Tsinghai/Chinghai(青海) Sining(西宁)
+            '青海':   /青海|Qinghai|Tsinghai|Chinghai|西宁|海东|海北|黄南|海南州|果洛|玉树|Xining|Sining|Haidong|Haibei|Huangnan|Hainanzhou|Guoluo|Yushu/i,
             // 新疆：含地级市/自治州/地区的拼音及国际通用英文名
-            '新疆':   /新疆|Xinjiang|维吾尔|乌鲁木齐|克拉玛依|吐鲁番|哈密|昌吉|博尔塔拉|巴音郭楞|阿克苏|克孜勒苏|喀什|和田|伊犁|塔城|阿勒泰|Urumqi|Wulumuqi|Karamay|Turpan|Tulufan|Hami|Changji|Bortala|Boertala|Bayingolin|Bayinguoleng|Aksu|Akesu|Kizilsu|Kashgar|Kashi|Hotan|Hetian|Ili|Yili|Tacheng|Altay|Aletai/i,
-            '宁夏':   /宁夏|Ningxia|银川|石嘴山|吴忠|固原|中卫|Yinchuan|Shizuishan|Wuzhong|Guyuan|Zhongwei/i,
+            // 邮政：Sinkiang(新疆) Urumchi(乌鲁木齐) Khotan(和田)
+            '新疆':   /新疆|Xinjiang|Sinkiang|维吾尔|乌鲁木齐|克拉玛依|吐鲁番|哈密|昌吉|博尔塔拉|巴音郭楞|阿克苏|克孜勒苏|喀什|和田|伊犁|塔城|阿勒泰|Urumqi|Urumchi|Wulumuqi|Karamay|Turpan|Tulufan|Hami|Changji|Bortala|Boertala|Bayingolin|Bayinguoleng|Aksu|Akesu|Kizilsu|Kashgar|Kashi|Hotan|Hetian|Khotan|Ili|Yili|Tacheng|Altay|Aletai/i,
+            // 邮政：Ningsia(宁夏)
+            '宁夏':   /宁夏|Ningxia|Ningsia|银川|石嘴山|吴忠|固原|中卫|Yinchuan|Shizuishan|Wuzhong|Guyuan|Zhongwei/i,
             // 内蒙古：9地级市+3盟，含蒙古语及国际英文名
-            '内蒙古': /内蒙古|内蒙|呼和浩特|包头|乌海|赤峰|通辽|鄂尔多斯|呼伦贝尔|巴彦淖尔|乌兰察布|兴安盟|锡林郭勒|阿拉善|蒙古语|Hohhot|Huhehaote|Baotou|Wuhai|Chifeng|Tongliao|Ordos|Eerduosi|Hulunbuir|Hulunbeier|Bayannur|Ulanqab|Wulanchabu|Hinggan|Xingan|Xilingol|Xilinguole|Alxa|Alasha/i,
+            // 邮政：Kweisui/Kweihua/Suiyuan(呼和浩特历史名) Paotow(包头)
+            '内蒙古': /内蒙古|内蒙|呼和浩特|包头|乌海|赤峰|通辽|鄂尔多斯|呼伦贝尔|巴彦淖尔|乌兰察布|兴安盟|锡林郭勒|阿拉善|蒙古语|Hohhot|Huhehaote|Kweisui|Kweihua|Suiyuan|Baotou|Paotow|Wuhai|Chifeng|Tongliao|Ordos|Eerduosi|Hulunbuir|Hulunbeier|Bayannur|Ulanqab|Wulanchabu|Hinggan|Xingan|Xilingol|Xilinguole|Alxa|Alasha/i,
         };
 
         /**
@@ -2641,8 +2690,10 @@ $totalCount = count($allStations);
             $(window).on('scroll.backtotop', function() {
                 if ($(this).scrollTop() > 300) {
                     $('#miniPlayer').addClass('show');
+                    $('body').addClass('mini-player-visible');
                 } else {
                     $('#miniPlayer').removeClass('show');
+                    $('body').removeClass('mini-player-visible');
                 }
             });
 
@@ -2682,7 +2733,13 @@ $totalCount = count($allStations);
             }
 
             $('#miniPlayBtn').on('click', function() { togglePlay(); });
-            $('#miniFullscreenBtn').on('click', function() { showFullscreen(); });
+            $('#miniFullscreenBtn').on('click', function(e) {
+                e.stopPropagation();
+                isAutoFullscreen = false;
+                userManuallyHid  = false;
+                showFullscreen();
+                setTimeout(() => requestBrowserFullscreen(), 100);
+            });
             
             // 播放按钮
             $(document).on('click', '.station-play-btn', function(e) {

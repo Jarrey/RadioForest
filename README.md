@@ -1,94 +1,96 @@
-# 电台森林 📻
+# Radio Forest 📻
 
-基于 PHP 的在线网络电台播放器。解析本地 M3U 播放列表，在浏览器中提供电台检索、分类筛选与在线收听功能。
+A PHP-based online radio web player that scans local M3U playlist files in the project root, parses station metadata, and provides search, region filtering, theme switching, and live playback in the browser.
 
-## 目录结构
+## Project structure
 
-```
+```text
 radioweb/
-├── index.dev.php    # 源文件（开发时编辑此文件）
-├── index.php        # 构建产物（部署到服务器的文件）
-├── build.js         # 构建脚本（压缩 CSS/JS 生成 index.php）
-├── package.json     # 构建依赖声明
-└── radio_*.m3u      # 播放列表文件（需自行提供，见下方说明）
+├── index.dev.php    # Source file for development, contains editable PHP/HTML/CSS/JS
+├── index.php        # Build output for deployment
+├── build.js         # Build script that minifies CSS/JS and generates index.php
+└── package.json     # Build dependency manifest
 ```
 
-## 使用前提
+## Overview
 
-> **必须**在项目根目录放置至少一个符合命名规则的 M3U 播放列表文件，否则页面将显示空列表。
+- The app reads all `radio*.m3u` files in the root directory.
+- It is recommended to use `radio_<region_code>.m3u` naming.
+- If no playlist files are found, the page will show an empty station list.
+- Multiple playlists are merged automatically.
 
-播放列表文件名格式：
+## Playlist format
 
-```
-radio_<地区代码>.m3u
-```
-
-示例：
-
-| 文件名         | 含义       |
-| -------------- | ---------- |
-| `radio_cn.m3u` | 中国电台   |
-| `radio_us.m3u` | 美国电台   |
-| `radio_jp.m3u` | 日本电台   |
-| `radio_.m3u`   | 全球电台   |
-
-地区代码遵循 ISO 3166-1 alpha-2 标准（`cn`、`us`、`gb`、`jp`、`kr` 等）。可同时放置多个文件，系统会合并全部列表。
-
-### M3U 文件格式
+Example M3U content:
 
 ```m3u
 #EXTM3U
-#EXTINF:-1 tvg-name="中央人民广播电台" tvg-logo="https://example.com/logo.png" group-title="China",中央人民广播电台
+#EXTINF:-1 tvg-name="CNR Radio" tvg-logo="https://example.com/logo.png" group-title="China",CNR Radio
 http://lhttp.cnr.cn/live/zgzs/64k.mp3
 ```
 
-支持的标签字段：
+Recommended file names:
 
-- `tvg-name` — 电台名称
-- `tvg-logo` — 台标图片 URL
-- `group-title` — 国家/分组（用于筛选面板）
+| File name        | Meaning      |
+| ---------------- | ------------ |
+| `radio_cn.m3u`   | China radio  |
+| `radio_us.m3u`   | USA radio    |
+| `radio_jp.m3u`   | Japan radio  |
+| `radio.m3u`     | Global radio |
 
-## 部署
+Supported tags:
 
-### 方式一：直接使用构建产物（推荐）
+- `tvg-name` — station name
+- `tvg-logo` — station logo URL
+- `group-title` — country/group name for filtering
 
-将 `index.php` 及 `radio_*.m3u` 文件上传至支持 PHP 的 Web 服务器同一目录，即可访问。
+## Deployment
 
-### 方式二：从源码构建
+### Option 1: Deploy the built file
 
-修改 `index.dev.php` 后，运行构建命令生成压缩版 `index.php`：
+Upload `index.php` and `radio_*.m3u` to a PHP-capable web server. `node_modules/` and `package-lock.json` are not required.
+
+### Option 2: Build from source
+
+Edit `index.dev.php`, then run:
 
 ```bash
-# 安装构建依赖（仅首次）
 npm install
-
-# 执行构建
 node build.js
 ```
 
-构建完成后将 `index.php` 部署到服务器。`node_modules/` 和 `package-lock.json` 无需上传。
+The build script minifies the inlined CSS and JavaScript, preserves PHP code blocks, and writes the result to `index.php`.
 
-## 功能特性
+## Key features
 
-- **多列表合并** — 自动读取目录下所有 `radio_*.m3u` 文件并合并
-- **国家/地区筛选** — 支持 40+ 个国家，带国旗图标
-- **分类筛选** — 音乐、新闻、交通、体育、文艺、儿童等分类，中国地区额外支持省份与央广/央视细分
-- **关键词搜索** — 实时过滤电台名称
-- **多主题配色** — 翠绿、青绿、天蓝、橙色、琥珀、玫瑰、深红、粉红、紫色、靛蓝、灰度、黑白共 12 套
-- **全屏播放器** — 带音波动画与实时时钟显示
-- **响应式设计** — 适配手机、平板及桌面，支持横屏模式
+- Playlist merge: automatically reads and merges all `radio*.m3u` files
+- Region filtering: supports multiple regions with flag icons
+- Keyword search: filters station names in real time
+- Theme switching: 12 color themes available
+- Fullscreen player: animated waveform, playback status, and clock display
+- Responsive design: works on mobile, tablet, and desktop
 
-## 运行环境
+## Requirements
 
-| 组件       | 要求                       |
-| ---------- | -------------------------- |
-| PHP        | 5.6+（服务端解析 M3U 文件）|
-| Web 服务器 | Apache / Nginx / 其他      |
-| 浏览器     | 支持 HTML5 `<audio>` 的现代浏览器 |
-| Node.js    | 仅构建时需要（≥ 14）       |
+| Component    | Requirement                              |
+| ------------ | ---------------------------------------- |
+| PHP          | 5.6+                                     |
+| Web server   | Apache / Nginx / other PHP-capable server |
+| Browser      | Modern browser with HTML5 `<audio>` support |
+| Node.js      | Required only for build (recommended ≥ 14) |
 
-## 开发说明
+## Development notes
 
-- 编辑 `index.dev.php`，其中包含未压缩的 PHP / HTML / CSS / JavaScript
-- 运行 `node build.js` 后，CSS 与 JS 会被 [Terser](https://terser.org/) 压缩并写入 `index.php`
-- 构建脚本会保留 PHP 代码块（`<?php ... ?>`），不会破坏服务端逻辑
+- `index.dev.php` is the editable source file containing HTML, CSS, JavaScript, and PHP logic.
+- `build.js` minifies inline CSS and JavaScript before writing `index.php`.
+- The build process uses `terser`, which is declared in `package.json`.
+
+## Notes
+
+- Keep playlist files and `index.php` in the same directory.
+- `group-title` values are mapped to Chinese country names for better filtering.
+- To add themes or customize UI, edit `index.dev.php` and run `node build.js` again.
+
+---
+
+For Chinese documentation, see `README_cn.md`.
