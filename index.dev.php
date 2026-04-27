@@ -1715,7 +1715,7 @@ $totalCount = count($allStations);
         <div class="filter-section">
             <div class="filter-header" id="regionsToggle">
                 <span class="toggle-icon">▼</span>
-                <h3>国家筛选<span id="regionFilterLabel" style="font-weight:normal;opacity:0.65;margin-left:6px;font-size:0.85em;"></span></h3>
+                <h3>国家/地区<span id="regionFilterLabel" style="font-weight:normal;opacity:0.65;margin-left:6px;font-size:0.85em;"></span></h3>
             </div>
             <div class="filter-content" id="regionsContent">
                 <div class="regions" id="regionBtns">
@@ -1750,7 +1750,7 @@ $totalCount = count($allStations);
         <div class="filter-section">
             <div class="filter-header" id="typesToggle">
                 <span class="toggle-icon">▼</span>
-                <h3>分类筛选<span id="typeFilterLabel" style="font-weight:normal;opacity:0.65;margin-left:6px;font-size:0.85em;"></span></h3>
+                <h3>分类<span id="typeFilterLabel" style="font-weight:normal;opacity:0.65;margin-left:6px;font-size:0.85em;"></span></h3>
             </div>
             <div class="filter-content" id="typesContent">
                 <div class="types" id="typeBtns"></div>
