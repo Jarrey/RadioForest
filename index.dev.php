@@ -1204,45 +1204,110 @@ $totalCount = count($allStations);
             transform: scale(1.1);
         }
         
-        /* 回到顶部按钮 */
-        .back-to-top {
+        /* 悬浮小播放条 */
+        .mini-player {
             position: fixed;
-            bottom: 28px;
-            right: 20px;
-            width: 44px;
-            height: 44px;
-            background: var(--primary);
-            border: none;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            transform: translateY(100%);
+            background: var(--player-bg);
+            border-top: 1px solid var(--player-border);
+            border-radius: 0;
+            box-shadow: 0 -4px 20px rgba(0,0,0,0.25), 0 0 14px var(--player-shadow);
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            padding: 8px 16px 8px 12px;
+            opacity: 0;
+            visibility: hidden;
+            transition: opacity 0.3s, visibility 0.3s, transform 0.3s;
+            z-index: 998;
+            backdrop-filter: blur(8px);
+            -webkit-backdrop-filter: blur(8px);
+        }
+        .mini-player.show {
+            opacity: 1;
+            visibility: visible;
+            transform: translateY(0);
+        }
+        .mini-player-logo {
+            width: 36px;
+            height: 36px;
             border-radius: 50%;
+            object-fit: cover;
+            flex-shrink: 0;
+            background: var(--bg-card);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+        }
+        .mini-player-logo img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            border-radius: 50%;
+        }
+        .mini-player-logo.placeholder {
+            background: color-mix(in srgb, var(--primary) 15%, var(--bg-card));
+        }
+        .mini-player-info {
+            flex: 1;
+            min-width: 0;
+            overflow: hidden;
+        }
+        .mini-player-name {
+            font-size: 0.85em;
+            font-weight: 600;
+            color: var(--text);
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+        .mini-player-status {
+            font-size: 0.72em;
+            color: var(--primary);
+            opacity: 0.8;
+            margin-top: 1px;
+        }
+        .mini-player-btn {
+            width: 34px;
+            height: 34px;
+            border-radius: 50%;
+            border: none;
+            background: color-mix(in srgb, var(--primary) 18%, transparent);
+            color: var(--primary);
             cursor: pointer;
             display: flex;
             align-items: center;
             justify-content: center;
-            color: #000;
-            box-shadow: 0 4px 16px rgba(0,0,0,0.3), 0 0 12px var(--player-shadow);
-            opacity: 0;
-            visibility: hidden;
-            transform: translateY(10px);
-            transition: opacity 0.3s, visibility 0.3s, transform 0.3s;
-            z-index: 999;
+            flex-shrink: 0;
+            transition: background 0.2s, transform 0.15s;
         }
-        
-        .back-to-top.show {
-            opacity: 0.6;
-            visibility: visible;
-            transform: translateY(0);
+        .mini-player-btn:hover {
+            background: color-mix(in srgb, var(--primary) 30%, transparent);
+            transform: scale(1.1);
         }
-        
-        .back-to-top:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 6px 20px rgba(0,0,0,0.4);
-            opacity: 0.9 !important;
-        }
-        
-        .back-to-top svg {
-            width: 20px;
-            height: 20px;
+        .mini-player-btn svg {
+            width: 16px;
+            height: 16px;
             fill: currentColor;
+        }
+        .mini-media {
+            display: none;
+            align-items: center;
+            gap: 10px;
+            flex: 1;
+            min-width: 0;
+            overflow: hidden;
+        }
+        .mini-player.has-station .mini-media {
+            display: flex;
+        }
+        .mini-player.has-station #backToTop {
+            border-left: 1px solid color-mix(in srgb, var(--border) 50%, transparent);
+            margin-left: 2px;
         }
         
         /* 正在播放的卡片标记 */
@@ -1711,11 +1776,26 @@ $totalCount = count($allStations);
         <div class="loading-more" id="loadingMore">加载更多...</div>
     </div>
     
-    <!-- 回到顶部按钮 -->
-    <button class="back-to-top" id="backToTop">
-        <svg viewBox="0 0 24 24"><path d="M12 4l-8 8h5v8h6v-8h5z"/></svg>
-    </button>
-    
+    <!-- 悬浮小播放条（含回到顶部） -->
+    <div class="mini-player" id="miniPlayer">
+        <div class="mini-media" id="miniMedia">
+            <div class="mini-player-logo placeholder" id="miniPlayerLogo"></div>
+            <div class="mini-player-info">
+                <div class="mini-player-name" id="miniPlayerName">选择一个电台</div>
+                <div class="mini-player-status" id="miniPlayerStatus">等待中</div>
+            </div>
+            <button class="mini-player-btn" id="miniPlayBtn" title="播放/暂停">
+                <svg viewBox="0 0 24 24" id="miniPlayIcon"><polygon points="6,4 20,12 6,20"/></svg>
+            </button>
+            <button class="mini-player-btn" id="miniFullscreenBtn" title="全屏播放">
+                <svg viewBox="0 0 24 24"><path d="M7 14H5v5h5v-2H7v-3zm-2-4h2V7h3V5H5v5zm12 7h-3v2h5v-5h-2v3zM14 5v2h3v3h2V5h-5z"/></svg>
+            </button>
+        </div>
+        <button class="mini-player-btn" id="backToTop" title="回到顶部">
+            <svg viewBox="0 0 24 24"><path d="M12 4l-8 8h5v8h6v-8h5z"/></svg>
+        </button>
+    </div>
+
     <!-- 全屏播放器 -->
     <div class="fullscreen-player" id="fullscreenPlayer">
         <div class="wave-background">
@@ -2104,6 +2184,7 @@ $totalCount = count($allStations);
                 
                 // 更新标题
                 $('#playerTitle, #fullscreenTitle').text(station.name);
+                syncMiniPlayer();
                 
                 // 更新 Logo
                 const imgSrc = station.logo && station.logo !== 'null' ? station.logo : null;
@@ -2324,6 +2405,8 @@ $totalCount = count($allStations);
                 .on('play',  function () {
                     $('#statusDot, #fullscreenDot').removeClass('paused').addClass('playing');
                     $('#playerStatus, #fullscreenStatus').text('正在播放');
+                    updateMiniPlayIcon(false);
+                    $('#miniPlayerStatus').text('正在播放');
                     $('#soundWave').addClass('playing');
                     $('#fullscreenCover').addClass('playing');
                     updatePlayIcon(false);
@@ -2347,6 +2430,8 @@ $totalCount = count($allStations);
                     updateFullscreenPlayIcon(true);
                     // 移除所有卡片播放高亮
                     $('.station-card').removeClass('playing');
+                    updateMiniPlayIcon(true);
+                    $('#miniPlayerStatus').text('已暂停');
                     document.title = '电台森林';
                 })
                 .on('error', function () {
@@ -2357,6 +2442,8 @@ $totalCount = count($allStations);
                     updatePlayIcon(true);
                     updateFullscreenPlayIcon(true);
                     $('.station-card').removeClass('playing');
+                    updateMiniPlayIcon(true);
+                    $('#miniPlayerStatus').text('播放错误');
                     console.error('音频加载错误');
                 });
 
@@ -2550,18 +2637,52 @@ $totalCount = count($allStations);
             updateClock();
             setInterval(updateClock, 1000);
             
-            // 回到顶部按钮
+            // 悬浮小播放条 & 回到顶部
             $(window).on('scroll.backtotop', function() {
                 if ($(this).scrollTop() > 300) {
-                    $('#backToTop').addClass('show');
+                    $('#miniPlayer').addClass('show');
                 } else {
-                    $('#backToTop').removeClass('show');
+                    $('#miniPlayer').removeClass('show');
                 }
             });
-            
+
             $('#backToTop').on('click', function() {
                 $('html, body').animate({ scrollTop: 0 }, 300);
             });
+
+            // 小播放条：根据 currentStation 显隐媒体控件
+            function updateMiniPlayer() {
+                if (currentStation) {
+                    $('#miniPlayer').addClass('has-station');
+                } else {
+                    $('#miniPlayer').removeClass('has-station');
+                }
+            }
+
+            // 同步小播放条电台信息（logo + 名称）
+            function syncMiniPlayer() {
+                if (!currentStation) return;
+                const imgSrc = currentStation.logo && currentStation.logo !== 'null' ? currentStation.logo : null;
+                const $logo = $('#miniPlayerLogo');
+                if (imgSrc) {
+                    $logo.removeClass('placeholder').html('<img src="' + imgSrc + '" alt="">');
+                } else {
+                    $logo.addClass('placeholder').html(SVG_RADIO_SM);
+                }
+                $('#miniPlayerName').text(currentStation.name);
+                updateMiniPlayer();
+            }
+
+            // 切换小播放条播放/暂停图标
+            function updateMiniPlayIcon(isPaused) {
+                const icon = isPaused
+                    ? '<polygon points="6,4 20,12 6,20"/>'
+                    : '<rect x="5" y="4" width="4" height="16"/><rect x="15" y="4" width="4" height="16"/>';
+                $('#miniPlayIcon').html(icon);
+            }
+
+            $('#miniPlayBtn').on('click', function() { togglePlay(); });
+            $('#miniFullscreenBtn').on('click', function() { showFullscreen(); });
             
             // 播放按钮
             $(document).on('click', '.station-play-btn', function(e) {
@@ -2582,6 +2703,7 @@ $totalCount = count($allStations);
                 audio.src = '';
                 currentUrl = '';
                 currentStation = null;
+                updateMiniPlayer();
                 filterAndRender();
                 $('#playerTitle').text('选择一个电台开始播放');
                 $('#playerStatus').text('等待中');
