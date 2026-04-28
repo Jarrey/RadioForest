@@ -2316,14 +2316,19 @@ if (isset($_GET['action']) && $_GET['action'] === 'stations') {
 
             // ── 加载完成后按去重数量更新地区按钮计数 ─────────────────────────────
             function updateRegionCounts() {
-                const regionDeduped = {};
-                const seenNames = new Set();
+                // 全局去重：用于"全部"按钮计数
+                const globalSeen = new Set();
                 let total = 0;
+                // 各地区独立去重：与点击地区按钮后 getFiltered 的结果保持一致
+                const regionDeduped = {};
+                const regionSeen = {};
                 allStations.forEach(s => {
-                    if (seenNames.has(s.name)) return;
-                    seenNames.add(s.name);
-                    total++;
-                    regionDeduped[s.region] = (regionDeduped[s.region] || 0) + 1;
+                    if (!globalSeen.has(s.name)) { globalSeen.add(s.name); total++; }
+                    if (!regionSeen[s.region]) regionSeen[s.region] = new Set();
+                    if (!regionSeen[s.region].has(s.name)) {
+                        regionSeen[s.region].add(s.name);
+                        regionDeduped[s.region] = (regionDeduped[s.region] || 0) + 1;
+                    }
                 });
                 $('.region-btn[data-region="all"]').html((_, h) => h.replace(/\(\d+\)/, `(${total})`));
                 Object.entries(regionDeduped).forEach(([region, count]) => {
