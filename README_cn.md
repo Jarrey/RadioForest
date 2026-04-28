@@ -11,6 +11,7 @@ radioweb/
 ├── build.js               # 构建脚本，压缩 CSS/JS 并生成 index.php
 ├── radioBrowserService.py # radio-browser.info 请求辅助模块
 ├── syncInternetRatio.py   # 从电台数据生成 M3U 播放列表
+├── lang/                  # UI 翻译字典
 └── package.json           # 构建依赖声明
 ```
 
@@ -102,6 +103,7 @@ node build.js
 
 - 多列表合并：读取所有 `radio_*.m3u` 文件并展示电台
 - 国家/地区筛选：支持多地区筛选，并显示国旗图标
+- 多语言界面：默认使用浏览器语言，并支持点击切换语言和国旗显示
 - 关键词搜索：快速过滤电台名称
 - 主题切换：提供 12 种配色主题
 - 全屏播放器：带音波动画、播放状态和时钟显示

@@ -11,6 +11,7 @@ radioweb/
 ├── build.js               # Build script that minifies CSS/JS and generates index.php
 ├── radioBrowserService.py # Helper module for radio-browser.info API requests
 ├── syncInternetRatio.py   # Generate M3U playlists from radio-browser station data
+├── lang/                  # UI translation dictionaries
 └── package.json           # Build dependency manifest
 ```
 
@@ -102,6 +103,7 @@ The build script minifies the inlined CSS and JavaScript, preserves PHP code blo
 
 - Multiple playlists: reads all `radio_*.m3u` files and merges stations
 - Region filtering: supports multiple regions with flag icons
+- Multi-language UI: browser locale default + manual language switcher with flags
 - Keyword search: filters station names in real time
 - Theme switching: 12 color themes available
 - Fullscreen player: animated waveform, playback status, and clock display

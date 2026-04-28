@@ -1795,8 +1795,8 @@ if (isset($_GET['action']) && $_GET['action'] === 'stations') {
                     <circle cx="47" cy="43" r="1.8" fill="var(--bg)" opacity="0.28"/>
                     <circle cx="53" cy="43" r="1.8" fill="var(--bg)" opacity="0.28"/>
                 </svg>
-                <h1>电台森林</h1>
-                <p class="subtitle" id="totalSubtitle">正在加载...</p>
+                <h1 data-i18n="appTitle">电台森林</h1>
+                <p class="subtitle" id="totalSubtitle" data-i18n="subtitleLoading">正在加载...</p>
             </div>
             <select class="theme-select" id="themeSelect">
                 <option value="green">🌿 翠绿</option>
@@ -1812,16 +1812,26 @@ if (isset($_GET['action']) && $_GET['action'] === 'stations') {
                 <option value="grayscale">⚫ 灰度</option>
                 <option value="bw">⚪ 黑白</option>
             </select>
+            <select class="lang-select" id="langSelect">
+                <option value="zh-CN">🇨🇳 中文</option>
+                <option value="en">🇺🇸 English</option>
+                <option value="es">🇪🇸 Español</option>
+                <option value="fr">🇫🇷 Français</option>
+                <option value="de">🇩🇪 Deutsch</option>
+                <option value="it">🇮🇹 Italiano</option>
+                <option value="ja">🇯🇵 日本語</option>
+                <option value="ko">🇰🇷 한국어</option>
+            </select>
         </header>
         
         <div class="search-box">
-            <input type="text" id="searchInput" placeholder="搜索电台...">
+            <input type="text" id="searchInput" data-i18n-placeholder="searchPlaceholder" placeholder="搜索电台...">
         </div>
         
         <div class="filter-section">
             <div class="filter-header" id="regionsToggle">
                 <span class="toggle-icon">▼</span>
-                <h3>国家/地区<span id="regionFilterLabel" style="font-weight:normal;opacity:0.65;margin-left:6px;font-size:0.85em;"></span></h3>
+                <h3 data-i18n="regionsHeader">国家/地区<span id="regionFilterLabel" style="font-weight:normal;opacity:0.65;margin-left:6px;font-size:0.85em;"></span></h3>
             </div>
             <div class="filter-content" id="regionsContent">
                 <div class="regions" id="regionBtns">
@@ -1856,7 +1866,7 @@ if (isset($_GET['action']) && $_GET['action'] === 'stations') {
         <div class="filter-section">
             <div class="filter-header" id="typesToggle">
                 <span class="toggle-icon">▼</span>
-                <h3>分类<span id="typeFilterLabel" style="font-weight:normal;opacity:0.65;margin-left:6px;font-size:0.85em;"></span></h3>
+                <h3 data-i18n="typesHeader">分类<span id="typeFilterLabel" style="font-weight:normal;opacity:0.65;margin-left:6px;font-size:0.85em;"></span></h3>
             </div>
             <div class="filter-content" id="typesContent">
                 <div class="types" id="typeBtns"></div>
@@ -1866,10 +1876,10 @@ if (isset($_GET['action']) && $_GET['action'] === 'stations') {
         <div class="player-bar" id="playerBar">
             <div class="player-logo placeholder" id="playerLogo"><svg viewBox="0 0 60 52" width="36" height="31"><line x1="46" y1="3" x2="39" y2="13" stroke="var(--primary)" stroke-width="2.5" stroke-linecap="round"/><rect x="3" y="12" width="54" height="36" rx="7" fill="var(--primary)"/><rect x="7" y="17" width="25" height="26" rx="4" fill="var(--bg)" opacity="0.1"/><line x1="9" y1="22" x2="30" y2="22" stroke="var(--bg)" stroke-width="1.3" stroke-linecap="round" opacity="0.55"/><line x1="9" y1="26" x2="30" y2="26" stroke="var(--bg)" stroke-width="1.3" stroke-linecap="round" opacity="0.55"/><line x1="9" y1="30" x2="30" y2="30" stroke="var(--bg)" stroke-width="1.3" stroke-linecap="round" opacity="0.55"/><line x1="9" y1="34" x2="30" y2="34" stroke="var(--bg)" stroke-width="1.3" stroke-linecap="round" opacity="0.55"/><line x1="9" y1="38" x2="30" y2="38" stroke="var(--bg)" stroke-width="1.3" stroke-linecap="round" opacity="0.55"/><rect x="36" y="16" width="17" height="8" rx="2" fill="var(--bg)" opacity="0.22"/><line x1="45" y1="17.5" x2="45" y2="23.5" stroke="var(--bg)" stroke-width="1.5" stroke-linecap="round" opacity="0.6"/><circle cx="41" cy="33" r="5" fill="var(--bg)" opacity="0.2"/><circle cx="41" cy="33" r="2.5" fill="var(--bg)" opacity="0.5"/><circle cx="53" cy="33" r="5" fill="var(--bg)" opacity="0.2"/><circle cx="53" cy="33" r="2.5" fill="var(--bg)" opacity="0.5"/></svg></div>
             <div class="player-info">
-                <div class="player-title" id="playerTitle">选择一个电台开始播放</div>
+                <div class="player-title" id="playerTitle" data-i18n="selectStationToPlay">选择一个电台开始播放</div>
                 <div class="player-status">
                     <span class="status-dot" id="statusDot"></span>
-                    <span id="playerStatus">等待中</span>
+                    <span id="playerStatus" data-i18n="playerWaiting">等待中</span>
                 </div>
             </div>
             <audio controls id="audioPlayer"></audio>
@@ -1884,7 +1894,7 @@ if (isset($_GET['action']) && $_GET['action'] === 'stations') {
 
         <div class="stations-list" id="stationsGrid"></div>
         
-        <div class="loading-more" id="loadingMore">加载更多...</div>
+        <div class="loading-more" id="loadingMore" data-i18n="loadMore">加载更多...</div>
     </div>
     
     <!-- 悬浮小播放条（含回到顶部） -->
@@ -1892,8 +1902,8 @@ if (isset($_GET['action']) && $_GET['action'] === 'stations') {
         <div class="mini-media" id="miniMedia">
             <div class="mini-player-logo placeholder" id="miniPlayerLogo"></div>
             <div class="mini-player-info">
-                <div class="mini-player-name" id="miniPlayerName">选择一个电台</div>
-                <div class="mini-player-status" id="miniPlayerStatus">等待中</div>
+                <div class="mini-player-name" id="miniPlayerName" data-i18n="selectStationToPlay">选择一个电台</div>
+                <div class="mini-player-status" id="miniPlayerStatus" data-i18n="playerWaiting">等待中</div>
             </div>
             <button class="mini-player-btn" id="miniPlayBtn" title="播放/暂停">
                 <svg viewBox="0 0 24 24" id="miniPlayIcon"><polygon points="6,4 20,12 6,20"/></svg>
@@ -2193,6 +2203,9 @@ if (isset($_GET['action']) && $_GET['action'] === 'stations') {
         let currentUrl      = '';
         let currentStation  = null;
         let stationsFullyLoaded = false; // 全部数据流式加载完毕标志
+        let currentLang    = 'en';
+        let i18n           = {};
+        const SUPPORTED_LANGS = ['zh-CN', 'en', 'es', 'fr', 'de', 'it', 'ja', 'ko'];
 
         // HTML 属性安全转义（防止电台名内的引号等破坏HTML属性）
         function esc(s) {
@@ -2251,11 +2264,11 @@ if (isset($_GET['action']) && $_GET['action'] === 'stations') {
                             </div>
                         </div>
                         <div class="station-actions">
-                            <span class="playing-badge"><span class="playing-badge-dot"></span>正在播放</span>
-                            <button class="station-play-btn" data-url="${esc(station.url)}" data-name="${esc(station.name)}" title="播放">
+                            <span class="playing-badge"><span class="playing-badge-dot"></span>${t('playerPlaying') || '正在播放'}</span>
+                            <button class="station-play-btn" data-url="${esc(station.url)}" data-name="${esc(station.name)}" title="${t('playButton') || '播放'}">
                                 <svg viewBox="0 0 24 24"><polygon points="6,4 20,12 6,20"/></svg>
                             </button>
-                            <button class="station-stop-btn" data-url="${esc(station.url)}" data-name="${esc(station.name)}" title="暂停">
+                            <button class="station-stop-btn" data-url="${esc(station.url)}" data-name="${esc(station.name)}" title="${t('pauseButton') || '暂停'}">
                                 <svg viewBox="0 0 24 24"><rect x="6" y="5" width="4" height="14" rx="1"/><rect x="14" y="5" width="4" height="14" rx="1"/></svg>
                             </button>
                         </div>
@@ -2267,15 +2280,19 @@ if (isset($_GET['action']) && $_GET['action'] === 'stations') {
             // ── 过滤 + 渲染主入口 ─────────────────────────────────────────────────
             function filterAndRender(reset = false) {
                 if (!allStations.length) {
-                    $('#resultCount').text(stationsFullyLoaded ? '无电台数据' : '加载中...');
+                    $('#resultCount').text(stationsFullyLoaded ? t('noStations') : t('loading'));
                     return;
                 }
                 if (reset) { filteredCache = null; visibleCount = BATCH_SIZE; }
                 const filtered = getFiltered();
                 const toShow   = filtered.slice(0, visibleCount);
                 renderStations(toShow);
-                const suffix = stationsFullyLoaded ? '' : '（加载中…）';
-                $('#resultCount').text(`显示 ${toShow.length} / ${filtered.length} 个电台${suffix}`);
+                const suffix = stationsFullyLoaded ? '' : t('loadingSuffix');
+                $('#resultCount').text(t('showingCount', {
+                    shown: toShow.length,
+                    total: filtered.length,
+                    suffix,
+                }));
                 $('#loadingMore').toggleClass('show', visibleCount < filtered.length);
             }
 
@@ -2329,7 +2346,7 @@ if (isset($_GET['action']) && $_GET['action'] === 'stations') {
                     if (typeCounts['其他']) sorted.push('其他');
                 }
 
-                let html = `<button class="type-btn ${currentType === '' ? 'active' : ''}" data-type="">所有</button>`;
+                let html = `<button class="type-btn ${currentType === '' ? 'active' : ''}" data-type="">${t('all')}</button>`;
                 sorted.forEach(type => {
                     html += `<button class="type-btn ${currentType === type ? 'active' : ''}" data-type="${type}">${type}(${typeCounts[type]})</button>`;
                 });
@@ -2356,7 +2373,7 @@ if (isset($_GET['action']) && $_GET['action'] === 'stations') {
                 Object.entries(regionDeduped).forEach(([region, count]) => {
                     $(`.region-btn[data-region="${region}"]`).html((_, h) => h.replace(/\(\d+\)/, `(${count})`));
                 });
-                $('#totalSubtitle').text(`共 ${total} 个电台`);
+                $('#totalSubtitle').text(t('totalStations', { total }));
             }
 
             // ── 播放 ──────────────────────────────────────────────────────────────
@@ -2397,19 +2414,19 @@ if (isset($_GET['action']) && $_GET['action'] === 'stations') {
                 
                 if (autoPlay) {
                     // 设置加载状态并播放
-                    $('#playerStatus, #fullscreenStatus').text('加载中...');
+                    $('#playerStatus, #fullscreenStatus').text(t('playerLoading'));
                     $('#statusDot, #fullscreenDot').removeClass('playing paused');
                     audio.src = station.url;
                     audio.play().catch(e => {
                         console.warn('自动播放被阻止，请点击播放条开始播放:', e);
-                        $('#playerStatus, #fullscreenStatus').text('点击播放');
+                        $('#playerStatus, #fullscreenStatus').text(t('playerClickToPlay'));
                         $('#statusDot, #fullscreenDot').addClass('paused');
                         updatePlayIcon(true);
                         updateFullscreenPlayIcon(true);
                     });
                 } else {
                     // 仅恢复显示，等待用户点击播放
-                    $('#playerStatus, #fullscreenStatus').text('点击播放');
+                    $('#playerStatus, #fullscreenStatus').text(t('playerClickToPlay'));
                     $('#statusDot, #fullscreenDot').removeClass('playing').addClass('paused');
                     updatePlayIcon(true);
                     updateFullscreenPlayIcon(true);
@@ -2466,8 +2483,8 @@ if (isset($_GET['action']) && $_GET['action'] === 'stations') {
 
             // 更新筛选标题提示
             function updateFilterLabels() {
-                $('#regionFilterLabel').text('· ' + (currentRegion !== 'all' ? currentRegion : '全部'));
-                $('#typeFilterLabel').text('· ' + (currentType !== '' ? currentType : '全部'));
+                $('#regionFilterLabel').text('· ' + (currentRegion !== 'all' ? currentRegion : t('all')));
+                $('#typeFilterLabel').text('· ' + (currentType !== '' ? currentType : t('all')));
             }
 
             // ── URL 状态同步 ──────────────────────────────────────────────────────
@@ -2480,6 +2497,72 @@ if (isset($_GET['action']) && $_GET['action'] === 'stations') {
                     params.set('play_name', currentStation.name);
                 }
                 history.replaceState(null, '', params.toString() ? '?' + params : location.pathname);
+            }
+
+            function t(key, vars = {}) {
+                let text = i18n[key] || key;
+                return String(text).replace(/\{\{(\w+)\}\}/g, (_, name) => vars[name] ?? '');
+            }
+
+            function translatePage() {
+                $('[data-i18n]').each(function () {
+                    const key = $(this).data('i18n');
+                    $(this).text(t(key));
+                });
+                $('[data-i18n-placeholder]').each(function () {
+                    const key = $(this).data('i18n-placeholder');
+                    $(this).attr('placeholder', t(key));
+                });
+                $('#langSelect').val(currentLang);
+                $('#themeSelect').attr('aria-label', t('theme'));
+                $('#langSelect').attr('aria-label', t('language'));
+                updateFilterLabels();
+                filterAndRender();
+                updateRegionCounts();
+                if (currentStation) {
+                    $('#playerTitle, #fullscreenTitle').text(currentStation.name);
+                    document.title = currentStation.name + ' — ' + t('appTitle');
+                } else {
+                    document.title = t('appTitle');
+                }
+            }
+
+            function loadLocale(lang) {
+                return fetch(`lang/${lang}.json`)
+                    .then(response => {
+                        if (!response.ok) throw new Error('Locale not found');
+                        return response.json();
+                    })
+                    .then(data => {
+                        i18n = data;
+                        currentLang = lang;
+                        $('#langSelect').val(lang);
+                        translatePage();
+                    })
+                    .catch(() => {
+                        if (lang !== 'en') return loadLocale('en');
+                    });
+            }
+
+            function initLanguage() {
+                const saved = localStorage.getItem('language');
+                const browserLang = (navigator.languages && navigator.languages[0]) || navigator.language || 'en';
+                const normalized = browserLang.startsWith('zh') ? 'zh-CN'
+                    : browserLang.startsWith('es') ? 'es'
+                    : browserLang.startsWith('fr') ? 'fr'
+                    : browserLang.startsWith('de') ? 'de'
+                    : browserLang.startsWith('it') ? 'it'
+                    : browserLang.startsWith('ja') ? 'ja'
+                    : browserLang.startsWith('ko') ? 'ko'
+                    : 'en';
+                const lang = saved || normalized;
+                return loadLocale(SUPPORTED_LANGS.includes(lang) ? lang : 'en');
+            }
+
+            function setLanguage(lang) {
+                if (!SUPPORTED_LANGS.includes(lang)) return;
+                localStorage.setItem('language', lang);
+                loadLocale(lang);
             }
 
             // ── 无限滚动 ──────────────────────────────────────────────────────────
@@ -2547,7 +2630,7 @@ if (isset($_GET['action']) && $_GET['action'] === 'stations') {
                 }
 
                 updateFilterLabels();
-                $('#resultCount').text('加载中...');
+                $('#resultCount').text(t('loading'));
 
                 // ── 流式加载电台数据（NDJSON），分批渐进渲染 ─────────────────
                 (async () => {
@@ -2566,7 +2649,7 @@ if (isset($_GET['action']) && $_GET['action'] === 'stations') {
                         const setProgress = (loaded) => {
                             const pct = STREAM_TOTAL > 0 ? Math.min(98, Math.round(loaded / STREAM_TOTAL * 100)) : 0;
                             $progressFill.css('width', pct + '%');
-                            $('#totalSubtitle').text(`正在加载 ${loaded.toLocaleString()} 个电台...`);
+                            $('#totalSubtitle').text(t('loadingStations', { loaded: loaded.toLocaleString() }));
                         };
 
                         const scheduleRender = () => {
@@ -2630,7 +2713,7 @@ if (isset($_GET['action']) && $_GET['action'] === 'stations') {
                             }
                         }
                     } catch (e) {
-                        $('#resultCount').text('数据加载失败，请刷新重试');
+                        $('#resultCount').text(t('loadFailedRefresh'));
                     }
                 })();
             }
@@ -2659,6 +2742,9 @@ if (isset($_GET['action']) && $_GET['action'] === 'stations') {
             // 主题选择下拉框
             $('#themeSelect').on('change', function () {
                 setTheme($(this).val());
+            });
+            $('#langSelect').on('change', function () {
+                setLanguage($(this).val());
             });
             
             // 折叠/展开功能
@@ -2693,9 +2779,9 @@ if (isset($_GET['action']) && $_GET['action'] === 'stations') {
             $('#audioPlayer')
                 .on('play',  function () {
                     $('#statusDot, #fullscreenDot').removeClass('paused').addClass('playing');
-                    $('#playerStatus, #fullscreenStatus').text('正在播放');
+                    $('#playerStatus, #fullscreenStatus').text(t('playerPlaying'));
                     updateMiniPlayIcon(false);
-                    $('#miniPlayerStatus').text('正在播放');
+                    $('#miniPlayerStatus').text(t('playerPlaying'));
                     $('#soundWave').addClass('playing');
                     $('#fullscreenCover').addClass('playing');
                     updatePlayIcon(false);
@@ -2707,12 +2793,12 @@ if (isset($_GET['action']) && $_GET['action'] === 'stations') {
                                 return $(this).attr('data-url') === currentStation.url &&
                                        $(this).attr('data-name') === currentStation.name;
                             }).addClass('playing');
-                        document.title = currentStation.name + ' — 电台森林';
+                        document.title = currentStation.name + ' — ' + t('appTitle');
                     }
                 })
                 .on('pause', function () {
                     $('#statusDot, #fullscreenDot').removeClass('playing').addClass('paused');
-                    $('#playerStatus, #fullscreenStatus').text('点击播放');
+                    $('#playerStatus, #fullscreenStatus').text(t('playerClickToPlay'));
                     $('#soundWave').removeClass('playing');
                     $('#fullscreenCover').removeClass('playing');
                     updatePlayIcon(true);
@@ -2720,19 +2806,19 @@ if (isset($_GET['action']) && $_GET['action'] === 'stations') {
                     // 移除所有卡片播放高亮
                     $('.station-card').removeClass('playing');
                     updateMiniPlayIcon(true);
-                    $('#miniPlayerStatus').text('已暂停');
-                    document.title = '电台森林';
+                    $('#miniPlayerStatus').text(t('playerPaused') || '已暂停');
+                    document.title = t('appTitle');
                 })
                 .on('error', function () {
                     $('#statusDot, #fullscreenDot').removeClass('playing').addClass('paused');
-                    $('#playerStatus, #fullscreenStatus').text('播放错误');
+                    $('#playerStatus, #fullscreenStatus').text(t('playerError'));
                     $('#soundWave').removeClass('playing');
                     $('#fullscreenCover').removeClass('playing');
                     updatePlayIcon(true);
                     updateFullscreenPlayIcon(true);
                     $('.station-card').removeClass('playing');
-                    updateMiniPlayIcon(true);
-                    $('#miniPlayerStatus').text('播放错误');
+                    updateMiniPlayer();
+                    $('#miniPlayerStatus').text(t('playerError'));
                     console.error('音频加载错误');
                 });
 
@@ -3002,19 +3088,21 @@ if (isset($_GET['action']) && $_GET['action'] === 'stations') {
                 currentStation = null;
                 updateMiniPlayer();
                 filterAndRender();
-                $('#playerTitle').text('选择一个电台开始播放');
-                $('#playerStatus').text('等待中');
+                $('#playerTitle').text(t('selectStationToPlay'));
+                $('#playerStatus').text(t('playerWaiting'));
                 $('#statusDot').removeClass('playing paused');
-                $('#fullscreenTitle').text('选择一个电台开始播放');
-                $('#fullscreenStatus').text('等待中');
+                $('#fullscreenTitle').text(t('selectStationToPlay'));
+                $('#fullscreenStatus').text(t('playerWaiting'));
                 $('#fullscreenDot').removeClass('playing paused');
                 $('#soundWave').removeClass('playing');
-                document.title = '电台森林';
+                document.title = t('appTitle');
             });
 
             // 主题初始化 + 页面初始化
-            setTheme(localStorage.getItem('theme') || 'green');
-            init();
+            initLanguage().then(() => {
+                setTheme(localStorage.getItem('theme') || 'green');
+                init();
+            });
         });
     </script>
 </body>
