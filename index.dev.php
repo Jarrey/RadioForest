@@ -1323,7 +1323,7 @@ if (isset($_GET['action']) && $_GET['action'] === 'stations') {
         .mini-player-logo {
             width: 36px;
             height: 36px;
-            border-radius: 50%;
+            border-radius: 8px;
             object-fit: cover;
             flex-shrink: 0;
             background: var(--bg-card);
@@ -1336,7 +1336,7 @@ if (isset($_GET['action']) && $_GET['action'] === 'stations') {
             width: 100%;
             height: 100%;
             object-fit: cover;
-            border-radius: 50%;
+            border-radius: 8px;
         }
         .mini-player-logo.placeholder {
             background: color-mix(in srgb, var(--primary) 15%, var(--bg-card));
@@ -1774,7 +1774,7 @@ if (isset($_GET['action']) && $_GET['action'] === 'stations') {
                     <circle cx="53" cy="43" r="1.8" fill="var(--bg)" opacity="0.28"/>
                 </svg>
                 <h1>电台森林</h1>
-                <p class="subtitle">共 <?php echo $totalCount; ?> 个电台</p>
+                <p class="subtitle" id="totalSubtitle">共 <?php echo $totalCount; ?> 个电台</p>
             </div>
             <select class="theme-select" id="themeSelect">
                 <option value="green">🌿 翠绿</option>
@@ -2334,6 +2334,7 @@ if (isset($_GET['action']) && $_GET['action'] === 'stations') {
                 Object.entries(regionDeduped).forEach(([region, count]) => {
                     $(`.region-btn[data-region="${region}"]`).html((_, h) => h.replace(/\(\d+\)/, `(${count})`));
                 });
+                $('#totalSubtitle').text(`共 ${total} 个电台`);
             }
 
             // ── 播放 ──────────────────────────────────────────────────────────────
