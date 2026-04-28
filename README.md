@@ -15,11 +15,25 @@ radioweb/
 └── package.json           # Build dependency manifest
 ```
 
+## Recent updates
+
+- Switched the UI translation system to use English label keys for consistent locale dictionaries.
+- Fixed language switching so the total station count and player status text update correctly after changing locale.
+- Translation dictionaries now cover regions, genres, provinces, and player interface labels consistently.
+
 ## Overview
 
 - The app reads all `radio_*.m3u` files in the root directory.
 - Use `radio_<region_code>.m3u` as the playlist file pattern.
 - If no playlist files are found, the page will show an empty station list.
+- The UI supports multiple languages and automatically selects the browser locale by default.
+
+## Multilingual UI
+
+- Language dictionaries are stored under `lang/`.
+- Supported languages: Chinese (Simplified), English, Spanish, French, German, Italian, Japanese, Korean.
+- Users can switch languages from the top-right selector and see country flags for each option.
+- Category labels such as region/type filters are also translated.
 
 ## Playlist generation scripts
 

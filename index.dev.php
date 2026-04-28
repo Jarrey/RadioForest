@@ -550,30 +550,162 @@ if (isset($_GET['action']) && $_GET['action'] === 'stations') {
             filter: drop-shadow(0 0 8px var(--player-shadow));
         }
         
-        .theme-select {
-            padding: 6px 12px;
+        .header-right {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        /* ── 主题 / 语言选择器 ─────────────────────────────────── */
+        .picker-wrap {
+            position: relative;
+        }
+        .picker-btn {
+            display: flex;
+            align-items: center;
+            gap: 5px;
+            padding: 6px 10px;
             background: var(--bg-card);
             border: 1px solid var(--border);
-            border-radius: 8px;
+            border-radius: 20px;
             color: var(--text);
-            font-size: 13px;
+            font-size: 12px;
             cursor: pointer;
             outline: none;
-            transition: all 0.2s;
+            transition: border-color 0.2s, box-shadow 0.2s, background 0.2s;
+            white-space: nowrap;
+            user-select: none;
+            line-height: 1;
         }
-        
-        .theme-select:hover {
+        .picker-btn:hover {
             border-color: var(--primary);
+            background: color-mix(in srgb, var(--primary) 8%, var(--bg-card));
         }
-        
-        .theme-select:focus {
+        .picker-wrap.open > .picker-btn {
             border-color: var(--primary);
-            box-shadow: 0 0 0 2px color-mix(in srgb, var(--primary) 20%, transparent);
+            box-shadow: 0 0 0 2px color-mix(in srgb, var(--primary) 22%, transparent);
         }
-        
-        .theme-select option {
+        .picker-dot {
+            width: 11px;
+            height: 11px;
+            border-radius: 50%;
+            flex-shrink: 0;
+            border: 1.5px solid rgba(255,255,255,0.2);
+        }
+        .picker-flag {
+            width: 18px;
+            height: 13px;
+            border-radius: 2px;
+            object-fit: cover;
+            flex-shrink: 0;
+        }
+        .picker-caret {
+            width: 8px;
+            height: 5px;
+            flex-shrink: 0;
+            fill: var(--text-dim);
+            transition: transform 0.2s;
+        }
+        .picker-wrap.open .picker-caret {
+            transform: rotate(180deg);
+        }
+        .picker-label {
+            font-size: 12px;
+        }
+        /* Dropdown panel */
+        .picker-panel {
+            position: absolute;
+            top: calc(100% + 6px);
+            right: 0;
             background: var(--bg-card);
+            border: 1px solid var(--border-light);
+            border-radius: 12px;
+            box-shadow: 0 8px 28px rgba(0,0,0,0.5);
+            z-index: 2000;
+            overflow: hidden;
+            visibility: hidden;
+            opacity: 0;
+            pointer-events: none;
+            transform: translateY(-6px);
+            transition: opacity 0.15s, transform 0.15s, visibility 0s 0.15s;
+        }
+        .picker-wrap.open .picker-panel {
+            visibility: visible;
+            opacity: 1;
+            pointer-events: all;
+            transform: translateY(0);
+            transition: opacity 0.15s, transform 0.15s;
+        }
+        /* Theme swatch grid */
+        #themePanel {
+            padding: 8px;
+            width: 210px;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 3px;
+        }
+        .theme-item {
+            display: flex;
+            align-items: center;
+            gap: 7px;
+            padding: 6px 8px;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: background 0.15s;
+            font-size: 12px;
             color: var(--text);
+            border: 1px solid transparent;
+        }
+        .theme-item:hover {
+            background: color-mix(in srgb, var(--primary) 12%, transparent);
+        }
+        .theme-item.active {
+            background: color-mix(in srgb, var(--primary) 18%, transparent);
+            border-color: color-mix(in srgb, var(--primary) 55%, transparent);
+        }
+        .theme-item-dot {
+            width: 13px;
+            height: 13px;
+            border-radius: 50%;
+            flex-shrink: 0;
+            border: 1.5px solid rgba(255,255,255,0.18);
+        }
+        /* Language list */
+        #langPanel {
+            padding: 6px;
+            min-width: 152px;
+        }
+        .lang-item {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            padding: 7px 10px;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: background 0.15s;
+            font-size: 13px;
+            color: var(--text);
+            border: 1px solid transparent;
+            white-space: nowrap;
+        }
+        .lang-item:hover {
+            background: color-mix(in srgb, var(--primary) 12%, transparent);
+        }
+        .lang-item.active {
+            background: color-mix(in srgb, var(--primary) 18%, transparent);
+            border-color: color-mix(in srgb, var(--primary) 55%, transparent);
+        }
+        .lang-item img {
+            width: 20px;
+            height: 14px;
+            border-radius: 2px;
+            object-fit: cover;
+            flex-shrink: 0;
+        }
+        /* Mobile: hide text label, keep icon + caret */
+        @media (max-width: 500px) {
+            .picker-label { display: none; }
+            .picker-btn { padding: 7px 9px; gap: 4px; }
         }
         
         h1 {
@@ -1796,32 +1928,28 @@ if (isset($_GET['action']) && $_GET['action'] === 'stations') {
                     <circle cx="53" cy="43" r="1.8" fill="var(--bg)" opacity="0.28"/>
                 </svg>
                 <h1 data-i18n="appTitle">电台森林</h1>
-                <p class="subtitle" id="totalSubtitle" data-i18n="subtitleLoading">正在加载...</p>
+                <p class="subtitle" id="totalSubtitle">正在加载...</p>
             </div>
-            <select class="theme-select" id="themeSelect">
-                <option value="green">🌿 翠绿</option>
-                <option value="teal">💎 青绿</option>
-                <option value="cyan">💠 天蓝</option>
-                <option value="orange">🍊 橙色</option>
-                <option value="amber">🔶 琥珀</option>
-                <option value="rose">🌹 玫瑰</option>
-                <option value="red">❤️ 深红</option>
-                <option value="pink">💗 粉红</option>
-                <option value="purple">💜 紫色</option>
-                <option value="indigo">🔵 靛蓝</option>
-                <option value="grayscale">⚫ 灰度</option>
-                <option value="bw">⚪ 黑白</option>
-            </select>
-            <select class="lang-select" id="langSelect">
-                <option value="zh-CN">🇨🇳 中文</option>
-                <option value="en">🇺🇸 English</option>
-                <option value="es">🇪🇸 Español</option>
-                <option value="fr">🇫🇷 Français</option>
-                <option value="de">🇩🇪 Deutsch</option>
-                <option value="it">🇮🇹 Italiano</option>
-                <option value="ja">🇯🇵 日本語</option>
-                <option value="ko">🇰🇷 한국어</option>
-            </select>
+            <div class="header-right">
+                <!-- 主题选择器 -->
+                <div class="picker-wrap" id="themePickerWrap">
+                    <button class="picker-btn" id="themePickerBtn" type="button" aria-label="主题">
+                        <span class="picker-dot" id="themePickerDot" style="background:#22c55e"></span>
+                        <span class="picker-label" id="themePickerLabel">翠绿</span>
+                        <svg class="picker-caret" viewBox="0 0 8 5" xmlns="http://www.w3.org/2000/svg"><path d="M0 0l4 5 4-5z"/></svg>
+                    </button>
+                    <div class="picker-panel" id="themePanel"></div>
+                </div>
+                <!-- 语言选择器 -->
+                <div class="picker-wrap" id="langPickerWrap">
+                    <button class="picker-btn" id="langPickerBtn" type="button" aria-label="语言">
+                        <img class="picker-flag" id="langPickerFlag" src="https://flagcdn.com/w20/cn.png" alt="">
+                        <span class="picker-label" id="langPickerLabel">简体中文</span>
+                        <svg class="picker-caret" viewBox="0 0 8 5" xmlns="http://www.w3.org/2000/svg"><path d="M0 0l4 5 4-5z"/></svg>
+                    </button>
+                    <div class="picker-panel" id="langPanel"></div>
+                </div>
+            </div>
         </header>
         
         <div class="search-box">
@@ -1835,7 +1963,7 @@ if (isset($_GET['action']) && $_GET['action'] === 'stations') {
             </div>
             <div class="filter-content" id="regionsContent">
                 <div class="regions" id="regionBtns">
-            <button class="region-btn active" data-region="all"><img src="https://flagcdn.com/w20/un.png" alt="" class="region-flag"> 全部(<?php echo $totalCount; ?>)</button>
+            <button class="region-btn active" data-region="all" data-flag-code="un" data-count="<?php echo $totalCount; ?>"><img src="https://flagcdn.com/w20/un.png" alt="" class="region-flag"> 全部(<?php echo $totalCount; ?>)</button>
             <?php
             $regionCodes = [
                 '中国' => 'cn', '日本' => 'jp', '韩国' => 'kr', '台湾' => 'tw', '香港' => 'hk',
@@ -1856,7 +1984,7 @@ if (isset($_GET['action']) && $_GET['action'] === 'stations') {
                     $code = $regionCodes[$r] ?? 'un';
                     $flagImg = '<img src="https://flagcdn.com/w20/' . $code . '.png" alt="" class="region-flag">';
             ?>
-                <button class="region-btn" data-region="<?php echo $r; ?>"><?php echo $flagImg . ' ' . $r; ?>(<?php echo $countries[$r]; ?>)</button>
+                <button class="region-btn" data-region="<?php echo $r; ?>" data-flag-code="<?php echo $code; ?>" data-count="<?php echo $countries[$r]; ?>"><?php echo $flagImg . ' ' . $r; ?>(<?php echo $countries[$r]; ?>)</button>
             <?php endif; endforeach; ?>
                 </div>
             </div>
@@ -1883,14 +2011,14 @@ if (isset($_GET['action']) && $_GET['action'] === 'stations') {
                 </div>
             </div>
             <audio controls id="audioPlayer"></audio>
-            <button class="fullscreen-btn" id="fullscreenBtn" title="全屏播放">
+            <button class="fullscreen-btn" id="fullscreenBtn" data-i18n-title="fullscreen" title="全屏播放">
                 <svg viewBox="0 0 24 24">
                     <path d="M7 14H5v5h5v-2H7v-3zm-2-4h2V7h3V5H5v5zm12 7h-3v2h5v-5h-2v3zM14 5v2h3v3h2V5h-5z"/>
                 </svg>
             </button>
         </div>
         
-        <p class="result-count" id="resultCount">加载中...</p>
+        <p class="result-count" id="resultCount" data-i18n="loading">加载中...</p>
 
         <div class="stations-list" id="stationsGrid"></div>
         
@@ -1905,14 +2033,14 @@ if (isset($_GET['action']) && $_GET['action'] === 'stations') {
                 <div class="mini-player-name" id="miniPlayerName" data-i18n="selectStationToPlay">选择一个电台</div>
                 <div class="mini-player-status" id="miniPlayerStatus" data-i18n="playerWaiting">等待中</div>
             </div>
-            <button class="mini-player-btn" id="miniPlayBtn" title="播放/暂停">
+            <button class="mini-player-btn" id="miniPlayBtn" data-i18n-title="playPause" title="播放/暂停">
                 <svg viewBox="0 0 24 24" id="miniPlayIcon"><polygon points="6,4 20,12 6,20"/></svg>
             </button>
-            <button class="mini-player-btn" id="miniFullscreenBtn" title="全屏播放">
+            <button class="mini-player-btn" id="miniFullscreenBtn" data-i18n-title="fullscreen" title="全屏播放">
                 <svg viewBox="0 0 24 24"><path d="M7 14H5v5h5v-2H7v-3zm-2-4h2V7h3V5H5v5zm12 7h-3v2h5v-5h-2v3zM14 5v2h3v3h2V5h-5z"/></svg>
             </button>
         </div>
-        <button class="mini-player-btn" id="backToTop" title="回到顶部">
+        <button class="mini-player-btn" id="backToTop" data-i18n-title="backToTop" title="回到顶部">
             <svg viewBox="0 0 24 24"><path d="M12 4l-8 8h5v8h6v-8h5z"/></svg>
         </button>
     </div>
@@ -1989,7 +2117,7 @@ if (isset($_GET['action']) && $_GET['action'] === 'stations') {
             </div>
             
             <div class="fullscreen-info">
-                <h2 class="fullscreen-title" id="fullscreenTitle">选择一个电台开始播放</h2>
+                <h2 class="fullscreen-title" id="fullscreenTitle" data-i18n="selectStationToPlay">选择一个电台开始播放</h2>
                 
                 <div class="fullscreen-status">
                     <span class="status-dot" id="fullscreenDot"></span>
@@ -2185,7 +2313,6 @@ if (isset($_GET['action']) && $_GET['action'] === 'stations') {
                     if (prov !== '其他') s._types.unshift(prov);
                 }
                 if (s._types.length === 0) s._types = ['其他'];
-                s._typeTagHtml = s._types.map(t => `<span class="type-tag">${t}</span>`).join('');
             });
         }
         function preprocessStations(data) {
@@ -2203,9 +2330,48 @@ if (isset($_GET['action']) && $_GET['action'] === 'stations') {
         let currentUrl      = '';
         let currentStation  = null;
         let stationsFullyLoaded = false; // 全部数据流式加载完毕标志
+        let cachedStationTotal = 0;           // 加载完成后缓存去重总数
         let currentLang    = 'en';
         let i18n           = {};
-        const SUPPORTED_LANGS = ['zh-CN', 'en', 'es', 'fr', 'de', 'it', 'ja', 'ko'];
+        const SUPPORTED_LANGS = ['zh-CN', 'zh-TW', 'en', 'es', 'fr', 'de', 'it', 'ja', 'ko'];
+        // Maps Chinese internal values → English label keys used in lang/*.json "labels"
+        const LABEL_KEYS = {
+            '中国':'china','日本':'japan','韩国':'korea','台湾':'taiwan','香港':'hongkong',
+            '新加坡':'singapore','英国':'uk','德国':'germany','法国':'france','意大利':'italy',
+            '西班牙':'spain','俄罗斯':'russia','美国':'usa','加拿大':'canada',
+            '澳大利亚':'australia','澳洲':'australia','新西兰':'newzealand',
+            '巴西':'brazil','墨西哥':'mexico','阿根廷':'argentina',
+            '瑞士':'switzerland','南非':'southafrica','其他':'other','全球':'global',
+            '音乐':'music','新闻':'news','综合':'general','交通':'traffic',
+            '体育':'sports','文艺':'arts','经典':'classic','儿童':'kids',
+            '宗教':'religion','古典':'classical','方言':'dialect',
+            '爵士':'jazz','流行':'pop','摇滚':'rock','嘻哈':'hiphop',
+            '电子':'electronic','R&B':'rnb','乡村':'country','民谣':'folk',
+            '蓝调':'blues','雷鬼':'reggae','金属':'metal','拉丁':'latin',
+            '央广':'cnr','央视':'cctv',
+            '全国':'national','北京':'beijing','天津':'tianjin','上海':'shanghai','重庆':'chongqing',
+            '广东':'guangdong','广西':'guangxi','海南':'hainan','福建':'fujian',
+            '江苏':'jiangsu','浙江':'zhejiang','山东':'shandong','安徽':'anhui',
+            '江西':'jiangxi','湖南':'hunan','湖北':'hubei','河南':'henan',
+            '河北':'hebei','山西':'shanxi','辽宁':'liaoning','吉林':'jilin',
+            '黑龙江':'heilongjiang','四川':'sichuan','贵州':'guizhou',
+            '云南':'yunnan','西藏':'tibet','陕西':'shaanxi',
+            '甘肃':'gansu','青海':'qinghai','新疆':'xinjiang',
+            '宁夏':'ningxia','内蒙古':'innermongolia'
+        };
+        const THEME_COLORS = {green:'#22c55e',teal:'#14b8a6',cyan:'#06b6d4',orange:'#f97316',amber:'#f59e0b',rose:'#f43f5e',red:'#dc2626',pink:'#ec4899',purple:'#a855f7',indigo:'#6366f1',grayscale:'#888',bw:'#ddd'};
+        const THEME_KEYS   = ['green','teal','cyan','orange','amber','rose','red','pink','purple','indigo','grayscale','bw'];
+        const LANG_OPTIONS = [
+            {value:'zh-CN',flag:'cn',label:'简体中文'},
+            {value:'zh-TW',flag:'tw',label:'繁體中文'},
+            {value:'en',   flag:'gb',label:'English'},
+            {value:'es',   flag:'es',label:'Español'},
+            {value:'fr',   flag:'fr',label:'Français'},
+            {value:'de',   flag:'de',label:'Deutsch'},
+            {value:'it',   flag:'it',label:'Italiano'},
+            {value:'ja',   flag:'jp',label:'日本語'},
+            {value:'ko',   flag:'kr',label:'한국어'},
+        ];
 
         // HTML 属性安全转义（防止电台名内的引号等破坏HTML属性）
         function esc(s) {
@@ -2253,14 +2419,15 @@ if (isset($_GET['action']) && $_GET['action'] === 'stations') {
                     // 生成带国旗的国家标签
                     const countryCode = regionCodes[station.country] || 'un';
                     const flagUrl = `https://flagcdn.com/w20/${countryCode}.png`;
-                    const regionTagHtml = `<span class="region-tag"><img src="${flagUrl}" alt="" class="region-tag-flag"><span class="region-tag-name">${station.country}</span></span>`;
+                    const regionTagHtml = `<span class="region-tag"><img src="${flagUrl}" alt="" class="region-tag-flag"><span class="region-tag-name">${tLabel(station.country)}</span></span>`;
+                    const typeTagHtml = station._types.map(tp => `<span class="type-tag">${tLabel(tp)}</span>`).join('');
                     
                     html += `<div class="station-card${activeClass}" data-url="${esc(station.url)}" data-name="${esc(station.name)}">
                         ${logoHtml}
                         <div class="station-content">
                             <div class="station-name">${station.name}</div>
                             <div class="station-meta">
-                                ${regionTagHtml}${station._typeTagHtml}
+                                ${regionTagHtml}${typeTagHtml}
                             </div>
                         </div>
                         <div class="station-actions">
@@ -2348,7 +2515,7 @@ if (isset($_GET['action']) && $_GET['action'] === 'stations') {
 
                 let html = `<button class="type-btn ${currentType === '' ? 'active' : ''}" data-type="">${t('all')}</button>`;
                 sorted.forEach(type => {
-                    html += `<button class="type-btn ${currentType === type ? 'active' : ''}" data-type="${type}">${type}(${typeCounts[type]})</button>`;
+                    html += `<button class="type-btn ${currentType === type ? 'active' : ''}" data-type="${type}">${tLabel(type)}(${typeCounts[type]})</button>`;
                 });
                 $('#typeBtns').html(html);
             }
@@ -2369,10 +2536,12 @@ if (isset($_GET['action']) && $_GET['action'] === 'stations') {
                         regionDeduped[s.region] = (regionDeduped[s.region] || 0) + 1;
                     }
                 });
-                $('.region-btn[data-region="all"]').html((_, h) => h.replace(/\(\d+\)/, `(${total})`));
+                $('.region-btn[data-region="all"]').attr('data-count', total);
                 Object.entries(regionDeduped).forEach(([region, count]) => {
-                    $(`.region-btn[data-region="${region}"]`).html((_, h) => h.replace(/\(\d+\)/, `(${count})`));
+                    $(`.region-btn[data-region="${region}"]`).attr('data-count', count);
                 });
+                cachedStationTotal = total;
+                translateRegionBtns();
                 $('#totalSubtitle').text(t('totalStations', { total }));
             }
 
@@ -2483,8 +2652,8 @@ if (isset($_GET['action']) && $_GET['action'] === 'stations') {
 
             // 更新筛选标题提示
             function updateFilterLabels() {
-                $('#regionFilterLabel').text('· ' + (currentRegion !== 'all' ? currentRegion : t('all')));
-                $('#typeFilterLabel').text('· ' + (currentType !== '' ? currentType : t('all')));
+                $('#regionFilterLabel').text('· ' + (currentRegion !== 'all' ? tLabel(currentRegion) : t('all')));
+                $('#typeFilterLabel').text('· ' + (currentType !== '' ? tLabel(currentType) : t('all')));
             }
 
             // ── URL 状态同步 ──────────────────────────────────────────────────────
@@ -2504,6 +2673,22 @@ if (isset($_GET['action']) && $_GET['action'] === 'stations') {
                 return String(text).replace(/\{\{(\w+)\}\}/g, (_, name) => vars[name] ?? '');
             }
 
+            function tLabel(key) {
+                const k = LABEL_KEYS[key] || key;
+                return (i18n.labels && i18n.labels[k]) ? i18n.labels[k] : key;
+            }
+
+            function translateRegionBtns() {
+                $('.region-btn').each(function () {
+                    const region = $(this).data('region');
+                    const count  = $(this).data('count');
+                    const code   = $(this).data('flag-code') || 'un';
+                    const label  = region === 'all' ? t('all') : tLabel(region);
+                    const suffix = count !== undefined ? '(' + count + ')' : '';
+                    $(this).html(`<img src="https://flagcdn.com/w20/${code}.png" alt="" class="region-flag"> ${label}${suffix}`);
+                });
+            }
+
             function translatePage() {
                 $('[data-i18n]').each(function () {
                     const key = $(this).data('i18n');
@@ -2513,17 +2698,47 @@ if (isset($_GET['action']) && $_GET['action'] === 'stations') {
                     const key = $(this).data('i18n-placeholder');
                     $(this).attr('placeholder', t(key));
                 });
-                $('#langSelect').val(currentLang);
-                $('#themeSelect').attr('aria-label', t('theme'));
-                $('#langSelect').attr('aria-label', t('language'));
+                $('[data-i18n-title]').each(function () {
+                    const key = $(this).data('i18n-title');
+                    $(this).attr('title', t(key));
+                });
+                // 恢复 totalSubtitle（不受 data-i18n 循环控制）
+                if (stationsFullyLoaded) {
+                    $('#totalSubtitle').text(t('totalStations', { total: cachedStationTotal }));
+                } else {
+                    $('#totalSubtitle').text(t('subtitleLoading'));
+                }
+                buildThemePanel();
+                updateThemePicker($('html').attr('data-theme') || 'green');
+                updateLangPicker(currentLang);
+                $('#themePickerBtn').attr('aria-label', t('theme'));
+                $('#langPickerBtn').attr('aria-label', t('language'));
                 updateFilterLabels();
                 filterAndRender();
-                updateRegionCounts();
+                translateRegionBtns();
+                if (stationsFullyLoaded) renderTypeButtons();
                 if (currentStation) {
                     $('#playerTitle, #fullscreenTitle').text(currentStation.name);
+                    $('#miniPlayerName').text(currentStation.name);
                     document.title = currentStation.name + ' — ' + t('appTitle');
+                    // 根据音频实际状态重新翻译状态文字
+                    const audio = document.getElementById('audioPlayer');
+                    let playerKey, miniKey;
+                    if (audio.error) {
+                        playerKey = 'playerError';
+                        miniKey   = 'playerError';
+                    } else if (!audio.paused) {
+                        playerKey = 'playerPlaying';
+                        miniKey   = 'playerPlaying';
+                    } else {
+                        playerKey = 'playerClickToPlay';
+                        miniKey   = 'playerPaused';
+                    }
+                    $('#playerStatus, #fullscreenStatus').text(t(playerKey));
+                    $('#miniPlayerStatus').text(t(miniKey));
                 } else {
                     document.title = t('appTitle');
+                    $('#fullscreenStatus').text(t('playerWaiting'));
                 }
             }
 
@@ -2536,7 +2751,6 @@ if (isset($_GET['action']) && $_GET['action'] === 'stations') {
                     .then(data => {
                         i18n = data;
                         currentLang = lang;
-                        $('#langSelect').val(lang);
                         translatePage();
                     })
                     .catch(() => {
@@ -2544,10 +2758,78 @@ if (isset($_GET['action']) && $_GET['action'] === 'stations') {
                     });
             }
 
+            function buildThemePanel() {
+                const html = THEME_KEYS.map(k => {
+                    const labelKey = k === 'bw' ? 'themeBW' : k === 'grayscale' ? 'themeGrayscale' : 'theme' + k.charAt(0).toUpperCase() + k.slice(1);
+                    const active = k === ($('html').attr('data-theme') || 'green') ? ' active' : '';
+                    return `<div class="theme-item${active}" data-theme="${k}"><span class="theme-item-dot" style="background:${THEME_COLORS[k]}"></span><span>${t(labelKey)}</span></div>`;
+                }).join('');
+                $('#themePanel').html(html);
+            }
+
+            function updateThemePicker(theme) {
+                $('#themePickerDot').css('background', THEME_COLORS[theme] || THEME_COLORS.green);
+                const labelKey = theme === 'bw' ? 'themeBW' : theme === 'grayscale' ? 'themeGrayscale' : 'theme' + theme.charAt(0).toUpperCase() + theme.slice(1);
+                $('#themePickerLabel').text(t(labelKey));
+                $('#themePanel .theme-item').removeClass('active').filter(`[data-theme="${theme}"]`).addClass('active');
+            }
+
+            function buildLangPanel() {
+                const html = LANG_OPTIONS.map(o => {
+                    const active = o.value === currentLang ? ' active' : '';
+                    return `<div class="lang-item${active}" data-lang="${o.value}"><img src="https://flagcdn.com/w20/${o.flag}.png" alt=""><span>${o.label}</span></div>`;
+                }).join('');
+                $('#langPanel').html(html);
+            }
+
+            function updateLangPicker(lang) {
+                const opt = LANG_OPTIONS.find(o => o.value === lang) || LANG_OPTIONS[0];
+                $('#langPickerFlag').attr('src', `https://flagcdn.com/w20/${opt.flag}.png`);
+                $('#langPickerLabel').text(opt.label);
+                $('#langPanel .lang-item').removeClass('active').filter(`[data-lang="${lang}"]`).addClass('active');
+            }
+
+            function initPickers() {
+                buildLangPanel();
+                updateLangPicker(currentLang);
+
+                $('#themePickerBtn').on('click', function (e) {
+                    e.stopPropagation();
+                    const $w = $('#themePickerWrap');
+                    const wasOpen = $w.hasClass('open');
+                    $('.picker-wrap').removeClass('open');
+                    if (!wasOpen) $w.addClass('open');
+                });
+                $('#langPickerBtn').on('click', function (e) {
+                    e.stopPropagation();
+                    const $w = $('#langPickerWrap');
+                    const wasOpen = $w.hasClass('open');
+                    $('.picker-wrap').removeClass('open');
+                    if (!wasOpen) $w.addClass('open');
+                });
+                $(document).on('click', '.theme-item', function (e) {
+                    e.stopPropagation();
+                    setTheme($(this).data('theme'));
+                    $('.picker-wrap').removeClass('open');
+                });
+                $(document).on('click', '.lang-item', function (e) {
+                    e.stopPropagation();
+                    setLanguage($(this).data('lang'));
+                    $('.picker-wrap').removeClass('open');
+                });
+                $(document).on('click', '.picker-panel', function (e) {
+                    e.stopPropagation();
+                });
+                $(document).on('click', function () {
+                    $('.picker-wrap').removeClass('open');
+                });
+            }
+
             function initLanguage() {
                 const saved = localStorage.getItem('language');
                 const browserLang = (navigator.languages && navigator.languages[0]) || navigator.language || 'en';
-                const normalized = browserLang.startsWith('zh') ? 'zh-CN'
+                const normalized = (browserLang.startsWith('zh-TW') || browserLang.startsWith('zh-HK') || browserLang.startsWith('zh-MO')) ? 'zh-TW'
+                    : browserLang.startsWith('zh') ? 'zh-CN'
                     : browserLang.startsWith('es') ? 'es'
                     : browserLang.startsWith('fr') ? 'fr'
                     : browserLang.startsWith('de') ? 'de'
@@ -2556,7 +2838,11 @@ if (isset($_GET['action']) && $_GET['action'] === 'stations') {
                     : browserLang.startsWith('ko') ? 'ko'
                     : 'en';
                 const lang = saved || normalized;
-                return loadLocale(SUPPORTED_LANGS.includes(lang) ? lang : 'en');
+                const resolvedLang = SUPPORTED_LANGS.includes(lang) ? lang : 'en';
+                if (!saved || saved !== resolvedLang) {
+                    localStorage.setItem('language', resolvedLang);
+                }
+                return loadLocale(resolvedLang);
             }
 
             function setLanguage(lang) {
@@ -2578,7 +2864,7 @@ if (isset($_GET['action']) && $_GET['action'] === 'stations') {
             function setTheme(theme) {
                 $('html').attr('data-theme', theme);
                 localStorage.setItem('theme', theme);
-                $('#themeSelect').val(theme);
+                updateThemePicker(theme);
             }
 
             // ── 初始化：从 URL 参数恢复 UI 状态，然后异步加载电台数据 ────────────
@@ -2739,13 +3025,8 @@ if (isset($_GET['action']) && $_GET['action'] === 'stations') {
                 setType($(this).attr('data-type'));
             });
 
-            // 主题选择下拉框
-            $('#themeSelect').on('change', function () {
-                setTheme($(this).val());
-            });
-            $('#langSelect').on('change', function () {
-                setLanguage($(this).val());
-            });
+            // 主题选择下拉框（由自定义 picker 接管，旧 select 已移除）
+            initPickers();
             
             // 折叠/展开功能
             $('#regionsToggle').on('click', function () {
