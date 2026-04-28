@@ -2692,7 +2692,10 @@ if (isset($_GET['action']) && $_GET['action'] === 'stations') {
             function translatePage() {
                 $('[data-i18n]').each(function () {
                     const key = $(this).data('i18n');
-                    $(this).text(t(key));
+                    const $el = $(this);
+                    const $children = $el.children().detach();
+                    $el.text(t(key));
+                    $el.append($children);
                 });
                 $('[data-i18n-placeholder]').each(function () {
                     const key = $(this).data('i18n-placeholder');
