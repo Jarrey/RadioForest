@@ -204,6 +204,14 @@ foreach ($allStations as $s) {
 }
 
 $totalCount = count($allStations);
+
+// ─── JSON API 端点：延迟加载电台列表数据 ──────────────────────────────────────
+if (isset($_GET['action']) && $_GET['action'] === 'stations') {
+    header('Content-Type: application/json; charset=UTF-8');
+    header('Cache-Control: no-store');
+    echo json_encode($allStations, JSON_UNESCAPED_UNICODE);
+    exit;
+}
 ?>
 <!DOCTYPE html>
 <html lang="zh-CN" data-theme="green">
@@ -1975,12 +1983,6 @@ $totalCount = count($allStations);
 
         // ─── 数据加载 ───────────────────────────────────────────────────────────
         var allStations = [];
-        try {
-            var _data = <?php echo json_encode($allStations, JSON_UNESCAPED_UNICODE); ?>;
-            if (Array.isArray(_data)) allStations = _data;
-        } catch(e) {
-            console.error('数据加载失败:', e);
-        }
 
         // ─── 分类正则（定义一次，全局复用）─────────────────────────────────────
         const typePatterns = {
@@ -2124,18 +2126,21 @@ $totalCount = count($allStations);
         // _nameLower:   规范化（繁→简）+ 小写，用于搜索匹配
         // _types:       匹配到的分类数组（中国电台额外含省份），避免过滤/渲染时重跑正则
         // _typeTagHtml: 预渲染好的分类标签 HTML 片段
-        allStations.forEach(s => {
-            const nameNorm = normalizeZh(s.name);  // 繁体名称统一为简体
-            s._nameLower = nameNorm.toLowerCase();
-            s._types = typeKeys.filter(t => typePatterns[t].test(nameNorm));
-            // 中国电台：将省份作为一种分类加入 _types（仅命中省份时，排在最前）
-            if (s.region === '中国') {
-                const prov = detectProvince(nameNorm);
-                if (prov !== '其他') s._types.unshift(prov);
-            }
-            if (s._types.length === 0) s._types = ['其他'];
-            s._typeTagHtml = s._types.map(t => `<span class="type-tag">${t}</span>`).join('');
-        });
+        function preprocessStations(data) {
+            allStations = data;
+            allStations.forEach(s => {
+                const nameNorm = normalizeZh(s.name);  // 繁体名称统一为简体
+                s._nameLower = nameNorm.toLowerCase();
+                s._types = typeKeys.filter(t => typePatterns[t].test(nameNorm));
+                // 中国电台：将省份作为一种分类加入 _types（仅命中省份时，排在最前）
+                if (s.region === '中国') {
+                    const prov = detectProvince(nameNorm);
+                    if (prov !== '其他') s._types.unshift(prov);
+                }
+                if (s._types.length === 0) s._types = ['其他'];
+                s._typeTagHtml = s._types.map(t => `<span class="type-tag">${t}</span>`).join('');
+            });
+        }
 
         // ─── 状态变量 ────────────────────────────────────────────────────────────
         const BATCH_SIZE = 100;
@@ -2419,12 +2424,11 @@ $totalCount = count($allStations);
                 $('#themeSelect').val(theme);
             }
 
-            // ── 初始化：从 URL 参数恢复状态 ───────────────────────────────────────
+            // ── 初始化：从 URL 参数恢复 UI 状态，然后异步加载电台数据 ────────────
             function init() {
                 const params      = new URLSearchParams(location.search);
                 const regionParam = params.get('region');
                 const typeParam   = params.get('type');
-                const playUrl     = params.get('play');
 
                 if (regionParam) {
                     currentRegion = regionParam;
@@ -2432,9 +2436,6 @@ $totalCount = count($allStations);
                     $(`.region-btn[data-region="${regionParam}"]`).addClass('active');
                 }
                 if (typeParam) currentType = typeParam;
-
-                renderTypeButtons();
-                filterAndRender();
 
                 // 窄屏（手机）默认收起分类筛选，宽屏保持展开
                 if (window.innerWidth < 600) {
@@ -2444,16 +2445,30 @@ $totalCount = count($allStations);
 
                 updateFilterLabels();
 
-                if (playUrl) {
-                    // 优先用 name+url 精确匹配，若失败则降级为 url 单独匹配（兼容旧书签或名称编码偏差）
-                    const playName = params.get('play_name');
-                    let station = playName
-                        ? allStations.find(s => s.url === playUrl && s.name === playName)
-                        : null;
-                    if (!station) station = allStations.find(s => s.url === playUrl);
-                    // 刷新恢复时不自动播放，仅还原显示状态，用户点击播放条即可开始
-                    if (station) playStation(station, false);
-                }
+                // ── 异步加载电台列表数据 ──────────────────────────────────────
+                fetch('?action=stations')
+                    .then(r => {
+                        if (!r.ok) throw new Error('HTTP ' + r.status);
+                        return r.json();
+                    })
+                    .then(data => {
+                        preprocessStations(data);
+                        renderTypeButtons();
+                        filterAndRender(true);
+                        // 从 URL 参数恢复播放状态（仅还原显示，不自动播放）
+                        const playUrl = params.get('play');
+                        if (playUrl) {
+                            const playName = params.get('play_name');
+                            let station = playName
+                                ? allStations.find(s => s.url === playUrl && s.name === playName)
+                                : null;
+                            if (!station) station = allStations.find(s => s.url === playUrl);
+                            if (station) playStation(station, false);
+                        }
+                    })
+                    .catch(() => {
+                        $('#resultCount').text('数据加载失败，请刷新重试');
+                    });
             }
 
             // ── 事件绑定 ──────────────────────────────────────────────────────────
