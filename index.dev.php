@@ -242,7 +242,7 @@ if (isset($_GET['action']) && $_GET['action'] === 'stations') {
         })();
     </script>
     <script src="https://code.jquery.com/jquery-3.7.1.min.js" integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
-    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 60 52'%3E%3Cline x1='46' y1='3' x2='39' y2='13' stroke='%2322c55e' stroke-width='2.5' stroke-linecap='round'/%3E%3Crect x='3' y='12' width='54' height='36' rx='7' fill='%2322c55e'/%3E%3Crect x='7' y='17' width='25' height='26' rx='4' fill='%23121212' opacity='0.1'/%3E%3Cline x1='9' y1='22' x2='30' y2='22' stroke='%23121212' stroke-width='1.3' stroke-linecap='round' opacity='0.55'/%3E%3Cline x1='9' y1='26' x2='30' y2='26' stroke='%23121212' stroke-width='1.3' stroke-linecap='round' opacity='0.55'/%3E%3Cline x1='9' y1='30' x2='30' y2='30' stroke='%23121212' stroke-width='1.3' stroke-linecap='round' opacity='0.55'/%3E%3Cline x1='9' y1='34' x2='30' y2='34' stroke='%23121212' stroke-width='1.3' stroke-linecap='round' opacity='0.55'/%3E%3Cline x1='9' y1='38' x2='30' y2='38' stroke='%23121212' stroke-width='1.3' stroke-linecap='round' opacity='0.55'/%3E%3Crect x='36' y='16' width='17' height='8' rx='2' fill='%23121212' opacity='0.22'/%3E%3Cline x1='45' y1='17.5' x2='45' y2='23.5' stroke='%23121212' stroke-width='1.5' stroke-linecap='round' opacity='0.6'/%3E%3Ccircle cx='41' cy='33' r='5' fill='%23121212' opacity='0.2'/%3E%3Ccircle cx='41' cy='33' r='2.5' fill='%23121212' opacity='0.5'/%3E%3Ccircle cx='53' cy='33' r='5' fill='%23121212' opacity='0.2'/%3E%3Ccircle cx='53' cy='33' r='2.5' fill='%23121212' opacity='0.5'/%3E%3Ccircle cx='41' cy='43' r='1.8' fill='%23121212' opacity='0.45'/%3E%3Ccircle cx='47' cy='43' r='1.8' fill='%23121212' opacity='0.28'/%3E%3Ccircle cx='53' cy='43' r='1.8' fill='%23121212' opacity='0.28'/%3E%3C/svg%3E">
+    <link rel="icon" type="image/svg+xml" href="radio-icon.svg">
     <style>
         :root {
             --primary: #22c55e;
@@ -1901,31 +1901,44 @@ if (isset($_GET['action']) && $_GET['action'] === 'stations') {
         <div class="fixed-header">
         <header>
             <div class="header-left">
-                <svg class="logo" viewBox="0 0 60 52" width="46" height="40">
-                    <!-- 天线 -->
-                    <line x1="46" y1="3" x2="39" y2="13" stroke="var(--primary)" stroke-width="2.5" stroke-linecap="round"/>
-                    <!-- 机身 -->
-                    <rect x="3" y="12" width="54" height="36" rx="7" fill="var(--primary)"/>
-                    <!-- 扬声器网格区域 -->
-                    <rect x="7" y="17" width="25" height="26" rx="4" fill="var(--bg)" opacity="0.1"/>
-                    <line x1="9" y1="22" x2="30" y2="22" stroke="var(--bg)" stroke-width="1.3" stroke-linecap="round" opacity="0.55"/>
-                    <line x1="9" y1="26" x2="30" y2="26" stroke="var(--bg)" stroke-width="1.3" stroke-linecap="round" opacity="0.55"/>
-                    <line x1="9" y1="30" x2="30" y2="30" stroke="var(--bg)" stroke-width="1.3" stroke-linecap="round" opacity="0.55"/>
-                    <line x1="9" y1="34" x2="30" y2="34" stroke="var(--bg)" stroke-width="1.3" stroke-linecap="round" opacity="0.55"/>
-                    <line x1="9" y1="38" x2="30" y2="38" stroke="var(--bg)" stroke-width="1.3" stroke-linecap="round" opacity="0.55"/>
-                    <!-- 调频显示条 -->
-                    <rect x="36" y="16" width="17" height="8" rx="2" fill="var(--bg)" opacity="0.22"/>
-                    <line x1="45" y1="17.5" x2="45" y2="23.5" stroke="var(--bg)" stroke-width="1.5" stroke-linecap="round" opacity="0.6"/>
-                    <!-- 音量旋钮 -->
-                    <circle cx="41" cy="33" r="5" fill="var(--bg)" opacity="0.2"/>
-                    <circle cx="41" cy="33" r="2.5" fill="var(--bg)" opacity="0.5"/>
-                    <!-- 调谐旋钮 -->
-                    <circle cx="53" cy="33" r="5" fill="var(--bg)" opacity="0.2"/>
-                    <circle cx="53" cy="33" r="2.5" fill="var(--bg)" opacity="0.5"/>
-                    <!-- 状态指示灯 -->
-                    <circle cx="41" cy="43" r="1.8" fill="var(--bg)" opacity="0.45"/>
-                    <circle cx="47" cy="43" r="1.8" fill="var(--bg)" opacity="0.28"/>
-                    <circle cx="53" cy="43" r="1.8" fill="var(--bg)" opacity="0.28"/>
+                <svg class="logo" viewBox="0 0 256 256" width="52" height="46" role="img" aria-label="电台森林">
+                    <defs>
+                        <linearGradient id="logoBg" x1="0" x2="1" y1="0" y2="1">
+                            <stop offset="0%" stop-color="var(--primary-dim, #3e2f33)"/>
+                            <stop offset="100%" stop-color="var(--primary, #22c55e)"/>
+                        </linearGradient>
+                        <linearGradient id="panelBg" x1="0" x2="1" y1="0" y2="1">
+                            <stop offset="0%" stop-color="var(--bg-card, #1a1a1a)"/>
+                            <stop offset="100%" stop-color="var(--bg, #121212)"/>
+                        </linearGradient>
+                    </defs>
+                    <rect x="16" y="56" width="224" height="152" rx="28" ry="28" fill="url(#logoBg)"/>
+                    <rect x="28" y="68" width="200" height="132" rx="22" ry="22" fill="url(#panelBg)" opacity="0.95"/>
+                    <g transform="translate(40,84)">
+                        <rect x="0" y="0" width="116" height="96" rx="16" ry="16" fill="var(--bg, #121212)"/>
+                        <rect x="8" y="8" width="100" height="80" rx="12" ry="12" fill="var(--primary-dim, #4a383c)" opacity="0.9"/>
+                        <circle cx="58" cy="48" r="34" fill="var(--primary, #a6764b)"/>
+                        <circle cx="58" cy="48" r="26" fill="var(--bg, #f8e0b8)"/>
+                        <circle cx="58" cy="48" r="18" fill="var(--primary-dim, #4b3a41)"/>
+                        <circle cx="58" cy="48" r="6" fill="var(--bg, #3d2c2f)"/>
+                        <path d="M28 48h60" stroke="var(--bg, #f8e0b8)" stroke-width="5" stroke-linecap="round"/>
+                    </g>
+                    <g transform="translate(172,84)">
+                        <rect x="0" y="0" width="60" height="36" rx="10" ry="10" fill="var(--primary-dim, #352a2d)"/>
+                        <rect x="4" y="4" width="52" height="28" rx="8" ry="8" fill="var(--primary, #f8e0b8)" opacity="0.2"/>
+                        <circle cx="32" cy="18" r="6" fill="var(--primary-dim, #4a383c)"/>
+                        <circle cx="32" cy="18" r="2" fill="var(--bg, #ffe8b6)"/>
+                        <line x1="14" y1="22" x2="50" y2="22" stroke="var(--bg, #4a383c)" stroke-width="4" stroke-linecap="round"/>
+                        <line x1="14" y1="14" x2="50" y2="14" stroke="var(--bg, #4a383c)" stroke-width="4" stroke-linecap="round"/>
+                    </g>
+                    <path d="M56 32L44 8" stroke="var(--primary-dim, #4a383c)" stroke-width="12" stroke-linecap="round"/>
+                    <path d="M44 8L64 4" stroke="var(--primary-dim, #4a383c)" stroke-width="12" stroke-linecap="round"/>
+                    <rect x="40" y="160" width="176" height="18" rx="9" ry="9" fill="var(--primary-dim, #4a383c)"/>
+                    <rect x="48" y="166" width="28" height="6" rx="3" ry="3" fill="var(--bg, #f9d9a6)"/>
+                    <rect x="84" y="166" width="20" height="6" rx="3" ry="3" fill="var(--bg, #f9d9a6)"/>
+                    <rect x="116" y="166" width="20" height="6" rx="3" ry="3" fill="var(--bg, #f9d9a6)"/>
+                    <rect x="148" y="166" width="20" height="6" rx="3" ry="3" fill="var(--bg, #f9d9a6)"/>
+                    <rect x="180" y="166" width="20" height="6" rx="3" ry="3" fill="var(--bg, #f9d9a6)"/>
                 </svg>
                 <h1 data-i18n="appTitle">电台森林</h1>
                 <p class="subtitle" id="totalSubtitle">正在加载...</p>
