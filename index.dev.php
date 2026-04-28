@@ -585,6 +585,26 @@ if (isset($_GET['action']) && $_GET['action'] === 'stations') {
         }
         
         .subtitle { color: var(--text-dim); font-size: 12px; }
+        #topProgressBar {
+            position: fixed;
+            top: 0; left: 0; right: 0;
+            height: 3px;
+            z-index: 9999;
+            pointer-events: none;
+        }
+        #topProgressFill {
+            height: 100%;
+            width: 0%;
+            background: linear-gradient(90deg, var(--primary), color-mix(in srgb, var(--primary) 60%, #fff));
+            border-radius: 0 2px 2px 0;
+            transition: width 0.3s ease;
+            box-shadow: 0 0 8px color-mix(in srgb, var(--primary) 70%, transparent);
+        }
+        #topProgressFill.done {
+            width: 100% !important;
+            transition: width 0.2s ease, opacity 0.5s ease 0.3s;
+            opacity: 0;
+        }
         
         .search-box {
             max-width: 400px;
@@ -1743,6 +1763,8 @@ if (isset($_GET['action']) && $_GET['action'] === 'stations') {
     </style>
 </head>
 <body>
+    <!-- 顶部加载进度条 -->
+    <div id="topProgressBar"><div id="topProgressFill"></div></div>
     <div class="container">
         <div class="fixed-header">
         <header>
@@ -2501,9 +2523,16 @@ if (isset($_GET['action']) && $_GET['action'] === 'stations') {
                         const reader  = r.body.getReader();
                         const decoder = new TextDecoder();
                         const STREAM_BATCH = 1000; // 每积攒 1000 条刷新一次界面（减少 DOM 操作频率）
+                        const STREAM_TOTAL = <?php echo $totalCount; ?>; // PHP 已知总数
                         let lineBuffer  = '';
                         let pendingBatch = [];
                         let renderPending = false;
+                        const $progressFill = $('#topProgressFill');
+
+                        const setProgress = (loaded) => {
+                            const pct = STREAM_TOTAL > 0 ? Math.min(98, Math.round(loaded / STREAM_TOTAL * 100)) : 0;
+                            $progressFill.css('width', pct + '%');
+                        };
 
                         const scheduleRender = () => {
                             if (renderPending) return;
@@ -2520,6 +2549,7 @@ if (isset($_GET['action']) && $_GET['action'] === 'stations') {
                             preprocessNewStations(pendingBatch);
                             pendingBatch.forEach(s => allStations.push(s));
                             pendingBatch = [];
+                            setProgress(allStations.length);
                             scheduleRender();
                         };
 
@@ -2545,6 +2575,7 @@ if (isset($_GET['action']) && $_GET['action'] === 'stations') {
                                 filterAndRender(true);    // 加载完成：重置 visibleCount
                                 renderTypeButtons();       // 仅在加载完成后构建分类按钮
                                 updateRegionCounts();      // 按去重后数量更新地区按钮计数
+                                $progressFill.addClass('done'); // 进度条完成动画
                                 // 恢复 URL 中记录的播放状态
                                 const playUrl = params.get('play');
                                 if (playUrl) {
