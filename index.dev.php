@@ -1796,7 +1796,7 @@ if (isset($_GET['action']) && $_GET['action'] === 'stations') {
                     <circle cx="53" cy="43" r="1.8" fill="var(--bg)" opacity="0.28"/>
                 </svg>
                 <h1>电台森林</h1>
-                <p class="subtitle" id="totalSubtitle">共 <?php echo $totalCount; ?> 个电台</p>
+                <p class="subtitle" id="totalSubtitle">正在加载...</p>
             </div>
             <select class="theme-select" id="themeSelect">
                 <option value="green">🌿 翠绿</option>
@@ -2532,6 +2532,7 @@ if (isset($_GET['action']) && $_GET['action'] === 'stations') {
                         const setProgress = (loaded) => {
                             const pct = STREAM_TOTAL > 0 ? Math.min(98, Math.round(loaded / STREAM_TOTAL * 100)) : 0;
                             $progressFill.css('width', pct + '%');
+                            $('#totalSubtitle').text(`正在加载 ${loaded.toLocaleString()} / ${STREAM_TOTAL.toLocaleString()} 个电台...`);
                         };
 
                         const scheduleRender = () => {
