@@ -104,8 +104,60 @@ function getCountryName($group) {
     return $lowerMap[$key] ?? ($group ?: '其他');
 }
 
+function getRadioFilesState(array $files) {
+    $state = [];
+    foreach ($files as $file) {
+        if (!is_file($file)) {
+            continue;
+        }
+        $state[] = [
+            'file'  => basename($file),
+            'mtime' => filemtime($file),
+            'size'  => filesize($file),
+        ];
+    }
+    return $state;
+}
+
+function loadStationCache(string $cacheFile, array $files) {
+    if (!is_file($cacheFile)) {
+        return null;
+    }
+    $json = file_get_contents($cacheFile);
+    if ($json === false) {
+        return null;
+    }
+    $data = json_decode($json, true);
+    if (!is_array($data) || !isset($data['file_state'], $data['stations']) || !is_array($data['file_state']) || !is_array($data['stations'])) {
+        return null;
+    }
+    $currentState = getRadioFilesState($files);
+    if (count($currentState) !== count($data['file_state'])) {
+        return null;
+    }
+    foreach ($currentState as $index => $item) {
+        if (!isset($data['file_state'][$index]) || $data['file_state'][$index] !== $item) {
+            return null;
+        }
+    }
+    return $data['stations'];
+}
+
+function saveStationCache(string $cacheFile, array $files, array $stations) {
+    $data = [
+        'file_state' => getRadioFilesState($files),
+        'stations'   => $stations,
+    ];
+    $tmpFile = $cacheFile . '.tmp';
+    if (file_put_contents($tmpFile, json_encode($data, JSON_UNESCAPED_UNICODE)) === false) {
+        return false;
+    }
+    return rename($tmpFile, $cacheFile);
+}
+
 $dir = __DIR__;
 $files = glob($dir . '/radio_*.m3u');
+$cacheFile = $dir . '/stations.cache.json';
 $allStations = [];
 $countries = [];
 
@@ -122,24 +174,33 @@ $regionNames = [
     'sa' => '沙特', '' => '全球'
 ];
 
-foreach ($files as $file) {
-    $stations = parseM3U($file);
-    $basename = basename($file, '.m3u');
-    $region = $basename === 'radio' ? '' : str_replace('radio_', '', $basename);
-    $regionName = $regionNames[$region] ?? $region;
+$cached = loadStationCache($cacheFile, $files);
+if ($cached !== null) {
+    $allStations = $cached;
+} else {
+    foreach ($files as $file) {
+        $stations = parseM3U($file);
+        $basename = basename($file, '.m3u');
+        $region = $basename === 'radio' ? '' : str_replace('radio_', '', $basename);
+        $regionName = $regionNames[$region] ?? $region;
 
-    foreach ($stations as $s) {
-        // 输出字段：去除 group，减少 JSON 体积
-        $allStations[] = [
-            'name'    => $s['name'],
-            'logo'    => $s['logo'],
-            'url'     => $s['url'],
-            'region'  => $regionName,
-            'country' => getCountryName($s['group']),
-        ];
-        if (!isset($countries[$regionName])) $countries[$regionName] = 0;
-        $countries[$regionName]++;
+        foreach ($stations as $s) {
+            $allStations[] = [
+                'name'    => $s['name'],
+                'logo'    => $s['logo'],
+                'url'     => $s['url'],
+                'region'  => $regionName,
+                'country' => getCountryName($s['group']),
+            ];
+        }
     }
+    saveStationCache($cacheFile, $files, $allStations);
+}
+
+// 无论来自缓存还是实时解析，都重建 $countries 统计
+foreach ($allStations as $s) {
+    if (!isset($countries[$s['region']])) $countries[$s['region']] = 0;
+    $countries[$s['region']]++;
 }
 
 $totalCount = count($allStations);
