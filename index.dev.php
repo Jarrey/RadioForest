@@ -1,4 +1,6 @@
 <?php
+// 防止大数据量时脚本超时
+set_time_limit(0);
 /**
  * 解析 M3U 播放列表文件，返回电台数组
  * 每个电台包含 name、logo、url、group 字段
@@ -207,14 +209,22 @@ $totalCount = count($allStations);
 
 // ─── JSON API 端点：流式输出 NDJSON（每行一条电台），支持渐进加载 ──────────────
 if (isset($_GET['action']) && $_GET['action'] === 'stations') {
+    // 关闭 gzip 压缩（压缩会阻止流式推送）
+    ini_set('zlib.output_compression', 'Off');
     // 清除 PHP 输出缓冲，让内容尽快发往浏览器
     while (ob_get_level() > 0) { ob_end_clean(); }
     header('Content-Type: application/x-ndjson; charset=UTF-8');
     header('Cache-Control: no-store');
     header('X-Accel-Buffering: no'); // 禁止 Nginx 缓冲
+    $i = 0;
     foreach ($allStations as $station) {
         echo json_encode($station, JSON_UNESCAPED_UNICODE) . "\n";
+        // 每 500 条强制刷新一次，确保数据持续送达浏览器
+        if (++$i % 500 === 0) {
+            flush();
+        }
     }
+    flush();
     exit;
 }
 ?>
@@ -2484,18 +2494,27 @@ if (isset($_GET['action']) && $_GET['action'] === 'stations') {
                         if (!r.ok) throw new Error('HTTP ' + r.status);
                         const reader  = r.body.getReader();
                         const decoder = new TextDecoder();
-                        const STREAM_BATCH = 200; // 每积攒 200 条刷新一次界面
+                        const STREAM_BATCH = 1000; // 每积攒 1000 条刷新一次界面（减少 DOM 操作频率）
                         let lineBuffer  = '';
                         let pendingBatch = [];
+                        let renderPending = false;
+
+                        const scheduleRender = () => {
+                            if (renderPending) return;
+                            renderPending = true;
+                            requestAnimationFrame(() => {
+                                renderPending = false;
+                                filteredCache = null;
+                                filterAndRender(); // 加载中不重建分类按钮，减少开销
+                            });
+                        };
 
                         const flushBatch = () => {
                             if (!pendingBatch.length) return;
                             preprocessNewStations(pendingBatch);
                             pendingBatch.forEach(s => allStations.push(s));
                             pendingBatch = [];
-                            filteredCache = null;
-                            filterAndRender();
-                            renderTypeButtons();
+                            scheduleRender();
                         };
 
                         while (true) {
@@ -2517,8 +2536,9 @@ if (isset($_GET['action']) && $_GET['action'] === 'stations') {
                                 flushBatch();
                                 stationsFullyLoaded = true;
                                 filteredCache = null;
-                                filterAndRender();
-                                updateRegionCounts();
+                                filterAndRender(true);    // 加载完成：重置 visibleCount
+                                renderTypeButtons();       // 仅在加载完成后构建分类按钮
+                                updateRegionCounts();      // 按去重后数量更新地区按钮计数
                                 // 恢复 URL 中记录的播放状态
                                 const playUrl = params.get('play');
                                 if (playUrl) {
