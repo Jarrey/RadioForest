@@ -6,10 +6,12 @@
 
 ```text
 radioweb/
-├── index.dev.php    # 开发源文件，包含可编辑的 PHP/HTML/CSS/JS
-├── index.php        # 构建产物，部署到服务器的文件
-├── build.js         # 构建脚本，压缩 CSS/JS 并生成 index.php
-└── package.json     # 构建依赖声明
+├── index.dev.php          # 开发源文件，包含可编辑的 PHP/HTML/CSS/JS
+├── index.php              # 构建产物，部署到服务器的文件
+├── build.js               # 构建脚本，压缩 CSS/JS 并生成 index.php
+├── radioBrowserService.py # radio-browser.info 请求辅助模块
+├── syncInternetRatio.py   # 从电台数据生成 M3U 播放列表
+└── package.json           # 构建依赖声明
 ```
 
 ## 说明
@@ -17,6 +19,40 @@ radioweb/
 - 项目会读取根目录下所有符合 `radio_*.m3u` 的文件。
 - 使用 `radio_<地区代码>.m3u` 作为播放列表文件命名方式。
 - 如果没有找到任何播放列表文件，页面会显示空列表。
+
+## 播放列表生成脚本
+
+仓库包含两个辅助 Python 脚本，用于从 radio-browser.info 获取电台数据并生成用于页面的播放列表文件：
+
+- `radioBrowserService.py` — 提供 radio-browser API 请求功能。
+- `syncInternetRatio.py` — 下载指定国家/地区的电台并写入 `radio_<code>.m3u` 和 `radio.m3u`。
+
+使用示例：
+
+```bash
+python syncInternetRatio.py CN,US --target-dir . --backup-dir ./backup
+```
+
+默认禁用代理；如果需要启用代理，请传入 `--proxy`，脚本将使用标准的 `HTTP_PROXY` / `HTTPS_PROXY` 环境变量。
+
+### syncInternetRatio.py 参数说明
+
+- `countries`（必选）
+  - 逗号分隔的 ISO 3166-1 alpha-2 国家/地区代码，例如 `CN,US,GB`。
+- `--target-dir DIR`
+  - 生成 M3U 文件的目录。默认值：`.`
+- `--backup-dir DIR`
+  - 备份现有播放列表文件的 ZIP 保存目录。默认值：`./backup`
+- `--no-backup`
+  - 跳过对现有 `radio_<code>.m3u` 和 `radio.m3u` 文件的备份。
+- `--show-broken`
+  - 包含上次检测失败的电台。默认情况下会过滤掉损坏电台。
+- `--page-size N`
+  - 每次 API 请求获取的电台数量。默认值：`500`。
+- `--timeout SEC`
+  - 每次 API 请求的 socket 超时时间，单位为秒。默认值：`120`。
+- `--proxy`
+  - 启用 HTTP 代理，使用标准 `HTTP_PROXY` / `HTTPS_PROXY` 环境变量。
 
 ## 播放列表格式
 
@@ -74,6 +110,8 @@ node build.js
 | 组件       | 要求                                  |
 | ---------- | ------------------------------------- |
 | PHP        | 5.6+                                  |
+| Python     | 3.x                                   |
+| requests   | 用于 HTTP API 请求的 Python 包         |
 | Web 服务器 | Apache / Nginx / 其他支持 PHP 的服务器 |
 | 浏览器     | 支持 HTML5 `<audio>` 的现代浏览器      |
 | Node.js    | 仅构建时需要（建议 ≥ 14）             |

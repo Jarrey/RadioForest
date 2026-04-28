@@ -6,10 +6,12 @@ A PHP-based online radio web player that scans local M3U playlist files in the p
 
 ```text
 radioweb/
-├── index.dev.php    # Source file for development, contains editable PHP/HTML/CSS/JS
-├── index.php        # Build output for deployment
-├── build.js         # Build script that minifies CSS/JS and generates index.php
-└── package.json     # Build dependency manifest
+├── index.dev.php          # Source file for development, contains editable PHP/HTML/CSS/JS
+├── index.php              # Build output for deployment
+├── build.js               # Build script that minifies CSS/JS and generates index.php
+├── radioBrowserService.py # Helper module for radio-browser.info API requests
+├── syncInternetRatio.py   # Generate M3U playlists from radio-browser station data
+└── package.json           # Build dependency manifest
 ```
 
 ## Overview
@@ -17,6 +19,40 @@ radioweb/
 - The app reads all `radio_*.m3u` files in the root directory.
 - Use `radio_<region_code>.m3u` as the playlist file pattern.
 - If no playlist files are found, the page will show an empty station list.
+
+## Playlist generation scripts
+
+This repository includes two helper Python scripts for fetching station data from radio-browser.info and generating playlist files that work with the web app.
+
+- `radioBrowserService.py` — API client used to fetch station JSON data.
+- `syncInternetRatio.py` — downloads country station lists and writes `radio_<code>.m3u` plus `radio.m3u`.
+
+Usage example:
+
+```bash
+python syncInternetRatio.py CN,US --target-dir . --backup-dir ./backup
+```
+
+Proxy is disabled by default; pass `--proxy` to enable HTTP proxy support using standard `HTTP_PROXY` / `HTTPS_PROXY` environment variables.
+
+### syncInternetRatio.py arguments
+
+- `countries` (required)
+  - Comma-separated ISO 3166-1 alpha-2 country codes, e.g. `CN,US,GB`.
+- `--target-dir DIR`
+  - Directory to write generated M3U files. Default: `.`
+- `--backup-dir DIR`
+  - Directory to store ZIP backups of existing playlist files. Default: `./backup`
+- `--no-backup`
+  - Skip backup of existing `radio_<code>.m3u` and `radio.m3u` files.
+- `--show-broken`
+  - Include stations that failed their last check. By default, broken stations are excluded.
+- `--page-size N`
+  - Number of stations fetched per API request page. Default: `500`.
+- `--timeout SEC`
+  - Socket timeout in seconds for each API request. Default: `120`.
+- `--proxy`
+  - Enable HTTP proxy for API requests using the standard `HTTP_PROXY` / `HTTPS_PROXY` environment variables.
 
 ## Playlist format
 
@@ -74,6 +110,8 @@ The build script minifies the inlined CSS and JavaScript, preserves PHP code blo
 | Component    | Requirement                              |
 | ------------ | ---------------------------------------- |
 | PHP          | 5.6+                                     |
+| Python       | 3.x                                      |
+| requests     | Python package for HTTP API calls        |
 | Web server   | Apache / Nginx / other PHP-capable server |
 | Browser      | Modern browser with HTML5 `<audio>` support |
 | Node.js      | Required only for build (recommended ≥ 14) |
