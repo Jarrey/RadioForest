@@ -205,11 +205,16 @@ foreach ($allStations as $s) {
 
 $totalCount = count($allStations);
 
-// ─── JSON API 端点：延迟加载电台列表数据 ──────────────────────────────────────
+// ─── JSON API 端点：流式输出 NDJSON（每行一条电台），支持渐进加载 ──────────────
 if (isset($_GET['action']) && $_GET['action'] === 'stations') {
-    header('Content-Type: application/json; charset=UTF-8');
+    // 清除 PHP 输出缓冲，让内容尽快发往浏览器
+    while (ob_get_level() > 0) { ob_end_clean(); }
+    header('Content-Type: application/x-ndjson; charset=UTF-8');
     header('Cache-Control: no-store');
-    echo json_encode($allStations, JSON_UNESCAPED_UNICODE);
+    header('X-Accel-Buffering: no'); // 禁止 Nginx 缓冲
+    foreach ($allStations as $station) {
+        echo json_encode($station, JSON_UNESCAPED_UNICODE) . "\n";
+    }
     exit;
 }
 ?>
@@ -2126,9 +2131,9 @@ if (isset($_GET['action']) && $_GET['action'] === 'stations') {
         // _nameLower:   规范化（繁→简）+ 小写，用于搜索匹配
         // _types:       匹配到的分类数组（中国电台额外含省份），避免过滤/渲染时重跑正则
         // _typeTagHtml: 预渲染好的分类标签 HTML 片段
-        function preprocessStations(data) {
-            allStations = data;
-            allStations.forEach(s => {
+        /** 对一组新电台对象进行预计算（增量，支持流式分批调用）*/
+        function preprocessNewStations(stations) {
+            stations.forEach(s => {
                 const nameNorm = normalizeZh(s.name);  // 繁体名称统一为简体
                 s._nameLower = nameNorm.toLowerCase();
                 s._types = typeKeys.filter(t => typePatterns[t].test(nameNorm));
@@ -2141,6 +2146,10 @@ if (isset($_GET['action']) && $_GET['action'] === 'stations') {
                 s._typeTagHtml = s._types.map(t => `<span class="type-tag">${t}</span>`).join('');
             });
         }
+        function preprocessStations(data) {
+            allStations = data;
+            preprocessNewStations(allStations);
+        }
 
         // ─── 状态变量 ────────────────────────────────────────────────────────────
         const BATCH_SIZE = 100;
@@ -2151,6 +2160,7 @@ if (isset($_GET['action']) && $_GET['action'] === 'stations') {
         let isLoading       = false;
         let currentUrl      = '';
         let currentStation  = null;
+        let stationsFullyLoaded = false; // 全部数据流式加载完毕标志
 
         // HTML 属性安全转义（防止电台名内的引号等破坏HTML属性）
         function esc(s) {
@@ -2224,12 +2234,16 @@ if (isset($_GET['action']) && $_GET['action'] === 'stations') {
 
             // ── 过滤 + 渲染主入口 ─────────────────────────────────────────────────
             function filterAndRender(reset = false) {
-                if (!allStations.length) { $('#resultCount').text('无电台数据'); return; }
+                if (!allStations.length) {
+                    $('#resultCount').text(stationsFullyLoaded ? '无电台数据' : '加载中...');
+                    return;
+                }
                 if (reset) { filteredCache = null; visibleCount = BATCH_SIZE; }
                 const filtered = getFiltered();
                 const toShow   = filtered.slice(0, visibleCount);
                 renderStations(toShow);
-                $('#resultCount').text(`显示 ${toShow.length} / ${filtered.length} 个电台`);
+                const suffix = stationsFullyLoaded ? '' : '（加载中…）';
+                $('#resultCount').text(`显示 ${toShow.length} / ${filtered.length} 个电台${suffix}`);
                 $('#loadingMore').toggleClass('show', visibleCount < filtered.length);
             }
 
@@ -2288,6 +2302,23 @@ if (isset($_GET['action']) && $_GET['action'] === 'stations') {
                     html += `<button class="type-btn ${currentType === type ? 'active' : ''}" data-type="${type}">${type}(${typeCounts[type]})</button>`;
                 });
                 $('#typeBtns').html(html);
+            }
+
+            // ── 加载完成后按去重数量更新地区按钮计数 ─────────────────────────────
+            function updateRegionCounts() {
+                const regionDeduped = {};
+                const seenNames = new Set();
+                let total = 0;
+                allStations.forEach(s => {
+                    if (seenNames.has(s.name)) return;
+                    seenNames.add(s.name);
+                    total++;
+                    regionDeduped[s.region] = (regionDeduped[s.region] || 0) + 1;
+                });
+                $('.region-btn[data-region="all"]').html((_, h) => h.replace(/\(\d+\)/, `(${total})`));
+                Object.entries(regionDeduped).forEach(([region, count]) => {
+                    $(`.region-btn[data-region="${region}"]`).html((_, h) => h.replace(/\(\d+\)/, `(${count})`));
+                });
             }
 
             // ── 播放 ──────────────────────────────────────────────────────────────
@@ -2444,31 +2475,67 @@ if (isset($_GET['action']) && $_GET['action'] === 'stations') {
                 }
 
                 updateFilterLabels();
+                $('#resultCount').text('加载中...');
 
-                // ── 异步加载电台列表数据 ──────────────────────────────────────
-                fetch('?action=stations')
-                    .then(r => {
+                // ── 流式加载电台数据（NDJSON），分批渐进渲染 ─────────────────
+                (async () => {
+                    try {
+                        const r = await fetch('?action=stations');
                         if (!r.ok) throw new Error('HTTP ' + r.status);
-                        return r.json();
-                    })
-                    .then(data => {
-                        preprocessStations(data);
-                        renderTypeButtons();
-                        filterAndRender(true);
-                        // 从 URL 参数恢复播放状态（仅还原显示，不自动播放）
-                        const playUrl = params.get('play');
-                        if (playUrl) {
-                            const playName = params.get('play_name');
-                            let station = playName
-                                ? allStations.find(s => s.url === playUrl && s.name === playName)
-                                : null;
-                            if (!station) station = allStations.find(s => s.url === playUrl);
-                            if (station) playStation(station, false);
+                        const reader  = r.body.getReader();
+                        const decoder = new TextDecoder();
+                        const STREAM_BATCH = 200; // 每积攒 200 条刷新一次界面
+                        let lineBuffer  = '';
+                        let pendingBatch = [];
+
+                        const flushBatch = () => {
+                            if (!pendingBatch.length) return;
+                            preprocessNewStations(pendingBatch);
+                            pendingBatch.forEach(s => allStations.push(s));
+                            pendingBatch = [];
+                            filteredCache = null;
+                            filterAndRender();
+                            renderTypeButtons();
+                        };
+
+                        while (true) {
+                            const { done, value } = await reader.read();
+                            if (value) {
+                                lineBuffer += decoder.decode(value, { stream: true });
+                                const lines = lineBuffer.split('\n');
+                                lineBuffer = lines.pop(); // 保留未完成的行
+                                for (const line of lines) {
+                                    if (!line.trim()) continue;
+                                    try { pendingBatch.push(JSON.parse(line)); } catch (e) {}
+                                }
+                                if (pendingBatch.length >= STREAM_BATCH) flushBatch();
+                            }
+                            if (done) {
+                                if (lineBuffer.trim()) {
+                                    try { pendingBatch.push(JSON.parse(lineBuffer.trim())); } catch (e) {}
+                                }
+                                flushBatch();
+                                stationsFullyLoaded = true;
+                                filteredCache = null;
+                                filterAndRender();
+                                updateRegionCounts();
+                                // 恢复 URL 中记录的播放状态
+                                const playUrl = params.get('play');
+                                if (playUrl) {
+                                    const playName = params.get('play_name');
+                                    let station = playName
+                                        ? allStations.find(s => s.url === playUrl && s.name === playName)
+                                        : null;
+                                    if (!station) station = allStations.find(s => s.url === playUrl);
+                                    if (station) playStation(station, false);
+                                }
+                                break;
+                            }
                         }
-                    })
-                    .catch(() => {
+                    } catch (e) {
                         $('#resultCount').text('数据加载失败，请刷新重试');
-                    });
+                    }
+                })();
             }
 
             // ── 事件绑定 ──────────────────────────────────────────────────────────
