@@ -35,6 +35,8 @@ python syncInternetRatio.py CN,US --target-dir . --backup-dir ./backup
 
 Proxy is disabled by default; pass `--proxy` to enable HTTP proxy support using standard `HTTP_PROXY` / `HTTPS_PROXY` environment variables.
 
+You can run the script from a scheduled task to keep playlists updated automatically. For example, use `cron` on Linux/macOS or Task Scheduler on Windows to run it at a fixed time every day.
+
 ### syncInternetRatio.py arguments
 
 - `countries` (required)

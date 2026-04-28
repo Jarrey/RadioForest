@@ -35,6 +35,8 @@ python syncInternetRatio.py CN,US --target-dir . --backup-dir ./backup
 
 默认禁用代理；如果需要启用代理，请传入 `--proxy`，脚本将使用标准的 `HTTP_PROXY` / `HTTPS_PROXY` 环境变量。
 
+可以将该脚本配置为计划任务，定期自动刷新播放列表。例如，在 Linux/macOS 上使用 `cron`，或在 Windows 上使用任务计划程序，每天固定时间运行一次。
+
 ### syncInternetRatio.py 参数说明
 
 - `countries`（必选）
