@@ -14,10 +14,9 @@ radioweb/
 
 ## Overview
 
-- The app reads all `radio*.m3u` files in the root directory.
-- It is recommended to use `radio_<region_code>.m3u` naming.
+- The app reads all `radio_*.m3u` files in the root directory.
+- Use `radio_<region_code>.m3u` as the playlist file pattern.
 - If no playlist files are found, the page will show an empty station list.
-- Multiple playlists are merged automatically.
 
 ## Playlist format
 
@@ -31,12 +30,12 @@ http://lhttp.cnr.cn/live/zgzs/64k.mp3
 
 Recommended file names:
 
-| File name        | Meaning      |
-| ---------------- | ------------ |
-| `radio_cn.m3u`   | China radio  |
-| `radio_us.m3u`   | USA radio    |
-| `radio_jp.m3u`   | Japan radio  |
-| `radio.m3u`     | Global radio |
+| File name            | Meaning      |
+| -------------------- | ------------ |
+| `radio_cn.m3u`       | China radio  |
+| `radio_us.m3u`       | USA radio    |
+| `radio_jp.m3u`       | Japan radio  |
+| `radio_<region>.m3u` | Region radio |
 
 Supported tags:
 
@@ -48,7 +47,7 @@ Supported tags:
 
 ### Option 1: Deploy the built file
 
-Upload `index.php` and `radio_*.m3u` to a PHP-capable web server. `node_modules/` and `package-lock.json` are not required.
+Upload `index.php` and your `radio_*.m3u` files to a PHP-capable web server. `node_modules/` and `package-lock.json` are not required.
 
 ### Option 2: Build from source
 
@@ -63,7 +62,7 @@ The build script minifies the inlined CSS and JavaScript, preserves PHP code blo
 
 ## Key features
 
-- Playlist merge: automatically reads and merges all `radio*.m3u` files
+- Multiple playlists: reads all `radio_*.m3u` files and merges stations
 - Region filtering: supports multiple regions with flag icons
 - Keyword search: filters station names in real time
 - Theme switching: 12 color themes available

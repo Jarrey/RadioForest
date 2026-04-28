@@ -105,7 +105,7 @@ function getCountryName($group) {
 }
 
 $dir = __DIR__;
-$files = glob($dir . '/radio*.m3u');
+$files = glob($dir . '/radio_*.m3u');
 $allStations = [];
 $countries = [];
 
@@ -125,7 +125,7 @@ $regionNames = [
 foreach ($files as $file) {
     $stations = parseM3U($file);
     $basename = basename($file, '.m3u');
-    $region = str_replace('radio_', '', $basename);
+    $region = $basename === 'radio' ? '' : str_replace('radio_', '', $basename);
     $regionName = $regionNames[$region] ?? $region;
     
     foreach ($stations as $s) {
