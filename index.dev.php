@@ -2532,7 +2532,7 @@ if (isset($_GET['action']) && $_GET['action'] === 'stations') {
                         const setProgress = (loaded) => {
                             const pct = STREAM_TOTAL > 0 ? Math.min(98, Math.round(loaded / STREAM_TOTAL * 100)) : 0;
                             $progressFill.css('width', pct + '%');
-                            $('#totalSubtitle').text(`正在加载 ${loaded.toLocaleString()} / ${STREAM_TOTAL.toLocaleString()} 个电台...`);
+                            $('#totalSubtitle').text(`正在加载 ${loaded.toLocaleString()} 个电台...`);
                         };
 
                         const scheduleRender = () => {
