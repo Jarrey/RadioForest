@@ -2364,6 +2364,8 @@ if (isset($_GET['action']) && $_GET['action'] === 'stations') {
             function playStation(station, autoPlay = true) {
                 currentUrl     = station.url;
                 currentStation = station;
+                localStorage.setItem('play_url', station.url);
+                localStorage.setItem('play_name', station.name);
                 const audio = document.getElementById('audioPlayer');
                 
                 // 更新标题
@@ -2443,6 +2445,8 @@ if (isset($_GET['action']) && $_GET['action'] === 'stations') {
             function setRegion(region) {
                 currentRegion = region;
                 currentType   = '';
+                localStorage.setItem('region', region);
+                localStorage.removeItem('type');
                 $('.region-btn').removeClass('active');
                 $(`.region-btn[data-region="${region}"]`).addClass('active');
                 renderTypeButtons();
@@ -2453,6 +2457,7 @@ if (isset($_GET['action']) && $_GET['action'] === 'stations') {
 
             function setType(type) {
                 currentType = type;
+                localStorage.setItem('type', type);
                 renderTypeButtons();
                 filterAndRender(true);
                 updateURL();
@@ -2498,13 +2503,42 @@ if (isset($_GET['action']) && $_GET['action'] === 'stations') {
                 const params      = new URLSearchParams(location.search);
                 const regionParam = params.get('region');
                 const typeParam   = params.get('type');
+                const savedRegion = localStorage.getItem('region') || 'all';
+                const savedType   = localStorage.getItem('type') || '';
 
                 if (regionParam) {
                     currentRegion = regionParam;
-                    $('.region-btn').removeClass('active');
-                    $(`.region-btn[data-region="${regionParam}"]`).addClass('active');
+                } else {
+                    currentRegion = savedRegion;
                 }
-                if (typeParam) currentType = typeParam;
+                if (currentRegion !== 'all') {
+                    $('.region-btn').removeClass('active');
+                    $(`.region-btn[data-region="${currentRegion}"]`).addClass('active');
+                }
+
+                if (typeParam) {
+                    currentType = typeParam;
+                } else if (savedRegion === currentRegion) {
+                    currentType = savedType;
+                } else {
+                    currentType = '';
+                }
+
+                if (regionParam) {
+                    localStorage.setItem('region', currentRegion);
+                    if (!typeParam) localStorage.removeItem('type');
+                }
+                if (typeParam) {
+                    localStorage.setItem('type', currentType);
+                }
+
+                // when URL doesn't provide filters, keep saved values
+                if (!regionParam && currentRegion !== savedRegion) {
+                    localStorage.setItem('region', currentRegion);
+                }
+                if (!typeParam && currentType !== savedType && currentType !== '') {
+                    localStorage.setItem('type', currentType);
+                }
 
                 // 窄屏（手机）默认收起分类筛选，宽屏保持展开
                 if (window.innerWidth < 600) {
@@ -2578,14 +2612,19 @@ if (isset($_GET['action']) && $_GET['action'] === 'stations') {
                                 updateRegionCounts();      // 按去重后数量更新地区按钮计数
                                 $progressFill.addClass('done'); // 进度条完成动画
                                 // 恢复 URL 中记录的播放状态
-                                const playUrl = params.get('play');
+                                const playUrl = params.get('play') || localStorage.getItem('play_url');
                                 if (playUrl) {
-                                    const playName = params.get('play_name');
+                                    const playName = params.get('play_name') || localStorage.getItem('play_name');
                                     let station = playName
                                         ? allStations.find(s => s.url === playUrl && s.name === playName)
                                         : null;
                                     if (!station) station = allStations.find(s => s.url === playUrl);
-                                    if (station) playStation(station, false);
+                                    if (station) {
+                                        playStation(station, false);
+                                        if (!params.get('play')) {
+                                            updateURL();
+                                        }
+                                    }
                                 }
                                 break;
                             }
