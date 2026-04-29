@@ -233,7 +233,7 @@ docker compose -f docker/docker-compose.yml exec app sh -c "./sync.sh"
 若已配置 `SYNC_CRON`，容器会启动 `crond` 并按计划执行同步任务，例如：
 
 ```text
-SYNC_CRON=0 3 * * *
+SYNC_CRON=30 1 * * *
 ```
 
 定时任务日志写入：

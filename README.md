@@ -246,7 +246,7 @@ docker compose -f docker/docker-compose.yml exec app sh -c "./sync.sh"
 If `SYNC_CRON` is configured in `.env`, the container will start `crond` and run the sync job on the schedule you specify. Example:
 
 ```text
-SYNC_CRON=0 3 * * *
+SYNC_CRON=30 1 * * *
 ```
 
 This runs sync every day at 03:00 and writes output to:
