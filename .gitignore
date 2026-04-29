@@ -4,3 +4,4 @@ package-lock.json
 
 # Playlist files (local data, not project code)
 radio_*.m3u
+radio.m3u

@@ -113,6 +113,49 @@ node build.js
 
 The build script minifies the inlined CSS and JavaScript, preserves PHP code blocks, and writes the result to `index.php`.
 
+## Docker deployment
+
+This project can be packaged as a Docker image with Nginx + PHP-FPM + Python3 in a single container.
+
+1. Copy `.env.sample` to `.env` and adjust the sync parameters as needed.
+2. Build the image:
+
+```powershell
+.\build-docker.ps1
+```
+
+Optionally specify a custom image tag:
+
+```powershell
+.\build-docker.ps1 -Tag "radioforest:1.0"
+```
+
+3. Start the service with Docker Compose:
+
+```bash
+docker compose up --build -d
+```
+
+4. Access the app on port `18882` by default.
+
+5. Run playlist synchronization inside the container:
+
+```bash
+docker compose exec app sh -c "./sync.sh"
+```
+If you want automatic scheduled sync, set `SYNC_CRON` in `.env` using a standard cron expression, for example:
+
+```text
+SYNC_CRON=0 3 * * *
+```
+
+This writes periodic sync output to `./logs/cron.log`.
+Host-mounted directories:
+
+- `./backup` → playlist backup ZIPs
+- `./logs` → sync and server logs
+- repository root → web app and `radio_*.m3u` files
+
 ## Key features
 
 - Multiple playlists: reads all `radio_*.m3u` files and merges stations
