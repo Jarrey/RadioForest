@@ -2176,6 +2176,7 @@ if (isset($_GET['action']) && $_GET['action'] === 'stations') {
         const typePatterns = {
             '音乐': /音乐|Music|pop|rock|hit|jazz|classical/i,
             '新闻': /新闻|News|资讯|information/i,
+            '财经': /财经|金融|股票|经济|Finance|Financial|Business|Economy|Stock|Market|Investment|Banking/i,
             '综合': /广播|Radio|综合|general/i,
             '交通': /交通|Traffic|汽车|Auto/i,
             '体育': /体育|Sports/i,
@@ -2361,6 +2362,7 @@ if (isset($_GET['action']) && $_GET['action'] === 'stations') {
             '爵士':'jazz','流行':'pop','摇滚':'rock','嘻哈':'hiphop',
             '电子':'electronic','R&B':'rnb','乡村':'country','民谣':'folk',
             '蓝调':'blues','雷鬼':'reggae','金属':'metal','拉丁':'latin',
+            '财经':'finance',
             '央广':'cnr','央视':'cctv',
             '全国':'national','北京':'beijing','天津':'tianjin','上海':'shanghai','重庆':'chongqing',
             '广东':'guangdong','广西':'guangxi','海南':'hainan','福建':'fujian',
@@ -2549,9 +2551,9 @@ if (isset($_GET['action']) && $_GET['action'] === 'stations') {
                         regionDeduped[s.region] = (regionDeduped[s.region] || 0) + 1;
                     }
                 });
-                $('.region-btn[data-region="all"]').attr('data-count', total);
+                $('.region-btn[data-region="all"]').data('count', total);
                 Object.entries(regionDeduped).forEach(([region, count]) => {
-                    $(`.region-btn[data-region="${region}"]`).attr('data-count', count);
+                    $(`.region-btn[data-region="${region}"]`).data('count', count);
                 });
                 cachedStationTotal = total;
                 translateRegionBtns();

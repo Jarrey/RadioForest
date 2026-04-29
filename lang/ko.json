@@ -53,6 +53,7 @@
     "jazz": "재즈", "pop": "팝", "rock": "록", "hiphop": "힙합",
     "electronic": "일렉트로닉", "rnb": "R&B", "country": "컨트리", "folk": "포크",
     "blues": "블루스", "reggae": "레게", "metal": "메탈", "latin": "라틴",
+    "finance": "경제/금융",
     "cnr": "CNR", "cctv": "CCTV",
     "national": "전국", "beijing": "베이징", "tianjin": "톈진", "shanghai": "상하이", "chongqing": "충칭",
     "guangdong": "광둥", "guangxi": "광시", "hainan": "하이난", "fujian": "푸젠",

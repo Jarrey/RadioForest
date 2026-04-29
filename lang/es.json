@@ -53,6 +53,7 @@
     "jazz": "Jazz", "pop": "Pop", "rock": "Rock", "hiphop": "Hip-Hop",
     "electronic": "Electrónica", "rnb": "R&B", "country": "Country", "folk": "Folk",
     "blues": "Blues", "reggae": "Reggae", "metal": "Metal", "latin": "Latino",
+    "finance": "Finanzas",
     "cnr": "CNR", "cctv": "CCTV",
     "national": "Nacional", "beijing": "Beijing", "tianjin": "Tianjin", "shanghai": "Shanghai", "chongqing": "Chongqing",
     "guangdong": "Guangdong", "guangxi": "Guangxi", "hainan": "Hainan", "fujian": "Fujian",
