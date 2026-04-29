@@ -2,6 +2,22 @@
 
 基于 PHP 的在线网络电台播放器。它会自动扫描项目根目录下的 M3U 播放列表文件，解析电台信息并在浏览器中提供搜索、区域筛选、主题切换和实时播放功能。
 
+## 目录
+
+- [目录结构](#目录结构)
+- [说明](#说明)
+- [多语言界面](#多语言界面)
+- [播放列表生成脚本](#播放列表生成脚本)
+- [播放列表格式](#播放列表格式)
+- [部署方式](#部署方式)
+  - [方式一：直接部署 `index.php`](#方式一直接部署-indexphp)
+  - [方式二：从源代码构建](#方式二从源代码构建)
+  - [方式三：Docker 部署](#方式三docker部署)
+- [功能亮点](#功能亮点)
+- [运行环境](#运行环境)
+- [开发说明](#开发说明)
+- [额外提示](#额外提示)
+
 ## 目录结构
 
 ```text
@@ -106,6 +122,113 @@ node build.js
 ```
 
 构建后，`build.js` 会将页面内的 CSS 和 JavaScript 压缩后写入 `index.php`，并保留原始 PHP 逻辑。
+
+### 方式三：Docker 部署
+
+项目已提供 Docker 部署配置，将 Web 应用、Nginx、PHP-FPM 和 Python 同步脚本打包到一个镜像中。
+
+#### Docker 镜像包含内容
+
+- `index.php` 作为 Web 应用入口
+- `lang/` 翻译字典
+- `radioBrowserService.py` 请求辅助模块
+- `syncInternetRatio.py` 同步脚本
+- `Dockerfile`, `docker-compose.yml`, `start.sh`, `sync.sh`
+- `nginx.conf` 用于 PHP-FPM 转发
+
+#### 主机目录挂载说明
+
+Docker Compose 会将以下主机目录挂载到容器：
+
+- `./backup` → `/var/www/html/backup`
+- `./logs` → `/var/www/html/logs`
+- 当前仓库根目录 → `/var/www/html`
+
+> `.dockerignore` 已排除 `radio_*.m3u` 和 `radio.m3u`，播放列表文件不会打包进镜像，使用宿主机挂载保持数据持久化。
+
+#### 准备 `.env`
+
+复制样例配置文件并根据实际需求修改：
+
+```powershell
+copy .env.sample .env
+```
+
+在 `.env` 中设置：
+
+- `HTTP_PORT` - 容器对外暴露端口
+- `SYNC_COUNTRIES` - 同步的国家/地区代码
+- `SYNC_TARGET_DIR` - 生成播放列表的目标目录
+- `SYNC_BACKUP_DIR` - 备份目录
+- `SYNC_CRON` - 定时任务表达式（可选）
+
+若不希望定时同步，可将 `SYNC_CRON` 留空。
+
+#### 构建镜像
+
+使用提供的 PowerShell 脚本构建镜像：
+
+```powershell
+.\build-docker.ps1
+```
+
+如果要自定义镜像标签：
+
+```powershell
+.\build-docker.ps1 -Tag "radioforest:1.0"
+```
+
+#### 使用 Docker Compose 运行
+
+启动容器：
+
+```bash
+docker compose up --build -d
+```
+
+然后访问：
+
+```text
+http://localhost:18882
+```
+
+停止服务：
+
+```bash
+docker compose down
+```
+
+#### 手动同步与定时任务
+
+手动运行同步命令：
+
+```bash
+docker compose exec app sh -c "./sync.sh"
+```
+
+若已配置 `SYNC_CRON`，容器会启动 `crond` 并按计划执行同步任务，例如：
+
+```text
+SYNC_CRON=0 3 * * *
+```
+
+定时任务日志写入：
+
+- `./logs/cron.log`
+
+手动同步日志写入：
+
+- `./logs/sync.log`
+
+#### 其他说明
+
+- 镜像不会包含本地 `radio_*.m3u` 文件。
+- 请使用主机挂载方式提供播放列表、备份和日志目录。
+- 更改 Docker 配置后，可重新执行：
+
+```bash
+docker compose up --build -d
+```
 
 ## 功能亮点
 
