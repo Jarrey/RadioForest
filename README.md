@@ -2,6 +2,29 @@
 
 A PHP-based online radio web player that scans local M3U playlist files in the project root, parses station metadata, and provides search, region filtering, theme switching, and live playback in the browser.
 
+## Table of contents
+
+- [Project structure](#project-structure)
+- [Recent updates](#recent-updates)
+- [Overview](#overview)
+- [Multilingual UI](#multilingual-ui)
+- [Playlist generation scripts](#playlist-generation-scripts)
+- [Playlist format](#playlist-format)
+- [Deployment](#deployment)
+  - [Option 1: Deploy the built file](#option-1-deploy-the-built-file)
+  - [Option 2: Build from source](#option-2-build-from-source)
+- [Docker deployment](#docker-deployment)
+  - [What is included in the Docker image](#what-is-included-in-the-docker-image)
+  - [Files mounted from the host](#files-mounted-from-the-host)
+  - [Prepare `.env`](#prepare-env)
+  - [Build the image](#build-the-image)
+  - [Run with Docker Compose](#run-with-docker-compose)
+  - [Manual sync and cron scheduling](#manual-sync-and-cron-scheduling)
+- [Key features](#key-features)
+- [Requirements](#requirements)
+- [Development notes](#development-notes)
+- [Notes](#notes)
+
 ## Project structure
 
 ```text
@@ -115,46 +138,116 @@ The build script minifies the inlined CSS and JavaScript, preserves PHP code blo
 
 ## Docker deployment
 
-This project can be packaged as a Docker image with Nginx + PHP-FPM + Python3 in a single container.
+This repository includes a Docker setup that packages the web app, Nginx, PHP-FPM, and Python sync scripts into one image.
 
-1. Copy `.env.sample` to `.env` and adjust the sync parameters as needed.
-2. Build the image:
+### What is included in the Docker image
+
+- `index.php` web application entry file
+- `lang/` translations
+- `radioBrowserService.py` helper module
+- `syncInternetRatio.py` playlist sync script
+- `Dockerfile`, `docker-compose.yml`, `start.sh`, `sync.sh`
+- `nginx.conf` with PHP-FPM routing
+
+### Files mounted from the host
+
+The Docker compose setup maps host directories into the container so that playlists, backups, and logs are stored outside the image:
+
+- `./backup` → `/var/www/html/backup`
+- `./logs` → `/var/www/html/logs`
+- repository root → `/var/www/html`
+
+> The `.dockerignore` file excludes `radio_*.m3u` and `radio.m3u` from the Docker build context, so playlist files remain hosted on the machine rather than baked into the image.
+
+### Prepare `.env`
+
+Copy the sample environment file and customize it before deployment:
+
+```powershell
+copy .env.sample .env
+```
+
+Then edit `.env` and set values such as:
+
+- `HTTP_PORT` - public port exposed by the container
+- `SYNC_COUNTRIES` - country codes for playlist sync
+- `SYNC_TARGET_DIR` - target directory for generated playlists inside the container
+- `SYNC_BACKUP_DIR` - backup directory inside the container
+- `SYNC_CRON` - optional cron expression for scheduled sync
+
+If you do not want scheduled sync, leave `SYNC_CRON` empty.
+
+### Build the image
+
+Use the provided PowerShell script to build the Docker image:
 
 ```powershell
 .\build-docker.ps1
 ```
 
-Optionally specify a custom image tag:
+To build with a custom image tag:
 
 ```powershell
 .\build-docker.ps1 -Tag "radioforest:1.0"
 ```
 
-3. Start the service with Docker Compose:
+### Run with Docker Compose
+
+Start the service in detached mode:
 
 ```bash
 docker compose up --build -d
 ```
 
-4. Access the app on port `18882` by default.
+Then open your browser and visit:
 
-5. Run playlist synchronization inside the container:
+```text
+http://localhost:18882
+```
+
+If you need to stop the service:
+
+```bash
+docker compose down
+```
+
+### Manual sync and cron scheduling
+
+To run the sync script manually inside the container:
 
 ```bash
 docker compose exec app sh -c "./sync.sh"
 ```
-If you want automatic scheduled sync, set `SYNC_CRON` in `.env` using a standard cron expression, for example:
+
+If `SYNC_CRON` is configured in `.env`, the container will start `crond` and run the sync job on the schedule you specify. Example:
 
 ```text
 SYNC_CRON=0 3 * * *
 ```
 
-This writes periodic sync output to `./logs/cron.log`.
-Host-mounted directories:
+This runs sync every day at 03:00 and writes output to:
 
-- `./backup` → playlist backup ZIPs
-- `./logs` → sync and server logs
-- repository root → web app and `radio_*.m3u` files
+- `./logs/cron.log`
+
+Manual sync output is written to:
+
+- `./logs/sync.log`
+
+### Useful Docker notes
+
+- The image does not include local `radio_*.m3u` files by design.
+- Use host mounts to keep playlist files, backups, and logs persistent.
+- You can inspect the container logs with:
+
+```bash
+docker compose logs -f
+```
+
+- To rebuild after changing Docker-related files, run:
+
+```bash
+docker compose up --build -d
+```
 
 ## Key features
 
