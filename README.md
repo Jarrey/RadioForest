@@ -209,6 +209,18 @@ Alternatively, from the repository root use:
 docker compose -f docker/docker-compose.yml up --build -d
 ```
 
+#### Run with the prebuilt GHCR image
+A published image is available at `ghcr.io/jarrey/radioforest:latest`. Use the sample compose file below to deploy without building locally.
+
+```bash
+cd docker
+copy .env.sample .env
+# or on Linux/macOS:
+# cp .env.sample .env
+
+docker compose -f docker/docker-compose-ghcr.yml up -d
+```
+
 Then open your browser and visit:
 
 ```text

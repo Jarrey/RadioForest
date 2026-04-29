@@ -196,6 +196,19 @@ docker compose up --build -d
 docker compose -f docker/docker-compose.yml up --build -d
 ```
 
+#### 使用 GHCR 预构建镜像运行
+预构建镜像地址：`ghcr.io/jarrey/radioforest:latest`。
+使用下面的示例 compose 文件即可直接部署，无需在本地构建：
+
+```bash
+cd docker
+copy .env.sample .env
+# 或在 Linux/macOS 上：
+# cp .env.sample .env
+
+docker compose -f docker/docker-compose-ghcr.yml up -d
+```
+
 然后访问：
 
 ```text
