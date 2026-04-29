@@ -164,10 +164,11 @@ The Docker compose setup maps host directories into the container so that playli
 Copy the sample environment file and customize it before deployment:
 
 ```powershell
+cd docker
 copy .env.sample .env
 ```
 
-Then edit `.env` and set values such as:
+Then edit `docker/.env` and set values such as:
 
 - `HTTP_PORT` - public port exposed by the container
 - `SYNC_COUNTRIES` - country codes for playlist sync
@@ -182,12 +183,14 @@ If you do not want scheduled sync, leave `SYNC_CRON` empty.
 Use the provided PowerShell script to build the Docker image:
 
 ```powershell
+cd docker
 .\build-docker.ps1
 ```
 
 To build with a custom image tag:
 
 ```powershell
+cd docker
 .\build-docker.ps1 -Tag "radioforest:1.0"
 ```
 
@@ -196,7 +199,14 @@ To build with a custom image tag:
 Start the service in detached mode:
 
 ```bash
+cd docker
 docker compose up --build -d
+```
+
+Alternatively, from the repository root use:
+
+```bash
+docker compose -f docker/docker-compose.yml up --build -d
 ```
 
 Then open your browser and visit:
@@ -205,18 +215,32 @@ Then open your browser and visit:
 http://localhost:18882
 ```
 
-If you need to stop the service:
+If you need to stop the service, run either:
 
 ```bash
+cd docker
 docker compose down
+```
+
+or from the repository root:
+
+```bash
+docker compose -f docker/docker-compose.yml down
 ```
 
 ### Manual sync and cron scheduling
 
-To run the sync script manually inside the container:
+To run the sync script manually inside the container, run either:
 
 ```bash
+cd docker
 docker compose exec app sh -c "./sync.sh"
+```
+
+or from the repository root:
+
+```bash
+docker compose -f docker/docker-compose.yml exec app sh -c "./sync.sh"
 ```
 
 If `SYNC_CRON` is configured in `.env`, the container will start `crond` and run the sync job on the schedule you specify. Example:
@@ -237,16 +261,30 @@ Manual sync output is written to:
 
 - The image does not include local `radio_*.m3u` files by design.
 - Use host mounts to keep playlist files, backups, and logs persistent.
-- You can inspect the container logs with:
+- You can inspect the container logs with either:
 
 ```bash
+cd docker
 docker compose logs -f
 ```
 
-- To rebuild after changing Docker-related files, run:
+or from the repository root:
 
 ```bash
+docker compose -f docker/docker-compose.yml logs -f
+```
+
+- To rebuild after changing Docker-related files, run either:
+
+```bash
+cd docker
 docker compose up --build -d
+```
+
+or from the repository root:
+
+```bash
+docker compose -f docker/docker-compose.yml up --build -d
 ```
 
 ## Key features

@@ -151,10 +151,11 @@ Docker Compose 会将以下主机目录挂载到容器：
 复制样例配置文件并根据实际需求修改：
 
 ```powershell
+cd docker
 copy .env.sample .env
 ```
 
-在 `.env` 中设置：
+在 `docker/.env` 中设置：
 
 - `HTTP_PORT` - 容器对外暴露端口
 - `SYNC_COUNTRIES` - 同步的国家/地区代码
@@ -169,12 +170,14 @@ copy .env.sample .env
 使用提供的 PowerShell 脚本构建镜像：
 
 ```powershell
+cd docker
 .\build-docker.ps1
 ```
 
 如果要自定义镜像标签：
 
 ```powershell
+cd docker
 .\build-docker.ps1 -Tag "radioforest:1.0"
 ```
 
@@ -183,7 +186,14 @@ copy .env.sample .env
 启动容器：
 
 ```bash
+cd docker
 docker compose up --build -d
+```
+
+或者在仓库根目录运行：
+
+```bash
+docker compose -f docker/docker-compose.yml up --build -d
 ```
 
 然后访问：
@@ -195,7 +205,14 @@ http://localhost:18882
 停止服务：
 
 ```bash
+cd docker
 docker compose down
+```
+
+或者在仓库根目录运行：
+
+```bash
+docker compose -f docker/docker-compose.yml down
 ```
 
 #### 手动同步与定时任务
@@ -203,7 +220,14 @@ docker compose down
 手动运行同步命令：
 
 ```bash
+cd docker
 docker compose exec app sh -c "./sync.sh"
+```
+
+或者在仓库根目录运行：
+
+```bash
+docker compose -f docker/docker-compose.yml exec app sh -c "./sync.sh"
 ```
 
 若已配置 `SYNC_CRON`，容器会启动 `crond` 并按计划执行同步任务，例如：
@@ -227,7 +251,14 @@ SYNC_CRON=0 3 * * *
 - 更改 Docker 配置后，可重新执行：
 
 ```bash
+cd docker
 docker compose up --build -d
+```
+
+或者在仓库根目录运行：
+
+```bash
+docker compose -f docker/docker-compose.yml up --build -d
 ```
 
 ## 功能亮点
