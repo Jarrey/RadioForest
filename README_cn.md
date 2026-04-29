@@ -261,6 +261,17 @@ docker compose up --build -d
 docker compose -f docker/docker-compose.yml up --build -d
 ```
 
+## GitHub Actions 自动构建
+
+此仓库已经包含 GitHub Actions 工作流，在每次推送到 `main` 或手动触发时，自动构建并发布 Docker 镜像。
+
+工作流会先执行 `node build.js` 生成最新的 `index.php`，然后将镜像推送到 GitHub Container Registry：
+
+- `ghcr.io/${{ github.repository_owner }}/radioforest:latest`
+- `ghcr.io/${{ github.repository_owner }}/radioforest:${{ github.sha }}`
+
+工作流文件位置：`.github/workflows/docker-build.yml`
+
 ## 功能亮点
 
 - 多列表合并：读取所有 `radio_*.m3u` 文件并展示电台
