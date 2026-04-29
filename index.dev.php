@@ -2761,7 +2761,7 @@ if (isset($_GET['action']) && $_GET['action'] === 'stations') {
             }
 
             function loadLocale(lang) {
-                return fetch(`lang/${lang}.json`)
+                return fetch(`lang/${lang}.json`, { cache: 'no-cache' })
                     .then(response => {
                         if (!response.ok) throw new Error('Locale not found');
                         return response.json();
