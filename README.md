@@ -180,7 +180,7 @@ If you do not want scheduled sync, leave `SYNC_CRON` empty.
 
 ### Build the image
 
-Use the provided PowerShell script to build the Docker image:
+Use the provided PowerShell script to build the Docker image. This script will automatically run `node build.js` first if `index.dev.php` is newer than `index.php` or if `index.php` is missing.
 
 ```powershell
 cd docker

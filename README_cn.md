@@ -167,7 +167,7 @@ copy .env.sample .env
 
 #### 构建镜像
 
-使用提供的 PowerShell 脚本构建镜像：
+使用提供的 PowerShell 脚本构建镜像。该脚本会在 `index.dev.php` 比 `index.php` 新，或 `index.php` 不存在时，自动先执行 `node build.js` 生成最新的 `index.php`。
 
 ```powershell
 cd docker
