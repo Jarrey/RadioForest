@@ -47,5 +47,5 @@ jobs:
           file: docker/Dockerfile
           push: true
           tags: |
-            ghcr.io/${{ github.repository_owner }}/radioforest:latest
-            ghcr.io/${{ github.repository_owner }}/radioforest:${{ github.sha }}
+            ghcr.io/${{ env.REPO_LOWER }}/radioforest:latest
+            ghcr.io/${{ env.REPO_LOWER }}/radioforest:${{ github.sha }}
