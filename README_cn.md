@@ -1,6 +1,6 @@
 # 电台森林 📻
 
-基于 PHP 的在线网络电台播放器。它会自动扫描项目根目录下的 M3U 播放列表文件，解析电台信息并在浏览器中提供搜索、区域筛选、主题切换和实时播放功能。
+基于 PHP 的在线网络电台播放器。它会自动扫描可配置播放目录中的 M3U 播放列表文件，解析电台信息并在浏览器中提供搜索、区域筛选、主题切换和实时播放功能。
 
 ## 目录
 
@@ -25,15 +25,17 @@ radioweb/
 ├── index.dev.php          # 开发源文件，包含可编辑的 PHP/HTML/CSS/JS
 ├── index.php              # 构建产物，部署到服务器的文件
 ├── build.js               # 构建脚本，压缩 CSS/JS 并生成 index.php
-├── radioBrowserService.py # radio-browser.info 请求辅助模块
-├── syncInternetRatio.py   # 从电台数据生成 M3U 播放列表
+├── config.php             # 可选外部运行时配置
+├── scripts/               # 播放列表同步脚本
+│   ├── radioBrowserService.py
+│   └── syncInternetRatio.py
 ├── lang/                  # UI 翻译字典
 └── package.json           # 构建依赖声明
 ```
 
 ## 说明
 
-- 项目会读取根目录下所有符合 `radio_*.m3u` 的文件。
+- 项目会读取可配置播放目录中的所有 `radio_*.m3u` 文件，默认目录为 `./playlists`，也可通过 `config.php` 覆盖。
 - 使用 `radio_<地区代码>.m3u` 作为播放列表文件命名方式。
 - 如果没有找到任何播放列表文件，页面会显示空列表。
 - UI 支持多语言，默认会根据浏览器本地语言自动切换。
@@ -41,7 +43,7 @@ radioweb/
 ## 多语言界面
 
 - 翻译词典存放在 `lang/` 目录。
-- 支持语言：简体中文、英文、西班牙语、法语、德语、意大利语、日语、韩语。
+- 支持语言：简体中文、英文、西班牙语、法语、德语、意大利语、日语、韩语、俄语。
 - 用户可以点击右上角语言选择框切换语言，并显示对应国旗。
 - 分类筛选、国家/地区等 UI 文本也已支持翻译。
 
@@ -49,13 +51,13 @@ radioweb/
 
 仓库包含两个辅助 Python 脚本，用于从 radio-browser.info 获取电台数据并生成用于页面的播放列表文件：
 
-- `radioBrowserService.py` — 提供 radio-browser API 请求功能。
-- `syncInternetRatio.py` — 下载指定国家/地区的电台并写入 `radio_<code>.m3u` 和 `radio.m3u`。
+- `scripts/radioBrowserService.py` — 提供 radio-browser API 请求功能。
+- `scripts/syncInternetRatio.py` — 下载指定国家/地区的电台并写入 `radio_<code>.m3u` 和 `radio.m3u`。
 
 使用示例：
 
 ```bash
-python syncInternetRatio.py CN,US --target-dir . --backup-dir ./backup
+python scripts/syncInternetRatio.py CN,US --target-dir . --backup-dir ./backup
 ```
 
 默认禁用代理；如果需要启用代理，请传入 `--proxy`，脚本将使用标准的 `HTTP_PROXY` / `HTTPS_PROXY` 环境变量。
@@ -140,9 +142,10 @@ node build.js
 
 Docker Compose 会将以下主机目录挂载到容器：
 
+- `./playlists` → `/var/www/html/playlists`
 - `./backup` → `/var/www/html/backup`
 - `./logs` → `/var/www/html/logs`
-- 当前仓库根目录 → `/var/www/html`
+- `./.env` → `/var/www/html/.env`
 
 > `.dockerignore` 已排除 `radio_*.m3u` 和 `radio.m3u`，播放列表文件不会打包进镜像，使用宿主机挂载保持数据持久化。
 

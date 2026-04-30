@@ -1,6 +1,6 @@
 # Radio Forest 📻
 
-A PHP-based online radio web player that scans local M3U playlist files in the project root, parses station metadata, and provides search, region filtering, theme switching, and live playback in the browser.
+A PHP-based online radio web player that scans local M3U playlist files in a configurable playlist directory, parses station metadata, and provides search, region filtering, theme switching, and live playback in the browser.
 
 ## Table of contents
 
@@ -32,8 +32,10 @@ radioweb/
 ├── index.dev.php          # Source file for development, contains editable PHP/HTML/CSS/JS
 ├── index.php              # Build output for deployment
 ├── build.js               # Build script that minifies CSS/JS and generates index.php
-├── radioBrowserService.py # Helper module for radio-browser.info API requests
-├── syncInternetRatio.py   # Generate M3U playlists from radio-browser station data
+├── config.php             # Optional external runtime configuration
+├── scripts/               # Playlist synchronization scripts
+│   ├── radioBrowserService.py
+│   └── syncInternetRatio.py
 ├── lang/                  # UI translation dictionaries
 └── package.json           # Build dependency manifest
 ```
@@ -46,7 +48,7 @@ radioweb/
 
 ## Overview
 
-- The app reads all `radio_*.m3u` files in the root directory.
+- The app reads all `radio_*.m3u` files from a configurable playlist directory (`config.php`) or the default `./playlists` folder.
 - Use `radio_<region_code>.m3u` as the playlist file pattern.
 - If no playlist files are found, the page will show an empty station list.
 - The UI supports multiple languages and automatically selects the browser locale by default.
@@ -54,7 +56,7 @@ radioweb/
 ## Multilingual UI
 
 - Language dictionaries are stored under `lang/`.
-- Supported languages: Chinese (Simplified), English, Spanish, French, German, Italian, Japanese, Korean.
+- Supported languages: Chinese (Simplified), English, Spanish, French, German, Italian, Japanese, Korean, Russian.
 - Users can switch languages from the top-right selector and see country flags for each option.
 - Category labels such as region/type filters are also translated.
 
@@ -62,13 +64,13 @@ radioweb/
 
 This repository includes two helper Python scripts for fetching station data from radio-browser.info and generating playlist files that work with the web app.
 
-- `radioBrowserService.py` — API client used to fetch station JSON data.
-- `syncInternetRatio.py` — downloads country station lists and writes `radio_<code>.m3u` plus `radio.m3u`.
+- `scripts/radioBrowserService.py` — API client used to fetch station JSON data.
+- `scripts/syncInternetRatio.py` — downloads country station lists and writes `radio_<code>.m3u` plus `radio.m3u`.
 
 Usage example:
 
 ```bash
-python syncInternetRatio.py CN,US --target-dir . --backup-dir ./backup
+python scripts/syncInternetRatio.py CN,US --target-dir . --backup-dir ./backup
 ```
 
 Proxy is disabled by default; pass `--proxy` to enable HTTP proxy support using standard `HTTP_PROXY` / `HTTPS_PROXY` environment variables.
@@ -151,11 +153,12 @@ This repository includes a Docker setup that packages the web app, Nginx, PHP-FP
 
 ### Files mounted from the host
 
-The Docker compose setup maps host directories into the container so that playlists, backups, and logs are stored outside the image:
+The Docker compose setup maps host directories into the container so that playlists, backups, logs, and configuration are stored outside the image:
 
+- `./playlists` → `/var/www/html/playlists`
 - `./backup` → `/var/www/html/backup`
 - `./logs` → `/var/www/html/logs`
-- repository root → `/var/www/html`
+- `./.env` → `/var/www/html/.env`
 
 > The `.dockerignore` file excludes `radio_*.m3u` and `radio.m3u` from the Docker build context, so playlist files remain hosted on the machine rather than baked into the image.
 
