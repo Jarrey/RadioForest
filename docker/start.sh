@@ -3,7 +3,7 @@ set -e
 
 LOG_DIR=/var/www/html/logs
 BACKUP_DIR=/var/www/html/backup
-mkdir -p /var/log/nginx /var/log/php "$LOG_DIR" "$BACKUP_DIR"
+mkdir -p "$LOG_DIR" "$BACKUP_DIR"
 
 cat > /usr/local/bin/run-sync.sh <<'EOF'
 #!/bin/sh
@@ -31,7 +31,7 @@ EOF
 fi
 
 # Start PHP-FPM and Nginx first, then run the initial sync in the background.
-php-fpm --nodaemonize 2>>/var/log/php/php-fpm.log &
+php-fpm --nodaemonize 2>> /var/www/html/logs/php-fpm.log &
 PHP_FPM_PID=$!
 
 nginx -g 'daemon off;' &
