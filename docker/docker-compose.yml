@@ -3,8 +3,9 @@ services:
     image: ghcr.io/jarrey/radioforest:latest
     container_name: radioforest
     ports:
-      - "${HTTP_PORT:-18882}:${HTTP_PORT:-18882}"
-      - "${HTTPS_PORT:-18883}:${HTTPS_PORT:-18883}"
+      # Uncomment and set HTTP_PORT in .env to enable HTTP
+      # - "${HTTP_PORT}:${HTTP_PORT}"
+      - "${HTTPS_PORT:-18882}:${HTTPS_PORT:-18882}"
     volumes:
       - ../playlists:/var/www/html/playlists
       - ../backup:/var/www/html/backup
@@ -14,8 +15,4 @@ services:
       - ../ssl:/etc/nginx/ssl
     env_file:
       - ../.env
-    environment:
-      - HTTPS_PORT=18883
-      - SSL_CERT_PATH=/etc/nginx/ssl/server.crt
-      - SSL_KEY_PATH=/etc/nginx/ssl/server.key
     restart: unless-stopped

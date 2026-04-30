@@ -19,8 +19,8 @@ load_env() {
 
 load_env
 
-HTTP_PORT=${HTTP_PORT:-18882}
-HTTPS_PORT=${HTTPS_PORT:-18883}
+HTTP_PORT=${HTTP_PORT:-}
+HTTPS_PORT=${HTTPS_PORT:-18882}
 SSL_CERT_PATH=${SSL_CERT_PATH:-/etc/nginx/ssl/server.crt}
 SSL_KEY_PATH=${SSL_KEY_PATH:-/etc/nginx/ssl/server.key}
 SSL_PROTOCOLS=${SSL_PROTOCOLS:-TLSv1.2 TLSv1.3}
@@ -83,7 +83,8 @@ EOF
   if [ -f "$SSL_CERT_PATH" ] && [ -f "$SSL_KEY_PATH" ]; then
     cat >> /etc/nginx/nginx.conf <<EOF
     server {
-        listen ${HTTPS_PORT} ssl http2;
+        listen ${HTTPS_PORT} ssl;
+        http2 on;
         server_name localhost;
         root /var/www/html;
         index index.php index.html;
