@@ -10,7 +10,7 @@
 - [播放列表生成脚本](#播放列表生成脚本)
 - [播放列表格式](#播放列表格式)
 - [部署方式](#部署方式)
-  - [方式一：直接部署 `index.php`](#方式一直接部署-indexphp)
+  - [方式一：直接部署 index.php](#方式一直接部署-indexphp)
   - [方式二：从源代码构建](#方式二从源代码构建)
   - [方式三：Docker 部署](#方式三docker部署)
 - [功能亮点](#功能亮点)
@@ -121,7 +121,7 @@ http://lhttp.cnr.cn/live/zgzs/64k.mp3
 
 ## 部署方式
 
-### 方式一：直接部署 `index.php`
+### 方式一：直接部署 index.php
 
 将 `index.php` 和 `radio_*.m3u` 文件上传到支持 PHP 的 Web 服务器即可。无需上传 `node_modules/` 和 `package-lock.json`。
 
