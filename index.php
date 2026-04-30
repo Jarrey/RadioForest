@@ -66,7 +66,7 @@ function getCountryName($group) {
             'Hong Kong' => '香港', 'Singapore' => '新加坡',
             'United Kingdom' => '英国', 'The United Kingdom of Great Britain and Northern Ireland' => '英国', 'The United Kingdom' => '英国', 'Great Britain' => '英国', 'Britain' => '英国', 'England' => '英国', 'Scotland' => '英国', 'Wales' => '英国', 'Northern Ireland' => '英国',
             'Germany' => '德国', 'France' => '法国', 'Italy' => '意大利', 'Spain' => '西班牙',
-            'Russia' => '俄罗斯',
+            'Russia' => '俄罗斯', 'The Russian Federation' => '俄罗斯',
             'United States Of America' => '美国', 'The United States Of America' => '美国',
             'United States' => '美国', 'America' => '美国', 'USA' => '美国', 'US' => '美国', 'U.S.A.' => '美国', 'U.S.' => '美国',
             'Canada' => '加拿大',
