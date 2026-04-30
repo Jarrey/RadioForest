@@ -203,6 +203,12 @@ docker compose -f docker/docker-compose.yml exec app sh -c "./sync.sh"
 
 If `SYNC_CRON` is configured, the container will start `crond` and run scheduled sync jobs.
 
+To make cron use China time, set in `.env`:
+
+```text
+TZ=Asia/Shanghai
+```
+
 Manual sync logs are written to:
 
 - `./logs/sync.log`

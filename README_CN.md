@@ -208,6 +208,12 @@ docker compose -f docker/docker-compose.yml exec app sh -c "./sync.sh"
 SYNC_CRON=30 1 * * *
 ```
 
+如果希望按北京时间执行，请在 `.env` 中设置：
+
+```text
+TZ=Asia/Shanghai
+```
+
 定时任务日志写入：
 
 - `./logs/cron.log`

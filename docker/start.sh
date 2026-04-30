@@ -145,6 +145,12 @@ cd /var/www/html
 EOF
 chmod +x /usr/local/bin/run-sync.sh
 
+# Apply container timezone at runtime if TZ is set
+if [ -n "$TZ" ] && [ -f "/usr/share/zoneinfo/$TZ" ]; then
+  cp "/usr/share/zoneinfo/$TZ" /etc/localtime
+  echo "$TZ" > /etc/timezone
+fi
+
 if [ -n "$SYNC_CRON" ]; then
   cat > /etc/crontabs/root <<EOF
 $SYNC_CRON /usr/local/bin/run-sync.sh >> /var/www/html/logs/cron.log 2>&1

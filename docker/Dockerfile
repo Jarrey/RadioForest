@@ -1,6 +1,8 @@
 FROM php:8.2-fpm-alpine3.20
 
-RUN apk add --no-cache nginx python3 py3-requests \
+ARG TZ=Asia/Shanghai
+ENV TZ=${TZ}
+RUN apk add --no-cache nginx python3 py3-requests tzdata \
  && mkdir -p /var/www/html /var/www/html/logs
 
 COPY docker/start.sh /usr/local/bin/start.sh
