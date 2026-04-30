@@ -151,10 +151,12 @@ copy .env.sample .env
 
 在 `docker/.env` 中设置：
 
-- `HTTP_PORT` - 容器对外暴露 HTTP 端口
+- `HTTP_PORT` - 容器对外暴露 HTTP 端口, 默认不设定，只开启 HTTPS
 - `HTTPS_PORT` - 容器对外暴露 HTTPS 端口
 - `SSL_CERT_PATH` - 容器内 TLS 证书路径
+  - 或者通过映射的ssl目录，放入证书文件后，将`SSL_CERT_PATH`设定为 `/etc/nginx/ssl/证书文件名`
 - `SSL_KEY_PATH` - 容器内 TLS 私钥路径
+  - 或者通过映射的ssl目录，放入私钥文件后，将`SSL_KEY_PATH`设定为 `/etc/nginx/ssl/私钥文件名`
 - `SYNC_COUNTRIES` - 同步的国家/地区代码
 - `SYNC_TARGET_DIR` - 生成播放列表的目标目录
 - `SYNC_BACKUP_DIR` - 备份目录
@@ -176,8 +178,7 @@ docker compose up -d
 然后访问：
 
 ```text
-http://localhost:18882
-https://localhost:18883
+https://localhost:18882
 ```
 
 停止服务：
