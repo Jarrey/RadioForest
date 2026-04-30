@@ -8,8 +8,8 @@ COPY docker/start.sh /usr/local/bin/start.sh
 COPY docker/sync.sh /usr/local/bin/sync.sh
 COPY docker/.env.sample /var/www/html/.env.sample
 COPY index.php /var/www/html/
-COPY radioBrowserService.py /var/www/html/
-COPY syncInternetRatio.py /var/www/html/
+COPY scripts/radioBrowserService.py /var/www/html/scripts/
+COPY scripts/syncInternetRatio.py /var/www/html/scripts/
 COPY lang /var/www/html/lang/
 
 WORKDIR /var/www/html

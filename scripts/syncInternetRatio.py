@@ -11,7 +11,7 @@ import argparse
 from radioBrowserService import downloadRadiobrowserStationsByCountryAll
 
 # ── defaults (used both as argparse defaults and documentation) ──────────────
-DEFAULT_TARGET_DIR = "."
+DEFAULT_TARGET_DIR = "./playlists"
 DEFAULT_BACKUP_DIR = "./backup"
 TARGET_FILE = "radio_{tag}.m3u"
 AGG_FILE    = "radio.m3u"

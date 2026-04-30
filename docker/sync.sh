@@ -2,7 +2,7 @@
 set -e
 
 SYNC_COUNTRIES=${SYNC_COUNTRIES:-CN,US}
-SYNC_TARGET_DIR=${SYNC_TARGET_DIR:-/var/www/html}
+SYNC_TARGET_DIR=${SYNC_TARGET_DIR:-/var/www/html/playlists}
 SYNC_BACKUP_DIR=${SYNC_BACKUP_DIR:-/var/www/html/backup}
 SYNC_NO_BACKUP=${SYNC_NO_BACKUP:-false}
 SYNC_SHOW_BROKEN=${SYNC_SHOW_BROKEN:-false}
@@ -28,7 +28,7 @@ set -- "$SYNC_COUNTRIES" "--target-dir" "$SYNC_TARGET_DIR" "--backup-dir" "$SYNC
 [ -n "$SYNC_TIMEOUT" ] && set -- "$@" --timeout "$SYNC_TIMEOUT"
 [ "$SYNC_PROXY" = "true" ] && set -- "$@" --proxy
 
-python3 /var/www/html/syncInternetRatio.py "$@" >> "$LOG_FILE" 2>&1
+python3 /var/www/html/scripts/syncInternetRatio.py "$@" >> "$LOG_FILE" 2>&1
 STATUS=$?
 
 echo "[$(date '+%Y-%m-%d %H:%M:%S')] Sync finished with status $STATUS" >> "$LOG_FILE"

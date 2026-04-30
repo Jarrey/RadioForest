@@ -157,9 +157,16 @@ function saveStationCache(string $cacheFile, array $files, array $stations) {
     return rename($tmpFile, $cacheFile);
 }
 
-$dir = __DIR__;
+// Load external configuration; fall back to built-in defaults if config.php is absent
+if (file_exists(__DIR__ . '/config.php')) {
+    require_once __DIR__ . '/config.php';
+}
+defined('PLAYLIST_DIR') || define('PLAYLIST_DIR', __DIR__ . '/playlists');
+defined('CACHE_FILE')   || define('CACHE_FILE',   __DIR__ . '/stations.cache.json');
+
+$dir = PLAYLIST_DIR;
 $files = glob($dir . '/radio_*.m3u');
-$cacheFile = $dir . '/stations.cache.json';
+$cacheFile = CACHE_FILE;
 $allStations = [];
 $countries = [];
 
@@ -2347,7 +2354,7 @@ if (isset($_GET['action']) && $_GET['action'] === 'stations') {
         let cachedStationTotal = 0;           // 加载完成后缓存去重总数
         let currentLang    = 'en';
         let i18n           = {};
-        const SUPPORTED_LANGS = ['zh-CN', 'zh-TW', 'en', 'es', 'fr', 'de', 'it', 'ja', 'ko'];
+        const SUPPORTED_LANGS = ['zh-CN', 'zh-TW', 'en', 'es', 'fr', 'de', 'it', 'ja', 'ko', 'ru'];
         // Maps Chinese internal values → English label keys used in lang/*.json "labels"
         const LABEL_KEYS = {
             '中国':'china','日本':'japan','韩国':'korea','台湾':'taiwan','香港':'hongkong',
@@ -2386,6 +2393,7 @@ if (isset($_GET['action']) && $_GET['action'] === 'stations') {
             {value:'it',   flag:'it',label:'Italiano'},
             {value:'ja',   flag:'jp',label:'日本語'},
             {value:'ko',   flag:'kr',label:'한국어'},
+            {value:'ru',   flag:'ru',label:'Русский'},
         ];
 
         // HTML 属性安全转义（防止电台名内的引号等破坏HTML属性）
@@ -2854,6 +2862,7 @@ if (isset($_GET['action']) && $_GET['action'] === 'stations') {
                     : browserLang.startsWith('it') ? 'it'
                     : browserLang.startsWith('ja') ? 'ja'
                     : browserLang.startsWith('ko') ? 'ko'
+                    : browserLang.startsWith('ru') ? 'ru'
                     : 'en';
                 const lang = saved || normalized;
                 const resolvedLang = SUPPORTED_LANGS.includes(lang) ? lang : 'en';
