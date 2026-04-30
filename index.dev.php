@@ -24,6 +24,9 @@ function parseM3U($file) {
             if (preg_match('/tvg-name="([^"]*)"/', $line, $matches)) {
                 $name = $matches[1];
             }
+            if (empty($name) && preg_match('/#EXTINF:[^,]*,(.+)/', $line, $matches)) {
+                $name = trim($matches[1]);
+            }
             if (preg_match('/tvg-logo="([^"]*)"/', $line, $matches)) {
                 $logo = $matches[1];
             }
@@ -38,7 +41,7 @@ function parseM3U($file) {
             
             if ($i < $lineCount) {
                 $url = trim($lines[$i]);
-                if (!empty($url) && strpos($url, '#') !== 0 && strpos($url, 'http') === 0) {
+                if (!empty($url) && (strpos($url, 'http://') === 0 || strpos($url, 'https://') === 0)) {
                     $stations[] = [
                         'name' => $name ?: '未知电台',
                         'logo' => $logo,
@@ -154,7 +157,11 @@ function saveStationCache(string $cacheFile, array $files, array $stations) {
     if (file_put_contents($tmpFile, json_encode($data, JSON_UNESCAPED_UNICODE)) === false) {
         return false;
     }
-    return rename($tmpFile, $cacheFile);
+    if (!rename($tmpFile, $cacheFile)) {
+        @unlink($tmpFile);
+        return false;
+    }
+    return true;
 }
 
 // Load external configuration; fall back to built-in defaults if config.php is absent
@@ -203,7 +210,9 @@ if ($cached !== null) {
             ];
         }
     }
-    saveStationCache($cacheFile, $files, $allStations);
+    if (!saveStationCache($cacheFile, $files, $allStations)) {
+        error_log('RadioForest: Failed to save station cache to ' . $cacheFile);
+    }
 }
 
 // 无论来自缓存还是实时解析，都重建 $countries 统计
@@ -1996,7 +2005,7 @@ if (isset($_GET['action']) && $_GET['action'] === 'stations') {
                 '瑞典' => 'se', '挪威' => 'no', '丹麦' => 'dk', '芬兰' => 'fi',
                 '爱尔兰' => 'ie', '葡萄牙' => 'pt', '希腊' => 'gr', '捷克' => 'cz',
                 '匈牙利' => 'hu', '罗马尼亚' => 'ro', '埃及' => 'eg', '以色列' => 'il',
-                '阿联酋' => 'ae', '沙特' => 'sa', '澳大利亚' => 'au', '其他' => 'un',
+                '阿联酋' => 'ae', '沙特' => 'sa', '其他' => 'un',
             ];
             $regionOrder = ['中国', '日本', '韩国', '台湾', '香港', '新加坡', '美国', '加拿大', '墨西哥', '巴西', '阿根廷', '英国', '德国', '法国', '意大利', '西班牙', '瑞士', '俄罗斯', '澳大利亚', '新西兰', '南非', '其他'];
             foreach ($regionOrder as $r):
@@ -2381,8 +2390,8 @@ if (isset($_GET['action']) && $_GET['action'] === 'stations') {
             '甘肃':'gansu','青海':'qinghai','新疆':'xinjiang',
             '宁夏':'ningxia','内蒙古':'innermongolia'
         };
-        const THEME_COLORS = {green:'#22c55e',teal:'#14b8a6',cyan:'#06b6d4',orange:'#f97316',amber:'#f59e0b',rose:'#f43f5e',red:'#dc2626',pink:'#ec4899',purple:'#a855f7',indigo:'#6366f1',grayscale:'#888',bw:'#ddd'};
-        const THEME_KEYS   = ['green','teal','cyan','orange','amber','rose','red','pink','purple','indigo','grayscale','bw'];
+        const THEME_COLORS = {green:'#22c55e',teal:'#14b8a6',cyan:'#06b6d4',orange:'#f97316',amber:'#f59e0b',rose:'#f43f5e',red:'#dc2626',pink:'#ec4899',purple:'#a855f7',indigo:'#6366f1',grayscale:'#888',bw:'#ddd',black:'#ffffff'};
+        const THEME_KEYS   = ['green','teal','cyan','orange','amber','rose','red','pink','purple','indigo','grayscale','bw','black'];
         const LANG_OPTIONS = [
             {value:'zh-CN',flag:'cn',label:'简体中文'},
             {value:'zh-TW',flag:'tw',label:'繁體中文'},
@@ -2398,7 +2407,12 @@ if (isset($_GET['action']) && $_GET['action'] === 'stations') {
 
         // HTML 属性安全转义（防止电台名内的引号等破坏HTML属性）
         function esc(s) {
-            return String(s).replace(/&/g, '&amp;').replace(/"/g, '&quot;');
+            return String(s)
+                .replace(/&/g, '&amp;')
+                .replace(/</g, '&lt;')
+                .replace(/>/g, '&gt;')
+                .replace(/"/g, '&quot;')
+                .replace(/'/g, '&#39;');
         }
         // 复合唯一键判断当前播放
         function isSameStation(a, b) {
@@ -2442,13 +2456,13 @@ if (isset($_GET['action']) && $_GET['action'] === 'stations') {
                     // 生成带国旗的国家标签
                     const countryCode = regionCodes[station.country] || 'un';
                     const flagUrl = `https://flagcdn.com/w20/${countryCode}.png`;
-                    const regionTagHtml = `<span class="region-tag"><img src="${flagUrl}" alt="" class="region-tag-flag"><span class="region-tag-name">${tLabel(station.country)}</span></span>`;
-                    const typeTagHtml = station._types.map(tp => `<span class="type-tag">${tLabel(tp)}</span>`).join('');
+                    const regionTagHtml = `<span class="region-tag"><img src="${flagUrl}" alt="" class="region-tag-flag"><span class="region-tag-name">${esc(tLabel(station.country))}</span></span>`;
+                    const typeTagHtml = station._types.map(tp => `<span class="type-tag">${esc(tLabel(tp))}</span>`).join('');
                     
                     html += `<div class="station-card${activeClass}" data-url="${esc(station.url)}" data-name="${esc(station.name)}">
                         ${logoHtml}
                         <div class="station-content">
-                            <div class="station-name">${station.name}</div>
+                            <div class="station-name">${esc(station.name)}</div>
                             <div class="station-meta">
                                 ${regionTagHtml}${typeTagHtml}
                             </div>
@@ -3076,12 +3090,15 @@ if (isset($_GET['action']) && $_GET['action'] === 'stations') {
                 }, 300);
             });
 
-            // 无限滚动（监听 window 滚动）
-            $(window).on('scroll', function () {
-                if ($(window).scrollTop() + $(window).height() >= $(document).height() - 200) {
-                    loadMore();
-                }
-            });
+            // 无限滚动（IntersectionObserver 监听 #loadingMore 元素）
+            (function () {
+                const loadingMoreEl = document.getElementById('loadingMore');
+                if (!loadingMoreEl) return;
+                const observer = new IntersectionObserver(function (entries) {
+                    if (entries[0].isIntersecting) loadMore();
+                }, { rootMargin: '200px' });
+                observer.observe(loadingMoreEl);
+            })();
 
             // 播放器状态事件
             $('#audioPlayer')
@@ -3165,6 +3182,7 @@ if (isset($_GET['action']) && $_GET['action'] === 'stations') {
             
             // 是否是自动触发的全屏（用于区分手动点击和横屏自动）
             let isAutoFullscreen = false;
+            let clockInterval    = null;
             // 记录上一次是否为横屏，用于检测“进入横屏”这个瞬间
             let lastIsLandscape  = false;
             let userManuallyHid  = false;
@@ -3195,6 +3213,8 @@ if (isset($_GET['action']) && $_GET['action'] === 'stations') {
                 $('body').css({ 'overflow': 'hidden', 'position': 'fixed', 'top': -scrollY + 'px', 'width': '100%' });
                 $('body').data('scroll-y', scrollY);
                 requestWakeLock();
+                updateClock();
+                if (!clockInterval) { clockInterval = setInterval(updateClock, 1000); }
             }
             
             function hideFullscreen() {
@@ -3205,6 +3225,7 @@ if (isset($_GET['action']) && $_GET['action'] === 'stations') {
                 isAutoFullscreen = false;
                 pendingBrowserFS = false;
                 releaseWakeLock();
+                if (clockInterval) { clearInterval(clockInterval); clockInterval = null; }
                 const fsEl = document.fullscreenElement || document.webkitFullscreenElement || document.mozFullScreenElement;
                 if (fsEl) {
                     (document.exitFullscreen || document.webkitExitFullscreen || document.mozCancelFullScreen || function(){}).call(document);
@@ -3317,8 +3338,6 @@ if (isset($_GET['action']) && $_GET['action'] === 'stations') {
                 const s = String(now.getSeconds()).padStart(2, '0');
                 $('#fullscreenClock').text(h + ':' + m + ':' + s);
             }
-            updateClock();
-            setInterval(updateClock, 1000);
             
             // 悬浮小播放条 & 回到顶部
             $(window).on('scroll.backtotop', function() {

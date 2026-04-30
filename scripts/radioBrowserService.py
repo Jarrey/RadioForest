@@ -11,16 +11,21 @@ import requests
 APP_NAME = "RadioBrowserSync/1.0"
 DEFAULT_PAGE_SIZE = 500
 
+_cached_base_urls = None
+
 
 def get_radiobrowser_base_urls():
     """
     Get all base urls of all currently available radiobrowser servers
     via DNS lookup of all.api.radio-browser.info followed by reverse-DNS
-    to obtain friendly hostnames.
+    to obtain friendly hostnames.  Result is cached after the first call.
 
     Returns:
         list: sorted list of HTTPS base URL strings
     """
+    global _cached_base_urls
+    if _cached_base_urls is not None:
+        return _cached_base_urls
     hosts = []
     ips = socket.getaddrinfo('all.api.radio-browser.info', 80, 0, 0, socket.IPPROTO_TCP)
     for ip_tuple in ips:
@@ -29,7 +34,8 @@ def get_radiobrowser_base_urls():
         if host_addr[0] not in hosts:
             hosts.append(host_addr[0])
     hosts.sort()
-    return ["https://" + h for h in hosts]
+    _cached_base_urls = ["https://" + h for h in hosts]
+    return _cached_base_urls
 
 
 def downloadUri(uri, params=None, timeout=30, use_proxy=False):

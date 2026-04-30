@@ -25,7 +25,7 @@ async function minifyJSBlock(js) {
     const phpTags = [];
     const sanitized = js.replace(phpTagRe, m => { phpTags.push(m); return PHP_PLACEHOLDER; });
     const result = await minify(sanitized, {
-        compress: { passes:3, drop_debugger:true, drop_console:false, dead_code:true,
+        compress: { passes:3, drop_debugger:true, drop_console:false, pure_funcs:['console.log'], dead_code:true,
                     unused:true, collapse_vars:true, reduce_vars:true, keep_fargs:false,
                     pure_getters:true, unsafe_comps:true, unsafe_methods:true },
         mangle: { reserved: ['$','jQuery','location','history','document','window',
