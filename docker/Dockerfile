@@ -17,6 +17,6 @@ WORKDIR /var/www/html
 
 RUN chmod +x /usr/local/bin/start.sh /usr/local/bin/sync.sh
 
-EXPOSE 18882
+EXPOSE 18882 18883
 
 CMD ["/usr/local/bin/start.sh"]

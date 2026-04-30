@@ -119,6 +119,9 @@ EOF
     }
 EOF
   fi
+
+  # Close the http block
+  printf '}\n' >> /etc/nginx/nginx.conf
 }
 
 generate_nginx_config
