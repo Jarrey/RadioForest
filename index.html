@@ -1,0 +1,14 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<script>
+(function () {
+    var loc = window.location;
+    var target = loc.protocol + '//' + loc.hostname + ':18882' + loc.pathname + loc.search + loc.hash;
+    window.location.replace(target);
+})();
+</script>
+</head>
+<body></body>
+</html>

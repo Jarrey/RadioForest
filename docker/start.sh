@@ -23,21 +23,26 @@ cd /var/www/html
 EOF
 chmod +x /usr/local/bin/run-sync.sh
 
-# Run initial sync once on first startup using environment parameters.
-if [ ! -f /var/www/html/.initial_sync_done ]; then
-  echo "[$(date '+%Y-%m-%d %H:%M:%S')] Running initial sync..." >> /var/www/html/logs/sync.log 2>&1
-  /usr/local/bin/run-sync.sh >> /var/www/html/logs/sync.log 2>&1
-  touch /var/www/html/.initial_sync_done
-fi
-
 if [ -n "$SYNC_CRON" ]; then
   cat > /etc/crontabs/root <<EOF
 $SYNC_CRON /usr/local/bin/run-sync.sh >> /var/www/html/logs/cron.log 2>&1
 EOF
-  crond -l 8
+  crond -l 8 &
 fi
 
-# Use the default php-fpm socket configuration in the PHP image
+# Start PHP-FPM and Nginx first, then run the initial sync in the background.
 php-fpm --nodaemonize 2>>/var/log/php/php-fpm.log &
+PHP_FPM_PID=$!
 
-nginx -g 'daemon off;'
+nginx -g 'daemon off;' &
+NGINX_PID=$!
+
+if [ ! -f /var/www/html/.initial_sync_done ]; then
+  (
+    echo "[$(date '+%Y-%m-%d %H:%M:%S')] Running initial sync..." >> /var/www/html/logs/sync.log 2>&1
+    /usr/local/bin/run-sync.sh >> /var/www/html/logs/sync.log 2>&1
+    touch /var/www/html/.initial_sync_done
+  ) &
+fi
+
+wait "$PHP_FPM_PID" "$NGINX_PID"
