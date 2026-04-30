@@ -40,6 +40,17 @@ radioweb/
 - 如果没有找到任何播放列表文件，页面会显示空列表。
 - UI 支持多语言，默认会根据浏览器本地语言自动切换。
 
+## 运行时配置
+
+你可以在项目根目录创建可选的 `config.php`，用于覆盖默认播放列表目录和缓存文件路径，无需修改 `index.php`：
+
+```php
+define('PLAYLIST_DIR', __DIR__ . '/playlists');
+define('CACHE_FILE', __DIR__ . '/stations.cache.json');
+```
+
+如果没有 `config.php`，应用会使用默认值 `./playlists` 和 `./stations.cache.json`。
+
 ## 多语言界面
 
 - 翻译词典存放在 `lang/` 目录。
@@ -127,27 +138,7 @@ node build.js
 
 ### 方式三：Docker 部署
 
-项目已提供 Docker 部署配置，将 Web 应用、Nginx、PHP-FPM 和 Python 同步脚本打包到一个镜像中。
-
-#### Docker 镜像包含内容
-
-- `index.php` 作为 Web 应用入口
-- `lang/` 翻译字典
-- `radioBrowserService.py` 请求辅助模块
-- `syncInternetRatio.py` 同步脚本
-- `Dockerfile`, `docker-compose.yml`, `start.sh`, `sync.sh`
-- `nginx.conf` 用于 PHP-FPM 转发
-
-#### 主机目录挂载说明
-
-Docker Compose 会将以下主机目录挂载到容器：
-
-- `./playlists` → `/var/www/html/playlists`
-- `./backup` → `/var/www/html/backup`
-- `./logs` → `/var/www/html/logs`
-- `./.env` → `/var/www/html/.env`
-
-> `.dockerignore` 已排除 `radio_*.m3u` 和 `radio.m3u`，播放列表文件不会打包进镜像，使用宿主机挂载保持数据持久化。
+项目已提供 Docker 部署配置，并推荐使用 GHCR 预构建镜像。`docker/docker-compose.yml` 已配置为使用 `ghcr.io/jarrey/radioforest:latest`，因此通常无需在本地构建镜像。
 
 #### 准备 `.env`
 
@@ -168,48 +159,13 @@ copy .env.sample .env
 
 若不希望定时同步，可将 `SYNC_CRON` 留空。
 
-#### 构建镜像
-
-使用提供的 PowerShell 脚本构建镜像。该脚本会在 `index.dev.php` 比 `index.php` 新，或 `index.php` 不存在时，自动先执行 `node build.js` 生成最新的 `index.php`。
-
-```powershell
-cd docker
-.\build-docker.ps1
-```
-
-如果要自定义镜像标签：
-
-```powershell
-cd docker
-.\build-docker.ps1 -Tag "radioforest:1.0"
-```
-
 #### 使用 Docker Compose 运行
 
 启动容器：
 
 ```bash
 cd docker
-docker compose up --build -d
-```
-
-或者在仓库根目录运行：
-
-```bash
-docker compose -f docker/docker-compose.yml up --build -d
-```
-
-#### 使用 GHCR 预构建镜像运行
-预构建镜像地址：`ghcr.io/jarrey/radioforest:latest`。
-使用下面的示例 compose 文件即可直接部署，无需在本地构建：
-
-```bash
-cd docker
-copy .env.sample .env
-# 或在 Linux/macOS 上：
-# cp .env.sample .env
-
-docker compose -f docker/docker-compose-ghcr.yml up -d
+docker compose up -d
 ```
 
 然后访问：
@@ -221,14 +177,7 @@ http://localhost:18882
 停止服务：
 
 ```bash
-cd docker
 docker compose down
-```
-
-或者在仓库根目录运行：
-
-```bash
-docker compose -f docker/docker-compose.yml down
 ```
 
 #### 手动同步与定时任务

@@ -32,7 +32,7 @@ radioweb/
 ├── index.dev.php          # Source file for development, contains editable PHP/HTML/CSS/JS
 ├── index.php              # Build output for deployment
 ├── build.js               # Build script that minifies CSS/JS and generates index.php
-├── config.php             # Optional external runtime configuration
+├── config.php             # Optional runtime configuration for playlist directory and cache path
 ├── scripts/               # Playlist synchronization scripts
 │   ├── radioBrowserService.py
 │   └── syncInternetRatio.py
@@ -52,6 +52,17 @@ radioweb/
 - Use `radio_<region_code>.m3u` as the playlist file pattern.
 - If no playlist files are found, the page will show an empty station list.
 - The UI supports multiple languages and automatically selects the browser locale by default.
+
+## Runtime configuration
+
+You can optionally create `config.php` in the project root to override the default playlist directory and cache file path without editing `index.php`:
+
+```php
+define('PLAYLIST_DIR', __DIR__ . '/playlists');
+define('CACHE_FILE', __DIR__ . '/stations.cache.json');
+```
+
+If `config.php` is absent, the app defaults to `./playlists` and `./stations.cache.json`.
 
 ## Multilingual UI
 
@@ -140,27 +151,7 @@ The build script minifies the inlined CSS and JavaScript, preserves PHP code blo
 
 ## Docker deployment
 
-This repository includes a Docker setup that packages the web app, Nginx, PHP-FPM, and Python sync scripts into one image.
-
-### What is included in the Docker image
-
-- `index.php` web application entry file
-- `lang/` translations
-- `radioBrowserService.py` helper module
-- `syncInternetRatio.py` playlist sync script
-- `Dockerfile`, `docker-compose.yml`, `start.sh`, `sync.sh`
-- `nginx.conf` with PHP-FPM routing
-
-### Files mounted from the host
-
-The Docker compose setup maps host directories into the container so that playlists, backups, logs, and configuration are stored outside the image:
-
-- `./playlists` → `/var/www/html/playlists`
-- `./backup` → `/var/www/html/backup`
-- `./logs` → `/var/www/html/logs`
-- `./.env` → `/var/www/html/.env`
-
-> The `.dockerignore` file excludes `radio_*.m3u` and `radio.m3u` from the Docker build context, so playlist files remain hosted on the machine rather than baked into the image.
+This project is designed to deploy from the prebuilt GHCR package. The `docker/docker-compose.yml` file already uses `ghcr.io/jarrey/radioforest:latest`, so you do not need to build a local image.
 
 ### Prepare `.env`
 
@@ -181,47 +172,13 @@ Then edit `docker/.env` and set values such as:
 
 If you do not want scheduled sync, leave `SYNC_CRON` empty.
 
-### Build the image
-
-Use the provided PowerShell script to build the Docker image. This script will automatically run `node build.js` first if `index.dev.php` is newer than `index.php` or if `index.php` is missing.
-
-```powershell
-cd docker
-.\build-docker.ps1
-```
-
-To build with a custom image tag:
-
-```powershell
-cd docker
-.\build-docker.ps1 -Tag "radioforest:1.0"
-```
-
 ### Run with Docker Compose
 
-Start the service in detached mode:
+Start the service using the GHCR image:
 
 ```bash
 cd docker
-docker compose up --build -d
-```
-
-Alternatively, from the repository root use:
-
-```bash
-docker compose -f docker/docker-compose.yml up --build -d
-```
-
-#### Run with the prebuilt GHCR image
-A published image is available at `ghcr.io/jarrey/radioforest:latest`. Use the sample compose file below to deploy without building locally.
-
-```bash
-cd docker
-copy .env.sample .env
-# or on Linux/macOS:
-# cp .env.sample .env
-
-docker compose -f docker/docker-compose-ghcr.yml up -d
+docker compose up -d
 ```
 
 Then open your browser and visit:
@@ -230,17 +187,10 @@ Then open your browser and visit:
 http://localhost:18882
 ```
 
-If you need to stop the service, run either:
+To stop the service:
 
 ```bash
-cd docker
 docker compose down
-```
-
-or from the repository root:
-
-```bash
-docker compose -f docker/docker-compose.yml down
 ```
 
 ### Manual sync and cron scheduling
