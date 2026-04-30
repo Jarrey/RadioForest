@@ -252,17 +252,6 @@ or from the repository root:
 docker compose -f docker/docker-compose.yml up --build -d
 ```
 
-## GitHub Actions automated build
-
-This repository includes a GitHub Actions workflow that automatically builds and publishes the Docker image on each push to `main` and when manually triggered.
-
-The workflow builds `index.php` using `node build.js`, then pushes the image to GitHub Container Registry (GHCR):
-
-- `ghcr.io/${{ github.repository_owner }}/radioforest:latest`
-- `ghcr.io/${{ github.repository_owner }}/radioforest:${{ github.sha }}`
-
-The workflow file is located at `.github/workflows/docker-build.yml`.
-
 ## Key features
 
 - Multiple playlists: reads all `radio_*.m3u` files and merges stations
