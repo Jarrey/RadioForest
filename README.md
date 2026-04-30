@@ -159,12 +159,17 @@ copy .env.sample .env
 Then edit `docker/.env` and set values such as:
 
 - `HTTP_PORT` - public port exposed by the container
+- `HTTPS_PORT` - public HTTPS port exposed by the container
+- `SSL_CERT_PATH` - path to the TLS certificate inside the container
+- `SSL_KEY_PATH` - path to the TLS private key inside the container
 - `SYNC_COUNTRIES` - country codes for playlist sync
 - `SYNC_TARGET_DIR` - target directory for generated playlists inside the container
 - `SYNC_BACKUP_DIR` - backup directory inside the container
 - `SYNC_CRON` - optional cron expression for scheduled sync
 
 If you do not want scheduled sync, leave `SYNC_CRON` empty.
+
+For HTTPS, mount your certificate files into the container and set `SSL_CERT_PATH` and `SSL_KEY_PATH` to the mounted paths, for example `/etc/nginx/ssl/server.crt` and `/etc/nginx/ssl/server.key`.
 
 ### Run with Docker Compose
 

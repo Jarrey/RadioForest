@@ -151,13 +151,18 @@ copy .env.sample .env
 
 在 `docker/.env` 中设置：
 
-- `HTTP_PORT` - 容器对外暴露端口
+- `HTTP_PORT` - 容器对外暴露 HTTP 端口
+- `HTTPS_PORT` - 容器对外暴露 HTTPS 端口
+- `SSL_CERT_PATH` - 容器内 TLS 证书路径
+- `SSL_KEY_PATH` - 容器内 TLS 私钥路径
 - `SYNC_COUNTRIES` - 同步的国家/地区代码
 - `SYNC_TARGET_DIR` - 生成播放列表的目标目录
 - `SYNC_BACKUP_DIR` - 备份目录
 - `SYNC_CRON` - 定时任务表达式（可选）
 
 若不希望定时同步，可将 `SYNC_CRON` 留空。
+
+如果启用 HTTPS，请将证书文件挂载到容器中，并将 `SSL_CERT_PATH` / `SSL_KEY_PATH` 设置为容器内文件路径，例如 `/etc/nginx/ssl/server.crt` 和 `/etc/nginx/ssl/server.key`。
 
 #### 使用 Docker Compose 运行
 
@@ -172,6 +177,7 @@ docker compose up -d
 
 ```text
 http://localhost:18882
+https://localhost:18883
 ```
 
 停止服务：
