@@ -718,10 +718,30 @@ if (isset($_GET['action']) && $_GET['action'] === 'stations') {
             object-fit: cover;
             flex-shrink: 0;
         }
-        /* Mobile: hide text label, keep icon + caret */
+        /* GitHub link */
+        .github-link {
+            display: flex;
+            align-items: center;
+            color: var(--text-dim);
+            text-decoration: none;
+            flex-shrink: 0;
+            transition: color 0.2s;
+        }
+        .github-link:hover {
+            color: var(--primary);
+        }
+        .github-link svg {
+            width: 20px;
+            height: 20px;
+            fill: currentColor;
+            flex-shrink: 0;
+        }
+
+        /* Mobile: hide text label, keep icon + caret; hide github link */
         @media (max-width: 500px) {
             .picker-label { display: none; }
             .picker-btn { padding: 7px 9px; gap: 4px; }
+            .github-link { display: none; }
         }
         
         h1 {
@@ -1778,8 +1798,8 @@ if (isset($_GET['action']) && $_GET['action'] === 'stations') {
             align-items: center;
         }
         
-        /* 横屏模式优化 - 水平布局 */
-        @media (max-width: 900px) and (orientation: landscape) {
+        /* 横屏模式优化 - 水平布局（仅限真正的手机横屏，高度≤500px且触控设备） */
+        @media (max-width: 900px) and (orientation: landscape) and (max-height: 500px) and (hover: none) and (pointer: coarse) {
             .fullscreen-player {
                 padding: 15px 30px;
             }
@@ -1978,6 +1998,10 @@ if (isset($_GET['action']) && $_GET['action'] === 'stations') {
                     </button>
                     <div class="picker-panel" id="langPanel"></div>
                 </div>
+                <!-- GitHub link -->
+                <a class="github-link" href="https://github.com/jarrey/radioforest" target="_blank" rel="noopener noreferrer" title="在 GitHub 上查看项目">
+                    <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M12 2C6.477 2 2 6.477 2 12c0 4.418 2.865 8.166 6.839 9.489.5.092.682-.217.682-.482 0-.237-.009-.868-.013-1.703-2.782.604-3.369-1.341-3.369-1.341-.454-1.154-1.11-1.462-1.11-1.462-.908-.62.069-.608.069-.608 1.003.07 1.531 1.03 1.531 1.03.892 1.529 2.341 1.087 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.11-4.555-4.943 0-1.091.39-1.984 1.029-2.683-.103-.253-.446-1.27.098-2.647 0 0 .84-.269 2.75 1.025A9.578 9.578 0 0 1 12 6.836a9.59 9.59 0 0 1 2.504.337c1.909-1.294 2.747-1.025 2.747-1.025.546 1.377.202 2.394.1 2.647.64.699 1.028 1.592 1.028 2.683 0 3.842-2.339 4.687-4.566 4.935.359.309.678.919.678 1.852 0 1.336-.012 2.415-.012 2.743 0 .267.18.578.688.48C19.138 20.163 22 16.418 22 12c0-5.523-4.477-10-10-10z"/></svg>
+                </a>
             </div>
         </header>
         
@@ -2182,7 +2206,7 @@ if (isset($_GET['action']) && $_GET['action'] === 'stations') {
 
         // ─── 电台默认图标 SVG（适配主题色）──────────────────────────────────────
         function makeSvgLogo(w, h) {
-            return `<svg viewBox="0 0 60 52" width="${w}" height="${h}" xmlns="http://www.w3.org/2000/svg"><rect x="8" y="10" width="44" height="32" rx="12" fill="var(--primary)"/><rect x="10" y="12" width="40" height="28" rx="10" fill="var(--bg-card)" opacity="0.95"/><rect x="12" y="14" width="22" height="20" rx="6" fill="var(--bg)"/><rect x="14" y="16" width="18" height="16" rx="5" fill="var(--primary-dim)" opacity="0.85"/><circle cx="25" cy="24" r="9" fill="var(--bg)"/><circle cx="25" cy="24" r="6" fill="var(--primary-dim)"/><circle cx="25" cy="24" r="3" fill="var(--bg)"/><path d="M16 24h18" stroke="var(--bg)" stroke-width="2" stroke-linecap="round"/><rect x="36" y="18" width="10" height="14" rx="3" fill="var(--primary-dim)"/><circle cx="41" cy="25" r="2" fill="var(--bg)"/><line x1="38" y1="21" x2="44" y2="21" stroke="var(--bg)" stroke-width="1.5" stroke-linecap="round"/><line x1="38" y1="29" x2="44" y2="29" stroke="var(--bg)" stroke-width="1.5" stroke-linecap="round"/></svg>`;
+            return `<svg viewBox="0 0 60 52" width="${w}" height="${h}" xmlns="http://www.w3.org/2000/svg"><rect x="8" y="10" width="44" height="32" rx="12" fill="var(--bg-card)" opacity="0.95" stroke="var(--primary)" stroke-width="1"/><rect x="12" y="14" width="22" height="20" rx="6" fill="var(--bg)"/><rect x="14" y="16" width="18" height="16" rx="5" fill="var(--primary-dim)" opacity="0.85"/><circle cx="25" cy="24" r="9" fill="var(--bg)"/><circle cx="25" cy="24" r="6" fill="var(--primary-dim)"/><circle cx="25" cy="24" r="3" fill="var(--bg)"/><path d="M16 24h18" stroke="var(--bg)" stroke-width="2" stroke-linecap="round"/><rect x="36" y="18" width="10" height="14" rx="3" fill="var(--primary-dim)"/><circle cx="41" cy="25" r="2" fill="var(--bg)"/><line x1="38" y1="21" x2="44" y2="21" stroke="var(--bg)" stroke-width="1.5" stroke-linecap="round"/><line x1="38" y1="29" x2="44" y2="29" stroke="var(--bg)" stroke-width="1.5" stroke-linecap="round"/></svg>`;
         }
         const SVG_LOGO_SM = makeSvgLogo(36, 28);
         const SVG_LOGO_MD = makeSvgLogo(44, 38);
@@ -3277,7 +3301,7 @@ if (isset($_GET['action']) && $_GET['action'] === 'stations') {
             
             // 横竖屏检测（手机横屏自动进入全屏播放器和浏览器全屏，竖屏退出）
             function checkOrientation() { // orientation-check
-                const isLandscape = window.matchMedia('(max-width: 900px) and (orientation: landscape)').matches;
+                const isLandscape = window.matchMedia('(max-width: 900px) and (orientation: landscape) and (max-height: 500px) and (hover: none) and (pointer: coarse)').matches;
                 const enteredLandscape = isLandscape && !lastIsLandscape;
 
                 // 每次“进入横屏”都强制进入播放器视图并请求浏览器全屏
