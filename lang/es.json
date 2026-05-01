@@ -39,8 +39,7 @@
   "selectStationToPlay": "Seleccione una emisora para reproducir",
   "loadMore": "Cargar más...",
   "fullscreen": "Pantalla completa",
-  "backToTop": "Volver arriba",
-  "playPause": "Reproducir / Pausar",
+  "backToTop": "Volver arriba",  "githubLinkTitle": "Ver en GitHub",  "playPause": "Reproducir / Pausar",
   "labels": {
     "china": "China", "japan": "Japón", "korea": "Corea del Sur", "taiwan": "Taiwán", "hongkong": "Hong Kong",
     "singapore": "Singapur", "uk": "Reino Unido", "germany": "Alemania", "france": "Francia", "italy": "Italia",

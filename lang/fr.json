@@ -39,8 +39,7 @@
   "selectStationToPlay": "Sélectionnez une station pour lire",
   "loadMore": "Charger plus...",
   "fullscreen": "Plein écran",
-  "backToTop": "Retour en haut",
-  "playPause": "Lire / Pause",
+  "backToTop": "Retour en haut",  "githubLinkTitle": "Voir sur GitHub",  "playPause": "Lire / Pause",
   "labels": {
     "china": "Chine", "japan": "Japon", "korea": "Corée du Sud", "taiwan": "Taïwan", "hongkong": "Hong Kong",
     "singapore": "Singapour", "uk": "Royaume-Uni", "germany": "Allemagne", "france": "France", "italy": "Italie",
