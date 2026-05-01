@@ -2,6 +2,8 @@
 
 A PHP-based online radio web player. It automatically scans M3U playlist files in a configurable playlist directory, parses station metadata, and provides search, region filtering, theme switching, and live playback in the browser.
 
+![Screen](screen.png)
+
 ## Table of contents
 
 - [Project structure](#project-structure)
