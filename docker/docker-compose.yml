@@ -1,6 +1,7 @@
 services:
   app:
-    image: ghcr.io/jarrey/radioforest:latest
+    image: docker.io/jarreybj/radioforest:latest
+    # image: ghcr.io/jarrey/radioforest:latest
     container_name: radioforest
     ports:
       # Uncomment and set HTTP_PORT in .env to enable HTTP
