@@ -139,7 +139,7 @@ The build script will compress inline CSS and JavaScript, preserve the PHP logic
 
 ### Option 3: Docker deployment
 
-The project includes Docker deployment configuration and is intended to work with the prebuilt GHCR image. `docker/docker-compose.yml` already uses `ghcr.io/jarrey/radioforest:latest`, so local image builds are generally not required.
+The project includes Docker deployment configuration and is intended to work with prebuilt container images. `docker/docker-compose.yml` already uses `ghcr.io/jarrey/radioforest:latest`, but you can also deploy from Docker Hub with `docker.io/jarreybj/radioforest:latest`. Choose either GitHub Container Registry or Docker Hub based on your preference.
 
 #### Prepare `.env`
 

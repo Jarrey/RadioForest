@@ -138,7 +138,7 @@ node build.js
 
 ### 方式三：Docker 部署
 
-项目已提供 Docker 部署配置，并推荐使用 GHCR 预构建镜像。`docker/docker-compose.yml` 已配置为使用 `ghcr.io/jarrey/radioforest:latest`，因此通常无需在本地构建镜像。
+项目已提供 Docker 部署配置，并推荐使用预构建镜像。`docker/docker-compose.yml` 已配置为使用 `ghcr.io/jarrey/radioforest:latest`，也可以选择使用 Docker Hub 镜像 `docker.io/jarreybj/radioforest:latest`。你可以根据需要从 GitHub Container Registry 或 Docker Hub 拉取镜像。
 
 #### 准备 `.env`
 
