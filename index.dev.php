@@ -2031,7 +2031,7 @@ if (isset($_GET['action']) && $_GET['action'] === 'stations') {
         </div>
         
         <div class="player-bar" id="playerBar">
-            <div class="player-logo placeholder" id="playerLogo"><svg viewBox="0 0 60 52" width="36" height="31"><line x1="46" y1="3" x2="39" y2="13" stroke="var(--primary)" stroke-width="2.5" stroke-linecap="round"/><rect x="3" y="12" width="54" height="36" rx="7" fill="var(--primary)"/><rect x="7" y="17" width="25" height="26" rx="4" fill="var(--bg)" opacity="0.1"/><line x1="9" y1="22" x2="30" y2="22" stroke="var(--bg)" stroke-width="1.3" stroke-linecap="round" opacity="0.55"/><line x1="9" y1="26" x2="30" y2="26" stroke="var(--bg)" stroke-width="1.3" stroke-linecap="round" opacity="0.55"/><line x1="9" y1="30" x2="30" y2="30" stroke="var(--bg)" stroke-width="1.3" stroke-linecap="round" opacity="0.55"/><line x1="9" y1="34" x2="30" y2="34" stroke="var(--bg)" stroke-width="1.3" stroke-linecap="round" opacity="0.55"/><line x1="9" y1="38" x2="30" y2="38" stroke="var(--bg)" stroke-width="1.3" stroke-linecap="round" opacity="0.55"/><rect x="36" y="16" width="17" height="8" rx="2" fill="var(--bg)" opacity="0.22"/><line x1="45" y1="17.5" x2="45" y2="23.5" stroke="var(--bg)" stroke-width="1.5" stroke-linecap="round" opacity="0.6"/><circle cx="41" cy="33" r="5" fill="var(--bg)" opacity="0.2"/><circle cx="41" cy="33" r="2.5" fill="var(--bg)" opacity="0.5"/><circle cx="53" cy="33" r="5" fill="var(--bg)" opacity="0.2"/><circle cx="53" cy="33" r="2.5" fill="var(--bg)" opacity="0.5"/></svg></div>
+            <div class="player-logo placeholder" id="playerLogo"><svg viewBox="0 0 60 52" width="44" height="38" xmlns="http://www.w3.org/2000/svg"><rect x="8" y="10" width="44" height="32" rx="12" fill="var(--primary)"/><rect x="10" y="12" width="40" height="28" rx="10" fill="var(--bg-card)" opacity="0.95"/><rect x="12" y="14" width="22" height="20" rx="6" fill="var(--bg)"/><rect x="14" y="16" width="18" height="16" rx="5" fill="var(--primary-dim)" opacity="0.85"/><circle cx="25" cy="24" r="9" fill="var(--bg)"/><circle cx="25" cy="24" r="6" fill="var(--primary-dim)"/><circle cx="25" cy="24" r="3" fill="var(--bg)"/><path d="M16 24h18" stroke="var(--bg)" stroke-width="2" stroke-linecap="round"/><rect x="36" y="18" width="10" height="14" rx="3" fill="var(--primary-dim)"/><circle cx="41" cy="25" r="2" fill="var(--bg)"/><line x1="38" y1="21" x2="44" y2="21" stroke="var(--bg)" stroke-width="1.5" stroke-linecap="round"/><line x1="38" y1="29" x2="44" y2="29" stroke="var(--bg)" stroke-width="1.5" stroke-linecap="round"/></svg></div>
             <div class="player-info">
                 <div class="player-title" id="playerTitle" data-i18n="selectStationToPlay">选择一个电台开始播放</div>
                 <div class="player-status">
@@ -2142,7 +2142,7 @@ if (isset($_GET['action']) && $_GET['action'] === 'stations') {
         
         <div class="fullscreen-content">
             <div class="fullscreen-cover placeholder" id="fullscreenCover">
-                <svg viewBox="0 0 60 52" width="100" height="87"><line x1="46" y1="3" x2="39" y2="13" stroke="var(--primary)" stroke-width="2.5" stroke-linecap="round"/><rect x="3" y="12" width="54" height="36" rx="7" fill="var(--primary)"/><rect x="7" y="17" width="25" height="26" rx="4" fill="var(--bg)" opacity="0.1"/><line x1="9" y1="22" x2="30" y2="22" stroke="var(--bg)" stroke-width="1.3" stroke-linecap="round" opacity="0.55"/><line x1="9" y1="26" x2="30" y2="26" stroke="var(--bg)" stroke-width="1.3" stroke-linecap="round" opacity="0.55"/><line x1="9" y1="30" x2="30" y2="30" stroke="var(--bg)" stroke-width="1.3" stroke-linecap="round" opacity="0.55"/><line x1="9" y1="34" x2="30" y2="34" stroke="var(--bg)" stroke-width="1.3" stroke-linecap="round" opacity="0.55"/><line x1="9" y1="38" x2="30" y2="38" stroke="var(--bg)" stroke-width="1.3" stroke-linecap="round" opacity="0.55"/><rect x="36" y="16" width="17" height="8" rx="2" fill="var(--bg)" opacity="0.22"/><line x1="45" y1="17.5" x2="45" y2="23.5" stroke="var(--bg)" stroke-width="1.5" stroke-linecap="round" opacity="0.6"/><circle cx="41" cy="33" r="5" fill="var(--bg)" opacity="0.2"/><circle cx="41" cy="33" r="2.5" fill="var(--bg)" opacity="0.5"/><circle cx="53" cy="33" r="5" fill="var(--bg)" opacity="0.2"/><circle cx="53" cy="33" r="2.5" fill="var(--bg)" opacity="0.5"/></svg>
+                <svg viewBox="0 0 60 52" width="100" height="87" xmlns="http://www.w3.org/2000/svg"><rect x="8" y="10" width="44" height="32" rx="12" fill="var(--primary)"/><rect x="10" y="12" width="40" height="28" rx="10" fill="var(--bg-card)" opacity="0.95"/><rect x="12" y="14" width="22" height="20" rx="6" fill="var(--bg)"/><rect x="14" y="16" width="18" height="16" rx="5" fill="var(--primary-dim)" opacity="0.85"/><circle cx="25" cy="24" r="9" fill="var(--bg)"/><circle cx="25" cy="24" r="6" fill="var(--primary-dim)"/><circle cx="25" cy="24" r="3" fill="var(--bg)"/><path d="M16 24h18" stroke="var(--bg)" stroke-width="2" stroke-linecap="round"/><rect x="36" y="18" width="10" height="14" rx="3" fill="var(--primary-dim)"/><circle cx="41" cy="25" r="2" fill="var(--bg)"/><line x1="38" y1="21" x2="44" y2="21" stroke="var(--bg)" stroke-width="1.5" stroke-linecap="round"/><line x1="38" y1="29" x2="44" y2="29" stroke="var(--bg)" stroke-width="1.5" stroke-linecap="round"/></svg>
             </div>
             
             <div class="fullscreen-info">
@@ -2181,9 +2181,12 @@ if (isset($_GET['action']) && $_GET['action'] === 'stations') {
         };
 
         // ─── 电台默认图标 SVG（适配主题色）──────────────────────────────────────
-        const SVG_RADIO_SM = '<svg viewBox="0 0 60 52" width="26" height="22"><line x1="46" y1="3" x2="39" y2="13" stroke="var(--primary)" stroke-width="2.5" stroke-linecap="round"/><rect x="3" y="12" width="54" height="36" rx="7" fill="var(--primary)"/><rect x="7" y="17" width="25" height="26" rx="4" fill="var(--bg)" opacity="0.1"/><line x1="9" y1="22" x2="30" y2="22" stroke="var(--bg)" stroke-width="1.3" stroke-linecap="round" opacity="0.55"/><line x1="9" y1="26" x2="30" y2="26" stroke="var(--bg)" stroke-width="1.3" stroke-linecap="round" opacity="0.55"/><line x1="9" y1="30" x2="30" y2="30" stroke="var(--bg)" stroke-width="1.3" stroke-linecap="round" opacity="0.55"/><line x1="9" y1="34" x2="30" y2="34" stroke="var(--bg)" stroke-width="1.3" stroke-linecap="round" opacity="0.55"/><line x1="9" y1="38" x2="30" y2="38" stroke="var(--bg)" stroke-width="1.3" stroke-linecap="round" opacity="0.55"/><rect x="36" y="16" width="17" height="8" rx="2" fill="var(--bg)" opacity="0.22"/><line x1="45" y1="17.5" x2="45" y2="23.5" stroke="var(--bg)" stroke-width="1.5" stroke-linecap="round" opacity="0.6"/><circle cx="41" cy="33" r="5" fill="var(--bg)" opacity="0.2"/><circle cx="41" cy="33" r="2.5" fill="var(--bg)" opacity="0.5"/><circle cx="53" cy="33" r="5" fill="var(--bg)" opacity="0.2"/><circle cx="53" cy="33" r="2.5" fill="var(--bg)" opacity="0.5"/></svg>';
-        const SVG_RADIO_MD = '<svg viewBox="0 0 60 52" width="36" height="31"><line x1="46" y1="3" x2="39" y2="13" stroke="var(--primary)" stroke-width="2.5" stroke-linecap="round"/><rect x="3" y="12" width="54" height="36" rx="7" fill="var(--primary)"/><rect x="7" y="17" width="25" height="26" rx="4" fill="var(--bg)" opacity="0.1"/><line x1="9" y1="22" x2="30" y2="22" stroke="var(--bg)" stroke-width="1.3" stroke-linecap="round" opacity="0.55"/><line x1="9" y1="26" x2="30" y2="26" stroke="var(--bg)" stroke-width="1.3" stroke-linecap="round" opacity="0.55"/><line x1="9" y1="30" x2="30" y2="30" stroke="var(--bg)" stroke-width="1.3" stroke-linecap="round" opacity="0.55"/><line x1="9" y1="34" x2="30" y2="34" stroke="var(--bg)" stroke-width="1.3" stroke-linecap="round" opacity="0.55"/><line x1="9" y1="38" x2="30" y2="38" stroke="var(--bg)" stroke-width="1.3" stroke-linecap="round" opacity="0.55"/><rect x="36" y="16" width="17" height="8" rx="2" fill="var(--bg)" opacity="0.22"/><line x1="45" y1="17.5" x2="45" y2="23.5" stroke="var(--bg)" stroke-width="1.5" stroke-linecap="round" opacity="0.6"/><circle cx="41" cy="33" r="5" fill="var(--bg)" opacity="0.2"/><circle cx="41" cy="33" r="2.5" fill="var(--bg)" opacity="0.5"/><circle cx="53" cy="33" r="5" fill="var(--bg)" opacity="0.2"/><circle cx="53" cy="33" r="2.5" fill="var(--bg)" opacity="0.5"/></svg>';
-        const SVG_RADIO_LG = '<svg viewBox="0 0 60 52" width="100" height="87"><line x1="46" y1="3" x2="39" y2="13" stroke="var(--primary)" stroke-width="2.5" stroke-linecap="round"/><rect x="3" y="12" width="54" height="36" rx="7" fill="var(--primary)"/><rect x="7" y="17" width="25" height="26" rx="4" fill="var(--bg)" opacity="0.1"/><line x1="9" y1="22" x2="30" y2="22" stroke="var(--bg)" stroke-width="1.3" stroke-linecap="round" opacity="0.55"/><line x1="9" y1="26" x2="30" y2="26" stroke="var(--bg)" stroke-width="1.3" stroke-linecap="round" opacity="0.55"/><line x1="9" y1="30" x2="30" y2="30" stroke="var(--bg)" stroke-width="1.3" stroke-linecap="round" opacity="0.55"/><line x1="9" y1="34" x2="30" y2="34" stroke="var(--bg)" stroke-width="1.3" stroke-linecap="round" opacity="0.55"/><line x1="9" y1="38" x2="30" y2="38" stroke="var(--bg)" stroke-width="1.3" stroke-linecap="round" opacity="0.55"/><rect x="36" y="16" width="17" height="8" rx="2" fill="var(--bg)" opacity="0.22"/><line x1="45" y1="17.5" x2="45" y2="23.5" stroke="var(--bg)" stroke-width="1.5" stroke-linecap="round" opacity="0.6"/><circle cx="41" cy="33" r="5" fill="var(--bg)" opacity="0.2"/><circle cx="41" cy="33" r="2.5" fill="var(--bg)" opacity="0.5"/><circle cx="53" cy="33" r="5" fill="var(--bg)" opacity="0.2"/><circle cx="53" cy="33" r="2.5" fill="var(--bg)" opacity="0.5"/></svg>';
+        function makeSvgLogo(w, h) {
+            return `<svg viewBox="0 0 60 52" width="${w}" height="${h}" xmlns="http://www.w3.org/2000/svg"><rect x="8" y="10" width="44" height="32" rx="12" fill="var(--primary)"/><rect x="10" y="12" width="40" height="28" rx="10" fill="var(--bg-card)" opacity="0.95"/><rect x="12" y="14" width="22" height="20" rx="6" fill="var(--bg)"/><rect x="14" y="16" width="18" height="16" rx="5" fill="var(--primary-dim)" opacity="0.85"/><circle cx="25" cy="24" r="9" fill="var(--bg)"/><circle cx="25" cy="24" r="6" fill="var(--primary-dim)"/><circle cx="25" cy="24" r="3" fill="var(--bg)"/><path d="M16 24h18" stroke="var(--bg)" stroke-width="2" stroke-linecap="round"/><rect x="36" y="18" width="10" height="14" rx="3" fill="var(--primary-dim)"/><circle cx="41" cy="25" r="2" fill="var(--bg)"/><line x1="38" y1="21" x2="44" y2="21" stroke="var(--bg)" stroke-width="1.5" stroke-linecap="round"/><line x1="38" y1="29" x2="44" y2="29" stroke="var(--bg)" stroke-width="1.5" stroke-linecap="round"/></svg>`;
+        }
+        const SVG_LOGO_SM = makeSvgLogo(36, 28);
+        const SVG_LOGO_MD = makeSvgLogo(44, 38);
+        const SVG_LOGO_LG = makeSvgLogo(100, 87);
 
         // ─── 数据加载 ───────────────────────────────────────────────────────────
         var allStations = [];
@@ -2448,7 +2451,7 @@ if (isset($_GET['action']) && $_GET['action'] === 'stations') {
                 stations.forEach(station => {
                     const logoHtml = station.logo && station.logo !== 'null'
                         ? `<img src="${station.logo}" class="station-logo" alt="" loading="lazy">`
-                        : `<div class="station-logo placeholder">${SVG_RADIO_SM}</div>`;
+                        : `<div class="station-logo placeholder">${SVG_LOGO_SM}</div>`;
                     const isPlaying = isSameStation(station, currentStation) &&
                         (() => { const a = document.getElementById('audioPlayer'); return !!a.src && a.src !== location.href && !a.paused; })();
                     const activeClass = isPlaying ? ' playing' : '';
@@ -2599,13 +2602,13 @@ if (isset($_GET['action']) && $_GET['action'] === 'stations') {
                 const imgSrc = station.logo && station.logo !== 'null' ? station.logo : null;
                 $('#playerLogo').replaceWith(imgSrc
                     ? `<img src="${imgSrc}" class="player-logo" id="playerLogo" alt="">`
-                    : `<div class="player-logo placeholder" id="playerLogo">${SVG_RADIO_MD}</div>`);
+                    : `<div class="player-logo placeholder" id="playerLogo">${SVG_LOGO_MD}</div>`);
                 
                 // 更新全屏封面
                 if (imgSrc) {
                     $('#fullscreenCover').replaceWith(`<img src="${imgSrc}" class="fullscreen-cover" id="fullscreenCover" alt="">`);
                 } else {
-                    $('#fullscreenCover').replaceWith(`<div class="fullscreen-cover placeholder" id="fullscreenCover">${SVG_RADIO_LG}</div>`);
+                    $('#fullscreenCover').replaceWith(`<div class="fullscreen-cover placeholder" id="fullscreenCover">${SVG_LOGO_LG}</div>`);
                 }
                 
                 // 更新卡片播放状态（名称+URL 双重匹配）
@@ -3163,7 +3166,7 @@ if (isset($_GET['action']) && $_GET['action'] === 'stations') {
                 if (imgSrc) {
                     $('#fullscreenCover').replaceWith(`<img src="${imgSrc}" class="fullscreen-cover" id="fullscreenCover" alt="">`);
                 } else {
-                    $('#fullscreenCover').replaceWith(`<div class="fullscreen-cover placeholder" id="fullscreenCover">${SVG_RADIO_LG}</div>`);
+                    $('#fullscreenCover').replaceWith(`<div class="fullscreen-cover placeholder" id="fullscreenCover">${SVG_LOGO_LG}</div>`);
                 }
                 
                 const audio = document.getElementById('audioPlayer');
@@ -3371,7 +3374,7 @@ if (isset($_GET['action']) && $_GET['action'] === 'stations') {
                 if (imgSrc) {
                     $logo.removeClass('placeholder').html('<img src="' + imgSrc + '" alt="">');
                 } else {
-                    $logo.addClass('placeholder').html(SVG_RADIO_SM);
+                    $logo.addClass('placeholder').html(SVG_LOGO_SM);
                 }
                 $('#miniPlayerName').text(currentStation.name);
                 updateMiniPlayer();
