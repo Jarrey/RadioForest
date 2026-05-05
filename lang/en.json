@@ -42,6 +42,11 @@
   "backToTop": "Back to top",
   "githubLinkTitle": "View on GitHub",
   "playPause": "Play / Pause",
+  "favOnlyToggle": "Favorites Only",
+  "favAdd": "Add to Favorites",
+  "favRemove": "Remove from Favorites",
+  "invalidStation": "Unavailable",
+  "noFavStations": "No favorited stations",
   "labels": {
     "china": "China", "japan": "Japan", "korea": "S. Korea", "taiwan": "Taiwan", "hongkong": "Hong Kong",
     "singapore": "Singapore", "uk": "UK", "germany": "Germany", "france": "France", "italy": "Italy",

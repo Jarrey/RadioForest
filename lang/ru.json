@@ -41,6 +41,11 @@
   "fullscreen": "На весь экран",
   "backToTop": "Наверх",
   "githubLinkTitle": "Посмотреть на GitHub",
+  "favOnlyToggle": "Только избранное",
+  "favAdd": "В избранное",
+  "favRemove": "Убрать из избранного",
+  "invalidStation": "Недоступно",
+  "noFavStations": "Нет избранных станций",
   "playPause": "Играть / Пауза",
   "labels": {
     "china": "Китай", "japan": "Япония", "korea": "Ю. Корея", "taiwan": "Тайвань", "hongkong": "Гонконг",

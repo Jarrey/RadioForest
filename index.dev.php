@@ -1928,6 +1928,132 @@ if (isset($_GET['action']) && $_GET['action'] === 'stations') {
                 height: 32px;
             }
         }
+
+        /* ── 收藏功能 ─────────────────────────────────────────────────────────── */
+        .station-fav-btn {
+            width: 28px;
+            height: 28px;
+            background: transparent;
+            border: 1px solid var(--border);
+            border-radius: 6px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--text-dimmer);
+            flex-shrink: 0;
+            transition: all 0.15s;
+        }
+        .station-fav-btn svg {
+            width: 14px;
+            height: 14px;
+            fill: none;
+            stroke: currentColor;
+            stroke-width: 2;
+            stroke-linecap: round;
+            stroke-linejoin: round;
+        }
+        .station-fav-btn:hover { border-color: #f59e0b; color: #f59e0b; }
+        .station-fav-btn.fav-active {
+            border-color: #f59e0b;
+            color: #f59e0b;
+            background: color-mix(in srgb, #f59e0b 12%, transparent);
+        }
+        .station-fav-btn.fav-active svg { fill: #f59e0b; }
+
+        .mini-player-btn.fav-active { color: #f59e0b; background: color-mix(in srgb, #f59e0b 20%, transparent); }
+        .mini-player-btn.fav-active svg { fill: #f59e0b; }
+        .fullscreen-control-btn.fav-active { border-color: #f59e0b; color: #f59e0b; }
+        .fullscreen-control-btn.fav-active svg { fill: #f59e0b; stroke: #f59e0b; }
+
+        /* 失效电台样式 */
+        .station-card.station-invalid { opacity: 0.65; }
+        .invalid-badge {
+            display: none;
+            padding: 1px 5px;
+            border-radius: 4px;
+            background: color-mix(in srgb, #ef4444 15%, transparent);
+            border: 1px solid #ef4444;
+            color: #ef4444;
+            font-size: 9px;
+            white-space: nowrap;
+            flex-shrink: 0;
+        }
+        .station-card.station-invalid .invalid-badge {
+            display: inline-flex;
+            align-items: center;
+        }
+
+        /* 仅显示收藏开关 */
+        .fav-only-bar {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            margin-bottom: 14px;
+        }
+        .fav-only-label {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            font-size: 13px;
+            color: var(--text-dim);
+            cursor: pointer;
+            user-select: none;
+            transition: color 0.15s;
+        }
+        .fav-only-label svg {
+            width: 14px;
+            height: 14px;
+            fill: none;
+            stroke: currentColor;
+            stroke-width: 2;
+            stroke-linecap: round;
+            stroke-linejoin: round;
+            flex-shrink: 0;
+            transition: fill 0.15s, stroke 0.15s;
+        }
+        .fav-only-label.active { color: #f59e0b; }
+        .fav-only-label.active svg { fill: #f59e0b; stroke: #f59e0b; }
+        #favCount { font-size: 11px; opacity: 0.7; }
+        .fav-only-switch {
+            position: relative;
+            width: 40px;
+            height: 22px;
+            flex-shrink: 0;
+            display: flex;
+        }
+        .fav-only-switch input { opacity: 0; width: 0; height: 0; position: absolute; }
+        .fav-only-slider {
+            position: absolute;
+            cursor: pointer;
+            top: 0; left: 0; right: 0; bottom: 0;
+            background: var(--border-light);
+            border-radius: 22px;
+            transition: background 0.2s;
+        }
+        .fav-only-slider::before {
+            content: '';
+            position: absolute;
+            width: 16px; height: 16px;
+            left: 3px; top: 3px;
+            border-radius: 50%;
+            background: var(--text-dim);
+            transition: transform 0.2s, background 0.2s;
+        }
+        .fav-only-switch input:checked + .fav-only-slider {
+            background: color-mix(in srgb, #f59e0b 60%, var(--border-light));
+        }
+        .fav-only-switch input:checked + .fav-only-slider::before {
+            transform: translateX(18px);
+            background: #f59e0b;
+        }
+
+        /* 收藏模式下淡化国家/风格过滤区域 */
+        body.fav-only-mode .filter-section {
+            opacity: 0.35;
+            pointer-events: none;
+        }
     </style>
 </head>
 <body>
@@ -2008,7 +2134,20 @@ if (isset($_GET['action']) && $_GET['action'] === 'stations') {
         <div class="search-box">
             <input type="text" id="searchInput" data-i18n-placeholder="searchPlaceholder" placeholder="搜索电台...">
         </div>
-        
+
+        <!-- 仅显示收藏开关 -->
+        <div class="fav-only-bar">
+            <label class="fav-only-label" id="favOnlyLabel" for="favOnlyToggle">
+                <svg viewBox="0 0 24 24"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>
+                <span data-i18n="favOnlyToggle">仅显示收藏</span>
+                <span id="favCount"></span>
+            </label>
+            <label class="fav-only-switch">
+                <input type="checkbox" id="favOnlyToggle">
+                <span class="fav-only-slider"></span>
+            </label>
+        </div>
+
         <div class="filter-section">
             <div class="filter-header" id="regionsToggle">
                 <span class="toggle-icon">▼</span>
@@ -2091,6 +2230,9 @@ if (isset($_GET['action']) && $_GET['action'] === 'stations') {
             </button>
             <button class="mini-player-btn" id="miniFullscreenBtn" data-i18n-title="fullscreen" title="全屏播放">
                 <svg viewBox="0 0 24 24"><path d="M7 14H5v5h5v-2H7v-3zm-2-4h2V7h3V5H5v5zm12 7h-3v2h5v-5h-2v3zM14 5v2h3v3h2V5h-5z"/></svg>
+            </button>
+            <button class="mini-player-btn" id="miniFavBtn" title="收藏">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>
             </button>
         </div>
         <button class="mini-player-btn" id="backToTop" data-i18n-title="backToTop" title="回到顶部">
@@ -2183,6 +2325,9 @@ if (isset($_GET['action']) && $_GET['action'] === 'stations') {
                             <polygon points="8,5 19,12 8,19"/>
                         </svg>
                     </button>
+                    <button class="fullscreen-control-btn" id="fullscreenFavBtn" title="收藏">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>
+                    </button>
                 </div>
             </div>
         </div>
@@ -2211,6 +2356,9 @@ if (isset($_GET['action']) && $_GET['action'] === 'stations') {
         const SVG_LOGO_SM = makeSvgLogo(36, 28);
         const SVG_LOGO_MD = makeSvgLogo(44, 38);
         const SVG_LOGO_LG = makeSvgLogo(100, 87);
+
+        // 收藏按钮心形 SVG（CSS 通过 .fav-active 控制填充色）
+        const FAV_HEART_SVG = `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>`;
 
         // ─── 数据加载 ───────────────────────────────────────────────────────────
         var allStations = [];
@@ -2390,6 +2538,8 @@ if (isset($_GET['action']) && $_GET['action'] === 'stations') {
         let cachedStationTotal = 0;           // 加载完成后缓存去重总数
         let currentLang    = 'en';
         let i18n           = {};
+        let showFavoritesOnly = false;
+        let favorites = []; // [{name, url, logo, region, country}]
         const SUPPORTED_LANGS = ['zh-CN', 'zh-TW', 'en', 'es', 'fr', 'de', 'it', 'ja', 'ko', 'ru'];
         // Maps Chinese internal values → English label keys used in lang/*.json "labels"
         const LABEL_KEYS = {
@@ -2451,9 +2601,101 @@ if (isset($_GET['action']) && $_GET['action'] === 'stations') {
         // ─── jQuery 主逻辑（DOM 操作、事件绑定、渲染）──────────────────────────
         $(function () {
 
-            // ── 计算过滤结果（有缓存则复用）──────────────────────────────────────
+            // ── 收藏管理 ──────────────────────────────────────────────────────────
+            function loadFavorites() {
+                try {
+                    const saved = localStorage.getItem('favorites');
+                    if (saved) favorites = JSON.parse(saved);
+                    if (!Array.isArray(favorites)) favorites = [];
+                } catch(e) { favorites = []; }
+            }
+            function saveFavorites() { localStorage.setItem('favorites', JSON.stringify(favorites)); }
+
+            function isFavorited(station) {
+                return favorites.some(f => f.url === station.url && f.name === station.name);
+            }
+            function updateFavCount() {
+                const count = favorites.length;
+                $('#favCount').text(count > 0 ? '(' + count + ')' : '');
+            }
+            function updatePlayerFavBtns() {
+                if (!currentStation) {
+                    $('#miniFavBtn, #fullscreenFavBtn').removeClass('fav-active');
+                    return;
+                }
+                const isFav = isFavorited(currentStation);
+                $('#miniFavBtn, #fullscreenFavBtn').toggleClass('fav-active', isFav);
+                const favTitle = isFav ? (t('favRemove') || '取消收藏') : (t('favAdd') || '收藏');
+                $('#miniFavBtn, #fullscreenFavBtn').attr('title', favTitle);
+            }
+            function toggleFavorite(station) {
+                const idx = favorites.findIndex(f => f.url === station.url && f.name === station.name);
+                const adding = idx < 0;
+                if (adding) {
+                    favorites.push({
+                        name: station.name, url: station.url,
+                        logo: station.logo || null,
+                        region: station.region || '', country: station.country || ''
+                    });
+                } else {
+                    favorites.splice(idx, 1);
+                }
+                saveFavorites();
+                updateFavCount();
+                // 更新卡片上的收藏按钮
+                $('.station-fav-btn').each(function() {
+                    if ($(this).attr('data-url') === station.url && $(this).attr('data-name') === station.name) {
+                        $(this).toggleClass('fav-active', adding)
+                               .attr('title', adding ? (t('favRemove') || '取消收藏') : (t('favAdd') || '收藏'));
+                    }
+                });
+                // 更新播放条收藏按钮
+                updatePlayerFavBtns();
+                // 收藏模式下刷新列表
+                if (showFavoritesOnly) { filteredCache = null; filterAndRender(); }
+            }
+            function setFavOnly(val) {
+                showFavoritesOnly = val;
+                localStorage.setItem('favOnly', val ? '1' : '0');
+                $('#favOnlyToggle').prop('checked', val);
+                $('#favOnlyLabel').toggleClass('active', val);
+                $('body').toggleClass('fav-only-mode', val);
+                filteredCache = null;
+                filterAndRender(true);
+                updateURL();
+            }
             function getFiltered() {
                 if (filteredCache) return filteredCache;
+
+                // 收藏模式：遍历收藏列表，搜索框仍有效
+                if (showFavoritesOnly) {
+                    const result = [];
+                    const seenNames = new Set();
+                    favorites.forEach(fav => {
+                        if (seenNames.has(fav.name)) return;
+                        seenNames.add(fav.name);
+                        if (currentSearch) {
+                            const nameNorm = normalizeZh(fav.name).toLowerCase();
+                            if (!nameNorm.includes(currentSearch)) return;
+                        }
+                        const station = allStations.find(s => s.url === fav.url && s.name === fav.name);
+                        if (station) {
+                            result.push(station);
+                        } else {
+                            // 未在已加载列表中找到 → 构造失效占位对象
+                            result.push({
+                                name: fav.name, url: fav.url,
+                                logo: fav.logo || null,
+                                region: fav.region || '', country: fav.country || '',
+                                _types: [], _nameLower: normalizeZh(fav.name).toLowerCase(),
+                                _invalid: stationsFullyLoaded  // 仅在加载完成后才真正标为失效
+                            });
+                        }
+                    });
+                    filteredCache = result;
+                    return result;
+                }
+
                 const result = [];
                 const seenNames = new Set();
                 for (let i = 0; i < allStations.length; i++) {
@@ -2473,29 +2715,39 @@ if (isset($_GET['action']) && $_GET['action'] === 'stations') {
             function renderStations(stations) {
                 let html = '';
                 stations.forEach(station => {
+                    const isFav = isFavorited(station);
+                    const isInvalid = !!station._invalid;
                     const logoHtml = station.logo && station.logo !== 'null'
                         ? `<img src="${station.logo}" class="station-logo" alt="" loading="lazy">`
                         : `<div class="station-logo placeholder">${SVG_LOGO_SM}</div>`;
                     const isPlaying = isSameStation(station, currentStation) &&
                         (() => { const a = document.getElementById('audioPlayer'); return !!a.src && a.src !== location.href && !a.paused; })();
-                    const activeClass = isPlaying ? ' playing' : '';
-                    
+                    const activeClass = (isPlaying ? ' playing' : '') + (isInvalid ? ' station-invalid' : '');
+
                     // 生成带国旗的国家标签
-                    const countryCode = regionCodes[station.country] || 'un';
-                    const flagUrl = `https://flagcdn.com/w20/${countryCode}.png`;
-                    const regionTagHtml = `<span class="region-tag"><img src="${flagUrl}" alt="" class="region-tag-flag"><span class="region-tag-name">${esc(tLabel(station.country))}</span></span>`;
-                    const typeTagHtml = station._types.map(tp => `<span class="type-tag">${esc(tLabel(tp))}</span>`).join('');
-                    
+                    let regionTagHtml = '';
+                    if (station.country) {
+                        const countryCode = regionCodes[station.country] || 'un';
+                        const flagUrl = `https://flagcdn.com/w20/${countryCode}.png`;
+                        regionTagHtml = `<span class="region-tag"><img src="${flagUrl}" alt="" class="region-tag-flag"><span class="region-tag-name">${esc(tLabel(station.country))}</span></span>`;
+                    }
+                    const typeTagHtml = (station._types || []).map(tp => `<span class="type-tag">${esc(tLabel(tp))}</span>`).join('');
+                    const invalidBadge = isInvalid
+                        ? `<span class="invalid-badge">⚠ ${t('invalidStation') || '失效'}</span>` : '';
+
                     html += `<div class="station-card${activeClass}" data-url="${esc(station.url)}" data-name="${esc(station.name)}">
                         ${logoHtml}
                         <div class="station-content">
                             <div class="station-name">${esc(station.name)}</div>
                             <div class="station-meta">
-                                ${regionTagHtml}${typeTagHtml}
+                                ${regionTagHtml}${typeTagHtml}${invalidBadge}
                             </div>
                         </div>
                         <div class="station-actions">
                             <span class="playing-badge"><span class="playing-badge-dot"></span>${t('playerPlaying') || '正在播放'}</span>
+                            <button class="station-fav-btn${isFav ? ' fav-active' : ''}" data-url="${esc(station.url)}" data-name="${esc(station.name)}" title="${isFav ? (t('favRemove') || '取消收藏') : (t('favAdd') || '收藏')}">
+                                ${FAV_HEART_SVG}
+                            </button>
                             <button class="station-play-btn" data-url="${esc(station.url)}" data-name="${esc(station.name)}" title="${t('playButton') || '播放'}">
                                 <svg viewBox="0 0 24 24"><polygon points="6,4 20,12 6,20"/></svg>
                             </button>
@@ -2510,7 +2762,7 @@ if (isset($_GET['action']) && $_GET['action'] === 'stations') {
 
             // ── 过滤 + 渲染主入口 ─────────────────────────────────────────────────
             function filterAndRender(reset = false) {
-                if (!allStations.length) {
+                if (!allStations.length && !showFavoritesOnly) {
                     $('#resultCount').text(stationsFullyLoaded ? t('noStations') : t('loading'));
                     return;
                 }
@@ -2518,6 +2770,16 @@ if (isset($_GET['action']) && $_GET['action'] === 'stations') {
                 const filtered = getFiltered();
                 const toShow   = filtered.slice(0, visibleCount);
                 renderStations(toShow);
+                // 收藏模式空收藏提示
+                if (showFavoritesOnly && filtered.length === 0) {
+                    const msg = favorites.length === 0
+                        ? (t('noFavStations') || '没有收藏的电台')
+                        : (t('noStations') || '无匹配结果');
+                    $('#stationsGrid').html(`<div class="no-results">${msg}</div>`);
+                    $('#resultCount').text('0 / 0');
+                    $('#loadingMore').removeClass('show');
+                    return;
+                }
                 const suffix = stationsFullyLoaded ? '' : t('loadingSuffix');
                 $('#resultCount').text(t('showingCount', {
                     shown: toShow.length,
@@ -2616,6 +2878,7 @@ if (isset($_GET['action']) && $_GET['action'] === 'stations') {
                 currentStation = station;
                 localStorage.setItem('play_url', station.url);
                 localStorage.setItem('play_name', station.name);
+                updatePlayerFavBtns();
                 const audio = document.getElementById('audioPlayer');
                 
                 // 更新标题
@@ -2725,6 +2988,7 @@ if (isset($_GET['action']) && $_GET['action'] === 'stations') {
                 const params = new URLSearchParams();
                 if (currentRegion !== 'all') params.set('region', currentRegion);
                 if (currentType !== '')       params.set('type',   currentType);
+                if (showFavoritesOnly)        params.set('fav', '1');
                 if (currentStation) {
                     params.set('play',      currentStation.url);
                     params.set('play_name', currentStation.name);
@@ -2943,6 +3207,21 @@ if (isset($_GET['action']) && $_GET['action'] === 'stations') {
                 const savedRegion = localStorage.getItem('region') || 'all';
                 const savedType   = localStorage.getItem('type') || '';
 
+                // 加载收藏列表
+                loadFavorites();
+                updateFavCount();
+
+                // 收藏模式初始化（URL 参数优先，其次 localStorage）
+                const favParam   = params.get('fav');
+                const savedFavOnly = localStorage.getItem('favOnly');
+                if (favParam === '1' || (!favParam && savedFavOnly === '1')) {
+                    showFavoritesOnly = true;
+                    $('#favOnlyToggle').prop('checked', true);
+                    $('#favOnlyLabel').addClass('active');
+                    $('body').addClass('fav-only-mode');
+                    if (favParam === '1') localStorage.setItem('favOnly', '1');
+                }
+
                 if (regionParam) {
                     currentRegion = regionParam;
                 } else {
@@ -3044,9 +3323,10 @@ if (isset($_GET['action']) && $_GET['action'] === 'stations') {
                                 flushBatch();
                                 stationsFullyLoaded = true;
                                 filteredCache = null;
-                                filterAndRender(true);    // 加载完成：重置 visibleCount
+                                filterAndRender(true);    // 加载完成：重置 visibleCount，收藏模式下也会重新标注失效状态
                                 renderTypeButtons();       // 仅在加载完成后构建分类按钮
                                 updateRegionCounts();      // 按去重后数量更新地区按钮计数
+                                updateFavCount();          // 刷新收藏数量显示
                                 $progressFill.addClass('done'); // 进度条完成动画
                                 // 恢复 URL 中记录的播放状态
                                 const playUrl = params.get('play') || localStorage.getItem('play_url');
@@ -3091,6 +3371,37 @@ if (isset($_GET['action']) && $_GET['action'] === 'stations') {
             // 分类按钮（委托，按钮由 renderTypeButtons 动态生成）
             $('#typeBtns').on('click', '.type-btn', function () {
                 setType($(this).attr('data-type'));
+            });
+
+            // 收藏模式开关
+            $('#favOnlyToggle').on('change', function() {
+                setFavOnly($(this).is(':checked'));
+            });
+
+            // 收藏按钮（卡片，事件委托）
+            $('#stationsGrid').on('click', '.station-fav-btn', function(e) {
+                e.stopPropagation();
+                const url  = $(this).attr('data-url');
+                const name = $(this).attr('data-name');
+                let station = name
+                    ? allStations.find(s => s.url === url && s.name === name)
+                    : allStations.find(s => s.url === url);
+                if (!station) {
+                    // 失效收藏站：从收藏列表中取元数据
+                    const fav = favorites.find(f => f.url === url && f.name === name);
+                    if (fav) station = { name: fav.name, url: fav.url, logo: fav.logo || null, region: fav.region || '', country: fav.country || '' };
+                }
+                if (station) toggleFavorite(station);
+            });
+
+            // 收藏按钮（mini 播放条）
+            $('#miniFavBtn').on('click', function() {
+                if (currentStation) toggleFavorite(currentStation);
+            });
+
+            // 收藏按钮（全屏播放器）
+            $('#fullscreenFavBtn').on('click', function() {
+                if (currentStation) toggleFavorite(currentStation);
             });
 
             // 主题选择下拉框（由自定义 picker 接管，旧 select 已移除）
@@ -3441,6 +3752,7 @@ if (isset($_GET['action']) && $_GET['action'] === 'stations') {
                 currentUrl = '';
                 currentStation = null;
                 updateMiniPlayer();
+                updatePlayerFavBtns();
                 filterAndRender();
                 $('#playerTitle').text(t('selectStationToPlay'));
                 $('#playerStatus').text(t('playerWaiting'));

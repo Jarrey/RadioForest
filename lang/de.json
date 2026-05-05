@@ -41,6 +41,11 @@
   "fullscreen": "Vollbild",
   "backToTop": "Nach oben",
   "githubLinkTitle": "Auf GitHub ansehen",
+  "favOnlyToggle": "Nur Favoriten",
+  "favAdd": "Zu Favoriten hinzufügen",
+  "favRemove": "Aus Favoriten entfernen",
+  "invalidStation": "Nicht verfügbar",
+  "noFavStations": "Keine Favoriten",
   "playPause": "Abspielen / Pause",
   "labels": {
     "china": "China", "japan": "Japan", "korea": "Südkorea", "taiwan": "Taiwan", "hongkong": "Hongkong",

@@ -41,6 +41,11 @@
   "fullscreen": "전체 화면",
   "backToTop": "위로 이동",
   "githubLinkTitle": "GitHub에서 보기",
+  "favOnlyToggle": "즐겨찾기만 보기",
+  "favAdd": "즐겨찾기 추가",
+  "favRemove": "즐겨찾기 제거",
+  "invalidStation": "사용 불가",
+  "noFavStations": "즐겨찾기한 방송국 없음",
   "playPause": "재생 / 일시 중지",
   "labels": {
     "china": "중국", "japan": "일본", "korea": "한국", "taiwan": "대만", "hongkong": "홍콩",

@@ -39,7 +39,12 @@
   "selectStationToPlay": "選擇一個電台開始播放",
   "loadMore": "載入更多...",
   "fullscreen": "全螢幕播放",
-  "backToTop": "回到頂部",  "githubLinkTitle": "在 GitHub 上查看專案",  "playPause": "播放/暫停",
+  "backToTop": "回到頂部",  "githubLinkTitle": "在 GitHub 上查看專案",  "favOnlyToggle": "僅顯示收藏",
+  "favAdd": "收藏",
+  "favRemove": "取消收藏",
+  "invalidStation": "失效",
+  "noFavStations": "沒有收藏的電台",
+  "playPause": "播放/暫停",
   "labels": {
     "china": "中國", "japan": "日本", "korea": "韓國", "taiwan": "臺灣", "hongkong": "香港",
     "singapore": "新加坡", "uk": "英國", "germany": "德國", "france": "法國", "italy": "義大利",

@@ -41,6 +41,11 @@
   "fullscreen": "全画面",
   "backToTop": "トップへ戻る",
   "githubLinkTitle": "GitHubで見る",
+  "favOnlyToggle": "お気に入りのみ",
+  "favAdd": "お気に入りに追加",
+  "favRemove": "お気に入りから削除",
+  "invalidStation": "利用不可",
+  "noFavStations": "お気に入りの局がありません",
   "playPause": "再生 / 一時停止",
   "labels": {
     "china": "中国", "japan": "日本", "korea": "韓国", "taiwan": "台湾", "hongkong": "香港",

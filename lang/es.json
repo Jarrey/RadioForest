@@ -39,7 +39,12 @@
   "selectStationToPlay": "Seleccione una emisora para reproducir",
   "loadMore": "Cargar más...",
   "fullscreen": "Pantalla completa",
-  "backToTop": "Volver arriba",  "githubLinkTitle": "Ver en GitHub",  "playPause": "Reproducir / Pausar",
+  "backToTop": "Volver arriba",  "githubLinkTitle": "Ver en GitHub",  "favOnlyToggle": "Solo favoritos",
+  "favAdd": "Añadir a favoritos",
+  "favRemove": "Quitar de favoritos",
+  "invalidStation": "No disponible",
+  "noFavStations": "Sin estaciones favoritas",
+  "playPause": "Reproducir / Pausar",
   "labels": {
     "china": "China", "japan": "Japón", "korea": "Corea del Sur", "taiwan": "Taiwán", "hongkong": "Hong Kong",
     "singapore": "Singapur", "uk": "Reino Unido", "germany": "Alemania", "france": "Francia", "italy": "Italia",
