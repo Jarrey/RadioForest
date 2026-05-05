@@ -1488,6 +1488,22 @@ if (isset($_GET['action']) && $_GET['action'] === 'stations') {
             color: var(--bg);
             transform: scale(1.1);
         }
+
+        .fullscreen-top-actions {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .fullscreen-close.fullscreen-fav-btn {
+            position: relative;
+        }
+
+        .fullscreen-close.fullscreen-fav-btn.fav-active {
+            color: #f59e0b;
+            border-color: #f59e0b;
+            background: color-mix(in srgb, #f59e0b 18%, transparent);
+        }
         
         /* 悬浮小播放条 */
         .mini-player {
@@ -2263,14 +2279,19 @@ if (isset($_GET['action']) && $_GET['action'] === 'stations') {
         </div>
         <div class="fullscreen-top-bar">
             <span class="fullscreen-clock" id="fullscreenClock"></span>
-            <button class="fullscreen-close" id="fullscreenClose">
-                <svg viewBox="0 0 24 24">
-                    <polyline points="4 14 10 14 10 20"/>
-                    <polyline points="20 10 14 10 14 4"/>
-                    <line x1="14" y1="10" x2="21" y2="3"/>
-                    <line x1="3" y1="21" x2="10" y2="14"/>
-                </svg>
-            </button>
+            <div class="fullscreen-top-actions">
+                <button class="fullscreen-close fullscreen-fav-btn" id="fullscreenFavBtn" title="收藏">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>
+                </button>
+                <button class="fullscreen-close" id="fullscreenClose">
+                    <svg viewBox="0 0 24 24">
+                        <polyline points="4 14 10 14 10 20"/>
+                        <polyline points="20 10 14 10 14 4"/>
+                        <line x1="14" y1="10" x2="21" y2="3"/>
+                        <line x1="3" y1="21" x2="10" y2="14"/>
+                    </svg>
+                </button>
+            </div>
         </div>
         
         <div class="fullscreen-content">
@@ -2291,9 +2312,6 @@ if (isset($_GET['action']) && $_GET['action'] === 'stations') {
                         <svg viewBox="0 0 24 24">
                             <polygon points="8,5 19,12 8,19"/>
                         </svg>
-                    </button>
-                    <button class="fullscreen-control-btn" id="fullscreenFavBtn" title="收藏">
-                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>
                     </button>
                 </div>
             </div>
