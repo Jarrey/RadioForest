@@ -3111,6 +3111,7 @@ if (isset($_GET['action']) && $_GET['action'] === 'stations') {
                     document.title = t('appTitle');
                     $('#fullscreenStatus').text(t('playerWaiting'));
                 }
+                updatePlayerFavBtns();
             }
 
             function loadLocale(lang) {
