@@ -4,12 +4,49 @@
 
 import socket
 import random
+import ssl
+import time
 import urllib.parse
 import json
 import requests
+import urllib3
+from requests.adapters import HTTPAdapter
+from urllib3.util.retry import Retry
+from urllib3.util.ssl_ import create_urllib3_context
+
+# Suppress InsecureRequestWarning caused by verify=False on SSL-broken servers
+urllib3.disable_warnings(urllib3.exceptions.InsecureRequestWarning)
 
 APP_NAME = "RadioBrowserSync/1.0"
 DEFAULT_PAGE_SIZE = 500
+
+# ── SSL-tolerant HTTP adapter ─────────────────────────────────────────────────
+# Some radio-browser servers send an abrupt SSL EOF (UNEXPECTED_EOF_WHILE_READING).
+# Using a permissive SSL context + urllib3-level retries avoids hard failures.
+
+class _SSLAdapter(HTTPAdapter):
+    """HTTPAdapter with a relaxed SSL context that survives EOF during handshake."""
+    def init_poolmanager(self, *args, **kwargs):
+        ctx = create_urllib3_context()
+        ctx.check_hostname = False
+        ctx.verify_mode = ssl.CERT_NONE
+        ctx.options |= getattr(ssl, 'OP_LEGACY_SERVER_CONNECT', 0)
+        kwargs['ssl_context'] = ctx
+        super().init_poolmanager(*args, **kwargs)
+
+def _make_session():
+    retry = Retry(
+        total=4,
+        backoff_factor=1.5,
+        status_forcelist=[429, 500, 502, 503, 504],
+        allowed_methods=["GET"],
+        raise_on_status=False,
+    )
+    s = requests.Session()
+    adapter = _SSLAdapter(max_retries=retry)
+    s.mount('https://', adapter)
+    s.mount('http://', adapter)
+    return s
 
 _cached_base_urls = None
 
@@ -41,6 +78,7 @@ def get_radiobrowser_base_urls():
 def downloadUri(uri, params=None, timeout=30, use_proxy=False):
     """
     Issue a GET request to *uri*, appending *params* as a query string.
+    Retries up to 3 times on SSL / connection errors with exponential backoff.
 
     Args:
         uri (str): Full URL to request.
@@ -52,7 +90,7 @@ def downloadUri(uri, params=None, timeout=30, use_proxy=False):
         bytes: Response body.
 
     Raises:
-        requests.exceptions.RequestException: On connection / HTTP errors.
+        requests.exceptions.RequestException: On connection / HTTP errors after retries.
     """
     if params:
         query_string = urllib.parse.urlencode(params)
@@ -62,14 +100,31 @@ def downloadUri(uri, params=None, timeout=30, use_proxy=False):
 
     proxies = None if use_proxy else {}
     print(f'  GET {full_uri}  (proxy={use_proxy})')
-    response = requests.get(
-        full_uri,
-        headers={"User-Agent": APP_NAME, "Accept": "application/json"},
-        proxies=proxies,
-        timeout=timeout,
-    )
-    response.raise_for_status()
-    return response.content
+
+    session = _make_session()
+    last_exc = None
+    for attempt in range(3):
+        try:
+            response = session.get(
+                full_uri,
+                headers={"User-Agent": APP_NAME, "Accept": "application/json"},
+                proxies=proxies,
+                timeout=timeout,
+                verify=False,
+            )
+            response.raise_for_status()
+            return response.content
+        except requests.exceptions.SSLError as e:
+            last_exc = e
+            wait = 2 ** attempt
+            print(f"  SSL error (attempt {attempt + 1}/3), retrying in {wait}s: {e}")
+            time.sleep(wait)
+        except requests.exceptions.ConnectionError as e:
+            last_exc = e
+            wait = 2 ** attempt
+            print(f"  Connection error (attempt {attempt + 1}/3), retrying in {wait}s: {e}")
+            time.sleep(wait)
+    raise last_exc
 
 
 def downloadRadiobrowser(path, params=None, timeout=30, use_proxy=False):
