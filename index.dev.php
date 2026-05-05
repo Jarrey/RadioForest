@@ -1992,79 +1992,41 @@ if (isset($_GET['action']) && $_GET['action'] === 'stations') {
             align-items: center;
         }
 
-        /* 仅显示收藏开关（与搜索框同行） */
-        .fav-only-bar {
+        /* 仅显示收藏按钮（心形图标，与搜索框同行） */
+        .fav-only-btn {
             display: flex;
             align-items: center;
-            gap: 6px;
-            flex-shrink: 0;
-        }
-        .fav-only-label {
-            display: flex;
-            align-items: center;
-            gap: 5px;
-            font-size: 12px;
-            color: var(--text-dim);
+            justify-content: center;
+            width: 38px;
+            height: 38px;
+            border-radius: 50%;
+            border: 1px solid var(--border);
+            background: var(--bg-input);
             cursor: pointer;
-            user-select: none;
-            white-space: nowrap;
-            transition: color 0.15s;
+            color: var(--text-dim);
+            flex-shrink: 0;
+            transition: color 0.15s, background 0.15s, border-color 0.15s;
         }
-        .fav-only-label svg {
-            width: 14px;
-            height: 14px;
+        .fav-only-btn svg {
+            width: 18px;
+            height: 18px;
             fill: none;
             stroke: currentColor;
             stroke-width: 2;
             stroke-linecap: round;
             stroke-linejoin: round;
-            flex-shrink: 0;
             transition: fill 0.15s, stroke 0.15s;
         }
-        .fav-only-label.active { color: #f59e0b; }
-        .fav-only-label.active svg { fill: #f59e0b; stroke: #f59e0b; }
-        #favCount { font-size: 11px; opacity: 0.7; }
-        /* 窄屏隐藏文字标签，只保留图标+开关 */
-        @media (max-width: 420px) {
-            .fav-only-label span { display: none; }
+        .fav-only-btn.active {
+            color: #f59e0b;
+            border-color: #f59e0b;
+            background: color-mix(in srgb, #f59e0b 12%, var(--bg-input));
         }
-        .fav-only-switch {
-            position: relative;
-            width: 40px;
-            height: 22px;
-            flex-shrink: 0;
-            display: flex;
-        }
-        .fav-only-switch input { opacity: 0; width: 0; height: 0; position: absolute; }
-        .fav-only-slider {
-            position: absolute;
-            cursor: pointer;
-            top: 0; left: 0; right: 0; bottom: 0;
-            background: var(--border-light);
-            border-radius: 22px;
-            transition: background 0.2s;
-        }
-        .fav-only-slider::before {
-            content: '';
-            position: absolute;
-            width: 16px; height: 16px;
-            left: 3px; top: 3px;
-            border-radius: 50%;
-            background: var(--text-dim);
-            transition: transform 0.2s, background 0.2s;
-        }
-        .fav-only-switch input:checked + .fav-only-slider {
-            background: color-mix(in srgb, #f59e0b 60%, var(--border-light));
-        }
-        .fav-only-switch input:checked + .fav-only-slider::before {
-            transform: translateX(18px);
-            background: #f59e0b;
-        }
+        .fav-only-btn.active svg { fill: #f59e0b; stroke: #f59e0b; }
 
-        /* 收藏模式下淡化国家/风格过滤区域 */
+        /* 收藏模式下隐藏国家/风格过滤区域 */
         body.fav-only-mode .filter-section {
-            opacity: 0.35;
-            pointer-events: none;
+            display: none;
         }
     </style>
 </head>
@@ -2147,18 +2109,10 @@ if (isset($_GET['action']) && $_GET['action'] === 'stations') {
             <div class="search-box">
                 <input type="text" id="searchInput" data-i18n-placeholder="searchPlaceholder" placeholder="搜索电台...">
             </div>
-            <!-- 仅显示收藏开关（搜索框右侧） -->
-            <div class="fav-only-bar">
-                <label class="fav-only-label" id="favOnlyLabel" for="favOnlyToggle">
-                    <svg viewBox="0 0 24 24"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>
-                    <span data-i18n="favOnlyToggle">仅显示收藏</span>
-                    <span id="favCount"></span>
-                </label>
-                <label class="fav-only-switch">
-                    <input type="checkbox" id="favOnlyToggle">
-                    <span class="fav-only-slider"></span>
-                </label>
-            </div>
+            <!-- 仅显示收藏（心形图标按钮，搜索框右侧） -->
+            <button class="fav-only-btn" id="favOnlyBtn" title="仅显示收藏">
+                <svg viewBox="0 0 24 24"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>
+            </button>
         </div>
 
         <div class="filter-section">
@@ -2629,7 +2583,8 @@ if (isset($_GET['action']) && $_GET['action'] === 'stations') {
             }
             function updateFavCount() {
                 const count = favorites.length;
-                $('#favCount').text(count > 0 ? '(' + count + ')' : '');
+                const base = t('favOnlyToggle') || '仅显示收藏';
+                $('#favOnlyBtn').attr('title', count > 0 ? base + ' (' + count + ')' : base);
             }
             function updatePlayerFavBtns() {
                 if (!currentStation) {
@@ -2670,8 +2625,7 @@ if (isset($_GET['action']) && $_GET['action'] === 'stations') {
             function setFavOnly(val) {
                 showFavoritesOnly = val;
                 localStorage.setItem('favOnly', val ? '1' : '0');
-                $('#favOnlyToggle').prop('checked', val);
-                $('#favOnlyLabel').toggleClass('active', val);
+                $('#favOnlyBtn').toggleClass('active', val);
                 $('body').toggleClass('fav-only-mode', val);
                 filteredCache = null;
                 filterAndRender(true);
@@ -3229,8 +3183,7 @@ if (isset($_GET['action']) && $_GET['action'] === 'stations') {
                 const savedFavOnly = localStorage.getItem('favOnly');
                 if (favParam === '1' || (!favParam && savedFavOnly === '1')) {
                     showFavoritesOnly = true;
-                    $('#favOnlyToggle').prop('checked', true);
-                    $('#favOnlyLabel').addClass('active');
+                    $('#favOnlyBtn').addClass('active');
                     $('body').addClass('fav-only-mode');
                     if (favParam === '1') localStorage.setItem('favOnly', '1');
                 }
@@ -3387,8 +3340,8 @@ if (isset($_GET['action']) && $_GET['action'] === 'stations') {
             });
 
             // 收藏模式开关
-            $('#favOnlyToggle').on('change', function() {
-                setFavOnly($(this).is(':checked'));
+            $('#favOnlyBtn').on('click', function() {
+                setFavOnly(!showFavoritesOnly);
             });
 
             // 收藏按钮（卡片，事件委托）
