@@ -172,7 +172,7 @@ defined('PLAYLIST_DIR') || define('PLAYLIST_DIR', __DIR__ . '/playlists');
 defined('CACHE_FILE')   || define('CACHE_FILE',   __DIR__ . '/stations.cache.json');
 
 $dir = PLAYLIST_DIR;
-$files = glob($dir . '/radio_*.m3u');
+$files = glob($dir . '/radio_*.m3u') ?: [];
 $cacheFile = CACHE_FILE;
 $allStations = [];
 $countries = [];
@@ -774,9 +774,17 @@ if (isset($_GET['action']) && $_GET['action'] === 'stations') {
             opacity: 0;
         }
         
-        .search-box {
-            max-width: 400px;
+        .search-row {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            max-width: 520px;
             margin: 0 auto 16px;
+        }
+
+        .search-box {
+            flex: 1;
+            min-width: 0;
         }
         
         .search-box input {
@@ -1984,22 +1992,22 @@ if (isset($_GET['action']) && $_GET['action'] === 'stations') {
             align-items: center;
         }
 
-        /* 仅显示收藏开关 */
+        /* 仅显示收藏开关（与搜索框同行） */
         .fav-only-bar {
             display: flex;
             align-items: center;
-            justify-content: center;
-            gap: 10px;
-            margin-bottom: 14px;
+            gap: 6px;
+            flex-shrink: 0;
         }
         .fav-only-label {
             display: flex;
             align-items: center;
-            gap: 6px;
-            font-size: 13px;
+            gap: 5px;
+            font-size: 12px;
             color: var(--text-dim);
             cursor: pointer;
             user-select: none;
+            white-space: nowrap;
             transition: color 0.15s;
         }
         .fav-only-label svg {
@@ -2016,6 +2024,10 @@ if (isset($_GET['action']) && $_GET['action'] === 'stations') {
         .fav-only-label.active { color: #f59e0b; }
         .fav-only-label.active svg { fill: #f59e0b; stroke: #f59e0b; }
         #favCount { font-size: 11px; opacity: 0.7; }
+        /* 窄屏隐藏文字标签，只保留图标+开关 */
+        @media (max-width: 420px) {
+            .fav-only-label span { display: none; }
+        }
         .fav-only-switch {
             position: relative;
             width: 40px;
@@ -2131,21 +2143,22 @@ if (isset($_GET['action']) && $_GET['action'] === 'stations') {
             </div>
         </header>
         
-        <div class="search-box">
-            <input type="text" id="searchInput" data-i18n-placeholder="searchPlaceholder" placeholder="搜索电台...">
-        </div>
-
-        <!-- 仅显示收藏开关 -->
-        <div class="fav-only-bar">
-            <label class="fav-only-label" id="favOnlyLabel" for="favOnlyToggle">
-                <svg viewBox="0 0 24 24"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>
-                <span data-i18n="favOnlyToggle">仅显示收藏</span>
-                <span id="favCount"></span>
-            </label>
-            <label class="fav-only-switch">
-                <input type="checkbox" id="favOnlyToggle">
-                <span class="fav-only-slider"></span>
-            </label>
+        <div class="search-row">
+            <div class="search-box">
+                <input type="text" id="searchInput" data-i18n-placeholder="searchPlaceholder" placeholder="搜索电台...">
+            </div>
+            <!-- 仅显示收藏开关（搜索框右侧） -->
+            <div class="fav-only-bar">
+                <label class="fav-only-label" id="favOnlyLabel" for="favOnlyToggle">
+                    <svg viewBox="0 0 24 24"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>
+                    <span data-i18n="favOnlyToggle">仅显示收藏</span>
+                    <span id="favCount"></span>
+                </label>
+                <label class="fav-only-switch">
+                    <input type="checkbox" id="favOnlyToggle">
+                    <span class="fav-only-slider"></span>
+                </label>
+            </div>
         </div>
 
         <div class="filter-section">
