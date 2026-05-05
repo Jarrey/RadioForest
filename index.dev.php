@@ -1060,9 +1060,9 @@ if (isset($_GET['action']) && $_GET['action'] === 'stations') {
         }
         
         .fullscreen-btn.fav-active {
-            color: #f59e0b;
-            border-color: #f59e0b;
-            background: color-mix(in srgb, #f59e0b 15%, var(--bg-card));
+            color: var(--primary);
+            border-color: var(--primary);
+            background: color-mix(in srgb, var(--primary) 15%, var(--bg-card));
         }
 
         .fullscreen-btn svg {
@@ -1529,9 +1529,9 @@ if (isset($_GET['action']) && $_GET['action'] === 'stations') {
         }
 
         .fullscreen-close.fullscreen-fav-btn.fav-active {
-            color: #f59e0b;
-            border-color: #f59e0b;
-            background: color-mix(in srgb, #f59e0b 18%, transparent);
+            color: var(--primary);
+            border-color: var(--primary);
+            background: color-mix(in srgb, var(--primary) 18%, transparent);
         }
         
         .fullscreen-close.fullscreen-fav-btn svg {
