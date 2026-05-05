@@ -1636,6 +1636,13 @@ if (isset($_GET['action']) && $_GET['action'] === 'stations') {
         .mini-player-btn svg {
             width: 16px;
             height: 16px;
+            fill: none;
+            stroke: currentColor;
+            stroke-width: 2;
+            stroke-linecap: round;
+            stroke-linejoin: round;
+        }
+        .mini-player-btn.fav-active svg {
             fill: currentColor;
         }
         .mini-media {
@@ -2262,7 +2269,7 @@ if (isset($_GET['action']) && $_GET['action'] === 'stations') {
             <button class="mini-player-btn" id="miniFullscreenBtn" data-i18n-title="fullscreen" title="全屏播放">
                 <svg viewBox="0 0 24 24"><path d="M7 14H5v5h5v-2H7v-3zm-2-4h2V7h3V5H5v5zm12 7h-3v2h5v-5h-2v3zM14 5v2h3v3h2V5h-5z"/></svg>
             </button>
-            <button class="mini-player-btn" id="miniFavBtn" title="收藏">
+            <button class="mini-player-btn" id="miniFavBtn" data-i18n-title="favAdd" title="收藏">
                 <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>
             </button>
         </div>
