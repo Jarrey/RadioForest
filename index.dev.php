@@ -1059,10 +1059,30 @@ if (isset($_GET['action']) && $_GET['action'] === 'stations') {
             transform: scale(1.05);
         }
         
+        .fullscreen-btn.fav-active {
+            color: #f59e0b;
+            border-color: #f59e0b;
+            background: color-mix(in srgb, #f59e0b 15%, var(--bg-card));
+        }
+
         .fullscreen-btn svg {
             width: 20px;
             height: 20px;
+            fill: none;
+            stroke: currentColor;
+            stroke-width: 2;
+            stroke-linecap: round;
+            stroke-linejoin: round;
+        }
+
+        .fullscreen-btn.fav-active svg {
             fill: currentColor;
+        }
+
+        .player-actions {
+            display: flex;
+            align-items: center;
+            gap: 8px;
         }
 
         .result-count {
@@ -1302,6 +1322,15 @@ if (isset($_GET['action']) && $_GET['action'] === 'stations') {
             .fullscreen-btn svg {
                 width: 18px;
                 height: 18px;
+                fill: none;
+                stroke: currentColor;
+                stroke-width: 2;
+                stroke-linecap: round;
+                stroke-linejoin: round;
+            }
+
+            .fullscreen-btn.fav-active svg {
+                fill: currentColor;
             }
             
             .region-btn, .type-btn {
@@ -1505,6 +1534,20 @@ if (isset($_GET['action']) && $_GET['action'] === 'stations') {
             background: color-mix(in srgb, #f59e0b 18%, transparent);
         }
         
+        .fullscreen-close.fullscreen-fav-btn svg {
+            width: 20px;
+            height: 20px;
+            fill: none;
+            stroke: currentColor;
+            stroke-width: 2;
+            stroke-linecap: round;
+            stroke-linejoin: round;
+        }
+
+        .fullscreen-close.fullscreen-fav-btn.fav-active svg {
+            fill: currentColor;
+        }
+
         /* 悬浮小播放条 */
         .mini-player {
             position: fixed;
@@ -2186,14 +2229,16 @@ if (isset($_GET['action']) && $_GET['action'] === 'stations') {
                 </div>
             </div>
             <audio controls id="audioPlayer"></audio>
-            <button class="fullscreen-btn" id="playerFavBtn" data-i18n-title="favAdd" title="收藏">
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>
-            </button>
-            <button class="fullscreen-btn" id="fullscreenBtn" data-i18n-title="fullscreen" title="全屏播放">
-                <svg viewBox="0 0 24 24">
-                    <path d="M7 14H5v5h5v-2H7v-3zm-2-4h2V7h3V5H5v5zm12 7h-3v2h5v-5h-2v3zM14 5v2h3v3h2V5h-5z"/>
-                </svg>
-            </button>
+            <div class="player-actions">
+                <button class="fullscreen-btn" id="playerFavBtn" data-i18n-title="favAdd" title="收藏">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>
+                </button>
+                <button class="fullscreen-btn" id="fullscreenBtn" data-i18n-title="fullscreen" title="全屏播放">
+                    <svg viewBox="0 0 24 24">
+                        <path d="M7 14H5v5h5v-2H7v-3zm-2-4h2V7h3V5H5v5zm12 7h-3v2h5v-5h-2v3zM14 5v2h3v3h2V5h-5z"/>
+                    </svg>
+                </button>
+            </div>
         </div>
         
         <p class="result-count" id="resultCount" data-i18n="loading">加载中...</p>
