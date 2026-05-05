@@ -2186,6 +2186,9 @@ if (isset($_GET['action']) && $_GET['action'] === 'stations') {
                 </div>
             </div>
             <audio controls id="audioPlayer"></audio>
+            <button class="fullscreen-btn" id="playerFavBtn" title="收藏">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>
+            </button>
             <button class="fullscreen-btn" id="fullscreenBtn" data-i18n-title="fullscreen" title="全屏播放">
                 <svg viewBox="0 0 24 24">
                     <path d="M7 14H5v5h5v-2H7v-3zm-2-4h2V7h3V5H5v5zm12 7h-3v2h5v-5h-2v3zM14 5v2h3v3h2V5h-5z"/>
@@ -2606,13 +2609,13 @@ if (isset($_GET['action']) && $_GET['action'] === 'stations') {
             }
             function updatePlayerFavBtns() {
                 if (!currentStation) {
-                    $('#miniFavBtn, #fullscreenFavBtn').removeClass('fav-active');
+                    $('#miniFavBtn, #fullscreenFavBtn, #playerFavBtn').removeClass('fav-active');
                     return;
                 }
                 const isFav = isFavorited(currentStation);
-                $('#miniFavBtn, #fullscreenFavBtn').toggleClass('fav-active', isFav);
+                $('#miniFavBtn, #fullscreenFavBtn, #playerFavBtn').toggleClass('fav-active', isFav);
                 const favTitle = isFav ? (t('favRemove') || '取消收藏') : (t('favAdd') || '收藏');
-                $('#miniFavBtn, #fullscreenFavBtn').attr('title', favTitle);
+                $('#miniFavBtn, #fullscreenFavBtn, #playerFavBtn').attr('title', favTitle);
             }
             function toggleFavorite(station) {
                 const idx = favorites.findIndex(f => f.url === station.url && f.name === station.name);
@@ -3379,12 +3382,7 @@ if (isset($_GET['action']) && $_GET['action'] === 'stations') {
             });
 
             // 收藏按钮（mini 播放条）
-            $('#miniFavBtn').on('click', function() {
-                if (currentStation) toggleFavorite(currentStation);
-            });
-
-            // 收藏按钮（全屏播放器）
-            $('#fullscreenFavBtn').on('click', function() {
+            $('#miniFavBtn, #fullscreenFavBtn, #playerFavBtn').on('click', function() {
                 if (currentStation) toggleFavorite(currentStation);
             });
 
