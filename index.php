@@ -336,7 +336,7 @@ if (isset($_GET['action']) && $_GET['action'] === 'stations') {
                 <input type="text" id="searchInput" data-i18n-placeholder="searchPlaceholder" placeholder="搜索电台...">
             </div>
 
-            <button class="fav-only-btn" id="favOnlyBtn" title="仅显示收藏">
+            <button class="fav-only-btn" id="favOnlyBtn" data-i18n-title="favOnlyToggle" title="仅显示收藏">
                 <svg viewBox="0 0 24 24"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>
             </button>
         </div>
@@ -493,7 +493,7 @@ if (isset($_GET['action']) && $_GET['action'] === 'stations') {
         <div class="fullscreen-top-bar">
             <span class="fullscreen-clock" id="fullscreenClock"></span>
             <div class="fullscreen-top-actions">
-                <button class="fullscreen-close fullscreen-fav-btn" id="fullscreenFavBtn" title="收藏">
+                <button class="fullscreen-close fullscreen-fav-btn" id="fullscreenFavBtn" data-i18n-title="favAdd" title="收藏">
                     <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>
                 </button>
                 <button class="fullscreen-close" id="fullscreenClose">
