@@ -2991,7 +2991,9 @@ if (isset($_GET['action']) && $_GET['action'] === 'stations') {
                 if (audio.paused) {
                     audio.play().catch(e => console.warn('播放失败:', e));
                 } else {
+                    isManuallyStopped = true;
                     audio.pause();
+                    audio.src = '';
                 }
             }
 
