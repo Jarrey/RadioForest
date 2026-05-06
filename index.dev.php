@@ -2994,6 +2994,17 @@ if (isset($_GET['action']) && $_GET['action'] === 'stations') {
                     isManuallyStopped = true;
                     audio.pause();
                     audio.src = '';
+                    // audio.src='' 会干扰 pause 事件的 UI 更新，直接手动更新
+                    $('#statusDot, #fullscreenDot').removeClass('playing').addClass('paused');
+                    $('#playerStatus, #fullscreenStatus').text(t('playerClickToPlay'));
+                    $('#soundWave').removeClass('playing');
+                    $('#fullscreenCover').removeClass('playing');
+                    updatePlayIcon(true);
+                    updateFullscreenPlayIcon(true);
+                    $('.station-card').removeClass('playing');
+                    updateMiniPlayIcon(true);
+                    $('#miniPlayerStatus').text(t('playerPaused') || '已暂停');
+                    document.title = t('appTitle');
                 }
             }
 
@@ -3803,6 +3814,10 @@ if (isset($_GET['action']) && $_GET['action'] === 'stations') {
                 $('#statusDot').removeClass('playing').addClass('paused');
                 $('#fullscreenDot').removeClass('playing').addClass('paused');
                 $('#soundWave').removeClass('playing');
+                $('#fullscreenCover').removeClass('playing');
+                updatePlayIcon(true);
+                updateFullscreenPlayIcon(true);
+                updateMiniPlayIcon(true);
             });
 
             // 主题初始化 + 页面初始化
