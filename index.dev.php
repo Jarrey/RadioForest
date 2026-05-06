@@ -2575,6 +2575,7 @@ if (isset($_GET['action']) && $_GET['action'] === 'stations') {
         let currentUrl      = '';
         let currentStation  = null;
         let stationsFullyLoaded = false; // 全部数据流式加载完毕标志
+        let isManuallyStopped = false;  // 主动停止时跳过 audio error 事件
         let cachedStationTotal = 0;           // 加载完成后缓存去重总数
         let currentLang    = 'en';
         let i18n           = {};
@@ -3508,6 +3509,7 @@ if (isset($_GET['action']) && $_GET['action'] === 'stations') {
                     document.title = t('appTitle');
                 })
                 .on('error', function () {
+                    if (isManuallyStopped) { isManuallyStopped = false; return; }
                     $('#statusDot, #fullscreenDot').removeClass('playing').addClass('paused');
                     $('#playerStatus, #fullscreenStatus').text(t('playerError'));
                     $('#soundWave').removeClass('playing');
@@ -3782,6 +3784,7 @@ if (isset($_GET['action']) && $_GET['action'] === 'stations') {
             $(document).on('click', '.station-stop-btn', function(e) {
                 e.stopPropagation();
                 const audio = document.getElementById('audioPlayer');
+                isManuallyStopped = true;
                 audio.pause();
                 audio.src = '';
                 currentUrl = '';
