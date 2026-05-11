@@ -1060,9 +1060,9 @@ if (isset($_GET['action']) && $_GET['action'] === 'stations') {
         }
         
         .fullscreen-btn.fav-active {
-            color: #f59e0b;
-            border-color: #f59e0b;
-            background: color-mix(in srgb, #f59e0b 15%, var(--bg-card));
+            color: var(--primary);
+            border-color: var(--primary);
+            background: color-mix(in srgb, var(--primary) 15%, var(--bg-card));
         }
 
         .fullscreen-btn svg {
@@ -1529,9 +1529,9 @@ if (isset($_GET['action']) && $_GET['action'] === 'stations') {
         }
 
         .fullscreen-close.fullscreen-fav-btn.fav-active {
-            color: #f59e0b;
-            border-color: #f59e0b;
-            background: color-mix(in srgb, #f59e0b 18%, transparent);
+            color: var(--primary);
+            border-color: var(--primary);
+            background: color-mix(in srgb, var(--primary) 18%, transparent);
         }
         
         .fullscreen-close.fullscreen-fav-btn svg {
@@ -2027,18 +2027,18 @@ if (isset($_GET['action']) && $_GET['action'] === 'stations') {
             stroke-linecap: round;
             stroke-linejoin: round;
         }
-        .station-fav-btn:hover { border-color: #f59e0b; color: #f59e0b; }
+        .station-fav-btn:hover { border-color: var(--primary); color: var(--primary); }
         .station-fav-btn.fav-active {
-            border-color: #f59e0b;
-            color: #f59e0b;
-            background: color-mix(in srgb, #f59e0b 12%, transparent);
+            border-color: var(--primary);
+            color: var(--primary);
+            background: color-mix(in srgb, var(--primary) 12%, transparent);
         }
-        .station-fav-btn.fav-active svg { fill: #f59e0b; }
+        .station-fav-btn.fav-active svg { fill: var(--primary); }
 
-        .mini-player-btn.fav-active { color: #f59e0b; background: color-mix(in srgb, #f59e0b 20%, transparent); }
-        .mini-player-btn.fav-active svg { fill: #f59e0b; }
-        .fullscreen-control-btn.fav-active { border-color: #f59e0b; color: #f59e0b; }
-        .fullscreen-control-btn.fav-active svg { fill: #f59e0b; stroke: #f59e0b; }
+        .mini-player-btn.fav-active { color: var(--primary); background: color-mix(in srgb, var(--primary) 20%, transparent); }
+        .mini-player-btn.fav-active svg { fill: var(--primary); }
+        .fullscreen-control-btn.fav-active { border-color: var(--primary); color: var(--primary); }
+        .fullscreen-control-btn.fav-active svg { fill: var(--primary); stroke: var(--primary); }
 
         /* 失效电台样式 */
         .station-card.station-invalid { opacity: 0.65; }
@@ -2084,11 +2084,11 @@ if (isset($_GET['action']) && $_GET['action'] === 'stations') {
             transition: fill 0.15s, stroke 0.15s;
         }
         .fav-only-btn.active {
-            color: #f59e0b;
-            border-color: #f59e0b;
-            background: color-mix(in srgb, #f59e0b 12%, var(--bg-input));
+            color: var(--primary);
+            border-color: var(--primary);
+            background: color-mix(in srgb, var(--primary) 12%, var(--bg-input));
         }
-        .fav-only-btn.active svg { fill: #f59e0b; stroke: #f59e0b; }
+        .fav-only-btn.active svg { fill: var(--primary); stroke: var(--primary); }
 
         /* 收藏模式下隐藏国家/风格过滤区域 */
         body.fav-only-mode .filter-section {
