@@ -2581,7 +2581,7 @@ if (isset($_GET['action']) && $_GET['action'] === 'stations') {
         let i18n           = {};
         let showFavoritesOnly = false;
         let favorites = []; // [{name, url, logo, region, country}]
-        const SUPPORTED_LANGS = ['zh-CN', 'zh-TW', 'en', 'es', 'fr', 'de', 'it', 'ja', 'ko', 'ru'];
+        const SUPPORTED_LANGS = ['zh-CN', 'zh-HK', 'en', 'es', 'fr', 'de', 'it', 'ja', 'ko', 'ru'];
         // Maps Chinese internal values → English label keys used in lang/*.json "labels"
         const LABEL_KEYS = {
             '中国':'china','日本':'japan','韩国':'korea','台湾':'taiwan','香港':'hongkong',
@@ -2612,7 +2612,7 @@ if (isset($_GET['action']) && $_GET['action'] === 'stations') {
         const THEME_KEYS   = ['green','teal','cyan','orange','amber','rose','red','pink','purple','indigo','grayscale','bw','black'];
         const LANG_OPTIONS = [
             {value:'zh-CN',flag:'cn',label:'简体中文'},
-            {value:'zh-TW',flag:'tw',label:'繁體中文'},
+            {value:'zh-HK',flag:'hk',label:'繁體中文'},
             {value:'en',   flag:'gb',label:'English'},
             {value:'es',   flag:'es',label:'Español'},
             {value:'fr',   flag:'fr',label:'Français'},
@@ -3214,7 +3214,7 @@ if (isset($_GET['action']) && $_GET['action'] === 'stations') {
             function initLanguage() {
                 const saved = localStorage.getItem('language');
                 const browserLang = (navigator.languages && navigator.languages[0]) || navigator.language || 'en';
-                const normalized = (browserLang.startsWith('zh-TW') || browserLang.startsWith('zh-HK') || browserLang.startsWith('zh-MO')) ? 'zh-TW'
+                const normalized = (browserLang.startsWith('zh-TW') || browserLang.startsWith('zh-HK') || browserLang.startsWith('zh-MO')) ? 'zh-HK'
                     : browserLang.startsWith('zh') ? 'zh-CN'
                     : browserLang.startsWith('es') ? 'es'
                     : browserLang.startsWith('fr') ? 'fr'
@@ -3224,7 +3224,7 @@ if (isset($_GET['action']) && $_GET['action'] === 'stations') {
                     : browserLang.startsWith('ko') ? 'ko'
                     : browserLang.startsWith('ru') ? 'ru'
                     : 'en';
-                const lang = saved || normalized;
+                const lang = (saved === 'zh-TW' ? 'zh-HK' : saved) || normalized;
                 const resolvedLang = SUPPORTED_LANGS.includes(lang) ? lang : 'en';
                 if (!saved || saved !== resolvedLang) {
                     localStorage.setItem('language', resolvedLang);

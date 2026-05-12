@@ -31,7 +31,7 @@ radioweb/
 ├── config.php             # optional runtime configuration
 ├── scripts/               # playlist synchronization scripts
 │   ├── radioBrowserService.py
-│   └── syncInternetRatio.py
+│   └── syncInternetRadio.py
 ├── lang/                  # UI translation dictionaries
 └── package.json           # build dependency manifest
 ```
@@ -66,19 +66,19 @@ If `config.php` is absent, the app will use the defaults `./playlists` and `./st
 The repository includes two helper Python scripts for fetching radio station data from radio-browser.info and generating playlist files for the web app:
 
 - `scripts/radioBrowserService.py` — provides radio-browser API request functionality.
-- `scripts/syncInternetRatio.py` — downloads stations for specified countries/regions and writes `radio_<code>.m3u` and `radio.m3u`.
+- `scripts/syncInternetRadio.py` — downloads stations for specified countries/regions and writes `radio_<code>.m3u` and `radio.m3u`.
 
 Usage example:
 
 ```bash
-python scripts/syncInternetRatio.py CN,US --target-dir . --backup-dir ./backup
+python scripts/syncInternetRadio.py CN,US --target-dir . --backup-dir ./backup
 ```
 
 Proxy is disabled by default. If you need proxy support, pass `--proxy` and the script will use the standard `HTTP_PROXY` / `HTTPS_PROXY` environment variables.
 
 You can schedule the script to run automatically using cron on Linux/macOS or Task Scheduler on Windows.
 
-### syncInternetRatio.py arguments
+### syncInternetRadio.py arguments
 
 - `countries` (required)
   - Comma-separated ISO 3166-1 alpha-2 country/region codes, e.g. `CN,US,GB`.

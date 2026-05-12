@@ -30,7 +30,7 @@ radioweb/
 ├── config.php             # 可选外部运行时配置
 ├── scripts/               # 播放列表同步脚本
 │   ├── radioBrowserService.py
-│   └── syncInternetRatio.py
+│   └── syncInternetRadio.py
 ├── lang/                  # UI 翻译字典
 └── package.json           # 构建依赖声明
 ```
@@ -65,19 +65,19 @@ define('CACHE_FILE', __DIR__ . '/stations.cache.json');
 仓库包含两个辅助 Python 脚本，用于从 radio-browser.info 获取电台数据并生成用于页面的播放列表文件：
 
 - `scripts/radioBrowserService.py` — 提供 radio-browser API 请求功能。
-- `scripts/syncInternetRatio.py` — 下载指定国家/地区的电台并写入 `radio_<code>.m3u` 和 `radio.m3u`。
+- `scripts/syncInternetRadio.py` — 下载指定国家/地区的电台并写入 `radio_<code>.m3u` 和 `radio.m3u`。
 
 使用示例：
 
 ```bash
-python scripts/syncInternetRatio.py CN,US --target-dir . --backup-dir ./backup
+python scripts/syncInternetRadio.py CN,US --target-dir . --backup-dir ./backup
 ```
 
 默认禁用代理；如果需要启用代理，请传入 `--proxy`，脚本将使用标准的 `HTTP_PROXY` / `HTTPS_PROXY` 环境变量。
 
 可以将该脚本配置为计划任务，定期自动刷新播放列表。例如，在 Linux/macOS 上使用 `cron`，或在 Windows 上使用任务计划程序，每天固定时间运行一次。
 
-### syncInternetRatio.py 参数说明
+### syncInternetRadio.py 参数说明
 
 - `countries`（必选）
   - 逗号分隔的 ISO 3166-1 alpha-2 国家/地区代码，例如 `CN,US,GB`。

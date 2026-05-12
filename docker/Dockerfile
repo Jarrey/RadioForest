@@ -11,7 +11,7 @@ COPY docker/.env.sample /var/www/html/.env.sample
 COPY index.php /var/www/html/
 COPY radio-icon.svg /var/www/html/
 COPY scripts/radioBrowserService.py /var/www/html/scripts/
-COPY scripts/syncInternetRatio.py /var/www/html/scripts/
+COPY scripts/syncInternetRadio.py /var/www/html/scripts/
 COPY lang /var/www/html/lang/
 
 WORKDIR /var/www/html
