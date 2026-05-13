@@ -1096,7 +1096,9 @@ if (isset($_GET['action']) && $_GET['action'] === 'stations') {
 
         .volume-popup {
             position: fixed;
-            background: var(--player-bg);
+            background: color-mix(in srgb, var(--player-bg) 82%, transparent);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
             border: 1px solid var(--player-border);
             border-radius: 14px;
             padding: 14px 10px 10px;
@@ -2150,6 +2152,7 @@ if (isset($_GET['action']) && $_GET['action'] === 'stations') {
 
         .mini-player-btn.fav-active { color: var(--primary); background: color-mix(in srgb, var(--primary) 20%, transparent); }
         .mini-player-btn.fav-active svg { fill: var(--primary); }
+        .mini-player-btn.fav-active:hover { background: color-mix(in srgb, var(--primary) 40%, transparent); box-shadow: 0 0 0 3px color-mix(in srgb, var(--primary) 28%, transparent); }
         .fullscreen-control-btn.fav-active { border-color: var(--primary); color: var(--primary); }
         .fullscreen-control-btn.fav-active svg { fill: var(--primary); stroke: var(--primary); }
 
@@ -3759,7 +3762,7 @@ if (isset($_GET['action']) && $_GET['action'] === 'stations') {
 
             // 弹出/收起音量面板
             // 将 popup 移至 <body> 以脱离 transform 形成的 containing block，确保 fixed 定位以视口为基准
-            function toggleVolumePopup(btnId, popupId, e) {
+            function toggleVolumePopup(btnId, popupId, e, extraUp) {
                 e.stopPropagation();
                 const $popup = $('#' + popupId);
                 const isShowing = $popup.hasClass('show');
@@ -3773,7 +3776,7 @@ if (isset($_GET['action']) && $_GET['action'] === 'stations') {
                 const pw = 44, ph = 132; // 弹窗预估尺寸（宽×高）
                 let left = r.left + r.width / 2 - pw / 2;
                 // 优先显示在按钮上方；上方空间不足才转到下方
-                let top = r.top - ph - 8;
+                let top = r.top - ph - 8 - (extraUp || 0);
                 left = Math.max(8, Math.min(left, window.innerWidth - pw - 8));
                 if (top < 8) top = r.bottom + 8;
                 $popup.css({ top: top + 'px', left: left + 'px' });
@@ -3781,7 +3784,7 @@ if (isset($_GET['action']) && $_GET['action'] === 'stations') {
             }
 
             $('#barVolumeBtn').on('click',  function(e) { toggleVolumePopup('barVolumeBtn',  'barVolumePopup',  e); });
-            $('#miniVolumeBtn').on('click', function(e) { toggleVolumePopup('miniVolumeBtn', 'miniVolumePopup', e); });
+            $('#miniVolumeBtn').on('click', function(e) { toggleVolumePopup('miniVolumeBtn', 'miniVolumePopup', e, 4); });
             $('#fsVolumeBtn').on('click',   function(e) { toggleVolumePopup('fsVolumeBtn',   'fsVolumePopup',   e); });
 
             // 鼠标离开按钮/弹窗区域后延迟 1.5s 自动关闭
