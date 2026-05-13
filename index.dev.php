@@ -2694,7 +2694,7 @@ if (isset($_GET['action']) && $_GET['action'] === 'stations') {
                 // 更新播放条收藏按钮
                 updatePlayerFavBtns();
                 // 收藏模式下刷新列表
-                if (showFavoritesOnly) { filteredCache = null; filterAndRender(); }
+                if (showFavoritesOnly) { filteredCache = null; filterAndRender(); renderTypeButtons(); }
             }
             function setFavOnly(val) {
                 showFavoritesOnly = val;
@@ -2703,6 +2703,7 @@ if (isset($_GET['action']) && $_GET['action'] === 'stations') {
                 $('body').toggleClass('fav-only-mode', val);
                 filteredCache = null;
                 filterAndRender(true);
+                renderTypeButtons();
                 updateURL();
             }
             function getFiltered() {
@@ -2834,6 +2835,19 @@ if (isset($_GET['action']) && $_GET['action'] === 'stations') {
             function getDeduplicatedScope() {
                 const result = [];
                 const seenNames = new Set();
+                if (showFavoritesOnly) {
+                    favorites.forEach(fav => {
+                        if (seenNames.has(fav.name)) return;
+                        if (currentSearch) {
+                            const nameNorm = normalizeZh(fav.name).toLowerCase();
+                            if (!nameNorm.includes(currentSearch)) return;
+                        }
+                        seenNames.add(fav.name);
+                        const station = allStations.find(s => s.url === fav.url && s.name === fav.name);
+                        if (station) result.push(station);
+                    });
+                    return result;
+                }
                 for (let i = 0; i < allStations.length; i++) {
                     const s = allStations[i];
                     if (seenNames.has(s.name)) continue;
@@ -3474,6 +3488,7 @@ if (isset($_GET['action']) && $_GET['action'] === 'stations') {
                 searchTimeout = setTimeout(() => {
                     currentSearch = normalizeZh($(this).val().toLowerCase());
                     filterAndRender(true);
+                    renderTypeButtons();
                 }, 300);
             });
 
