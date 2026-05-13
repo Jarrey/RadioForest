@@ -1860,14 +1860,14 @@ if (isset($_GET['action']) && $_GET['action'] === 'stations') {
         }
         
         .fullscreen-cover {
-            width: 280px;
-            height: 280px;
+            width: clamp(160px, 28vmin, 280px);
+            height: clamp(160px, 28vmin, 280px);
             border-radius: 20px;
             object-fit: cover;
             background: var(--bg-card);
             border: 4px solid var(--primary);
             box-shadow: 0 20px 60px rgba(0,0,0,0.4), 0 0 40px var(--player-shadow);
-            margin-bottom: 40px;
+            margin-bottom: clamp(20px, 4vmin, 40px);
             position: relative;
         }
         
@@ -1875,23 +1875,23 @@ if (isset($_GET['action']) && $_GET['action'] === 'stations') {
             display: flex;
             align-items: center;
             justify-content: center;
-            font-size: 120px;
+            font-size: clamp(60px, 12vmin, 120px);
             color: var(--primary);
         }
         
         .fullscreen-title {
-            font-size: 32px;
+            font-size: clamp(18px, 3.5vmin, 32px);
             font-weight: 600;
             color: var(--text);
-            margin-bottom: 12px;
+            margin-bottom: clamp(6px, 1.5vmin, 12px);
             text-align: center;
             max-width: 80%;
         }
         
         .fullscreen-status {
-            font-size: 16px;
+            font-size: clamp(12px, 2vmin, 16px);
             color: var(--text-dim);
-            margin-bottom: 40px;
+            margin-bottom: clamp(20px, 4vmin, 40px);
             display: flex;
             align-items: center;
             gap: 8px;
@@ -1904,8 +1904,8 @@ if (isset($_GET['action']) && $_GET['action'] === 'stations') {
         }
         
         .fullscreen-control-btn {
-            width: 64px;
-            height: 64px;
+            width: clamp(44px, 8vmin, 64px);
+            height: clamp(44px, 8vmin, 64px);
             background: var(--bg-card);
             border: 2px solid var(--primary);
             border-radius: 50%;
@@ -1924,19 +1924,19 @@ if (isset($_GET['action']) && $_GET['action'] === 'stations') {
         }
         
         .fullscreen-control-btn.play-pause {
-            width: 80px;
-            height: 80px;
+            width: clamp(56px, 10vmin, 80px);
+            height: clamp(56px, 10vmin, 80px);
         }
         
         .fullscreen-control-btn svg {
-            width: 32px;
-            height: 32px;
+            width: clamp(20px, 4vmin, 32px);
+            height: clamp(20px, 4vmin, 32px);
             fill: currentColor;
         }
         
         .fullscreen-control-btn.play-pause svg {
-            width: 40px;
-            height: 40px;
+            width: clamp(26px, 5vmin, 40px);
+            height: clamp(26px, 5vmin, 40px);
         }
         
         /* 音波动画 */
@@ -1987,47 +1987,48 @@ if (isset($_GET['action']) && $_GET['action'] === 'stations') {
             align-items: center;
         }
         
-        /* 横屏模式优化 - 水平布局（仅限真正的手机横屏，高度≤500px且触控设备） */
-        @media (max-width: 900px) and (orientation: landscape) and (max-height: 500px) and (hover: none) and (pointer: coarse) {
+        /* 横屏模式优化 - 宽高比 > 4:3 时启用水平布局（桌面及手机横屏均适用） */
+        @media (orientation: landscape) and (min-aspect-ratio: 4/3) {
             .fullscreen-player {
-                padding: 15px 30px;
+                padding: 15px 5vw;
             }
             
             .fullscreen-content {
                 flex-direction: row;
-                gap: 30px;
+                gap: clamp(24px, 5vw, 60px);
                 align-items: center;
                 justify-content: center;
                 width: 100%;
             }
             
             .fullscreen-cover {
-                width: 140px;
-                height: 140px;
+                width: clamp(120px, 38vh, 260px);
+                height: clamp(120px, 38vh, 260px);
                 margin-bottom: 0;
                 flex-shrink: 0;
             }
             
             .fullscreen-cover.placeholder {
-                font-size: 50px;
+                font-size: clamp(44px, 13vh, 90px);
             }
             
             .fullscreen-info {
                 align-items: flex-start;
                 flex: 1;
-                max-width: 400px;
+                min-width: 0;
+                max-width: 55vw;
             }
             
             .fullscreen-title {
-                font-size: 18px;
-                margin-bottom: 6px;
+                font-size: clamp(16px, 3.2vh, 30px);
+                margin-bottom: clamp(4px, 1vh, 10px);
                 text-align: left;
                 max-width: 100%;
             }
             
             .fullscreen-status {
-                font-size: 12px;
-                margin-bottom: 12px;
+                font-size: clamp(11px, 1.8vh, 15px);
+                margin-bottom: clamp(12px, 2.5vh, 28px);
             }
             
             .fullscreen-controls {
@@ -2035,40 +2036,28 @@ if (isset($_GET['action']) && $_GET['action'] === 'stations') {
             }
             
             .fullscreen-control-btn {
-                width: 48px;
-                height: 48px;
+                width: clamp(40px, 7vh, 64px);
+                height: clamp(40px, 7vh, 64px);
             }
             
             .fullscreen-control-btn.play-pause {
-                width: 56px;
-                height: 56px;
+                width: clamp(52px, 9vh, 80px);
+                height: clamp(52px, 9vh, 80px);
             }
             
             .fullscreen-control-btn svg {
-                width: 20px;
-                height: 20px;
+                width: clamp(18px, 3.5vh, 32px);
+                height: clamp(18px, 3.5vh, 32px);
             }
             
             .fullscreen-control-btn.play-pause svg {
-                width: 24px;
-                height: 24px;
+                width: clamp(22px, 4.5vh, 40px);
+                height: clamp(22px, 4.5vh, 40px);
             }
             
             .sound-wave {
-                bottom: -30px;
-                height: 25px;
-            }
-            
-            .fullscreen-close {
-                width: 36px;
-                height: 36px;
-                top: 15px;
-                right: 15px;
-            }
-            
-            .fullscreen-close svg {
-                width: 16px;
-                height: 16px;
+                bottom: clamp(-40px, -8vh, -20px);
+                height: clamp(20px, 4vh, 40px);
             }
         }
         
@@ -2078,43 +2067,12 @@ if (isset($_GET['action']) && $_GET['action'] === 'stations') {
             }
             
             .fullscreen-cover {
-                width: 220px;
-                height: 220px;
-                margin-bottom: 30px;
-            }
-            
-            .fullscreen-cover.placeholder {
-                font-size: 80px;
+                max-width: 90vw;
+                max-height: 90vw;
             }
             
             .fullscreen-title {
-                font-size: 24px;
                 max-width: 90%;
-            }
-            
-            .fullscreen-status {
-                font-size: 14px;
-                margin-bottom: 30px;
-            }
-            
-            .fullscreen-control-btn {
-                width: 52px;
-                height: 52px;
-            }
-            
-            .fullscreen-control-btn.play-pause {
-                width: 68px;
-                height: 68px;
-            }
-            
-            .fullscreen-control-btn svg {
-                width: 24px;
-                height: 24px;
-            }
-            
-            .fullscreen-control-btn.play-pause svg {
-                width: 32px;
-                height: 32px;
             }
         }
 
@@ -2511,6 +2469,11 @@ if (isset($_GET['action']) && $_GET['action'] === 'stations') {
                 </div>
                 
                 <div class="fullscreen-controls">
+                    <button class="fullscreen-control-btn play-pause" id="fullscreenPlayBtn">
+                        <svg viewBox="0 0 24 24">
+                            <polygon points="8,5 19,12 8,19"/>
+                        </svg>
+                    </button>
                     <div class="volume-control" id="fsVolumeControl">
                         <button class="fullscreen-control-btn play-pause" id="fsVolumeBtn" title="音量">
                             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" id="fsVolumeIcon">
@@ -2526,11 +2489,6 @@ if (isset($_GET['action']) && $_GET['action'] === 'stations') {
                             <span class="volume-label" id="fsVolumeLabel">50%</span>
                         </div>
                     </div>
-                    <button class="fullscreen-control-btn play-pause" id="fullscreenPlayBtn">
-                        <svg viewBox="0 0 24 24">
-                            <polygon points="8,5 19,12 8,19"/>
-                        </svg>
-                    </button>
                 </div>
             </div>
         </div>
