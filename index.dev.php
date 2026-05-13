@@ -1095,10 +1095,7 @@ if (isset($_GET['action']) && $_GET['action'] === 'stations') {
         }
 
         .volume-popup {
-            position: absolute;
-            bottom: calc(100% + 10px);
-            left: 50%;
-            transform: translateX(-50%);
+            position: fixed;
             background: var(--player-bg);
             border: 1px solid var(--player-border);
             border-radius: 14px;
@@ -1107,19 +1104,17 @@ if (isset($_GET['action']) && $_GET['action'] === 'stations') {
             flex-direction: column;
             align-items: center;
             gap: 6px;
-            z-index: 1010;
+            z-index: 9999;
             opacity: 0;
             visibility: hidden;
-            transition: opacity 0.18s, visibility 0.18s, transform 0.18s;
-            transform: translateX(-50%) translateY(6px);
+            transition: opacity 0.18s, visibility 0.18s;
             box-shadow: 0 6px 24px rgba(0,0,0,0.4), 0 0 12px var(--player-shadow);
-            min-width: 40px;
+            min-width: 44px;
         }
 
         .volume-popup.show {
             opacity: 1;
             visibility: visible;
-            transform: translateX(-50%) translateY(0);
         }
 
         .volume-slider-wrap {
@@ -1661,7 +1656,7 @@ if (isset($_GET['action']) && $_GET['action'] === 'stations') {
             box-shadow: 0 4px 24px rgba(0,0,0,0.35), 0 0 14px var(--player-shadow);
             display: flex;
             align-items: center;
-            gap: 10px;
+            gap: 8px;
             padding: 8px 16px 8px 12px;
             opacity: 0;
             visibility: hidden;
@@ -1731,7 +1726,7 @@ if (isset($_GET['action']) && $_GET['action'] === 'stations') {
         }
         .mini-player-btn:hover {
             background: color-mix(in srgb, var(--primary) 30%, transparent);
-            transform: scale(1.1);
+            box-shadow: 0 0 0 3px color-mix(in srgb, var(--primary) 18%, transparent);
         }
         .mini-player-btn svg {
             width: 16px;
@@ -1748,7 +1743,7 @@ if (isset($_GET['action']) && $_GET['action'] === 'stations') {
         .mini-media {
             display: none;
             align-items: center;
-            gap: 10px;
+            gap: 8px;
             flex: 1;
             min-width: 0;
             overflow: hidden;
@@ -1761,41 +1756,22 @@ if (isset($_GET['action']) && $_GET['action'] === 'stations') {
             margin-left: 2px;
         }
 
-        /* 小播放条：额外按钮组（窄屏折叠，悬停/展开后显示） */
+        /* 小播放条：额外按钮组（窄屏默认隐藏，鼠标悬停显示） */
         .mini-extra-btns {
             display: flex;
             align-items: center;
-            gap: 6px;
+            gap: 8px;
             flex-shrink: 0;
         }
-        #miniExpandBtn {
+        .mini-player:not(.has-station) .mini-extra-btns {
             display: none;
         }
         @media (max-width: 520px) {
-            #miniExpandBtn {
+            .mini-player.has-station .mini-extra-btns {
+                display: none;
+            }
+            .mini-player.has-station:hover .mini-extra-btns {
                 display: flex;
-            }
-            .mini-extra-btns {
-                max-width: 0;
-                overflow: hidden;
-                opacity: 0;
-                gap: 6px;
-                transition: max-width 0.28s ease, opacity 0.22s ease;
-                pointer-events: none;
-            }
-            .mini-player:hover #miniExpandBtn,
-            .mini-player.expanded #miniExpandBtn {
-                opacity: 0;
-                width: 0;
-                overflow: hidden;
-                padding: 0;
-                pointer-events: none;
-            }
-            .mini-player:hover .mini-extra-btns,
-            .mini-player.expanded .mini-extra-btns {
-                max-width: 180px;
-                opacity: 1;
-                pointer-events: auto;
             }
         }
         
@@ -2419,10 +2395,8 @@ if (isset($_GET['action']) && $_GET['action'] === 'stations') {
             <button class="mini-player-btn" id="miniPlayBtn" data-i18n-title="playPause" title="播放/暂停">
                 <svg viewBox="0 0 24 24" id="miniPlayIcon"><polygon points="6,4 20,12 6,20"/></svg>
             </button>
-            <button class="mini-player-btn" id="miniExpandBtn" title="更多">
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="5" cy="12" r="1" fill="currentColor"/><circle cx="12" cy="12" r="1" fill="currentColor"/><circle cx="19" cy="12" r="1" fill="currentColor"/></svg>
-            </button>
-            <div class="mini-extra-btns">
+        </div><!-- /.mini-media -->
+        <div class="mini-extra-btns">
             <button class="mini-player-btn" id="miniFullscreenBtn" data-i18n-title="fullscreen" title="全屏播放">
                 <svg viewBox="0 0 24 24"><path d="M7 14H5v5h5v-2H7v-3zm-2-4h2V7h3V5H5v5zm12 7h-3v2h5v-5h-2v3zM14 5v2h3v3h2V5h-5z"/></svg>
             </button>
@@ -2444,8 +2418,7 @@ if (isset($_GET['action']) && $_GET['action'] === 'stations') {
                     <span class="volume-label" id="miniVolumeLabel">50%</span>
                 </div>
             </div>
-            </div><!-- /.mini-extra-btns -->
-        </div><!-- /.mini-media -->
+        </div><!-- /.mini-extra-btns -->
         <button class="mini-player-btn" id="backToTop" data-i18n-title="backToTop" title="回到顶部">
             <svg viewBox="0 0 24 24"><path d="M12 4l-8 8h5v8h6v-8h5z"/></svg>
         </button>
@@ -2537,7 +2510,7 @@ if (isset($_GET['action']) && $_GET['action'] === 'stations') {
                 
                 <div class="fullscreen-controls">
                     <div class="volume-control" id="fsVolumeControl">
-                        <button class="fullscreen-control-btn" id="fsVolumeBtn" title="音量">
+                        <button class="fullscreen-control-btn play-pause" id="fsVolumeBtn" title="音量">
                             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" id="fsVolumeIcon">
                                 <polygon points="11,5 6,9 2,9 2,15 6,15 11,19"/>
                                 <path d="M15.54,8.46a5,5,0,0,1,0,7.07"/>
@@ -3785,19 +3758,44 @@ if (isset($_GET['action']) && $_GET['action'] === 'stations') {
                 // volumechange 事件会自动触发 updateVolumeUI
             }
 
-            // 弹出/收起音量面板
-            function toggleVolumePopup(popupId, e) {
+            // 弹出/收起音量面板（position:fixed 定位，突破容器 overflow:hidden 限制）
+            function toggleVolumePopup(btnId, popupId, e) {
                 e.stopPropagation();
                 const $popup = $('#' + popupId);
                 const isShowing = $popup.hasClass('show');
-                // 先关闭所有其他弹窗
                 $('.volume-popup').removeClass('show');
-                if (!isShowing) $popup.addClass('show');
+                if (isShowing) return;
+                // 根据按钮的视口坐标计算 fixed 定位
+                const btn = document.getElementById(btnId);
+                const r = btn.getBoundingClientRect();
+                const pw = 44, ph = 132; // 弹窗预估尺寸（宽×高）
+                let left = r.left + r.width / 2 - pw / 2;
+                let top  = r.top - ph - 8; // 默认在按钮上方
+                left = Math.max(8, Math.min(left, window.innerWidth - pw - 8));
+                if (top < 8) top = r.bottom + 8; // 上方空间不足则转到下方
+                $popup.css({ top: top + 'px', left: left + 'px' });
+                $popup.addClass('show');
             }
 
-            $('#barVolumeBtn').on('click',  function(e) { toggleVolumePopup('barVolumePopup', e); });
-            $('#miniVolumeBtn').on('click', function(e) { toggleVolumePopup('miniVolumePopup', e); });
-            $('#fsVolumeBtn').on('click',   function(e) { toggleVolumePopup('fsVolumePopup', e); });
+            $('#barVolumeBtn').on('click',  function(e) { toggleVolumePopup('barVolumeBtn',  'barVolumePopup',  e); });
+            $('#miniVolumeBtn').on('click', function(e) { toggleVolumePopup('miniVolumeBtn', 'miniVolumePopup', e); });
+            $('#fsVolumeBtn').on('click',   function(e) { toggleVolumePopup('fsVolumeBtn',   'fsVolumePopup',   e); });
+
+            // 鼠标离开按钮/弹窗区域后延迟 1.5s 自动关闭
+            let volumeHideTimer = null;
+            function scheduleVolumeHide() {
+                clearTimeout(volumeHideTimer);
+                volumeHideTimer = setTimeout(function() {
+                    $('.volume-popup').removeClass('show');
+                }, 1500);
+            }
+            function cancelVolumeHide() {
+                clearTimeout(volumeHideTimer);
+            }
+            // 鼠标进入按钮或弹窗时取消计时
+            $(document).on('mouseenter.volHide', '#barVolumeBtn, #barVolumePopup, #miniVolumeBtn, #miniVolumePopup, #fsVolumeBtn, #fsVolumePopup', cancelVolumeHide);
+            // 鼠标离开按钮或弹窗时启动计时
+            $(document).on('mouseleave.volHide', '#barVolumeBtn, #barVolumePopup, #miniVolumeBtn, #miniVolumePopup, #fsVolumeBtn, #fsVolumePopup', scheduleVolumeHide);
 
             // 滑块输入
             $('#barVolumeSlider, #miniVolumeSlider, #fsVolumeSlider').on('input', function() {
@@ -3806,8 +3804,9 @@ if (isset($_GET['action']) && $_GET['action'] === 'stations') {
             // 阻止滑块点击冒泡到 document（避免立刻关闭弹窗）
             $('.volume-popup').on('click', function(e) { e.stopPropagation(); });
 
-            // 点击其他区域关闭音量弹窗
+            // 点击其他区域立即关闭音量弹窗
             $(document).on('click.volumeClose', function() {
+                clearTimeout(volumeHideTimer);
                 $('.volume-popup').removeClass('show');
             });
 
@@ -4060,18 +4059,6 @@ if (isset($_GET['action']) && $_GET['action'] === 'stations') {
                 setTimeout(() => requestBrowserFullscreen(), 100);
             });
 
-            // 窄屏展开按钮（touch 设备点击切换 .expanded）
-            $('#miniExpandBtn').on('click', function(e) {
-                e.stopPropagation();
-                $('#miniPlayer').toggleClass('expanded');
-            });
-            // 点击小播放条外部时收起
-            $(document).on('click.miniExpand', function(e) {
-                if (!$(e.target).closest('#miniPlayer').length) {
-                    $('#miniPlayer').removeClass('expanded');
-                }
-            });
-            
             // 播放按钮
             $(document).on('click', '.station-play-btn', function(e) {
                 e.stopPropagation();
