@@ -2312,7 +2312,7 @@ if (isset($_GET['action']) && $_GET['action'] === 'stations') {
             <audio controls id="audioPlayer"></audio>
             <div class="player-actions">
                 <div class="volume-control" id="barVolumeControl">
-                    <button class="fullscreen-btn" id="barVolumeBtn" title="音量">
+                    <button class="fullscreen-btn" id="barVolumeBtn" data-i18n-title="volume" title="音量">
                         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" id="barVolumeIcon">
                             <polygon points="11,5 6,9 2,9 2,15 6,15 11,19"/>
                             <path d="M15.54,8.46a5,5,0,0,1,0,7.07"/>
@@ -2358,7 +2358,7 @@ if (isset($_GET['action']) && $_GET['action'] === 'stations') {
         </div><!-- /.mini-media -->
         <div class="mini-extra-btns">
             <div class="volume-control" id="miniVolumeControl">
-                <button class="mini-player-btn" id="miniVolumeBtn" title="音量">
+                <button class="mini-player-btn" id="miniVolumeBtn" data-i18n-title="volume" title="音量">
                     <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" id="miniVolumeIcon">
                         <polygon points="11,5 6,9 2,9 2,15 6,15 11,19"/>
                         <path d="M15.54,8.46a5,5,0,0,1,0,7.07"/>
@@ -2475,7 +2475,7 @@ if (isset($_GET['action']) && $_GET['action'] === 'stations') {
                         </svg>
                     </button>
                     <div class="volume-control" id="fsVolumeControl">
-                        <button class="fullscreen-control-btn play-pause" id="fsVolumeBtn" title="音量">
+                        <button class="fullscreen-control-btn play-pause" id="fsVolumeBtn" data-i18n-title="volume" title="音量">
                             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" id="fsVolumeIcon">
                                 <polygon points="11,5 6,9 2,9 2,15 6,15 11,19"/>
                                 <path d="M15.54,8.46a5,5,0,0,1,0,7.07"/>

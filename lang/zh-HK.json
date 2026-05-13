@@ -42,6 +42,7 @@
   "backToTop": "回到頂部",  "githubLinkTitle": "在 GitHub 上查看專案",  "favOnlyToggle": "僅顯示收藏",
   "favAdd": "收藏",
   "favRemove": "取消收藏",
+  "volume": "音量",
   "invalidStation": "失效",
   "noFavStations": "沒有收藏的電台",
   "playPause": "播放/暫停",

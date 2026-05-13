@@ -42,6 +42,7 @@
   "backToTop": "Retour en haut",  "githubLinkTitle": "Voir sur GitHub",  "favOnlyToggle": "Favoris uniquement",
   "favAdd": "Ajouter aux favoris",
   "favRemove": "Retirer des favoris",
+  "volume": "Volume",
   "invalidStation": "Indisponible",
   "noFavStations": "Aucune station favorite",
   "playPause": "Lire / Pause",
