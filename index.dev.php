@@ -1722,7 +1722,7 @@ if (isset($_GET['action']) && $_GET['action'] === 'stations') {
             align-items: center;
             justify-content: center;
             flex-shrink: 0;
-            transition: background 0.2s, transform 0.15s;
+            transition: background 0.2s, box-shadow 0.2s;
         }
         .mini-player-btn:hover {
             background: color-mix(in srgb, var(--primary) 30%, transparent);
@@ -1746,7 +1746,6 @@ if (isset($_GET['action']) && $_GET['action'] === 'stations') {
             gap: 8px;
             flex: 1;
             min-width: 0;
-            overflow: hidden;
         }
         .mini-player.has-station .mini-media {
             display: flex;
@@ -2397,12 +2396,6 @@ if (isset($_GET['action']) && $_GET['action'] === 'stations') {
             </button>
         </div><!-- /.mini-media -->
         <div class="mini-extra-btns">
-            <button class="mini-player-btn" id="miniFullscreenBtn" data-i18n-title="fullscreen" title="全屏播放">
-                <svg viewBox="0 0 24 24"><path d="M7 14H5v5h5v-2H7v-3zm-2-4h2V7h3V5H5v5zm12 7h-3v2h5v-5h-2v3zM14 5v2h3v3h2V5h-5z"/></svg>
-            </button>
-            <button class="mini-player-btn" id="miniFavBtn" data-i18n-title="favAdd" title="收藏">
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>
-            </button>
             <div class="volume-control" id="miniVolumeControl">
                 <button class="mini-player-btn" id="miniVolumeBtn" title="音量">
                     <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" id="miniVolumeIcon">
@@ -2418,6 +2411,12 @@ if (isset($_GET['action']) && $_GET['action'] === 'stations') {
                     <span class="volume-label" id="miniVolumeLabel">50%</span>
                 </div>
             </div>
+            <button class="mini-player-btn" id="miniFavBtn" data-i18n-title="favAdd" title="收藏">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>
+            </button>
+            <button class="mini-player-btn" id="miniFullscreenBtn" data-i18n-title="fullscreen" title="全屏播放">
+                <svg viewBox="0 0 24 24"><path d="M7 14H5v5h5v-2H7v-3zm-2-4h2V7h3V5H5v5zm12 7h-3v2h5v-5h-2v3zM14 5v2h3v3h2V5h-5z"/></svg>
+            </button>
         </div><!-- /.mini-extra-btns -->
         <button class="mini-player-btn" id="backToTop" data-i18n-title="backToTop" title="回到顶部">
             <svg viewBox="0 0 24 24"><path d="M12 4l-8 8h5v8h6v-8h5z"/></svg>
@@ -3758,21 +3757,25 @@ if (isset($_GET['action']) && $_GET['action'] === 'stations') {
                 // volumechange 事件会自动触发 updateVolumeUI
             }
 
-            // 弹出/收起音量面板（position:fixed 定位，突破容器 overflow:hidden 限制）
+            // 弹出/收起音量面板
+            // 将 popup 移至 <body> 以脱离 transform 形成的 containing block，确保 fixed 定位以视口为基准
             function toggleVolumePopup(btnId, popupId, e) {
                 e.stopPropagation();
                 const $popup = $('#' + popupId);
                 const isShowing = $popup.hasClass('show');
                 $('.volume-popup').removeClass('show');
                 if (isShowing) return;
+                // 挂到 body 下，脱离任何 transform 父级
+                if (!$popup.parent().is('body')) $('body').append($popup);
                 // 根据按钮的视口坐标计算 fixed 定位
                 const btn = document.getElementById(btnId);
                 const r = btn.getBoundingClientRect();
                 const pw = 44, ph = 132; // 弹窗预估尺寸（宽×高）
                 let left = r.left + r.width / 2 - pw / 2;
-                let top  = r.top - ph - 8; // 默认在按钮上方
+                // 优先显示在按钮上方；上方空间不足才转到下方
+                let top = r.top - ph - 8;
                 left = Math.max(8, Math.min(left, window.innerWidth - pw - 8));
-                if (top < 8) top = r.bottom + 8; // 上方空间不足则转到下方
+                if (top < 8) top = r.bottom + 8;
                 $popup.css({ top: top + 'px', left: left + 'px' });
                 $popup.addClass('show');
             }
