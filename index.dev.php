@@ -1085,6 +1085,106 @@ if (isset($_GET['action']) && $_GET['action'] === 'stations') {
             gap: 8px;
         }
 
+        /* ─── 音量控制 ──────────────────────────────────────────────────── */
+        .volume-control {
+            position: relative;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
+        }
+
+        .volume-popup {
+            position: absolute;
+            bottom: calc(100% + 10px);
+            left: 50%;
+            transform: translateX(-50%);
+            background: var(--player-bg);
+            border: 1px solid var(--player-border);
+            border-radius: 14px;
+            padding: 14px 10px 10px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 6px;
+            z-index: 1010;
+            opacity: 0;
+            visibility: hidden;
+            transition: opacity 0.18s, visibility 0.18s, transform 0.18s;
+            transform: translateX(-50%) translateY(6px);
+            box-shadow: 0 6px 24px rgba(0,0,0,0.4), 0 0 12px var(--player-shadow);
+            min-width: 40px;
+        }
+
+        .volume-popup.show {
+            opacity: 1;
+            visibility: visible;
+            transform: translateX(-50%) translateY(0);
+        }
+
+        .volume-slider-wrap {
+            width: 24px;
+            height: 88px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: visible;
+        }
+
+        .volume-slider-input {
+            -webkit-appearance: none;
+            appearance: none;
+            width: 88px;
+            height: 4px;
+            background: linear-gradient(
+                to right,
+                var(--primary) var(--vol, 50%),
+                color-mix(in srgb, var(--primary) 22%, var(--bg-card)) var(--vol, 50%)
+            );
+            border-radius: 2px;
+            cursor: pointer;
+            outline: none;
+            transform: rotate(-90deg);
+            transform-origin: center center;
+        }
+
+        .volume-slider-input::-webkit-slider-thumb {
+            -webkit-appearance: none;
+            width: 14px;
+            height: 14px;
+            border-radius: 50%;
+            background: var(--primary);
+            cursor: pointer;
+            box-shadow: 0 0 6px var(--player-shadow);
+            border: 2px solid var(--bg);
+        }
+
+        .volume-slider-input::-moz-range-thumb {
+            width: 14px;
+            height: 14px;
+            border-radius: 50%;
+            background: var(--primary);
+            cursor: pointer;
+            border: 2px solid var(--bg);
+            box-shadow: 0 0 6px var(--player-shadow);
+        }
+
+        .volume-label {
+            font-size: 10px;
+            color: var(--primary);
+            font-weight: 600;
+            line-height: 1;
+        }
+
+        /* 全屏播放器音量图标使用描边风格 */
+        #fsVolumeIcon {
+            fill: none !important;
+            stroke: currentColor;
+            stroke-width: 2;
+            stroke-linecap: round;
+            stroke-linejoin: round;
+        }
+
         .result-count {
             text-align: center;
             color: var(--text-dim);
@@ -1659,6 +1759,44 @@ if (isset($_GET['action']) && $_GET['action'] === 'stations') {
         .mini-player.has-station #backToTop {
             border-left: 1px solid color-mix(in srgb, var(--border) 50%, transparent);
             margin-left: 2px;
+        }
+
+        /* 小播放条：额外按钮组（窄屏折叠，悬停/展开后显示） */
+        .mini-extra-btns {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            flex-shrink: 0;
+        }
+        #miniExpandBtn {
+            display: none;
+        }
+        @media (max-width: 520px) {
+            #miniExpandBtn {
+                display: flex;
+            }
+            .mini-extra-btns {
+                max-width: 0;
+                overflow: hidden;
+                opacity: 0;
+                gap: 6px;
+                transition: max-width 0.28s ease, opacity 0.22s ease;
+                pointer-events: none;
+            }
+            .mini-player:hover #miniExpandBtn,
+            .mini-player.expanded #miniExpandBtn {
+                opacity: 0;
+                width: 0;
+                overflow: hidden;
+                padding: 0;
+                pointer-events: none;
+            }
+            .mini-player:hover .mini-extra-btns,
+            .mini-player.expanded .mini-extra-btns {
+                max-width: 180px;
+                opacity: 1;
+                pointer-events: auto;
+            }
         }
         
         /* 正在播放的卡片标记 */
@@ -2237,6 +2375,21 @@ if (isset($_GET['action']) && $_GET['action'] === 'stations') {
             </div>
             <audio controls id="audioPlayer"></audio>
             <div class="player-actions">
+                <div class="volume-control" id="barVolumeControl">
+                    <button class="fullscreen-btn" id="barVolumeBtn" title="音量">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" id="barVolumeIcon">
+                            <polygon points="11,5 6,9 2,9 2,15 6,15 11,19"/>
+                            <path d="M15.54,8.46a5,5,0,0,1,0,7.07"/>
+                            <path d="M19.07,4.93a10,10,0,0,1,0,14.14"/>
+                        </svg>
+                    </button>
+                    <div class="volume-popup" id="barVolumePopup">
+                        <div class="volume-slider-wrap">
+                            <input type="range" class="volume-slider-input" id="barVolumeSlider" min="0" max="100" value="50">
+                        </div>
+                        <span class="volume-label" id="barVolumeLabel">50%</span>
+                    </div>
+                </div>
                 <button class="fullscreen-btn" id="playerFavBtn" data-i18n-title="favAdd" title="收藏">
                     <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>
                 </button>
@@ -2266,13 +2419,33 @@ if (isset($_GET['action']) && $_GET['action'] === 'stations') {
             <button class="mini-player-btn" id="miniPlayBtn" data-i18n-title="playPause" title="播放/暂停">
                 <svg viewBox="0 0 24 24" id="miniPlayIcon"><polygon points="6,4 20,12 6,20"/></svg>
             </button>
+            <button class="mini-player-btn" id="miniExpandBtn" title="更多">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="5" cy="12" r="1" fill="currentColor"/><circle cx="12" cy="12" r="1" fill="currentColor"/><circle cx="19" cy="12" r="1" fill="currentColor"/></svg>
+            </button>
+            <div class="mini-extra-btns">
             <button class="mini-player-btn" id="miniFullscreenBtn" data-i18n-title="fullscreen" title="全屏播放">
                 <svg viewBox="0 0 24 24"><path d="M7 14H5v5h5v-2H7v-3zm-2-4h2V7h3V5H5v5zm12 7h-3v2h5v-5h-2v3zM14 5v2h3v3h2V5h-5z"/></svg>
             </button>
             <button class="mini-player-btn" id="miniFavBtn" data-i18n-title="favAdd" title="收藏">
                 <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>
             </button>
-        </div>
+            <div class="volume-control" id="miniVolumeControl">
+                <button class="mini-player-btn" id="miniVolumeBtn" title="音量">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" id="miniVolumeIcon">
+                        <polygon points="11,5 6,9 2,9 2,15 6,15 11,19"/>
+                        <path d="M15.54,8.46a5,5,0,0,1,0,7.07"/>
+                        <path d="M19.07,4.93a10,10,0,0,1,0,14.14"/>
+                    </svg>
+                </button>
+                <div class="volume-popup" id="miniVolumePopup">
+                    <div class="volume-slider-wrap">
+                        <input type="range" class="volume-slider-input" id="miniVolumeSlider" min="0" max="100" value="50">
+                    </div>
+                    <span class="volume-label" id="miniVolumeLabel">50%</span>
+                </div>
+            </div>
+            </div><!-- /.mini-extra-btns -->
+        </div><!-- /.mini-media -->
         <button class="mini-player-btn" id="backToTop" data-i18n-title="backToTop" title="回到顶部">
             <svg viewBox="0 0 24 24"><path d="M12 4l-8 8h5v8h6v-8h5z"/></svg>
         </button>
@@ -2363,6 +2536,21 @@ if (isset($_GET['action']) && $_GET['action'] === 'stations') {
                 </div>
                 
                 <div class="fullscreen-controls">
+                    <div class="volume-control" id="fsVolumeControl">
+                        <button class="fullscreen-control-btn" id="fsVolumeBtn" title="音量">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" id="fsVolumeIcon">
+                                <polygon points="11,5 6,9 2,9 2,15 6,15 11,19"/>
+                                <path d="M15.54,8.46a5,5,0,0,1,0,7.07"/>
+                                <path d="M19.07,4.93a10,10,0,0,1,0,14.14"/>
+                            </svg>
+                        </button>
+                        <div class="volume-popup" id="fsVolumePopup">
+                            <div class="volume-slider-wrap">
+                                <input type="range" class="volume-slider-input" id="fsVolumeSlider" min="0" max="100" value="50">
+                            </div>
+                            <span class="volume-label" id="fsVolumeLabel">50%</span>
+                        </div>
+                    </div>
                     <button class="fullscreen-control-btn play-pause" id="fullscreenPlayBtn">
                         <svg viewBox="0 0 24 24">
                             <polygon points="8,5 19,12 8,19"/>
@@ -3540,6 +3728,7 @@ if (isset($_GET['action']) && $_GET['action'] === 'stations') {
                 })
                 .on('volumechange', function () {
                     localStorage.setItem('player_volume', this.volume);
+                    updateVolumeUI(this.volume);
                 })
                 .on('error', function () {
                     if (isManuallyStopped) { isManuallyStopped = false; return; }
@@ -3557,9 +3746,78 @@ if (isset($_GET['action']) && $_GET['action'] === 'stations') {
 
             // 播放条整体点击切换（忽略 audio 原生控件和全屏按钮）
             $('#playerBar').on('click', function (e) {
-                if ($(e.target).closest('audio, .fullscreen-btn').length) return;
+                if ($(e.target).closest('audio, .fullscreen-btn, .volume-control').length) return;
                 togglePlay();
             });
+
+            // ─── 音量控制 ─────────────────────────────────────────────────────────
+            const VOL_ICONS = {
+                mute: `<polygon points="11,5 6,9 2,9 2,15 6,15 11,19"/><line x1="23" y1="9" x2="17" y2="15" stroke-linecap="round"/><line x1="17" y1="9" x2="23" y2="15" stroke-linecap="round"/>`,
+                low:  `<polygon points="11,5 6,9 2,9 2,15 6,15 11,19"/><path d="M15.54,8.46a5,5,0,0,1,0,7.07"/>`,
+                med:  `<polygon points="11,5 6,9 2,9 2,15 6,15 11,19"/><path d="M15.54,8.46a5,5,0,0,1,0,7.07"/><path d="M19.07,4.93a10,10,0,0,1,0,14.14"/>`,
+                high: `<polygon points="11,5 6,9 2,9 2,15 6,15 11,19"/><path d="M15.54,8.46a5,5,0,0,1,0,7.07"/><path d="M19.07,4.93a10,10,0,0,1,0,14.14"/>`
+            };
+
+            function getVolIcon(vol) {
+                if (vol === 0) return VOL_ICONS.mute;
+                if (vol < 0.35) return VOL_ICONS.low;
+                if (vol < 0.7)  return VOL_ICONS.med;
+                return VOL_ICONS.high;
+            }
+
+            function updateVolumeUI(vol) {
+                const pct = Math.round(vol * 100);
+                const pctStr = pct + '%';
+                const icon = getVolIcon(vol);
+                // 更新所有三处图标
+                $('#barVolumeIcon, #miniVolumeIcon, #fsVolumeIcon').html(icon);
+                // 更新所有滑块值和进度颜色
+                $('.volume-slider-input').val(pct).each(function() {
+                    this.style.setProperty('--vol', pct + '%');
+                });
+                // 更新所有标签
+                $('.volume-label').text(pctStr);
+            }
+
+            function setVolume(val) {
+                const audio = document.getElementById('audioPlayer');
+                audio.volume = Math.max(0, Math.min(1, val / 100));
+                // volumechange 事件会自动触发 updateVolumeUI
+            }
+
+            // 弹出/收起音量面板
+            function toggleVolumePopup(popupId, e) {
+                e.stopPropagation();
+                const $popup = $('#' + popupId);
+                const isShowing = $popup.hasClass('show');
+                // 先关闭所有其他弹窗
+                $('.volume-popup').removeClass('show');
+                if (!isShowing) $popup.addClass('show');
+            }
+
+            $('#barVolumeBtn').on('click',  function(e) { toggleVolumePopup('barVolumePopup', e); });
+            $('#miniVolumeBtn').on('click', function(e) { toggleVolumePopup('miniVolumePopup', e); });
+            $('#fsVolumeBtn').on('click',   function(e) { toggleVolumePopup('fsVolumePopup', e); });
+
+            // 滑块输入
+            $('#barVolumeSlider, #miniVolumeSlider, #fsVolumeSlider').on('input', function() {
+                setVolume(parseInt(this.value, 10));
+            });
+            // 阻止滑块点击冒泡到 document（避免立刻关闭弹窗）
+            $('.volume-popup').on('click', function(e) { e.stopPropagation(); });
+
+            // 点击其他区域关闭音量弹窗
+            $(document).on('click.volumeClose', function() {
+                $('.volume-popup').removeClass('show');
+            });
+
+            // 初始化音量 UI
+            (function() {
+                const audio = document.getElementById('audioPlayer');
+                const initVol = audio.volume;
+                updateVolumeUI(initVol);
+            })();
+            // ─── 音量控制 END ────────────────────────────────────────────────────
             
             // 全屏播放器功能
             function updateFullscreenUI() {
@@ -3800,6 +4058,18 @@ if (isset($_GET['action']) && $_GET['action'] === 'stations') {
                 userManuallyHid  = false;
                 showFullscreen();
                 setTimeout(() => requestBrowserFullscreen(), 100);
+            });
+
+            // 窄屏展开按钮（touch 设备点击切换 .expanded）
+            $('#miniExpandBtn').on('click', function(e) {
+                e.stopPropagation();
+                $('#miniPlayer').toggleClass('expanded');
+            });
+            // 点击小播放条外部时收起
+            $(document).on('click.miniExpand', function(e) {
+                if (!$(e.target).closest('#miniPlayer').length) {
+                    $('#miniPlayer').removeClass('expanded');
+                }
             });
             
             // 播放按钮
