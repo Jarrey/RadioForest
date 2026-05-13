@@ -2935,7 +2935,8 @@ if (isset($_GET['action']) && $_GET['action'] === 'stations') {
                 localStorage.setItem('play_name', station.name);
                 updatePlayerFavBtns();
                 const audio = document.getElementById('audioPlayer');
-                
+                audio.volume = parseFloat(localStorage.getItem('player_volume')) || 0.5;
+
                 // 更新标题
                 $('#playerTitle, #fullscreenTitle').text(station.name);
                 syncMiniPlayer();
@@ -2998,6 +2999,7 @@ if (isset($_GET['action']) && $_GET['action'] === 'stations') {
             function togglePlay() {
                 if (!currentStation) return;
                 const audio = document.getElementById('audioPlayer');
+                audio.volume = parseFloat(localStorage.getItem('player_volume')) || 0.5;
                 // 刷新后 src 为空（仅恢复了显示），需要先赋 src 再播放
                 if (!audio.src || audio.src === window.location.href) {
                     audio.src = currentStation.url;
@@ -3535,6 +3537,9 @@ if (isset($_GET['action']) && $_GET['action'] === 'stations') {
                     updateMiniPlayIcon(true);
                     $('#miniPlayerStatus').text(t('playerPaused') || '已暂停');
                     document.title = t('appTitle');
+                })
+                .on('volumechange', function () {
+                    localStorage.setItem('player_volume', this.volume);
                 })
                 .on('error', function () {
                     if (isManuallyStopped) { isManuallyStopped = false; return; }
