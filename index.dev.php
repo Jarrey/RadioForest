@@ -2697,6 +2697,13 @@ if (isset($_GET['action']) && $_GET['action'] === 'stations') {
         let currentStation  = null;
         let stationsFullyLoaded = false; // 全部数据流式加载完毕标志
         let isManuallyStopped = false;  // 主动停止时跳过 audio error 事件
+        let retryCount     = 0;           // 当前重试次数
+        let retryStartTime = 0;           // 首次重试的时间戳 (ms)
+        let retryTimer  = null;        // 重试延迟计时器
+        let stallTimer  = null;        // 卡顿监测计时器
+        const MAX_RETRIES     = 30;      // 最大重试次数
+        const MAX_RETRY_MS    = 600000;  // 最长重试窗口 10 分钟 (ms)
+        const STALL_TIMEOUT   = 15000;  // 卡顿超时阈值 (ms)
         let cachedStationTotal = 0;           // 加载完成后缓存去重总数
         let currentLang    = 'en';
         let i18n           = {};
@@ -3052,6 +3059,11 @@ if (isset($_GET['action']) && $_GET['action'] === 'stations') {
             function playStation(station, autoPlay = true) {
                 currentUrl     = station.url;
                 currentStation = station;
+                // 切换新电台时重置重试状态
+                retryCount = 0;
+                retryStartTime = 0;
+                clearTimeout(retryTimer);
+                clearTimeout(stallTimer);
                 localStorage.setItem('play_url', station.url);
                 localStorage.setItem('play_name', station.name);
                 updatePlayerFavBtns();
@@ -3108,6 +3120,59 @@ if (isset($_GET['action']) && $_GET['action'] === 'stations') {
                 updateURL();
             }
 
+            /**
+             * 网络中断后自动重试播放。
+             * 采用指数退避策略，延迟从 3 s 起，最多翻倍 3 次（上限 30 s）。
+             * 两个停止条件：累计次数 ≤ MAX_RETRIES 且总耗时 ≤ MAX_RETRY_MS (10 min)。
+             */
+            function scheduleRetry() {
+                if (isManuallyStopped || !currentStation) return;
+                clearTimeout(retryTimer);
+                clearTimeout(stallTimer);
+                const now = Date.now();
+                // 首次重试：记录起始时间
+                if (retryCount === 0) retryStartTime = now;
+                // 检查次数上限
+                if (retryCount >= MAX_RETRIES) {
+                    $('#playerStatus, #fullscreenStatus').text(t('playerError'));
+                    $('#miniPlayerStatus').text(t('playerError'));
+                    console.warn('已达最大重试次数，停止重连');
+                    return;
+                }
+                // 检查时间上限
+                if (retryStartTime > 0 && (now - retryStartTime) >= MAX_RETRY_MS) {
+                    $('#playerStatus, #fullscreenStatus').text(t('playerError'));
+                    $('#miniPlayerStatus').text(t('playerError'));
+                    console.warn('超过最长重试时间 10 分钟，停止重连');
+                    return;
+                }
+                retryCount++;
+                const delay   = Math.min(30000, 3000 * Math.pow(2, Math.min(retryCount - 1, 3)));
+                // 若加上本次延迟会超出 10 分钟窗口，则缩短延迟到刚好用完剩余时间
+                const elapsed  = now - retryStartTime;
+                const remaining = MAX_RETRY_MS - elapsed;
+                const actualDelay = Math.min(delay, remaining);
+                const seconds = Math.round(actualDelay / 1000);
+                const msg = `${t('playerRetrying') || '重连中'} (${retryCount}/${MAX_RETRIES}) … ${seconds}s`;
+                $('#playerStatus, #fullscreenStatus').text(msg);
+                $('#miniPlayerStatus').text(msg);
+                console.warn(`音频重连 #${retryCount}，${seconds}s 后重试（已用 ${Math.round(elapsed/1000)}s）`);
+                retryTimer = setTimeout(() => {
+                    if (isManuallyStopped || !currentStation) return;
+                    // 超时窗口到期则放弃
+                    if ((Date.now() - retryStartTime) >= MAX_RETRY_MS) {
+                        $('#playerStatus, #fullscreenStatus').text(t('playerError'));
+                        $('#miniPlayerStatus').text(t('playerError'));
+                        console.warn('超过最长重试时间 10 分钟，停止重连');
+                        return;
+                    }
+                    const audio = document.getElementById('audioPlayer');
+                    audio.src = currentStation.url;
+                    audio.load();
+                    audio.play().catch(e => console.warn('重试播放失败:', e));
+                }, actualDelay);
+            }
+
             /** 根据暂停状态切换播放图标（三角=播放 / 方块=停止）*/
             function updatePlayIcon(isPaused) {
                 const icon = isPaused
@@ -3129,6 +3194,10 @@ if (isset($_GET['action']) && $_GET['action'] === 'stations') {
                     audio.play().catch(e => console.warn('播放失败:', e));
                 } else {
                     isManuallyStopped = true;
+                    retryCount = 0;
+                    retryStartTime = 0;
+                    clearTimeout(retryTimer);
+                    clearTimeout(stallTimer);
                     audio.pause();
                     audio.src = '';
                     // audio.src='' 会干扰 pause 事件的 UI 更新，直接手动更新
@@ -3628,6 +3697,11 @@ if (isset($_GET['action']) && $_GET['action'] === 'stations') {
             // 播放器状态事件
             $('#audioPlayer')
                 .on('play',  function () {
+                    // 连接成功，清除所有重试状态
+                    retryCount = 0;
+                    retryStartTime = 0;
+                    clearTimeout(retryTimer);
+                    clearTimeout(stallTimer);
                     $('#statusDot, #fullscreenDot').removeClass('paused').addClass('playing');
                     $('#playerStatus, #fullscreenStatus').text(t('playerPlaying'));
                     updateMiniPlayIcon(false);
@@ -3663,18 +3737,31 @@ if (isset($_GET['action']) && $_GET['action'] === 'stations') {
                     localStorage.setItem('player_volume', this.volume);
                     updateVolumeUI(this.volume);
                 })
+                .on('stalled waiting', function () {
+                    if (isManuallyStopped) return;
+                    clearTimeout(stallTimer);
+                    stallTimer = setTimeout(() => {
+                        const audio = document.getElementById('audioPlayer');
+                        if (!audio.paused && audio.readyState < 3) {
+                            scheduleRetry();
+                        }
+                    }, STALL_TIMEOUT);
+                })
+                .on('playing', function () {
+                    // 成功恢复播放，清除卡顿计时器
+                    clearTimeout(stallTimer);
+                })
                 .on('error', function () {
                     if (isManuallyStopped) { isManuallyStopped = false; return; }
                     $('#statusDot, #fullscreenDot').removeClass('playing').addClass('paused');
-                    $('#playerStatus, #fullscreenStatus').text(t('playerError'));
                     $('#soundWave').removeClass('playing');
                     $('#fullscreenCover').removeClass('playing');
                     updatePlayIcon(true);
                     updateFullscreenPlayIcon(true);
                     $('.station-card').removeClass('playing');
                     updateMiniPlayer();
-                    $('#miniPlayerStatus').text(t('playerError'));
-                    console.error('音频加载错误');
+                    console.error('音频加载错误，准备重试');
+                    scheduleRetry();
                 });
 
             // 播放条整体点击切换（忽略 audio 原生控件和全屏按钮）
@@ -4039,6 +4126,10 @@ if (isset($_GET['action']) && $_GET['action'] === 'stations') {
                 e.stopPropagation();
                 const audio = document.getElementById('audioPlayer');
                 isManuallyStopped = true;
+                retryCount = 0;
+                retryStartTime = 0;
+                clearTimeout(retryTimer);
+                clearTimeout(stallTimer);
                 audio.pause();
                 audio.src = '';
                 currentUrl = '';
