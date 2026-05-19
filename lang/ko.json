@@ -14,6 +14,7 @@
   "playerLoading": "불러오는 중...",
   "playerClickToPlay": "재생하려면 클릭",
   "playerError": "재생 오류",
+  "playerRetrying": "재연결 중",
   "language": "언어",
   "theme": "테마",
   "themeGreen": "그린",

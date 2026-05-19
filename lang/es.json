@@ -14,6 +14,7 @@
   "playerLoading": "Cargando...",
   "playerClickToPlay": "Haz clic para reproducir",
   "playerError": "Error de reproducción",
+  "playerRetrying": "Reconectando",
   "language": "Idioma",
   "theme": "Tema",
   "themeGreen": "Verde",

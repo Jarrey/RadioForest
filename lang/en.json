@@ -14,6 +14,7 @@
   "playerLoading": "Loading...",
   "playerClickToPlay": "Click to play",
   "playerError": "Playback error",
+  "playerRetrying": "Reconnecting",
   "language": "Language",
   "theme": "Theme",
   "themeGreen": "Green",
