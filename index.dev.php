@@ -64,46 +64,9 @@ function parseM3U($file) {
 function getCountryName($group) {
     static $lowerMap = null;
     if ($lowerMap === null) {
-        $raw = [
-            'China' => '中国', 'Japan' => '日本', 'South Korea' => '韩国', 'The Republic Of Korea' => '韩国', 'Korea' => '韩国', 'Taiwan' => '台湾', 'Taiwan, Republic Of China' => '台湾', 'Republic Of China' => '台湾',
-            'Hong Kong' => '香港', 'Singapore' => '新加坡',
-            'United Kingdom' => '英国', 'The United Kingdom of Great Britain and Northern Ireland' => '英国', 'The United Kingdom' => '英国', 'Great Britain' => '英国', 'Britain' => '英国', 'England' => '英国', 'Scotland' => '英国', 'Wales' => '英国', 'Northern Ireland' => '英国',
-            'Germany' => '德国', 'France' => '法国', 'Italy' => '意大利', 'Spain' => '西班牙',
-            'Russia' => '俄罗斯', 'The Russian Federation' => '俄罗斯',
-            'United States Of America' => '美国', 'The United States Of America' => '美国',
-            'United States' => '美国', 'America' => '美国', 'USA' => '美国', 'US' => '美国', 'U.S.A.' => '美国', 'U.S.' => '美国',
-            'Canada' => '加拿大',
-            'Australia' => '澳大利亚', 'New Zealand' => '新西兰', 'Brazil' => '巴西',
-            'Mexico' => '墨西哥', 'Argentina' => '阿根廷', 'India' => '印度', 'Thailand' => '泰国',
-            'Vietnam' => '越南', 'Malaysia' => '马来西亚', 'Indonesia' => '印尼',
-            'Philippines' => '菲律宾', 'Saudi Arabia' => '沙特', 'Turkey' => '土耳其',
-            'Netherlands' => '荷兰', 'Belgium' => '比利时', 'Switzerland' => '瑞士',
-            'Austria' => '奥地利', 'Poland' => '波兰', 'Sweden' => '瑞典', 'Norway' => '挪威',
-            'Denmark' => '丹麦', 'Finland' => '芬兰', 'Ireland' => '爱尔兰', 'Portugal' => '葡萄牙',
-            'Greece' => '希腊', 'Czech' => '捷克', 'Hungary' => '匈牙利', 'Romania' => '罗马尼亚',
-            'South Africa' => '南非', 'Egypt' => '埃及', 'Israel' => '以色列', 'UAE' => '阿联酋',
-            'UK' => '英国', 'GB' => '英国', 'CH' => '瑞士', 'NL' => '荷兰', 'SE' => '瑞典',
-            'NO' => '挪威', 'DK' => '丹麦', 'FI' => '芬兰', 'PL' => '波兰',
-            'AT' => '奥地利', 'BE' => '比利时', 'PT' => '葡萄牙', 'GR' => '希腊',
-            'CZ' => '捷克', 'HU' => '匈牙利', 'RO' => '罗马尼亚', 'UA' => '乌克兰',
-            'BY' => '白俄罗斯', 'KZ' => '哈萨克斯坦', 'CL' => '智利',
-            'CO' => '哥伦比亚', 'PE' => '秘鲁', 'VE' => '委内瑞拉', 'EC' => '厄瓜多尔',
-            'KR' => '韩国', 'JP' => '日本', 'IN' => '印度', 'PK' => '巴基斯坦',
-            'BD' => '孟加拉', 'LK' => '斯里兰卡', 'NP' => '尼泊尔', 'MM' => '缅甸',
-            'KH' => '柬埔寨', 'LA' => '老挝', 'BN' => '文莱', 'MY' => '马来西亚',
-            'TW' => '台湾', 'HK' => '香港', 'MO' => '澳门', 'PH' => '菲律宾',
-            'TH' => '泰国', 'ID' => '印尼', 'SG' => '新加坡', 'VN' => '越南',
-            'SA' => '沙特', 'AE' => '阿联酋', 'QA' => '卡塔尔', 'KW' => '科威特',
-            'BH' => '巴林', 'OM' => '阿曼', 'JO' => '约旦', 'LB' => '黎巴嫩',
-            'SY' => '叙利亚', 'IQ' => '伊拉克', 'IR' => '伊朗', 'AF' => '阿富汗',
-            'NG' => '尼日利亚', 'MA' => '摩洛哥', 'KE' => '肯尼亚',
-            'GH' => '加纳', 'TZ' => '坦桑尼亚', 'ET' => '埃塞俄比亚', 'DZ' => '阿尔及利亚',
-            'TN' => '突尼斯', 'SD' => '苏丹', 'UG' => '乌干达', 'ZW' => '津巴布韦',
-            'NA' => '纳米比亚', 'BW' => '博茨瓦纳', 'ZM' => '赞比亚', 'MG' => '马达加斯加',
-        ];
-        // 预构建全小写键的映射，后续查找为 O(1)
+        // 数据源来自 config.php 中的 GROUP_TITLE_MAP 常量
         $lowerMap = [];
-        foreach ($raw as $k => $v) $lowerMap[strtolower($k)] = $v;
+        foreach (GROUP_TITLE_MAP as $k => $v) $lowerMap[strtolower($k)] = $v;
     }
     $key = strtolower(trim($group));
     return $lowerMap[$key] ?? ($group ?: '其他');
@@ -177,18 +140,8 @@ $cacheFile = CACHE_FILE;
 $allStations = [];
 $countries = [];
 
-$regionNames = [
-    'cn' => '中国', 'jp' => '日本', 'kr' => '韩国', 'tw' => '台湾', 'hk' => '香港',
-    'sg' => '新加坡', 'gb' => '英国', 'de' => '德国', 'fr' => '法国', 'it' => '意大利',
-    'es' => '西班牙', 'ru' => '俄罗斯', 'us' => '美国', 'ca' => '加拿大', 'au' => '澳大利亚',
-    'nz' => '新西兰', 'br' => '巴西', 'mx' => '墨西哥', 'ar' => '阿根廷', 'ch' => '瑞士',
-    'za' => '南非', 'in' => '印度', 'th' => '泰国', 'vn' => '越南', 'my' => '马来西亚',
-    'id' => '印尼', 'ph' => '菲律宾', 'tr' => '土耳其', 'nl' => '荷兰', 'be' => '比利时',
-    'at' => '奥地利', 'pl' => '波兰', 'se' => '瑞典', 'no' => '挪威', 'dk' => '丹麦',
-    'fi' => '芬兰', 'ie' => '爱尔兰', 'pt' => '葡萄牙', 'gr' => '希腊', 'cz' => '捷克',
-    'hu' => '匈牙利', 'ro' => '罗马尼亚', 'eg' => '埃及', 'il' => '以色列', 'ae' => '阿联酋',
-    'sa' => '沙特', '' => '全球'
-];
+// 国别列表来自 config.php 中的 REGION_NAMES 常量
+$regionNames = REGION_NAMES;
 
 $cached = loadStationCache($cacheFile, $files);
 if ($cached !== null) {
@@ -198,7 +151,7 @@ if ($cached !== null) {
         $stations = parseM3U($file);
         $basename = basename($file, '.m3u');
         $region = $basename === 'radio' ? '' : str_replace('radio_', '', $basename);
-        $regionName = $regionNames[$region] ?? $region;
+        $regionName = REGION_NAMES[$region] ?? $region;
 
         foreach ($stations as $s) {
             $allStations[] = [
@@ -2717,7 +2670,23 @@ if (isset($_GET['action']) && $_GET['action'] === 'stations') {
             '西班牙':'spain','俄罗斯':'russia','美国':'usa','加拿大':'canada',
             '澳大利亚':'australia','澳洲':'australia','新西兰':'newzealand',
             '巴西':'brazil','墨西哥':'mexico','阿根廷':'argentina',
-            '瑞士':'switzerland','南非':'southafrica','其他':'other','全球':'global',
+            '瑞士':'switzerland','南非':'southafrica','葡萄牙':'portugal','马来西亚':'malaysia','奥地利':'austria',
+            '印度':'india','泰国':'thailand','越南':'vietnam','印尼':'indonesia',
+            '菲律宾':'philippines','土耳其':'turkey','荷兰':'netherlands','比利时':'belgium',
+            '波兰':'poland','瑞典':'sweden','挪威':'norway','丹麦':'denmark',
+            '芬兰':'finland','爱尔兰':'ireland','希腊':'greece','捷克':'czech',
+            '匈牙利':'hungary','罗马尼亚':'romania','埃及':'egypt','以色列':'israel',
+            '阿联酋':'uae','沙特':'saudi','其他':'other','全球':'global',
+            '乌克兰':'ukraine','白俄罗斯':'belarus','哈萨克斯坦':'kazakhstan',
+            '智利':'chile','哥伦比亚':'colombia','秘鲁':'peru','委内瑞拉':'venezuela','厄瓜多尔':'ecuador',
+            '澳门':'macau','巴基斯坦':'pakistan','孟加拉':'bangladesh','斯里兰卡':'srilanka','尼泊尔':'nepal',
+            '缅甸':'myanmar','柬埔寨':'cambodia','老挝':'laos','文莱':'brunei',
+            '卡塔尔':'qatar','科威特':'kuwait','巴林':'bahrain','阿曼':'oman',
+            '约旦':'jordan','黎巴嫩':'lebanon','叙利亚':'syria','伊拉克':'iraq','伊朗':'iran','阿富汗':'afghanistan',
+            '尼日利亚':'nigeria','摩洛哥':'morocco','肯尼亚':'kenya','加纳':'ghana',
+            '坦桑尼亚':'tanzania','埃塞俄比亚':'ethiopia','阿尔及利亚':'algeria','突尼斯':'tunisia',
+            '苏丹':'sudan','乌干达':'uganda','津巴布韦':'zimbabwe',
+            '纳米比亚':'namibia','博茨瓦纳':'botswana','赞比亚':'zambia','马达加斯加':'madagascar',
             '音乐':'music','新闻':'news','综合':'general','交通':'traffic',
             '体育':'sports','文艺':'arts','经典':'classic','儿童':'kids',
             '宗教':'religion','古典':'classical','方言':'dialect',
