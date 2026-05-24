@@ -2643,7 +2643,6 @@ if (isset($_GET['action']) && $_GET['action'] === 'stations') {
         let i18n           = {};
         let showFavoritesOnly = false;
         let favorites = []; // [{name, url, logo, region, country}]
-        const SUPPORTED_LANGS = ['zh-CN', 'zh-HK', 'en', 'es', 'fr', 'de', 'it', 'ja', 'ko', 'ru'];
         // Maps Chinese internal values → English label keys used in lang/*.json "labels"
         const LABEL_KEYS = {
             '中国':'china','日本':'japan','韩国':'korea','台湾':'taiwan','香港':'hongkong',
@@ -2705,6 +2704,8 @@ if (isset($_GET['action']) && $_GET['action'] === 'stations') {
             foreach ($langMap as $c => $o) { if (!in_array($c, $langOrder)) $opts[] = $o; }
             echo json_encode($opts, JSON_UNESCAPED_UNICODE);
         ?>;
+        // 从 LANG_OPTIONS 自动派生，新增语言文件后无需手动维护
+        const SUPPORTED_LANGS = LANG_OPTIONS.map(o => o.value);
 
         // HTML 属性安全转义（防止电台名内的引号等破坏HTML属性）
         function esc(s) {
