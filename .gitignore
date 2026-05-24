@@ -4,3 +4,4 @@ node_modules/
 # Playlist files (local data, not project code)
 radio_*.m3u
 radio.m3u
+playlists/index.html
