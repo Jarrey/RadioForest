@@ -131,8 +131,10 @@ function saveStationCache(string $cacheFile, array $files, array $stations) {
 if (file_exists(__DIR__ . '/config.php')) {
     require_once __DIR__ . '/config.php';
 }
-defined('PLAYLIST_DIR') || define('PLAYLIST_DIR', __DIR__ . '/playlists');
-defined('CACHE_FILE')   || define('CACHE_FILE',   __DIR__ . '/stations.cache.json');
+defined('PLAYLIST_DIR')    || define('PLAYLIST_DIR',    __DIR__ . '/playlists');
+defined('CACHE_FILE')      || define('CACHE_FILE',      __DIR__ . '/stations.cache.json');
+defined('REGION_NAMES')    || define('REGION_NAMES',    ['' => '全球']);
+defined('GROUP_TITLE_MAP') || define('GROUP_TITLE_MAP', []);
 
 $dir = PLAYLIST_DIR;
 $files = glob($dir . '/radio_*.m3u') ?: [];
