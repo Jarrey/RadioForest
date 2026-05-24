@@ -319,7 +319,9 @@ if (isset($_GET['action']) && $_GET['action'] === 'stations') {
                 '阿联酋' => 'ae', '沙特' => 'sa', '其他' => 'un',
             ];
             $regionOrder = ['中国', '日本', '韩国', '台湾', '香港', '新加坡', '美国', '加拿大', '墨西哥', '巴西', '阿根廷', '英国', '德国', '法国', '意大利', '西班牙', '瑞士', '俄罗斯', '澳大利亚', '新西兰', '南非', '其他'];
-            foreach ($regionOrder as $r):
+            // 将不在预设顺序中的国家追加到末尾，避免新增 M3U 文件后被忽略
+            $allRegions = array_merge($regionOrder, array_diff(array_keys($countries), $regionOrder));
+            foreach ($allRegions as $r):
                 if (isset($countries[$r])):
                     $code = $regionCodes[$r] ?? 'un';
                     $flagImg = '<img src="https://flagcdn.com/w20/' . $code . '.png" alt="" class="region-flag">';
