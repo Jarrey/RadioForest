@@ -2219,19 +2219,8 @@ if (isset($_GET['action']) && $_GET['action'] === 'stations') {
                 <div class="regions" id="regionBtns">
             <button class="region-btn active" data-region="all" data-flag-code="un" data-count="<?php echo $totalCount; ?>"><img src="https://flagcdn.com/w20/un.png" alt="" class="region-flag"> 全部(<?php echo $totalCount; ?>)</button>
             <?php
-            $regionCodes = [
-                '中国' => 'cn', '日本' => 'jp', '韩国' => 'kr', '台湾' => 'tw', '香港' => 'hk',
-                '新加坡' => 'sg', '英国' => 'gb', '德国' => 'de', '法国' => 'fr', '意大利' => 'it',
-                '西班牙' => 'es', '俄罗斯' => 'ru', '美国' => 'us', '加拿大' => 'ca', '澳大利亚' => 'au',
-                '澳洲' => 'au', '新西兰' => 'nz', '巴西' => 'br', '墨西哥' => 'mx', '阿根廷' => 'ar',
-                '瑞士' => 'ch', '南非' => 'za', '印度' => 'in', '泰国' => 'th', '越南' => 'vn',
-                '马来西亚' => 'my', '印尼' => 'id', '菲律宾' => 'ph', '土耳其' => 'tr',
-                '荷兰' => 'nl', '比利时' => 'be', '奥地利' => 'at', '波兰' => 'pl',
-                '瑞典' => 'se', '挪威' => 'no', '丹麦' => 'dk', '芬兰' => 'fi',
-                '爱尔兰' => 'ie', '葡萄牙' => 'pt', '希腊' => 'gr', '捷克' => 'cz',
-                '匈牙利' => 'hu', '罗马尼亚' => 'ro', '埃及' => 'eg', '以色列' => 'il',
-                '阿联酋' => 'ae', '沙特' => 'sa', '其他' => 'un',
-            ];
+            // 从 REGION_NAMES 自动生成"中文名 → ISO码"映射，与 config.php 保持同步
+            $regionCodes = array_merge(array_flip(REGION_NAMES), ['其他' => 'un']);
             $regionOrder = ['中国', '日本', '韩国', '台湾', '香港', '新加坡', '美国', '加拿大', '墨西哥', '巴西', '阿根廷', '英国', '德国', '法国', '意大利', '西班牙', '瑞士', '俄罗斯', '澳大利亚', '新西兰', '南非', '其他'];
             // 将不在预设顺序中的国家追加到末尾，避免新增 M3U 文件后被忽略
             $allRegions = array_merge($regionOrder, array_diff(array_keys($countries), $regionOrder));
