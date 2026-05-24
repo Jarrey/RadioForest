@@ -2441,20 +2441,8 @@ if (isset($_GET['action']) && $_GET['action'] === 'stations') {
     </div>
     
     <script>
-        // ─── 国家代码映射（用于国旗显示）───────────────────────────────────────
-        const regionCodes = {
-            '中国': 'cn', '日本': 'jp', '韩国': 'kr', '台湾': 'tw', '香港': 'hk',
-            '新加坡': 'sg', '英国': 'gb', '德国': 'de', '法国': 'fr', '意大利': 'it',
-            '西班牙': 'es', '俄罗斯': 'ru', '美国': 'us', '加拿大': 'ca', '澳大利亚': 'au',
-            '澳洲': 'au', '新西兰': 'nz', '巴西': 'br', '墨西哥': 'mx', '阿根廷': 'ar',
-            '瑞士': 'ch', '南非': 'za', '印度': 'in', '泰国': 'th', '越南': 'vn',
-            '马来西亚': 'my', '印尼': 'id', '菲律宾': 'ph', '土耳其': 'tr',
-            '荷兰': 'nl', '比利时': 'be', '奥地利': 'at', '波兰': 'pl',
-            '瑞典': 'se', '挪威': 'no', '丹麦': 'dk', '芬兰': 'fi',
-            '爱尔兰': 'ie', '葡萄牙': 'pt', '希腊': 'gr', '捷克': 'cz',
-            '匈牙利': 'hu', '罗马尼亚': 'ro', '埃及': 'eg', '以色列': 'il',
-            '阿联酋': 'ae', '沙特': 'sa', '其他': 'un'
-        };
+        // ─── 国家代码映射（用于国旗显示，自动从 config.php REGION_NAMES 生成）──
+        const regionCodes = <?php echo json_encode(array_merge(array_flip(REGION_NAMES), ['其他' => 'un']), JSON_UNESCAPED_UNICODE); ?>;
 
         // ─── 电台默认图标 SVG（适配主题色）──────────────────────────────────────
         function makeSvgLogo(w, h) {
