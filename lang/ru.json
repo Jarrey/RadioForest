@@ -1,4 +1,6 @@
 {
+  "langName": "Русский",
+  "langFlag": "ru",
   "appTitle": "Радио Лес",
   "subtitleLoading": "Загрузка...",
   "searchPlaceholder": "Поиск станций...",

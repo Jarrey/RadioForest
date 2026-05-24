@@ -1,4 +1,6 @@
 {
+  "langName": "한국어",
+  "langFlag": "kr",
   "appTitle": "Radio Forest",
   "subtitleLoading": "로딩 중...",
   "searchPlaceholder": "방송국 검색...",

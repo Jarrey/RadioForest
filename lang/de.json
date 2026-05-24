@@ -1,4 +1,6 @@
 {
+  "langName": "Deutsch",
+  "langFlag": "de",
   "appTitle": "Radio Forest",
   "subtitleLoading": "Wird geladen...",
   "searchPlaceholder": "Sender suchen...",

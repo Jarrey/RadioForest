@@ -1,4 +1,6 @@
 {
+  "langName": "Español",
+  "langFlag": "es",
   "appTitle": "Radio Forest",
   "subtitleLoading": "Cargando...",
   "searchPlaceholder": "Buscar emisoras...",

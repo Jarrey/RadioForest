@@ -1,4 +1,6 @@
 {
+  "langName": "简体中文",
+  "langFlag": "cn",
   "appTitle": "电台森林",
   "subtitleLoading": "正在加载...",
   "searchPlaceholder": "搜索电台...",

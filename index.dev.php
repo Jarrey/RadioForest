@@ -2688,18 +2688,23 @@ if (isset($_GET['action']) && $_GET['action'] === 'stations') {
         };
         const THEME_COLORS = {green:'#22c55e',teal:'#14b8a6',cyan:'#06b6d4',orange:'#f97316',amber:'#f59e0b',rose:'#f43f5e',red:'#dc2626',pink:'#ec4899',purple:'#a855f7',indigo:'#6366f1',grayscale:'#888',bw:'#ddd',black:'#ffffff'};
         const THEME_KEYS   = ['green','teal','cyan','orange','amber','rose','red','pink','purple','indigo','grayscale','bw','black'];
-        const LANG_OPTIONS = [
-            {value:'zh-CN',flag:'cn',label:'简体中文'},
-            {value:'zh-HK',flag:'hk',label:'繁體中文'},
-            {value:'en',   flag:'gb',label:'English'},
-            {value:'es',   flag:'es',label:'Español'},
-            {value:'fr',   flag:'fr',label:'Français'},
-            {value:'de',   flag:'de',label:'Deutsch'},
-            {value:'it',   flag:'it',label:'Italiano'},
-            {value:'ja',   flag:'jp',label:'日本語'},
-            {value:'ko',   flag:'kr',label:'한국어'},
-            {value:'ru',   flag:'ru',label:'Русский'},
-        ];
+        // ─── 语言选项（从 lang/*.json 自动生成，label/flag 取自文件内容）──────
+        const LANG_OPTIONS = <?php
+            $langDir   = __DIR__ . '/lang';
+            $langOrder = ['zh-CN','zh-HK','en','es','fr','de','it','ja','ko','ru'];
+            $langMap   = [];
+            foreach (glob($langDir . '/*.json') ?: [] as $f) {
+                $code = basename($f, '.json');
+                $d    = @json_decode(file_get_contents($f), true);
+                if ($d && isset($d['langName'], $d['langFlag'])) {
+                    $langMap[$code] = ['value' => $code, 'flag' => $d['langFlag'], 'label' => $d['langName']];
+                }
+            }
+            $opts = [];
+            foreach ($langOrder as $c) { if (isset($langMap[$c])) $opts[] = $langMap[$c]; }
+            foreach ($langMap as $c => $o) { if (!in_array($c, $langOrder)) $opts[] = $o; }
+            echo json_encode($opts, JSON_UNESCAPED_UNICODE);
+        ?>;
 
         // HTML 属性安全转义（防止电台名内的引号等破坏HTML属性）
         function esc(s) {

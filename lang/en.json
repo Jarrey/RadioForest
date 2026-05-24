@@ -1,4 +1,6 @@
 {
+  "langName": "English",
+  "langFlag": "gb",
   "appTitle": "Radio Forest",
   "subtitleLoading": "Loading...",
   "searchPlaceholder": "Search stations...",
