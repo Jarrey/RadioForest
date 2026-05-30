@@ -2621,73 +2621,35 @@ if (isset($_GET['action']) && $_GET['action'] === 'stations') {
         }
 
         // ─── 状态变量 ────────────────────────────────────────────────────────────
-        const BATCH_SIZE = 100;
-        let currentRegion = 'all';
-        let currentType   = '';
-        let currentSearch = '';
-        let visibleCount    = BATCH_SIZE;
-        let isLoading       = false;
-        let currentUrl      = '';
-        let currentStation  = null;
-        let stationsFullyLoaded = false; // 全部数据流式加载完毕标志
-        let isManuallyStopped = false;  // 主动停止时跳过 audio error 事件
-        let retryCount     = 0;           // 当前重试次数
-        let retryStartTime = 0;           // 首次重试的时间戳 (ms)
-        let retryTimer  = null;        // 重试延迟计时器
-        let stallTimer  = null;        // 卡顿监测计时器
-        const MAX_RETRIES     = 30;      // 最大重试次数
-        const MAX_RETRY_MS    = 600000;  // 最长重试窗口 10 分钟 (ms)
-        const STALL_TIMEOUT   = 15000;  // 卡顿超时阈值 (ms)
-        let cachedStationTotal = 0;           // 加载完成后缓存去重总数
-        let currentLang    = 'en';
-        let i18n           = {};
-        let showFavoritesOnly = false;
-        let favorites = []; // [{name, url, logo, region, country}]
-        // Maps Chinese internal values → English label keys used in lang/*.json "labels"
-        const LABEL_KEYS = {
-            '中国':'china','日本':'japan','韩国':'korea','台湾':'taiwan','香港':'hongkong',
-            '新加坡':'singapore','英国':'uk','德国':'germany','法国':'france','意大利':'italy',
-            '西班牙':'spain','俄罗斯':'russia','美国':'usa','加拿大':'canada',
-            '澳大利亚':'australia','澳洲':'australia','新西兰':'newzealand',
-            '巴西':'brazil','墨西哥':'mexico','阿根廷':'argentina',
-            '瑞士':'switzerland','南非':'southafrica','葡萄牙':'portugal','马来西亚':'malaysia','奥地利':'austria',
-            '印度':'india','泰国':'thailand','越南':'vietnam','印尼':'indonesia',
-            '菲律宾':'philippines','土耳其':'turkey','荷兰':'netherlands','比利时':'belgium',
-            '波兰':'poland','瑞典':'sweden','挪威':'norway','丹麦':'denmark',
-            '芬兰':'finland','爱尔兰':'ireland','希腊':'greece','捷克':'czech',
-            '匈牙利':'hungary','罗马尼亚':'romania','埃及':'egypt','以色列':'israel',
-            '阿联酋':'uae','沙特':'saudi','其他':'other','全球':'global',
-            '乌克兰':'ukraine','白俄罗斯':'belarus','哈萨克斯坦':'kazakhstan',
-            '智利':'chile','哥伦比亚':'colombia','秘鲁':'peru','委内瑞拉':'venezuela','厄瓜多尔':'ecuador',
-            '澳门':'macau','巴基斯坦':'pakistan','孟加拉':'bangladesh','斯里兰卡':'srilanka','尼泊尔':'nepal',
-            '缅甸':'myanmar','柬埔寨':'cambodia','老挝':'laos','文莱':'brunei',
-            '卡塔尔':'qatar','科威特':'kuwait','巴林':'bahrain','阿曼':'oman',
-            '约旦':'jordan','黎巴嫩':'lebanon','叙利亚':'syria','伊拉克':'iraq','伊朗':'iran','阿富汗':'afghanistan',
-            '尼日利亚':'nigeria','摩洛哥':'morocco','肯尼亚':'kenya','加纳':'ghana',
-            '坦桑尼亚':'tanzania','埃塞俄比亚':'ethiopia','阿尔及利亚':'algeria','突尼斯':'tunisia',
-            '苏丹':'sudan','乌干达':'uganda','津巴布韦':'zimbabwe',
-            '纳米比亚':'namibia','博茨瓦纳':'botswana','赞比亚':'zambia','马达加斯加':'madagascar',
-            '音乐':'music','新闻':'news','综合':'general','交通':'traffic',
-            '体育':'sports','文艺':'arts','经典':'classic','儿童':'kids',
-            '宗教':'religion','古典':'classical','方言':'dialect',
-            '爵士':'jazz','流行':'pop','摇滚':'rock','嘻哈':'hiphop',
-            '电子':'electronic','R&B':'rnb','乡村':'country','民谣':'folk',
-            '蓝调':'blues','雷鬼':'reggae','金属':'metal','拉丁':'latin',
-            '财经':'finance',
-            '央广':'cnr','央视':'cctv',
-            '全国':'national','北京':'beijing','天津':'tianjin','上海':'shanghai','重庆':'chongqing',
-            '广东':'guangdong','广西':'guangxi','海南':'hainan','福建':'fujian',
-            '江苏':'jiangsu','浙江':'zhejiang','山东':'shandong','安徽':'anhui',
-            '江西':'jiangxi','湖南':'hunan','湖北':'hubei','河南':'henan',
-            '河北':'hebei','山西':'shanxi','辽宁':'liaoning','吉林':'jilin',
-            '黑龙江':'heilongjiang','四川':'sichuan','贵州':'guizhou',
-            '云南':'yunnan','西藏':'tibet','陕西':'shaanxi',
-            '甘肃':'gansu','青海':'qinghai','新疆':'xinjiang',
-            '宁夏':'ningxia','内蒙古':'innermongolia'
-        };
+        const BATCH_SIZE        = 100;
+        let currentRegion       = 'all';
+        let currentType         = '';
+        let currentSearch       = '';
+        let visibleCount        = BATCH_SIZE;
+        let isLoading           = false;
+        let currentUrl          = '';
+        let currentStation      = null;
+        let stationsFullyLoaded = false;  // 全部数据流式加载完毕标志
+        let isManuallyStopped   = false;  // 主动停止时跳过 audio error 事件
+        let retryCount          = 0;      // 当前重试次数
+        let retryStartTime      = 0;      // 首次重试的时间戳 (ms)
+        let retryTimer          = null;   // 重试延迟计时器
+        let stallTimer          = null;   // 卡顿监测计时器
+        const MAX_RETRIES       = 30;     // 最大重试次数
+        const MAX_RETRY_MS      = 600000; // 最长重试窗口 10 分钟 (ms)
+        const STALL_TIMEOUT     = 15000;  // 卡顿超时阈值 (ms)
+        let cachedStationTotal  = 0;      // 加载完成后缓存去重总数
+        let currentLang         = 'en';
+        let i18n                = {};
+        let showFavoritesOnly   = false;
+        let favorites           = [];     // [{name, url, logo, region, country}]
+
+        // ─── 标签键映射（中文内部值 → lang/*.json "labels" 中的英文键）────────
+        const LABEL_KEYS   = <?php echo json_encode(LABEL_KEYS,   JSON_UNESCAPED_UNICODE); ?>;
         const THEME_COLORS = {green:'#22c55e',teal:'#14b8a6',cyan:'#06b6d4',orange:'#f97316',amber:'#f59e0b',rose:'#f43f5e',red:'#dc2626',pink:'#ec4899',purple:'#a855f7',indigo:'#6366f1',grayscale:'#888',bw:'#ddd',black:'#ffffff'};
         const THEME_KEYS   = ['green','teal','cyan','orange','amber','rose','red','pink','purple','indigo','grayscale','bw','black'];
-        // ─── 语言选项（从 lang/*.json 自动生成，label/flag 取自文件内容）──────
+
+        // ─── 语言选项（从 lang/*.json 自动生成，label/flag 取自文件内容）────────
         const LANG_OPTIONS = <?php
             $langDir   = __DIR__ . '/lang';
             $langOrder = ['zh-CN','zh-HK','en','es','fr','de','it','ja','ko','ru'];
